@@ -1,0 +1,10 @@
+{
+  "title": "zip",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- zip :: [a] -> [b] -> [(a, b)]\ron zip(xs, ys)\r\tset lng to min(length of xs, length of ys)\r\tset lst to {}\r\trepeat with i from 1 to lng\r\t\tset end of lst to Tuple(item i of xs, item i of ys)\r\tend repeat\r\treturn lst\rend zip"
+    }
+  ]
+}

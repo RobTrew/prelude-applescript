@@ -1,0 +1,15 @@
+{
+  "title": "unfoldTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- | Build a tree from a seed value"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unfoldTree :: (b -> (a, [b])) -> b -> Tree a\ron unfoldTree(f, b)\r\tset g to mReturn(f)\r\tset tpl to g's |λ|(b)\r\tNode(|1| of tpl, unfoldForest(g, |2| of tpl))\rend unfoldTree"
+    }
+  ]
+}

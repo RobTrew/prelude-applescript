@@ -1,0 +1,10 @@
+{
+  "title": "last",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- last :: [a] -> a\ron |last|(xs)\r\t\titem -1 of xs\rend |last|"
+    }
+  ]
+}

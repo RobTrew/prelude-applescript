@@ -1,0 +1,10 @@
+{
+  "title": "TupleN",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- TupleN :: a -> b ...  -> (a, b ... )\ron TupleN(xs)\r\ttupleFromArray(xs)\rend Tuple"
+    }
+  ]
+}

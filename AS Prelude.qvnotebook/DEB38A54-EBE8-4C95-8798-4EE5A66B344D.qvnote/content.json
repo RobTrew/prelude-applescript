@@ -1,0 +1,10 @@
+{
+  "title": "fst",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fst :: (a, b) -> a\ron fst(tpl)\r\tif class of tpl is record then\r\t\t|1| of tpl\r\telse\r\t\titem 1 of tpl\r\tend if\rend fst"
+    }
+  ]
+}

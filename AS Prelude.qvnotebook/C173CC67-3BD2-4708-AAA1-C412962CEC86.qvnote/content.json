@@ -1,0 +1,10 @@
+{
+  "title": "succ",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- succ :: Enum a => a -> a\ron succ(x)\r\tif isChar(x) then\r\t\tchr(ord(x) + 1)\r\telse\r\t\t1 + x\r\tend if\rend succ"
+    }
+  ]
+}

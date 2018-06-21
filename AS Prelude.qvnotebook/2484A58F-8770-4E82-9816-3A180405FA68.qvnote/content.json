@@ -1,0 +1,15 @@
+{
+  "title": "mappendOrdering (<>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Ordering :: ( LT | EQ | GT ) | ( -1 | 0 | 1 )"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mappendOrdering (<>) :: Ordering -> Ordering -> Ordering\ron mappendOrdering(a, b)\r\tif my |EQ| = a then\r\t\tb\r\telse\r\t\ta\r\tend if\rend mappendOrdering"
+    }
+  ]
+}

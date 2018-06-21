@@ -1,0 +1,10 @@
+{
+  "title": "treeLeaves",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- treeLeaves :: Node -> [Node]\ron treeLeaves(oNode)\r\tscript go\r\t\ton |λ|(x)\r\t\t\tset lst to nest of x\r\t\t\tif length of lst > 0 then\r\t\t\t\tconcatMap(my treeLeaves, lst)\r\t\t\telse\r\t\t\t\t{x}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t|λ|(oNode) of go\rend treeLeaves"
+    }
+  ]
+}

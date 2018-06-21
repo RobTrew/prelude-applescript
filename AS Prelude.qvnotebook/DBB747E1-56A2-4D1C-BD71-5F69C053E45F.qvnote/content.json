@@ -1,0 +1,10 @@
+{
+  "title": "elemIndex",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- elemIndex :: Eq a => a -> [a] -> Maybe Int\ron elemIndex(x, xs)\r\tset lng to length of xs\r\trepeat with i from 1 to lng\r\t\tif x = (item i of xs) then return Just(i)\r\tend repeat\r\treturn Nothing()\rend elemIndex"
+    }
+  ]
+}

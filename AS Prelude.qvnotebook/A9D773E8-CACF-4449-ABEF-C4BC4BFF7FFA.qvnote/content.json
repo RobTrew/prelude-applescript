@@ -1,0 +1,10 @@
+{
+  "title": "read",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- read :: Read a => String -> a\ron read (s)\r\trun script s\rend read"
+    }
+  ]
+}

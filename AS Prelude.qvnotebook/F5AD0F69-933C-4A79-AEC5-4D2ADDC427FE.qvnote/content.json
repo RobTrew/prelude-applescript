@@ -1,0 +1,10 @@
+{
+  "title": "deleteFirst",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- deleteFirst :: a -> [a] -> [a]\non deleteFirst(x, xs)\n    script Eq\n        on |λ|(a, b)\n            a = b\n        end |λ|\n    end script\n \n    deleteBy(Eq, x, xs)\nend |delete|"
+    }
+  ]
+}

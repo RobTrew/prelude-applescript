@@ -1,0 +1,15 @@
+{
+  "title": "caseOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- caseOf :: [(a -> Bool, b)] -> b -> a ->  b\ron caseOf (pvs, otherwise, x)\r\trepeat with tpl in pvs\r\t\tif mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl\r\tend repeat\r\treturn otherwise\rend caseOf"
+    }
+  ]
+}

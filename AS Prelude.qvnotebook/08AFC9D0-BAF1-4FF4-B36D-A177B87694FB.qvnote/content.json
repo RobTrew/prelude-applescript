@@ -1,0 +1,10 @@
+{
+  "title": "filter",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- filter :: (a -> Bool) -> [a] -> [a]\ron filter(f, xs)\r\ttell mReturn(f)\r\t\tset lst to {}\r\t\tset lng to length of xs\r\t\trepeat with i from 1 to lng\r\t\t\tset v to item i of xs\r\t\t\tif |λ|(v, i, xs) then set end of lst to v\r\t\tend repeat\r\t\treturn lst\r\tend tell\rend filter"
+    }
+  ]
+}

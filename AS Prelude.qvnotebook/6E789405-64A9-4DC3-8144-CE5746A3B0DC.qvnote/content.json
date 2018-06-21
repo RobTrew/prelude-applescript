@@ -1,0 +1,10 @@
+{
+  "title": "mapAccumL_Tree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)\ron mapAccumL_Tree(f, acc, tree)\r\tscript go\r\t\tproperty mf : mReturn(f)'s |λ|\r\t\ton |λ|(a, x)\r\t\t\tset pair to f(a, root of x)\r\t\t\tset tpl to mapAccumL(go, item 1 of pair, nest of x)\r\t\t\tTuple(item 1 of tpl, Node(item 2 of pair, item 2 of tpl))\r\t\tend |λ|\r\tend script\r\t|λ|(acc, tree) of go\rend mapAccumL_Tree"
+    }
+  ]
+}

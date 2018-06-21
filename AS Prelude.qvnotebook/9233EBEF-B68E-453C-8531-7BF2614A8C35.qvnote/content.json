@@ -1,0 +1,10 @@
+{
+  "title": "toRatio",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- toRatio :: Real -> Ratio\ron toRatio(n)\r\tapproxRatio(1.0E-12, n)\rend toRatio"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "isNull",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isNull :: [a] -> Bool\r-- isNull :: String -> Bool\ron isNull(xs)\r\tif class of xs is string then\r\t\txs = \"\"\r\telse\r\t\txs = {}\r\tend if\rend isNull"
+    }
+  ]
+}

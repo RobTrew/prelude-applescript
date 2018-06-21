@@ -1,0 +1,10 @@
+{
+  "title": "stripEnd",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- stripEnd :: String -> String\ron stripEnd(s)\r\tdropWhileEnd(my isSpace, s)\rend stripEnd"
+    }
+  ]
+}

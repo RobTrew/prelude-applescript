@@ -1,0 +1,10 @@
+{
+  "title": "isLower",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isLower :: Char -> Bool\ron isLower(c)\r\tset d to (id of c) - 97 -- id of \"a\"\r\td ≥ 0 and d < 26\rend isLower"
+    }
+  ]
+}

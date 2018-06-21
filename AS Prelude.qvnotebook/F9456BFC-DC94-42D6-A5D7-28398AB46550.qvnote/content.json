@@ -1,0 +1,10 @@
+{
+  "title": "dropAround",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- dropAround :: (Char -> Bool) -> String -> String\ron dropAround(p, s)\r\tdropWhile(p, dropWhileEnd(p, s))\rend dropAround"
+    }
+  ]
+}

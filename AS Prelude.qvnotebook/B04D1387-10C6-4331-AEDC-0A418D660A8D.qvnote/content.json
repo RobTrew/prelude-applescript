@@ -1,0 +1,10 @@
+{
+  "title": "flip",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- flip :: (a -> b -> c) -> b -> a -> c\non flip(f)\n\tscript\n\t\tproperty g : f\n\t\ton |λ|(x, y)\n\t\t\tg(y, x)\n\t\tend |λ|\n\tend script\nend flip"
+    }
+  ]
+}

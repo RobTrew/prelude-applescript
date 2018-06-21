@@ -1,0 +1,10 @@
+{
+  "title": "group",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- group :: Eq a => [a] -> [[a]]\non group(xs)\n\tscript eq\n\t\ton |λ|(a, b)\n\t\t\ta = b\n\t\tend |λ|\n\tend script\n\t\n\tgroupBy(eq, xs)\nend group"
+    }
+  ]
+}

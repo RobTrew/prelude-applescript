@@ -1,0 +1,10 @@
+{
+  "title": "then (>>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- then (>>) :: Monad m => m a -> m b -> m b\ron |then|(ma, mb)\r\tset c to class of ma\r\tif c is list then\r\t\tthenList(ma, mb)\r\telse if c is record then\r\t\tif keys(ma) contains \"Maybe\" then\r\t\t\tthenMay(ma, mb)\r\t\telse\r\t\t\tthenIO(ma, mb)\r\t\tend if\r\telse\r\t\tthenIO(ma, mb)\r\tend if\rend |then|"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "reverse",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- reverse :: [a] -> [a]\ron |reverse|(xs)\r\tif class of xs is text then\r\t\t(reverse of characters of xs) as text\r\telse\r\t\treverse of xs\r\tend if\rend |reverse|"
+    }
+  ]
+}

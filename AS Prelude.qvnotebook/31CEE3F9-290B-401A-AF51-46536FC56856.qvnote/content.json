@@ -1,0 +1,15 @@
+{
+  "title": "toTitle",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- NB this does not model any regional or cultural conventions.\n-- It simply simply capitalizes the first character of each word."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- toTitle :: String -> String\ron toTitle(str)\r\tset ca to current application\r\t((ca's NSString's stringWithString:(str))'s ¬\r\t\tcapitalizedStringWithLocale:(ca's NSLocale's currentLocale())) as text\rend toTitle"
+    }
+  ]
+}

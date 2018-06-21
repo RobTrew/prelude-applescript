@@ -1,0 +1,10 @@
+{
+  "title": "drawForest",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- drawForest :: Forest String -> String\ron drawForest(trees)\r\tintercalate(\"\\n\\n\", map(my drawTree, trees))\rend drawForest"
+    }
+  ]
+}

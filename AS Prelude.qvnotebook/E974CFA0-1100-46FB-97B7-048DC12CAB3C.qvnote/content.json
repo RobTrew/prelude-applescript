@@ -1,0 +1,10 @@
+{
+  "title": "composeListLR",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- composeListLR :: [(a -> a)] -> (a -> a)\ron composeListLR(fs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tscript\r\t\t\t\ton |λ|(a, f)\r\t\t\t\t\tmReturn(f)'s |λ|(a)\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\t\r\t\t\tfoldl(result, x, fs)\r\t\tend |λ|\r\tend script\rend composeListLR"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "minimumBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- minimumBy :: (a -> a -> Ordering) -> [a] -> a\ron minimumBy(f, xs)\r\tset lng to length of xs\r\tif lng < 1 then\r\t\tmissing value\r\telse if lng > 1 then\r\t\ttell mReturn(f)\r\t\t\tset v to item 1 of xs\r\t\t\trepeat with x in xs\r\t\t\t\tif |λ|(x, v) < 0 then set v to contents of x\r\t\t\tend repeat\r\t\t\treturn v\r\t\tend tell\r\telse\r\t\titem 1 of xs\r\tend if\rend minimumBy"
+    }
+  ]
+}

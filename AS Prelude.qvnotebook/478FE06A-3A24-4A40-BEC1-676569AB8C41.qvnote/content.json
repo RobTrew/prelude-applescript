@@ -1,0 +1,10 @@
+{
+  "title": "randomRInt",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- randomRInt :: Int -> Int -> Int\ron randomRInt(low, high)\r\tfloor(low + ((random number) * (1 + (high - low))))\rend randomRInt"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "truncate",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- truncate :: Num -> Int\ron truncate(x)\r\titem 1 of properFraction(x)\rend truncate"
+    }
+  ]
+}

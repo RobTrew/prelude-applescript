@@ -1,0 +1,10 @@
+{
+  "title": "catMaybes",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- catMaybes :: [Maybe a] -> [a]\ron catMaybes(mbs)\r\tscript emptyOrListed\r\t\ton |λ|(m)\r\t\t\tif Nothing of m then\r\t\t\t\t{}\r\t\t\telse\r\t\t\t\t{Just of m}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tconcatMap(emptyOrListed, mbs)\rend catMaybes"
+    }
+  ]
+}

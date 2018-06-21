@@ -1,0 +1,15 @@
+{
+  "title": "all",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Applied to a predicate and a list, `all` determines if all elements \n-- of the list satisfy the predicate."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- all :: (a -> Bool) -> [a] -> Bool\ron all(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\trepeat with i from 1 to lng\r\t\t\tif not |λ|(item i of xs, i, xs) then return false\r\t\tend repeat\r\t\ttrue\r\tend tell\rend all"
+    }
+  ]
+}

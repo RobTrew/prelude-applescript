@@ -1,0 +1,10 @@
+{
+  "title": "compose",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- compose :: (b -> c) -> (a -> b) -> a -> c\ron compose(f, g)\r\tscript\r\t\ton |λ|(x)\r\t\t\t|λ|(|λ|(x) of mReturn(g)) of mReturn(f)\r\t\tend |λ|\r\tend script\rend compose"
+    }
+  ]
+}

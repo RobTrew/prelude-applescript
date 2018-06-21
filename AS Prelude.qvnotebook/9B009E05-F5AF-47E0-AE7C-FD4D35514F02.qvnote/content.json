@@ -1,0 +1,10 @@
+{
+  "title": "member",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- member :: Key -> Dict -> Bool\ron member(k, dct)\r\t((current application's ¬\r\t\tNSDictionary's dictionaryWithDictionary:dct)'s ¬\r\t\tobjectForKey:k) is not missing value\rend member"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "isSuffixOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isSuffixOf :: Eq a => [a] -> [a] -> Bool\r-- isSuffixOf :: String -> String -> Bool \ron isSuffixOf(suffix, main)\r\tif class of suffix is string then\r\t\t(offset of suffix in main) = 1 + (length of main) - (length of suffix)\r\telse\r\t\tset lngSuffix to length of suffix\r\t\tif lngSuffix = 0 then\r\t\t\ttrue\r\t\telse\r\t\t\tset lngMain to length of main\r\t\t\tset lngDelta to lngMain - lngSuffix\r\t\t\tif lngDelta < 0 or lngMain = 0 then\r\t\t\t\tfalse\r\t\t\telse\r\t\t\t\trepeat with i from 1 to lngSuffix\r\t\t\t\t\tif item i of suffix ≠ item (lngDelta + i) of main then return false\r\t\t\t\tend repeat\r\t\t\t\ttrue\r\t\t\tend if\r\t\tend if\r\tend if\rend isSuffixOf"
+    }
+  ]
+}

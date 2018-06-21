@@ -1,0 +1,10 @@
+{
+  "title": "concat",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- concat :: [[a]] -> [a]\r-- concat :: [String] -> String\ron concat(xs)\r\tif length of xs > 0 and class of (item 1 of xs) is string then\r\t\tset acc to \"\"\r\telse\r\t\tset acc to {}\r\tend if\r\trepeat with i from 1 to length of xs\r\t\tset acc to acc & item i of xs\r\tend repeat\r\tacc\rend concat"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "variance",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- variance :: [Num] -> Num\ron variance(xs)\r\tset m to mean(xs)\r\tscript\r\t\ton |λ|(a, x)\r\t\t\ta + (x - m) ^ 2\r\t\tend |λ|\r\tend script\r\tfoldl(result, 0, xs) / ((length of xs) - 1)\rend variance"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "until",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- until :: (a -> Bool) -> (a -> a) -> a -> a\ron |until|(p, f, x)\r\tset v to x\r\tset mp to mReturn(p)\r\tset mf to mReturn(f)\r\trepeat until mp's |λ|(v)\r\t\tset v to mf's |λ|(v)\r\tend repeat\rend |until|"
+    }
+  ]
+}

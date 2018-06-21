@@ -1,0 +1,10 @@
+{
+  "title": "rem",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- rem :: Int -> Int -> Int\ron rem(m, n)\r\tm mod n\rend rem"
+    }
+  ]
+}

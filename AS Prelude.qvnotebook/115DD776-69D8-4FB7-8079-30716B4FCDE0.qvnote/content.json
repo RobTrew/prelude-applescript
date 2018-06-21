@@ -1,0 +1,10 @@
+{
+  "title": "takeWhile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeWhile :: (a -> Bool) -> [a] -> [a]\ron takeWhile(p, xs)\r\tset bln to false\r\ttell mReturn(p)\r\t\trepeat with i from 1 to length of xs\r\t\t\tif not |λ|(item i of xs) then\r\t\t\t\tset bln to true\r\t\t\t\texit repeat\r\t\t\tend if\r\t\tend repeat\r\tend tell\r\tif bln then\r\t\tif i > 1 then\r\t\t\titems 1 thru (i - 1) of xs\r\t\telse\r\t\t\t{}\r\t\tend if\r\telse\r\t\txs\r\tend if\rend takeWhile"
+    }
+  ]
+}

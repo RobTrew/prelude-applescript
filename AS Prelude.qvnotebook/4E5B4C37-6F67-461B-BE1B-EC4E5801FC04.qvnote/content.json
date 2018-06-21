@@ -1,0 +1,10 @@
+{
+  "title": "union",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- union :: [a] -> [a] -> [a]\ron union(xs, ys)\r\tscript flipDelete\r\t\ton |λ|(xs, x)\r\t\t\tmy |delete|(x, xs)\r\t\tend |λ|\r\tend script\r\t\r\tset sx to nub(xs)\r\tsx & foldl(flipDelete, nub(ys), sx)\rend union"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "isSortedBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- The 'isSortedBy' function returns true iff the predicate returns true\n-- for all adjacent pairs of elements in the list."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool\ron isSortedBy(cmp, xs)\r\tscript LE\r\t\ton |λ|(x)\r\t\t\tx < 1\r\t\tend |λ|\r\tend script\r\t(length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))\rend isSortedBy"
+    }
+  ]
+}

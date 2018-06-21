@@ -1,0 +1,10 @@
+{
+  "title": "takeFileName",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeFileName :: FilePath -> FilePath\non takeFileName(strPath)\n    if strPath ≠ \"\" and character -1 of strPath ≠ \"/\" then\n        item -1 of splitOn(\"/\", strPath)\n    else\n        \"\"\n    end if\nend takeFileName"
+    }
+  ]
+}

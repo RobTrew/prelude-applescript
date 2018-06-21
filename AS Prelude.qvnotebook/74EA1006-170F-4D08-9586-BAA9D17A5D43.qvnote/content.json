@@ -1,0 +1,10 @@
+{
+  "title": "showIntAtBase",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String\ron showIntAtBase(base, toChr, n, rs)\r\tscript showIt\r\t\ton |λ|(nd_, r)\r\t\t\tset {n, d} to nd_\r\t\t\tset r_ to toChr's |λ|(d) & r\r\t\t\tif n > 0 then\r\t\t\t\t|λ|(quotRem(n, base), r_)\r\t\t\telse\r\t\t\t\tr_\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tif base ≤ 1 then\r\t\t\"error: showIntAtBase applied to unsupported base\"\r\telse if n < 0 then\r\t\t\"error: showIntAtBase applied to negative number\"\r\telse\r\t\tshowIt's |λ|(quotRem(n, base), rs)\r\tend if\rend showIntAtBase"
+    }
+  ]
+}

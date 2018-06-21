@@ -1,0 +1,10 @@
+{
+  "title": "thenIO (>>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- thenIO (>>) :: IO a -> IO b -> IO b\ron thenIO(ma, mb)\r\tmb\rend thenIO"
+    }
+  ]
+}

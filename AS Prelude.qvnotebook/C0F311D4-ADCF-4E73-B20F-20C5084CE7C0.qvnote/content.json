@@ -1,0 +1,10 @@
+{
+  "title": "Nothing",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Nothing :: () -> Nothing\ron Nothing()\r\t{type:\"Maybe\", Nothing:true}\rend Nothing"
+    }
+  ]
+}

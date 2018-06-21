@@ -1,0 +1,15 @@
+{
+  "title": "apMaybe (<*>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Maybe f applied to Maybe x, deriving a Maybe y"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- apMaybe (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\ron apMaybe(mf, mx)\r\tif Nothing of mf or Nothing of mx then\r\t\tNothing()\r\telse\r\t\tJust(|λ|(Just of mx) of mReturn(Just of mf))\r\tend if\rend apMaybe"
+    }
+  ]
+}

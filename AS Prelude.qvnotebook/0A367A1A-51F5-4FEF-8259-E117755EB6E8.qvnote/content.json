@@ -1,0 +1,10 @@
+{
+  "title": "showLog",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showLog :: a -> IO ()\ron showLog(e)\r\tlog show(e)\rend showLog"
+    }
+  ]
+}

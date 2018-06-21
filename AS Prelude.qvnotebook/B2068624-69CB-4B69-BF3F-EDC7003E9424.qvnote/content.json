@@ -1,0 +1,10 @@
+{
+  "title": "iso8601Local",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- iso8601Local :: Date -> String\ron iso8601Local(dte)\r\t(dte as «class isot» as string)\rend iso8601Local"
+    }
+  ]
+}

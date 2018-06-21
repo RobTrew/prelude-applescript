@@ -1,0 +1,10 @@
+{
+  "title": "showList",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showList :: [a] -> String\ron showList(xs)\r  showJSON(xs)\rend showList"
+    }
+  ]
+}

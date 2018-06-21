@@ -1,0 +1,10 @@
+{
+  "title": "typeName",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- typeName :: a -> String\ron typeName(x)\r\tset mb to lookup((class of x) as string, ¬\r\t\t{|list|:\"List\", |integer|:\"Int\", |real|:\"Float\", |text|:¬\r\t\t\t\"String\", |string|:\"String\", |record|:¬\r\t\t\t\"Record\", |boolean|:\"Bool\", |handler|:\"Function\", |script|:\"Function\"})\r\tif Nothing of mb then\r\t\t\"Bottom\"\r\telse\r\t\tset k to Just of mb\r\t\tif k = \"Record\" then\r\t\t\tif keys(x) contains \"type\" then\r\t\t\t\ttype of x\r\t\t\telse\r\t\t\t\t\"Dict\"\r\t\t\tend if\r\t\telse\r\t\t\tk\r\t\tend if\r\tend if\rend typeName"
+    }
+  ]
+}

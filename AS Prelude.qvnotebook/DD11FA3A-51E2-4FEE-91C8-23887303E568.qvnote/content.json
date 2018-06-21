@@ -1,0 +1,10 @@
+{
+  "title": "ord",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- ord :: Char -> Int\ron ord(c)\r\tid of c\rend ord"
+    }
+  ]
+}

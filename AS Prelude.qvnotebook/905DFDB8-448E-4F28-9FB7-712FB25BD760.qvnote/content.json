@@ -1,0 +1,10 @@
+{
+  "title": "not",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- not :: Bool -> Bool\ron |not|(p)\r\tnot p\rend |not|"
+    }
+  ]
+}

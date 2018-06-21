@@ -1,0 +1,10 @@
+{
+  "title": "bindLR (>>=)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b\ron bindLR(m, mf)\r\tif isRight(m) then\r\t\tmReturn(mf)'s |λ|(|Right| of m)\r\telse\r\t\tm\r\tend if\rend bindLR"
+    }
+  ]
+}

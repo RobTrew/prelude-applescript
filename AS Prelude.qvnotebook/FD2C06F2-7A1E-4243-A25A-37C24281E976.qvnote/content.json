@@ -1,0 +1,10 @@
+{
+  "title": "keys",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- keys :: Dict -> [String]\ron keys(rec)\r\t(current application's NSDictionary's dictionaryWithDictionary:rec)'s allKeys() as list\rend keys"
+    }
+  ]
+}

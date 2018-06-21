@@ -1,0 +1,10 @@
+{
+  "title": "fileSize",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fileSize :: FilePath -> Either String Int\ron fileSize(fp)\r\tscript fs\r\t\ton |λ|(rec)\r\t\t\t|Right|(NSFileSize of rec)\r\t\tend |λ|\r\tend script\r\tbindLR(my fileStatus(fp), fs)\rend fileSize"
+    }
+  ]
+}

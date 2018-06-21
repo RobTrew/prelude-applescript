@@ -1,0 +1,10 @@
+{
+  "title": "isSubsequenceOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- isSubsequenceOf :: Eq a => [a] -> [a] -> Bool\r-- isSubsequenceOf :: String -> String -> Bool\ron isSubsequenceOf(xs, ys)\r\tscript iss\r\t\ton |λ|(a, b)\r\t\t\tif a ≠ {} then\r\t\t\t\tif b ≠ {} then\r\t\t\t\t\tif item 1 of a = item 1 of b then\r\t\t\t\t\t\t|λ|(rest of a, rest of b)\r\t\t\t\t\telse\r\t\t\t\t\t\t|λ|(a, rest of b)\r\t\t\t\t\tend if\r\t\t\t\telse\r\t\t\t\t\tfalse\r\t\t\t\tend if\r\t\t\telse\r\t\t\t\ttrue\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tif class of xs = string then\r\t\ttell iss to |λ|(characters of xs, characters of ys)\r\telse\r\t\ttell iss to |λ|(xs, ys)\r\tend if\rend isSubsequenceOf"
+    }
+  ]
+}

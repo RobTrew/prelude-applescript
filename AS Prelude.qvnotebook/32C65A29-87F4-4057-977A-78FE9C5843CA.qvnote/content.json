@@ -1,0 +1,15 @@
+{
+  "title": "appendFileMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Write a string to the end of a file. \n-- Returns a Just FilePath value if the \n-- path exists and the write succeeded. \n-- Otherwise returns Nothing."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- appendFileMay :: FilePath -> String -> Maybe IO FilePath\ron appendFileMay(strPath, txt)\r\tset ca to current application\r\tset oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\r\t\tstringByStandardizingPath\r\tset strFullPath to oFullPath as string\r\tset {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\r\t\tfileExistsAtPath:oFullPath isDirectory:(reference))\r\tif blnExists then\r\t\tif intFolder = 0 then -- Not a directory\r\t\t\tset oData to (ca's NSString's stringWithString:txt)'s ¬\r\t\t\t\tdataUsingEncoding:(ca's NSUTF8StringEncoding)\r\t\t\tset h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\r\t\t\th's seekToEndOfFile\r\t\t\th's writeData:oData\r\t\t\th's closeFile()\r\t\t\tJust(strFullPath)\r\t\telse\r\t\t\tNothing()\r\t\tend if\r\telse\r\t\tif doesDirectoryExist(takeDirectory(strFullPath)) then\r\t\t\twriteFile(oFullPath, txt)\r\t\t\tJust(strFullPath)\r\t\telse\r\t\t\tNothing()\r\t\tend if\r\tend if\rend appendFileMay"
+    }
+  ]
+}

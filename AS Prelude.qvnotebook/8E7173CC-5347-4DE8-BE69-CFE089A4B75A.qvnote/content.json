@@ -1,0 +1,10 @@
+{
+  "title": "intercalateS",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intercalateS :: String -> [String] -> String\non intercalateS(sep, xs)\n    set {dlm, my text item delimiters} to {my text item delimiters, sep}\n    set s to xs as text\n    set my text item delimiters to dlm\n    return s\nend intercalateS"
+    }
+  ]
+}

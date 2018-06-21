@@ -1,0 +1,10 @@
+{
+  "title": "sum",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- sum :: [Num] -> Num\non sum(xs)\n\tscript add\n\t\ton |λ|(a, b)\n\t\t\ta + b\n\t\tend |λ|\n\tend script\n\t\n\tfoldl(add, 0, xs)\nend sum"
+    }
+  ]
+}

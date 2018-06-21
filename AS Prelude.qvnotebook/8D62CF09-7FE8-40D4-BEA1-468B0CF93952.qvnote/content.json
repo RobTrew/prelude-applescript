@@ -1,0 +1,10 @@
+{
+  "title": "enumFromToChar",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- enumFromToChar :: Char -> Char -> [Char]\ron enumFromToChar(m, n)\r\tset {intM, intN} to {id of m, id of n}\r\tif intM ≤ intN then\r\t\tset xs to {}\r\t\trepeat with i from intM to intN\r\t\t\tset end of xs to character id i\r\t\tend repeat\r\t\treturn xs\r\telse\r\t\t{}\r\tend if\rend enumFromToChar"
+    }
+  ]
+}

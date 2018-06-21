@@ -1,0 +1,10 @@
+{
+  "title": "liftA2List",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- liftA2List :: (a -> b -> c) -> [a] -> [b] -> [c]\ron liftA2List(f, xs, ys)\r\tscript\r\t\tproperty g : mReturn(f)'s |λ|\r\t\ton |λ|(x)\r\t\t\tscript\r\t\t\t\ton |λ|(y)\r\t\t\t\t\t{g(x, y)}\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tconcatMap(result, ys)\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend liftA2List"
+    }
+  ]
+}

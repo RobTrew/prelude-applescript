@@ -1,0 +1,10 @@
+{
+  "title": "index (!!)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- index (!!) :: [a] -> Int -> a\ron |index|(xs, i)\r\titem i of xs\rend |index|"
+    }
+  ]
+}

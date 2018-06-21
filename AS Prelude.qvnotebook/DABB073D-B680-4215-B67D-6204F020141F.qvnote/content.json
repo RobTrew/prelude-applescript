@@ -1,0 +1,10 @@
+{
+  "title": "scanl",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- scanl :: (b -> a -> b) -> b -> [a] -> [b]\non scanl(f, startValue, xs)\n\ttell mReturn(f)\n\t\tset v to startValue\n\t\tset lng to length of xs\n\t\tset lst to {startValue}\n\t\trepeat with i from 1 to lng\n\t\t\tset v to |λ|(v, item i of xs, i, xs)\n\t\t\tset end of lst to v\n\t\tend repeat\n\t\treturn lst\n\tend tell\nend scanl"
+    }
+  ]
+}

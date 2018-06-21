@@ -1,0 +1,10 @@
+{
+  "title": "inits",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- inits :: [a] -> [[a]]\n-- inits :: String -> [String]\non inits(xs)\n\tscript elemInit\n\t\ton |λ|(_, i, xs)\n\t\t\titems 1 thru i of xs\n\t\tend |λ|\n\tend script\n\t\n\tscript charInit\n\t\ton |λ|(_, i, xs)\n\t\t\ttext 1 thru i of xs\n\t\tend |λ|\n\tend script\n\t\n\tif class of xs is string then\n\t\t{\"\"} & map(charInit, xs)\n\telse\n\t\t{{}} & map(elemInit, xs)\n\tend if\nend inits"
+    }
+  ]
+}

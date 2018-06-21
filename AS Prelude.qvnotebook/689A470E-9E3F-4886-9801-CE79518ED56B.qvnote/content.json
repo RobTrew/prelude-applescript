@@ -1,0 +1,10 @@
+{
+  "title": "log",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- log :: Float -> Float\ron |log|(n)\r\tJust of evalJSMay((\"Math.log(\" & n as string) & \")\")\rend |log|"
+    }
+  ]
+}

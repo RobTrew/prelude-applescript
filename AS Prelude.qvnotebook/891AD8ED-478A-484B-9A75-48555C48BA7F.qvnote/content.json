@@ -1,0 +1,10 @@
+{
+  "title": "intersectionBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intersectionBy:: (a -> a -> Bool) -> [[a]] -> [a]\ron intersectionBy(fnEq, xs)\r\tscript\r\t\tproperty eq : mReturn(fnEq)\r\t\ton |λ|(a, x)\r\t\t\tintersectBy(eq, a, x)\r\t\tend |λ|\r\tend script\r\tfoldr1(result, xs)\rend intersectionBy"
+    }
+  ]
+}

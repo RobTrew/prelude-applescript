@@ -1,0 +1,10 @@
+{
+  "title": "mappendComparing",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mappendComparing :: [(a -> b)] -> (a -> a -> Ordering)\ron mappendComparing(fs)\r\tscript\r\t\ton |λ|(x, y)\r\t\t\tscript\r\t\t\t\ton |λ|(ordr, f)\r\t\t\t\t\tif ordr ≠ 0 then\r\t\t\t\t\t\tordr\r\t\t\t\t\telse\r\t\t\t\t\t\ttell mReturn(f)\r\t\t\t\t\t\t\tcompare(|λ|(x), |λ|(y))\r\t\t\t\t\t\tend tell\r\t\t\t\t\tend if\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tfoldl(result, 0, fs)\r\t\tend |λ|\r\tend script\rend mappendComparing"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "takeBaseName",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeBaseName :: FilePath -> String\non takeBaseName(strPath)\n    if strPath ≠ \"\" then\n        if text -1 of strPath = \"/\" then\n            \"\"\n        else\n            set fn to item -1 of splitOn(\"/\", strPath)\n            if fn contains \".\" then\n                intercalateString(\".\", items 1 thru -2 of splitOn(\".\", fn))\n            else\n                fn\n            end if\n        end if\n    else\n        \"\"\n    end if\nend takeBaseName"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "unlines",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unlines :: [String] -> String\ron unlines(xs)\r\tset {dlm, my text item delimiters} to ¬\r\t\t{my text item delimiters, linefeed}\r\tset str to xs as text\r\tset my text item delimiters to dlm\r\tstr\rend unlines"
+    }
+  ]
+}

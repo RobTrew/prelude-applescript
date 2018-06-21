@@ -1,0 +1,10 @@
+{
+  "title": "showLR",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showLR :: Either a b -> String\ron showLR(lr)\r\tif isRight(lr) then\r\t\t\"Right(\" & unQuoted(show(|Right| of lr)) & \")\"\r\telse\r\t\t\"Left(\" & unQuoted(show(|Left| of lr)) & \")\"\r\tend if\rend showLR"
+    }
+  ]
+}

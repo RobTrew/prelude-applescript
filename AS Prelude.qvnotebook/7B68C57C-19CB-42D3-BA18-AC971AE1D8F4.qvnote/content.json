@@ -1,0 +1,10 @@
+{
+  "title": "intToDigit",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intToDigit :: Int -> Char\ron intToDigit(n)\r\tif n ≥ 0 and n < 16 then\r\t\tcharacter (n + 1) of \"0123456789ABCDEF\"\r\telse\r\t\t\"?\"\r\tend if\rend intToDigit"
+    }
+  ]
+}

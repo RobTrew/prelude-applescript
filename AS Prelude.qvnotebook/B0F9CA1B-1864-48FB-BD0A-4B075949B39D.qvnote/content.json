@@ -1,0 +1,15 @@
+{
+  "title": "evalJSMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- use framework \"Foundation\"\n-- use framework \"JavaScriptCore\"\n\n-- gJSC can be declared in the global namespace,\n-- but unless the reference is released before the \n-- end of the script (e.g. `set gJSC to null`)\n-- it will persist, and\n-- Script Editor will be unable to save a .scpt file"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- evalJSMay :: String -> Maybe a\ron evalJSMay(strJS)\r\ttry -- NB if gJSC is global it must be released \r\t\t-- (e.g. set to null) at end of script\r\t\tgJSC's evaluateScript\r\ton error\r\t\tset gJSC to current application's JSContext's new()\r\t\tlog (\"new JSC\")\r\tend try\r\tset v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())\r\tif v is missing value then\r\t\tNothing()\r\telse\r\t\tJust(v)\r\tend if\rend evalJSMay"
+    }
+  ]
+}

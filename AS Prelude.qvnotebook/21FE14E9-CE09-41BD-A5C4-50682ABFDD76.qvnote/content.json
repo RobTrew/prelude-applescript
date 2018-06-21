@@ -1,0 +1,10 @@
+{
+  "title": "lcm",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- lcm :: Int -> Int -> Int\ron lcm(x, y)\r\tif (x = 0 or y = 0) then\r\t\t0\r\telse\r\t\tabs(floor(x / (gcd(x, y))) * y)\r\tend if\rend lcm"
+    }
+  ]
+}

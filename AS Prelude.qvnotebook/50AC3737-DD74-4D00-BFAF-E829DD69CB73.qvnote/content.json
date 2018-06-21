@@ -1,0 +1,10 @@
+{
+  "title": "tupleFromArray",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- tupleFromArray [a] -> (a, a ...)\ron tupleFromArray(xs)\r\tset lng to length of xs\r\tif lng > 1 then\r\t\tif lng > 2 then\r\t\t\tset strSuffix to lng as string\r\t\telse\r\t\t\tset strSuffix to \"\"\r\t\tend if\r\t\tscript kv\r\t\t\ton |λ|(a, x, i)\r\t\t\t\tinsertMap(a, (i as string), x)\r\t\t\tend |λ|\r\t\tend script\r\t\tfoldl(kv, {type:\"Tuple\" & strSuffix}, xs)\r\telse\r\t\tmissing value\r\tend if\rend tupleFromArray"
+    }
+  ]
+}

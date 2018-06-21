@@ -1,0 +1,10 @@
+{
+  "title": "pureT",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- pureT :: f a -> (a -> f a)\ron pureT(x)\r\tif class of x is record and keys(x) contains \"type\" then\r\t\tset t to type of x\r\t\tif t = \"Either\" then\r\t\t\tpureLR\r\t\telse if t = \"Maybe\" then\r\t\t\tpureMay\r\t\telse if t = \"Tree\" then\r\t\t\tpureTree\r\t\telse if t = \"Tuple\" then\r\t\t\tpureTuple\r\t\telse\r\t\t\tpureList\r\t\tend if\r\telse\r\t\tpureList\r\tend if\rend pureT"
+    }
+  ]
+}

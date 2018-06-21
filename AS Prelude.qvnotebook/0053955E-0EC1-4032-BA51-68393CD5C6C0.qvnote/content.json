@@ -1,0 +1,10 @@
+{
+  "title": "tails",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- tails :: [a] -> [[a]]\non tails(xs)\n\tif class of xs is text then\n\t\tset xs_ to characters of xs\n\telse\n\t\tset xs_ to xs\n\tend if\n\t\n\tscript\n\t\ton |λ|(_, i)\n\t\t\titems i thru -1 of xs_\n\t\tend |λ|\n\tend script\n\t\n\tmap(result, xs_) & {{}}\nend tails"
+    }
+  ]
+}

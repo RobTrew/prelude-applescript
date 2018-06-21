@@ -1,0 +1,10 @@
+{
+  "title": "either",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- either :: (a -> c) -> (b -> c) -> Either a b -> c\ron either(lf, rf, e)\r\tif isRight(e) then\r\t\ttell mReturn(rf) to |λ|(|Right| of e)\r\telse\r\t\ttell mReturn(lf) to |λ|(|Left| of e)\r\tend if\rend either"
+    }
+  ]
+}

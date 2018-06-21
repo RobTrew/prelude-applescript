@@ -1,0 +1,10 @@
+{
+  "title": "even",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- even :: Int -> Bool\ron even(x)\r\tx mod 2 = 0\rend even"
+    }
+  ]
+}

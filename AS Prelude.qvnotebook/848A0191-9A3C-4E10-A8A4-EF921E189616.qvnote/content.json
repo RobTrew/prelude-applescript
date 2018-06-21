@@ -1,0 +1,10 @@
+{
+  "title": "enumFromToInt",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- enumFromToInt :: Int -> Int -> [Int]\ron enumFromToInt(m, n)\r\tif m ≤ n then\r\t\tset lst to {}\r\t\trepeat with i from m to n\r\t\t\tset end of lst to i\r\t\tend repeat\r\t\treturn lst\r\telse\r\t\treturn {}\r\tend if\rend enumFromToInt"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "replace",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- replace :: String -> String -> String -> String\ron replace(strNeedle, strNew, strHayStack)\r\tset {dlm, my text item delimiters} to {my text item delimiters, strNeedle}\r\tset xs to text items of strHayStack\r\tset my text item delimiters to strNew\r\tset strReplaced to xs as text\r\tset my text item delimiters to dlm\r\treturn strReplaced\rend replace"
+    }
+  ]
+}

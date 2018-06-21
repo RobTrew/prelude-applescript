@@ -1,0 +1,15 @@
+{
+  "title": "writeTempFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "use framework \"Foundation\"\r-- File name template -> string data -> temporary path\r-- (Random digit sequence inserted between template base and extension)"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- writeTempFile :: String -> String -> IO FilePath\ron writeTempFile(template, txt)\r\tset strPath to (current application's ¬\r\t\tNSTemporaryDirectory() as string) & ¬\r\t\ttakeBaseName(template) & ¬\r\t\ttext 3 thru -1 of ((random number) as string) & ¬\r\t\ttakeExtension(template)\r\t-- Effect\r\twriteFile(strPath, txt)\r\t-- Value\r\tstrPath\rend writeTempFile"
+    }
+  ]
+}

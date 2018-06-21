@@ -1,0 +1,10 @@
+{
+  "title": "bind (>>=)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b\ron bind(m, mf)\r\tset c to class of m\r\tif c = list then\r\t\tbindList(m, mf)\r\telse if c = record then\r\t\tset ks to keys(m)\r\t\tif ks contains \"type\" then\r\t\t\tset t to type of m\r\t\t\tif t = \"Maybe\" then\r\t\t\t\tbindMay(m, mf)\r\t\t\telse if t = \"Either\" then\r\t\t\t\tbindEither(m, mf)\r\t\t\telse if t = \"Tuple\" then\r\t\t\t\tbindTuple(m, mf)\r\t\t\telse\r\t\t\t\tNothing()\r\t\t\tend if\r\t\telse\r\t\t\tNothing()\r\t\tend if\r\telse\r\t\tNothing()\r\tend if\rend bind"
+    }
+  ]
+}

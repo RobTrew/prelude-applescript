@@ -1,0 +1,10 @@
+{
+  "title": "maximumByMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- maximumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a\ron maximumByMay(f, xs)\r\tset cmp to mReturn(f)\r\tscript max\r\t\ton |λ|(a, b)\r\t\t\tif a is missing value or cmp's |λ|(a, b) < 0 then\r\t\t\t\tb\r\t\t\telse\r\t\t\t\ta\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tfoldl1May(max, xs)\rend maximumByMay"
+    }
+  ]
+}

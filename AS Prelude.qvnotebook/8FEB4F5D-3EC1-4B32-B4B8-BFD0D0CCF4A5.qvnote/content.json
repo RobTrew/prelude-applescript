@@ -1,0 +1,10 @@
+{
+  "title": "unionBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unionBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\ron unionBy(fnEq, xs, ys)\r\tscript flipDeleteByEq\r\t\ton |λ|(xs, x)\r\t\t\tdeleteBy(fnEq, x, xs)\r\t\tend |λ|\r\tend script\r\txs & foldl(flipDeleteByEq, nubBy(fnEq, ys), xs)\rend unionBy"
+    }
+  ]
+}

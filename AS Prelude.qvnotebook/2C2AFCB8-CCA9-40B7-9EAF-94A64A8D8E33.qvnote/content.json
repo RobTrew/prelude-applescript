@@ -1,0 +1,15 @@
+{
+  "title": "quickSort",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Adequate for small sorts, but sort :: Ord a => [a] -> [a], (which uses the ObjC\n-- sortedArrayUsingSelector) is the one to use"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- quickSort :: (Ord a) => [a] -> [a]\ron quickSort(xs)\r\tif length of xs > 1 then\r\t\tset h to item 1 of xs\r\t\tscript\r\t\t\ton |λ|(x)\r\t\t\t\tx ≤ h\r\t\t\tend |λ|\r\t\tend script\r\t\tset {less, more} to partition(result, rest of xs)\r\t\tquickSort(less) & h & quickSort(more)\r\telse\r\t\txs\r\tend if\rend quickSort"
+    }
+  ]
+}

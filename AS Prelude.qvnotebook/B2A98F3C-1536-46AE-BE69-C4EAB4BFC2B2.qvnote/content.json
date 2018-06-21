@@ -1,0 +1,10 @@
+{
+  "title": "unwords",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unwords :: [String] -> String\ron unwords(xs)\r\tintercalate(space, xs)\rend unwords"
+    }
+  ]
+}

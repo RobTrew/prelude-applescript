@@ -1,0 +1,10 @@
+{
+  "title": "or",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- or :: [Bool] -> Bool\ron |or|(ps)\r\trepeat with p in ps\r\t\tif p then return true\r\tend repeat\r\treturn false\rend |or|"
+    }
+  ]
+}

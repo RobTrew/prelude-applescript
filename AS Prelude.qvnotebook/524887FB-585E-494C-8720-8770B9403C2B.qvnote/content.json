@@ -1,0 +1,15 @@
+{
+  "title": "secondArrow",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Lift a simple function to one which applies to a tuple, \n-- transforming only the second item of the tuple"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- secondArrow :: (a -> b) -> ((c, a) -> (c, b))\ron secondArrow(f)\r\tscript\r\t\ton |λ|(xy)\r\t\t\tTuple(|1| of xy, mReturn(f)'s |λ|(|2| of xy))\r\t\tend |λ|\r\tend script\rend |second|"
+    }
+  ]
+}

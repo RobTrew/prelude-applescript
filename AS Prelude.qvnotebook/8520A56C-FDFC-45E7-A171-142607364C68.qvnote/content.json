@@ -1,0 +1,10 @@
+{
+  "title": "takeAround",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeAround :: (a -> Bool) -> [a] -> [a]\ron takeAround(p, xs)\r\tset ys to takeWhile(p, xs)\r\tif length of ys < length of xs then\r\t\tys & takeWhileR(p, xs)\r\telse\r\t\tys\r\tend if\rend takeAround"
+    }
+  ]
+}

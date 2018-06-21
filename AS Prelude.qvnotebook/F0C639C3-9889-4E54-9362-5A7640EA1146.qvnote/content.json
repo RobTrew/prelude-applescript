@@ -1,0 +1,10 @@
+{
+  "title": "Right",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Right :: b -> Either a b\ron |Right|(x)\r\t{type:\"Either\", |Left|:missing value, |Right|:x}\rend |Right|"
+    }
+  ]
+}

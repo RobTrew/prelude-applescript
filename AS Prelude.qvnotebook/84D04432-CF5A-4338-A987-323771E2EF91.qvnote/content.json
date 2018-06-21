@@ -1,0 +1,15 @@
+{
+  "title": "breakOnMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- needle -> haystack -> maybe (prefix before match, match + rest)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- breakOnMay :: String -> String -> Maybe (String, String)\ron breakOnMay(pat, src)\r\tif pat ≠ \"\" then\r\t\tset {dlm, my text item delimiters} to {my text item delimiters, pat}\r\t\t\r\t\tset lstParts to text items of src\r\t\tif length of lstParts > 1 then\r\t\t\tset mbTuple to Just(Tuple(item 1 of lstParts, pat & ¬\r\t\t\t\t((items 2 thru -1 of lstParts) as text)))\r\t\telse\r\t\t\tset mbTuple to Just(Tuple(src, \"\"))\r\t\tend if\r\t\t\r\t\tset my text item delimiters to dlm\r\t\treturn mbTuple\r\telse\r\t\tNothing()\r\tend if\rend breakOnMay"
+    }
+  ]
+}

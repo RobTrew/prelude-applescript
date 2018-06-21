@@ -1,0 +1,10 @@
+{
+  "title": "rights",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- rights :: [Either a b] -> [b]\ron rights(xs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tif class of x is record then\r\t\t\t\tset ks to keys(x)\r\t\t\t\tks contains \"type\" and ks contains \"Right\"\r\t\t\telse\r\t\t\t\tfalse\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tfilter(result, xs)\rend rights"
+    }
+  ]
+}

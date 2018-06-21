@@ -1,0 +1,10 @@
+{
+  "title": "apLR (<*>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b\ron apLR(flr, lr)\r\tif isRight(flr) then\r\t\tif isRight(lr) then\r\t\t\t|Right|(|λ|(|Right| of lr) of mReturn(|Right| of flr))\r\t\telse\r\t\t\tlr\r\t\tend if\r\telse\r\t\tflr\r\tend if\rend apLR"
+    }
+  ]
+}

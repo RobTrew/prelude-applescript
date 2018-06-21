@@ -1,0 +1,10 @@
+{
+  "title": "zipWith",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]\non zipWith(f, xs, ys)\n\tset lng to min(length of xs, length of ys)\n\tif lng < 1 then return {}\n\tset lst to {}\n\ttell mReturn(f)\n\t\trepeat with i from 1 to lng\n\t\t\tset end of lst to |λ|(item i of xs, item i of ys)\n\t\tend repeat\n\t\treturn lst\n\tend tell\nend zipWith"
+    }
+  ]
+}

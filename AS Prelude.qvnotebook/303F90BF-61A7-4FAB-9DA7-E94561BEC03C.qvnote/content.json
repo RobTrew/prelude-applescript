@@ -1,0 +1,15 @@
+{
+  "title": "sortBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Enough for small scale sorts.\n-- Use instead sortOn :: Ord b => (a -> b) -> [a] -> [a]\n-- which is equivalent to the more flexible sortBy(comparing(f), xs)\n-- and uses a much faster ObjC NSArray sort method"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- sortBy :: (a -> a -> Ordering) -> [a] -> [a]\ron sortBy(f, xs)\r\tif length of xs > 1 then\r\t\tset h to item 1 of xs\r\t\tset f to mReturn(f)\r\t\tscript\r\t\t\ton |λ|(x)\r\t\t\t\tf's |λ|(x, h) ≤ 0\r\t\t\tend |λ|\r\t\tend script\r\t\tset lessMore to partition(result, rest of xs)\r\t\tsortBy(f, |1| of lessMore) & {h} & ¬\r\t\t\tsortBy(f, |2| of lessMore)\r\telse\r\t\txs\r\tend if\rend sortBy"
+    }
+  ]
+}

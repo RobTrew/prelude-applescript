@@ -1,0 +1,10 @@
+{
+  "title": "mappendMaybe (<>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- mappendMaybe (<>) :: Maybe a -> Maybe a -> Maybe a\ron mappendMaybe(a, b)\r\tif Nothing of a then\r\t\tb\r\telse if Nothing of b then\r\t\ta\r\telse\r\t\tJust(mappend(Just of a, Just of b))\r\tend if\rend mappendMaybe"
+    }
+  ]
+}

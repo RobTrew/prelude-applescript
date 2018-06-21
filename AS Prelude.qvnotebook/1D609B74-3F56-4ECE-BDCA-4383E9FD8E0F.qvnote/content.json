@@ -1,0 +1,15 @@
+{
+  "title": "intersperse",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intersperse :: Char -> String -> String\r-- intersperse :: a -> [a] -> [a]\ron intersperse(sep, xs)\r\tset lng to length of xs\r\tif lng > 1 then\r\t\tset acc to {item 1 of xs}\r\t\trepeat with i from 2 to lng\r\t\t\tset acc to acc & {sep, item i of xs}\r\t\tend repeat\r\t\tif class of xs is string then\r\t\t\tconcat(acc)\r\t\telse\r\t\t\tacc\r\t\tend if\r\telse\r\t\txs\r\tend if\rend intersperse"
+    }
+  ]
+}

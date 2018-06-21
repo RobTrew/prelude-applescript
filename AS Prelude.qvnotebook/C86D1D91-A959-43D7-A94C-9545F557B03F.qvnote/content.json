@@ -1,0 +1,15 @@
+{
+  "title": "groupSortOn",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Sort and group a list by comparing the results of a key function\n-- applied to each element. groupSortOn f is equivalent to\n-- groupBy eq $ sortBy (comparing f),\n-- but has the performance advantage of only evaluating f once for each\n-- element in the input list.\n-- This is a decorate-(group.sort)-undecorate pattern, as in the\n-- so-called 'Schwartzian transform'.\n-- Groups are arranged from from lowest to highest."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- groupSortOn :: Ord b => (a -> b) -> [a] -> [a]\r-- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]\ron groupSortOn(f, xs)\r\tscript keyBool\r\t\ton |λ|(a, x)\r\t\t\tif class of x is boolean then\r\t\t\t\t{asc:x, fbs:fbs of a}\r\t\t\telse\r\t\t\t\t{asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tset {fs, bs} to {|1|, |2|} of unzip(fbs of foldl(keyBool, ¬\r\t\t{asc:true, fbs:{}}, flatten({f})))\r\t\r\tset intKeys to length of fs\r\tset ca to current application\r\tscript dec\r\t\tproperty gs : map(my mReturn, fs)\r\t\ton |λ|(x)\r\t\t\tset nsDct to (ca's NSMutableDictionary's ¬\r\t\t\t\tdictionaryWithDictionary:{val:x})\r\t\t\trepeat with i from 1 to intKeys\r\t\t\t\t(nsDct's setValue:((item i of gs)'s |λ|(x)) ¬\r\t\t\t\t\tforKey:(character id (96 + i)))\r\t\t\tend repeat\r\t\t\tnsDct as record\r\t\tend |λ|\r\tend script\r\t\r\tscript descrip\r\t\ton |λ|(bool, i)\r\t\t\tca's NSSortDescriptor's ¬\r\t\t\t\tsortDescriptorWithKey:(character id (96 + i)) ¬\r\t\t\t\t\tascending:bool\r\t\tend |λ|\r\tend script\r\t\r\tscript grpUndec\r\t\ton |λ|(grp)\r\t\t\tscript\r\t\t\t\ton |λ|(x)\r\t\t\t\t\tval of x\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tmap(result, grp)\r\t\tend |λ|\r\tend script\r\t\r\tscript aEq\r\t\ton |λ|(p, q)\r\t\t\t(a of p) = (a of q)\r\t\tend |λ|\r\tend script\r\t\r\t-- Sorted, grouped, undecorated\r\tmap(grpUndec, ¬\r\t\tgroupBy(aEq, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬\r\t\t\tsortedArrayUsingDescriptors:map(descrip, bs)) as list))\rend groupSortOn"
+    }
+  ]
+}

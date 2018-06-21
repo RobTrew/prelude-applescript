@@ -1,0 +1,15 @@
+{
+  "title": "mapAccumR",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- 'The mapAccumR function behaves like a combination of map and foldr; \n--  it applies a function to each element of a list, passing an accumulating \n--  parameter from |Right| to |Left|, and returning a final value of this \n--  accumulator together with the new list.' (see Hoogle)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\ron mapAccumR(f, acc, xs)\r\tscript\r\t\ton |λ|(x, a, i)\r\t\t\ttell mReturn(f) to set pair to |λ|(|1| of a, x, i)\r\t\t\tTuple(|1| of pair, (|2| of pair) & |2| of a)\r\t\tend |λ|\r\tend script\r\tfoldr(result, Tuple(acc, []), xs)\rend mapAccumR"
+    }
+  ]
+}

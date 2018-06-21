@@ -1,0 +1,10 @@
+{
+  "title": "dropFileName",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- dropFileName :: FilePath -> FilePath\ron dropFileName(strPath)\r\tif strPath ≠ \"\" then\r\t\tif character -1 of strPath = \"/\" then\r\t\t\tstrPath\r\t\telse\r\t\t\tset xs to init(splitOn(\"/\", strPath))\r\t\t\tif xs ≠ {} then\r\t\t\t\tintercalate(\"/\", xs) & \"/\"\r\t\t\telse\r\t\t\t\t\"./\"\r\t\t\tend if\r\t\tend if\r\telse\r\t\t\"./\"\r\tend if\rend dropFileName"
+    }
+  ]
+}

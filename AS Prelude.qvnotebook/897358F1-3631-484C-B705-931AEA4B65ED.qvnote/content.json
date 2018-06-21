@@ -1,0 +1,10 @@
+{
+  "title": "headDef",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- head :: [a] -> a\ron head(xs)\r\tif xs = {} then\r\t\tmissing value\r\telse\r\t\titem 1 of xs\r\tend if\rend head"
+    }
+  ]
+}

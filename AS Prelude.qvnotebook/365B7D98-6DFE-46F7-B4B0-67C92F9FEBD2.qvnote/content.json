@@ -1,0 +1,10 @@
+{
+  "title": "doesPathExist",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- doesPathExist :: FilePath -> IO Bool\ron doesPathExist(strPath)\r\tset ca to current application\r\tca's NSFileManager's defaultManager's ¬\r\t\tfileExistsAtPath:((ca's NSString's ¬\r\t\t\tstringWithString:strPath)'s ¬\r\t\t\tstringByStandardizingPath)\rend doesPathExist"
+    }
+  ]
+}

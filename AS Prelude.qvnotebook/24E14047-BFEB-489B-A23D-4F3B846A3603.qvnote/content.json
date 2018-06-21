@@ -1,0 +1,10 @@
+{
+  "title": "elems",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- elems :: Dict -> [a]\ron elems(rec)\r\tset ca to current application\r\t(ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list\rend elems"
+    }
+  ]
+}

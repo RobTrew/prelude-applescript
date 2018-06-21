@@ -1,0 +1,10 @@
+{
+  "title": "deleteBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]\ron deleteBy(fnEq, x, xs)\r\tif length of xs > 0 then\r\t\tset mb to uncons(xs)\r\t\tif Nothing of mb then\r\t\t\txs\r\t\telse\r\t\t\tset ht to Just of mb\r\t\t\tset {h, t} to {|1| of ht, |2| of ht}\r\t\t\tif |λ|(x, h) of mReturn(fnEq) then\r\t\t\t\tt\r\t\t\telse\r\t\t\t\t{h} & deleteBy(fnEq, x, t)\r\t\t\tend if\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend deleteBy"
+    }
+  ]
+}

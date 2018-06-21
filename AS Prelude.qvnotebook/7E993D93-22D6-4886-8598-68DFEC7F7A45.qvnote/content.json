@@ -1,0 +1,10 @@
+{
+  "title": "id",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- id :: a -> a\ron |id|(x)\r\tx\rend |id|"
+    }
+  ]
+}

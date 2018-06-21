@@ -1,0 +1,10 @@
+{
+  "title": "subtract",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- subtract :: Num -> Num -> Num\ron subtract(x, y)\r\ty - x\rend subtract"
+    }
+  ]
+}

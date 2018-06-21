@@ -1,0 +1,10 @@
+{
+  "title": "jsonLog",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- jsonLog :: a -> IO ()\non jsonLog(e)\n\tlog showJSON(e)\nend jsonLog"
+    }
+  ]
+}

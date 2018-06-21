@@ -1,0 +1,10 @@
+{
+  "title": "Just",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Just :: a -> Just a\ron Just(x)\r\t{type: \"Maybe\", Nothing:false, Just:x}\rend Just"
+    }
+  ]
+}

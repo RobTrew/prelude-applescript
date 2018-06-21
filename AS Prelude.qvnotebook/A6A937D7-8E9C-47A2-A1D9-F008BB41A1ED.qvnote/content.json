@@ -1,0 +1,10 @@
+{
+  "title": "range",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- range :: Ix a => (a, a) -> [a]\ron range(ab)\r\tset {a, b} to {|1| of ab, |2| of ab}\r\tif class of a is list then\r\t\tset {xs, ys} to {a, b}\r\telse\r\t\tset {xs, ys} to {{a}, {b}}\r\tend if\r\tset lng to length of xs\r\t\r\tif lng = length of ys then\r\t\tif lng > 1 then\r\t\t\tscript\r\t\t\t\ton |λ|(_, i)\r\t\t\t\t\tenumFromTo(item i of xs, item i of ys)\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tsequence(map(result, xs))\r\t\telse\r\t\t\tenumFromTo(a, b)\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend range"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Ratio",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Ratio :: Int -> Int -> Ratio\ron Ratio(n, d)\r\t{type:\"Ratio\", n:n, d:d}\rend Ratio"
+    }
+  ]
+}

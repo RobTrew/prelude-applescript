@@ -1,0 +1,10 @@
+{
+  "title": "splitRegex",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- splitRegex :: Regex -> String -> [String]\non splitRegex(strRegex, str)\n\tset lstMatches to regexMatches(strRegex, str)\n\tif length of lstMatches > 0 then\n\t\tscript preceding\n\t\t\ton |λ|(a, x)\n\t\t\t\tset iFrom to start of a\n\t\t\t\tset iLocn to (location of x)\n\t\t\t\t\n\t\t\t\tif iLocn > iFrom then\n\t\t\t\t\tset strPart to text (iFrom + 1) thru iLocn of str\n\t\t\t\telse\n\t\t\t\t\tset strPart to \"\"\n\t\t\t\tend if\n\t\t\t\t{parts:parts of a & strPart, start:iLocn + (length of x) - 1}\n\t\t\tend |λ|\n\t\tend script\n\t\t\n\t\tset recLast to foldl(preceding, {parts:[], start:0}, lstMatches)\n\t\t\n\t\tset iFinal to start of recLast\n\t\tif iFinal < length of str then\n\t\t\tparts of recLast & text (iFinal + 1) thru -1 of str\n\t\telse\n\t\t\tparts of recLast & \"\"\n\t\tend if\n\telse\n\t\t{str}\n\tend if\nend splitRegex"
+    }
+  ]
+}

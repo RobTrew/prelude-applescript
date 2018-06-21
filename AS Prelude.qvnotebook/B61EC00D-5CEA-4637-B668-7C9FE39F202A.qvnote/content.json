@@ -1,0 +1,15 @@
+{
+  "title": "abs",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Absolute value."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- abs :: Num -> Num\ron abs(x)\r\tif x < 0 then\r\t\t-x\r\telse\r\t\tx\r\tend if\t\rend abs"
+    }
+  ]
+}

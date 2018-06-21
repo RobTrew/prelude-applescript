@@ -1,0 +1,10 @@
+{
+  "title": "readFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- readFile :: FilePath -> IO String\ron readFile(strPath)\r\tset ca to current application\r\tset e to reference\r\tset {s, e} to (ca's NSString's ¬\r\t\tstringWithContentsOfFile:((ca's NSString's ¬\r\t\t\tstringWithString:strPath)'s ¬\r\t\t\tstringByStandardizingPath) ¬\r\t\t\tencoding:(ca's NSUTF8StringEncoding) |error|:(e))\r\tif e is missing value then\r\t\ts as string\r\telse\r\t\t(localizedDescription of e) as string\r\tend if\rend readFile"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "outdented",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- All lines in the string outdented by the same amount\n-- (just enough to ensure that the least indented lines \n--  have no remaining indent)\n-- All relative indents are left unchanged"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- outdented :: String -> String\ron outdented(s)\r\tset xs to |lines|(s)\r\tscript dent\r\t\ton |λ|(x)\r\t\t\tscript isSpace\r\t\t\t\ton |λ|(c)\r\t\t\t\t\tid of c = 32\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tlength of takeWhile(isSpace, x)\r\t\tend |λ|\r\tend script\r\tset n to |λ|(minimumBy(comparing(dent), xs)) of dent\r\tif n < 1 then\r\t\ts\r\telse\r\t\tunlines(map(|λ|(n) of curry(drop), xs))\r\tend if\rend outdented"
+    }
+  ]
+}

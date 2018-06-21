@@ -1,0 +1,10 @@
+{
+  "title": "break",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- break :: (a -> Bool) -> [a] -> ([a], [a])\non break(p, xs)\n\tset bln to false\n\ttell mReturn(p)\n\t\tset lng to length of xs\n\t\trepeat with i from 1 to lng\n\t\t\tif |λ|(item i of xs) then\n\t\t\t\tset bln to true\n\t\t\t\texit repeat\n\t\t\tend if\n\t\tend repeat\n\tend tell\n\tif bln then\n\t\tif i > 1 then\n\t\t\tTuple(items 1 thru (i - 1) of xs, items i thru -1 of xs)\n\t\telse\n\t\t\tTuple({}, xs)\n\t\tend if\n\telse\n\t\tTuple(xs, {})\n\tend if\nend break"
+    }
+  ]
+}

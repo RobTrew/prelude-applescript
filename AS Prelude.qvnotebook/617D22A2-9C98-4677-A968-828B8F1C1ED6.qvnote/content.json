@@ -1,0 +1,10 @@
+{
+  "title": "curry",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- curry :: ((a, b) -> c) -> a -> b -> c\non curry(f)\n\tscript\n\t\ton |λ|(a)\n\t\t\tscript\n\t\t\t\ton |λ|(b)\n\t\t\t\t\t|λ|(a, b) of mReturn(f)\n\t\t\t\tend |λ|\n\t\t\tend script\n\t\tend |λ|\n\tend script\nend curry"
+    }
+  ]
+}

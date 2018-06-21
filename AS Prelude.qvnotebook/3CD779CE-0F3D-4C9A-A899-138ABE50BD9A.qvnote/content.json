@@ -1,0 +1,10 @@
+{
+  "title": "recip",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- recip :: Num -> Num\ron recip(n)\r\tif n ≠ 0 then\r\t\t1 / n\r\telse\r\t\tmissing value\r\tend if\rend recip"
+    }
+  ]
+}

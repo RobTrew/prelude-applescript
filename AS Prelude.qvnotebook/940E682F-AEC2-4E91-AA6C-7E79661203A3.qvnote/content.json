@@ -1,0 +1,10 @@
+{
+  "title": "splitBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- splitBy :: (a -> a -> Bool) -> [a] -> [[a]]\r-- splitBy :: (String -> String -> Bool) -> String -> [String]\ron splitBy(p, xs)\r\tif length of xs < 2 then\r\t\t{xs}\r\telse\r\t\tscript f\r\t\t\tproperty mp : |λ| of mReturn(p)\r\t\t\ton |λ|(a, x)\r\t\t\t\tset {acc, active, prev} to a\r\t\t\t\tif mp(prev, x) then\r\t\t\t\t\t{acc & {active}, {x}, x}\r\t\t\t\telse\r\t\t\t\t\t{acc, active & x, x}\r\t\t\t\tend if\r\t\t\tend |λ|\r\t\tend script\r\t\t\r\t\tset h to item 1 of xs\r\t\tset lstParts to foldl(f, {{}, {h}, h}, items 2 thru -1 of xs)\r\t\tif class of item 1 of xs = string then\r\t\t\tmap(concat, (item 1 of lstParts & {item 2 of lstParts}))\r\t\telse\r\t\t\titem 1 of lstParts & {item 2 of lstParts}\r\t\tend if\r\tend if\rend splitBy"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "mod",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Composable wrapper for built-in operator"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mod :: Int -> Int -> Int\ron |mod|(n, d)\r\tn mod d\rend |mod|"
+    }
+  ]
+}

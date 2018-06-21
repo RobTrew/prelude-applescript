@@ -1,0 +1,10 @@
+{
+  "title": "length",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- length :: [a] -> Int\ron |length|(xs)\r\tlength of xs\rend |length|"
+    }
+  ]
+}

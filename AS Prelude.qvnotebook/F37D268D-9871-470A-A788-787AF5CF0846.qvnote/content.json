@@ -1,0 +1,10 @@
+{
+  "title": "regexMatches",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- regexMatches :: String -> String -> [[String]]\ron regexMatches(strRegex, strHay)\r\tset ca to current application\r\tset oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬\r\t\toptions:((ca's NSRegularExpressionAnchorsMatchLines as integer)) |error|:(missing value)\r\tset oString to ca's NSString's stringWithString:strHay\r\tset oMatches to oRgx's matchesInString:oString options:0 range:{location:0, |length|:oString's |length|()}\r\t\r\tset xs to {}\r\trepeat with oMatch in oMatches\r\t\tset intMax to ((numberOfRanges of oMatch) as integer) - 1\r\t\t\r\t\tset subs to {}\r\t\trepeat with i from 0 to intMax\r\t\t\ttell (oMatch's rangeAtIndex:i)\r\t\t\t\tset intFrom to its location\r\t\t\t\tset end of subs to text (intFrom + 1) thru (intFrom + (its |length|)) of strHay\r\t\t\tend tell\r\t\tend repeat\r\t\tset end of xs to subs\r\t\t\r\tend repeat\r\treturn xs\rend regexMatches"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "minimum",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- minimum :: Ord a => [a] -> a\ron minimum(xs)\r\tset lng to length of xs\r\tif lng < 1 then return missing value\r\tset m to item 1 of xs\r\trepeat with x in xs\r\t\tset v to contents of x\r\t\tif v < m then set m to v\r\tend repeat\r\treturn m\rend minimum"
+    }
+  ]
+}

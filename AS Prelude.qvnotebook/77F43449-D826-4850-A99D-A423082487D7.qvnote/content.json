@@ -1,0 +1,10 @@
+{
+  "title": "apTuple (<*>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- apTuple (<*>) :: Monoid m => (m, (a -> b)) -> (m, a) -> (m, b)\ron apTuple(tf, tx)\r\tTuple(mappend(|1| of tf, |1| of tx), |λ|(|2| of tx) of mReturn(|2| of tf))\rend apTuple"
+    }
+  ]
+}

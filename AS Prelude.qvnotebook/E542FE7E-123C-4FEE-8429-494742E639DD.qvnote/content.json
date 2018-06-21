@@ -1,0 +1,10 @@
+{
+  "title": "Node",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Node :: a -> [Tree a] -> Tree a\ron Node(v, xs)\r\t{type:\"Node\", root:v, nest:xs}\rend Node"
+    }
+  ]
+}

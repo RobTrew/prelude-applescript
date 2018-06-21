@@ -1,0 +1,10 @@
+{
+  "title": "lastMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- lastMay :: [a] -> Maybe a\ron lastMay(xs)\r\tif length of xs > 0 then\r\t\tJust(item -1 of xs)\r\telse\r\t\tNothing()\r\tend if\rend lastMay"
+    }
+  ]
+}

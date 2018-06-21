@@ -1,0 +1,15 @@
+{
+  "title": "listToMaybe",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- The listToMaybe function returns Nothing on \r-- an empty list or Just the head of the list."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- listToMaybe :: [a] -> Maybe a\ron listToMaybe(xs)\r\tif xs ≠ {} then\r\t\tJust(item 1 of xs)\r\telse\r\t\tNothing()\r\tend if\rend listToMaybe"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "unzip4",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- unzip4 :: [(a,b,c,d)] -> ([a],[b],[c],[d])\ron unzip4(wxyzs)\r\tset ws to {}\r\tset xs to {}\r\tset ys to {}\r\tset zs to {}\r\trepeat with wxyz in wxyzs\r\t\tset end of ws to |1| of wxyz\r\t\tset end of xs to |2| of wxyz\r\t\tset end of ys to |3| of wxyz\r\t\tset end of zs to |4| of wxyz\r\tend repeat\r\treturn Tuple4(ws, xs, ys, zs)\rend unzip4"
+    }
+  ]
+}

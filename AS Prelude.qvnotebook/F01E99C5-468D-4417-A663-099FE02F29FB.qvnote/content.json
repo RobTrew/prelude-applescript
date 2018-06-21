@@ -1,0 +1,10 @@
+{
+  "title": "liftMmay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- liftMmay :: (a -> b) -> (Maybe a -> Maybe b)\ron liftMmay(f)\r\tscript\r\t\ton |λ|(mb)\r\t\t\tif Nothing of mb then\r\t\t\t\tmb\r\t\t\telse\r\t\t\t\ttell mReturn(f) to |λ|(Just of mb)\r\t\t\tend if\r\t\tend |λ|\r\tend script\rend liftMmay"
+    }
+  ]
+}

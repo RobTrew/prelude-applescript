@@ -1,0 +1,10 @@
+{
+  "title": "max",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- max :: Ord a => a -> a -> a\non max(x, y)\n    if x > y then\n        x\n    else\n        y\n    end if\nend max"
+    }
+  ]
+}

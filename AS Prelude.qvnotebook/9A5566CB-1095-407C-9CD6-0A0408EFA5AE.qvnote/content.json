@@ -1,0 +1,10 @@
+{
+  "title": "sqrtMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- sqrtMay :: Num -> Maybe Num\ron sqrtMay(n)\r\tif n ≥ 0 then\r\t\tJust(n ^ (1 / 2))\r\telse\r\t\tNothing()\r\tend if\rend sqrtMay"
+    }
+  ]
+}

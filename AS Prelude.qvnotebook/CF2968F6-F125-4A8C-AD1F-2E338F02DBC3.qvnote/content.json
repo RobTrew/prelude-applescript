@@ -1,0 +1,10 @@
+{
+  "title": "draw",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- draw :: Tree String -> [String]\ron draw(tree)\r\t\r\t-- shift :: String -> String -> [String] -> [String]\r\tscript shift\r\t\ton |λ|(strFirst, strOther, xs)\r\t\t\tzipWith(my append, ¬\r\t\t\t\tcons(strFirst, replicate((length of xs) - 1, strOther)), xs)\r\t\tend |λ|\r\tend script\r\t\r\t-- drawSubTrees :: [Tree String] -> [String]\r\tscript drawSubTrees\r\t\ton |λ|(xs)\r\t\t\tset lng to length of xs\r\t\t\tif lng > 0 then\r\t\t\t\tif lng > 1 then\r\t\t\t\t\tcons(\"│\", append(shift's |λ|(\"├─ \", \"│  \", draw(item 1 of xs)), ¬\r\t\t\t\t\t\t|λ|(items 2 thru -1 of xs)))\r\t\t\t\telse\r\t\t\t\t\tcons(\"│\", shift's |λ|(\"└─ \", \"   \", draw(item 1 of xs)))\r\t\t\t\tend if\r\t\t\telse\r\t\t\t\t{}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tparagraphs of (root of tree) & |λ|(nest of tree) of drawSubTrees\rend draw"
+    }
+  ]
+}

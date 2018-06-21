@@ -1,0 +1,15 @@
+{
+  "title": "newUUID",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- use framework \"Foundation\"\r-- use scripting additions"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- newUUID :: () -> IO UUID String\ron newUUID()\r\tcurrent application's NSUUID's UUID's UUIDString as string\rend newUUID"
+    }
+  ]
+}

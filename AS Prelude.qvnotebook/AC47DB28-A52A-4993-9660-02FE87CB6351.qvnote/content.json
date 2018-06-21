@@ -1,0 +1,15 @@
+{
+  "title": "breakOnAll",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- breakOnAll \"::\" \"\"\n-- ==> []\n-- breakOnAll \"/\" \"a/b/c/\"\n-- ==> [(\"a\", \"/b/c/\"), (\"a/b\", \"/c/\"), (\"a/b/c\", \"/\")]"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- breakOnAll :: String -> String -> [(String, String)]\ron breakOnAll(pat, src)\r\tif pat ≠ \"\" then\r\t\tscript\r\t\t\ton |λ|(a, _, i, xs)\r\t\t\t\tif i > 1 then\r\t\t\t\t\ta & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\r\t\t\t\t\t\tpat & intercalate(pat, drop(i - 1, xs)))}\r\t\t\t\telse\r\t\t\t\t\ta\r\t\t\t\tend if\r\t\t\tend |λ|\r\t\tend script\r\t\tfoldl(result, {}, splitOn(pat, src))\r\telse\r\t\tmissing value\r\tend if\rend breakOnAll"
+    }
+  ]
+}

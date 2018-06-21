@@ -1,0 +1,10 @@
+{
+  "title": "pureTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- pureTree :: a -> Tree a\ron pureTree(x)\r\tNode(x, [])\rend pureTree"
+    }
+  ]
+}

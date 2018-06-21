@@ -1,0 +1,15 @@
+{
+  "title": "unsnoc",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- If the list is empty returns Nothing, otherwise returns \n-- Just the init and the last."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unsnoc :: [a] -> Maybe ([a], a)\ron unsnoc(xs)\r\tset blnString to class of xs is string\r\tset lng to length of xs\r\tif lng = 0 then\r\t\tNothing()\r\telse\r\t\tset h to item -1 of xs\r\t\tif lng > 1 then\r\t\t\tif blnString then\r\t\t\t\tJust(Tuple(text 1 thru -2 of xs, h))\r\t\t\telse\r\t\t\t\tJust(Tuple(items 1 thru -2 of xs, h))\r\t\t\tend if\r\t\telse\r\t\t\tif blnString then\r\t\t\t\tJust(Tuple(\"\", h))\r\t\t\telse\r\t\t\t\tJust(Tuple({}, h))\r\t\t\tend if\r\t\tend if\r\tend if\rend unsnoc"
+    }
+  ]
+}

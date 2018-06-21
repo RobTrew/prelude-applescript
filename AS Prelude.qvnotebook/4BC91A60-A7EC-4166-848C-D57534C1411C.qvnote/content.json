@@ -1,0 +1,10 @@
+{
+  "title": "safeMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- safeMay :: (a -> Bool) -> (a -> b) -> Maybe b\ron safeMay(p, f, x)\r\tif p(x) then\r\t\tJust(f(x))\r\telse\r\t\tNothing()\r\tend if\rend safeMay"
+    }
+  ]
+}

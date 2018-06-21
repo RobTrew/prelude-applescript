@@ -1,0 +1,10 @@
+{
+  "title": "take",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- take :: Int -> [a] -> [a]\ron take(n, xs)\r\tif class of xs is string then\r\t\tif n > 0 then\r\t\t\ttext 1 thru min(n, length of xs) of xs\r\t\telse\r\t\t\t\"\"\r\t\tend if\r\telse\r\t\tif n > 0 then\r\t\t\titems 1 thru min(n, length of xs) of xs\r\t\telse\r\t\t\t{}\r\t\tend if\r\tend if\rend take"
+    }
+  ]
+}

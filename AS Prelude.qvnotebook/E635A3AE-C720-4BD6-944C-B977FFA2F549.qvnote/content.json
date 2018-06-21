@@ -1,0 +1,10 @@
+{
+  "title": "LT",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- LT :: Ordering\nproperty |LT| : {type:\"Ordering\", value:-1}"
+    }
+  ]
+}

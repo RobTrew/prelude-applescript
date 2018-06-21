@@ -1,0 +1,10 @@
+{
+  "title": "takeCycle",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeCycle :: Int -> [a] -> [a]\ron takeCycle(n, xs)\r\tset lng to length of xs\r\tif lng ≥ n then\r\t\tset cycle to xs\r\telse\r\t\tset cycle to concat(replicate((n div lng) + 1, xs))\r\tend if\r\t\r\tif class of xs is string then\r\t\titems 1 thru n of cycle as string\r\telse\r\t\titems 1 thru n of cycle\r\tend if\rend takeCycle"
+    }
+  ]
+}

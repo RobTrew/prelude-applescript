@@ -1,0 +1,10 @@
+{
+  "title": "quot",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- quot :: Int -> Int -> Int\non quot(m, n)\n\tm div n\nend quot"
+    }
+  ]
+}

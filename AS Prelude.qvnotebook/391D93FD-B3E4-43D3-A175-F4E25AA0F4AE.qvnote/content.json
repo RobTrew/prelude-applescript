@@ -1,0 +1,10 @@
+{
+  "title": "assocs",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- assocs :: Map k a -> [(k, a)]\ron assocs(m)\r\tset c to class of m\r\tif c is list then\r\t  zip(enumFromTo(1, length of m), m)\r\telse if c is record then\r\t\tset dict to (current application's ¬\r\t\t\tNSDictionary's ¬\r\t\t\tdictionaryWithDictionary:(m))\r\t\tzip((dict's allKeys()'s ¬\r\t\t\tsortedArrayUsingSelector:\"compare:\") as list, ¬\r\t\t\tdict's allValues() as list)\r\telse\r\t\t{}\r\tend if\rend assocs"
+    }
+  ]
+}

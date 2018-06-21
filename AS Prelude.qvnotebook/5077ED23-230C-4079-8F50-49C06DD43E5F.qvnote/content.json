@@ -1,0 +1,15 @@
+{
+  "title": "toSentence",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- Sentence case - initial string capitalized and rest lowercase"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- toSentence :: String -> String\ron toSentence(str)\r\tset ca to current application\r\tif length of str > 0 then\r\t\tset locale to ca's NSLocale's currentLocale()\r\t\tset ws to ca's NSString\r\t\t(((ws's stringWithString:(text 1 of str))'s ¬\r\t\t\tuppercaseStringWithLocale:(locale)) as text) & ¬\r\t\t\t((ws's stringWithString:(text 2 thru -1 of str))'s ¬\r\t\t\t\tlowercaseStringWithLocale:(locale)) as text\r\telse\r\t\tstr\r\tend if\rend toSentence"
+    }
+  ]
+}

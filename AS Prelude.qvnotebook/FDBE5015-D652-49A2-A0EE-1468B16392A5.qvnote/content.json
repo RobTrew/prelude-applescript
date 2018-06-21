@@ -1,0 +1,10 @@
+{
+  "title": "filePath",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- filePath :: String -> FilePath\ron filePath(s)\r\t((current application's ¬\r\t\tNSString's stringWithString:s)'s ¬\r\t\tstringByStandardizingPath()) as string\rend filePath"
+    }
+  ]
+}

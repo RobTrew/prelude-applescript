@@ -1,0 +1,10 @@
+{
+  "title": "listFromTuple",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- listFromTuple (a, a ...) -> [a]\ron listFromTuple(tpl)\r\tscript\r\t\ton |λ|(k)\r\t\t\tJust of lookupDict(k, tpl)\r\t\tend |λ|\r\tend script -- All keys except 'type' at end\r\tmap(result, items 1 thru -2 of sort(keys(tpl)))\rend listFromTuple"
+    }
+  ]
+}

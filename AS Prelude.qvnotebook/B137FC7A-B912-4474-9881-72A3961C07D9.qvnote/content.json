@@ -1,0 +1,10 @@
+{
+  "title": "negate",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- negate :: Num -> Num\ron |negate|(n)\r\t-n\rend |negate|"
+    }
+  ]
+}

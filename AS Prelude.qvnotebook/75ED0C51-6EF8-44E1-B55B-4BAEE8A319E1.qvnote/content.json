@@ -1,0 +1,10 @@
+{
+  "title": "writeFileMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- writeFileMay :: FilePath -> String -> Maybe FilePath\ron writeFileMay(strPath, strText)\r\tset ca to current application\r\tset strFullPath to stringByStandardizingPath of ¬\r\t\twrap(strPath)\r\tif wrap(strText)'s writeToFile:(strFullPath) atomically:false ¬\r\t\tencoding:(ca's NSUTF8StringEncoding) |error|:(missing value) then\r\t\tJust(unwrap(strFullPath))\r\telse\r\t\tNothing()\r\tend if\rend writeFileMay"
+    }
+  ]
+}

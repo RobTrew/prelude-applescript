@@ -1,0 +1,10 @@
+{
+  "title": "Ordering",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- Ordering :: Int -> Ordering\ron Ordering(e)\r\tif e > 0 then\r\t\tset v to 1\r\telse if e < 0 then\r\t\tset v to -1\r\telse\r\t\tset v to 0\r\tend if\r\t{type:\"Ordering\", value:v}\rend Ordering"
+    }
+  ]
+}

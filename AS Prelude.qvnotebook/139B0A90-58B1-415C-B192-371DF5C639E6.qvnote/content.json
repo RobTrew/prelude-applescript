@@ -1,0 +1,10 @@
+{
+  "title": "filePathTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- filePathTree :: filePath -> [Tree String] -> Tree filePath\ron filePathTree(fpAnchor, trees)\r\tscript go\r\t\ton |λ|(fp)\r\t\t\tscript\r\t\t\t\ton |λ|(tree)\r\t\t\t\t\tset strPath to fp & \"/\" & (root of tree)\r\t\t\t\t\t\r\t\t\t\t\tNode(strPath, map(go's |λ|(strPath), nest of tree))\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\tend |λ|\r\tend script\r\t\r\tNode(fpAnchor, map(go's |λ|(fpAnchor), trees))\rend filePathTree"
+    }
+  ]
+}

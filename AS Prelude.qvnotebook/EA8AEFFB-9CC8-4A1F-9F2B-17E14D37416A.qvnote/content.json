@@ -1,0 +1,10 @@
+{
+  "title": "strip",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- strip :: String -> String\ron strip(s)\r\tscript isSpace\r\t\ton |λ|(c)\r\t\t\tset i to id of c\r\t\t\ti = 32 or (i ≥ 9 and i ≤ 13)\r\t\tend |λ|\r\tend script\r\tdropWhile(isSpace, dropWhileEnd(isSpace, s))\rend strip"
+    }
+  ]
+}

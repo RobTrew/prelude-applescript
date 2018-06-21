@@ -1,0 +1,15 @@
+{
+  "title": "appendFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Write a string to the end of a file. \n-- Returns true if the path exists \n-- and the write succeeded. \n-- Otherwise returns false."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- appendFile :: FilePath -> String -> IO Bool\ron appendFile(strPath, txt)\r\tset ca to current application\r\tset oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\r\t\tstringByStandardizingPath\r\tset {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\r\t\tfileExistsAtPath:oFullPath isDirectory:(reference))\r\tif blnExists then\r\t\tif intFolder = 0 then\r\t\t\tset oData to (ca's NSString's stringWithString:txt)'s ¬\r\t\t\t\tdataUsingEncoding:(ca's NSUTF8StringEncoding)\r\t\t\tset h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\r\t\t\th's seekToEndOfFile\r\t\t\th's writeData:oData\r\t\t\th's closeFile()\r\t\t\ttrue\r\t\telse\r\t\t\t-- text appended to folder is undefined\r\t\t\tfalse\r\t\tend if\r\telse\r\t\tif doesDirectoryExist(takeDirectory(oFullPath as string)) then\r\t\t\twriteFile(oFullPath, txt)\r\t\t\ttrue\r\t\telse\r\t\t\tfalse\r\t\tend if\r\tend if\rend appendFile"
+    }
+  ]
+}

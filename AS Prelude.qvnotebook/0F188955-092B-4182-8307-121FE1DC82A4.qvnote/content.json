@@ -1,0 +1,10 @@
+{
+  "title": "isRight",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isRight :: Either a b -> Bool\ron isRight(x)\r\tset dct to current application's ¬\r\t\tNSDictionary's dictionaryWithDictionary:x\r\t(dct's objectForKey:\"type\") as text = \"Either\" and ¬\r\t\t(dct's objectForKey:\"Left\") as list = {missing value}\rend isRight"
+    }
+  ]
+}

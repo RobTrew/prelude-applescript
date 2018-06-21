@@ -1,0 +1,10 @@
+{
+  "title": "fromRight",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- fromRight :: b -> Either a b -> b\ron fromRight(def, lr)\r\tif isRight(lr) then\r\t\t|Right| of lr\r\telse\r\t\tdef\r\tend if\rend fromRight"
+    }
+  ]
+}

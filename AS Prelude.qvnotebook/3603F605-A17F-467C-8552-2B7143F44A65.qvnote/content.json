@@ -1,0 +1,10 @@
+{
+  "title": "tailMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- tailMay :: [a] -> Maybe [a]\ron tailMay(xs)\r\tif xs = {} then\r\t\tNothing()\r\telse\r\t\tJust(rest of xs)\r\tend if\rend tailMay"
+    }
+  ]
+}

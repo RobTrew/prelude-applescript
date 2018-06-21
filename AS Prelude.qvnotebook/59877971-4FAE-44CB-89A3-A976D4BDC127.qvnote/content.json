@@ -1,0 +1,10 @@
+{
+  "title": "doesDirectoryExist",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- doesDirectoryExist :: FilePath -> IO Bool\ron doesDirectoryExist(strPath)\r\tset ca to current application\r\tset oPath to (ca's NSString's stringWithString:strPath)'s ¬\r\t\tstringByStandardizingPath\r\tset {bln, int} to (ca's NSFileManager's defaultManager's ¬\r\t\tfileExistsAtPath:oPath isDirectory:(reference))\r\tbln and (int = 1)\rend doesDirectoryExist"
+    }
+  ]
+}

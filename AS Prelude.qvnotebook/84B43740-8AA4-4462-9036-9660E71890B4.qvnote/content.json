@@ -1,0 +1,10 @@
+{
+  "title": "swap",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- swap :: (a, b) -> (b, a)\ron swap(ab)\r\tif class of ab is record then\r\t\tTuple(|2| of ab, |1| of ab)\r\telse\r\t\t{item 2 of ab, item 1 of ab}\r\tend if\rend swap"
+    }
+  ]
+}

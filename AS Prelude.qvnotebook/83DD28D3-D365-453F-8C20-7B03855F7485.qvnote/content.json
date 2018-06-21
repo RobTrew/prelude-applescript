@@ -1,0 +1,10 @@
+{
+  "title": "maximumMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- maximumMay :: Ord a => [a] -> Maybe a\ron maximumMay(xs)\r\tfoldl1May(max, xs)\rend maximumMay"
+    }
+  ]
+}

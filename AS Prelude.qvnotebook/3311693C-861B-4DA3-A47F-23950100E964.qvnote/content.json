@@ -1,0 +1,10 @@
+{
+  "title": "foldlTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- foldlTree :: (b -> a -> b) -> b -> Tree a -> b\ron foldlTree(f, acc, tree)\r\tscript go\r\t\tproperty g : |λ| of mReturn(f)\r\t\ton |λ|(a, x)\r\t\t\tset xs to nest of x\r\t\t\tif xs ≠ {} then\r\t\t\t\tfoldl(go, g(a, root of x), xs)\r\t\t\telse\r\t\t\t\tg(a, root of x)\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t|λ|(acc, tree) of go\rend foldlTree"
+    }
+  ]
+}

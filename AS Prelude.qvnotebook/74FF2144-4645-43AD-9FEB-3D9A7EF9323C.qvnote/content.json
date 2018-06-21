@@ -1,0 +1,15 @@
+{
+  "title": "groupBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Typical usage: groupBy(on(eq, f), xs)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- groupBy :: (a -> a -> Bool) -> [a] -> [[a]]\ron groupBy(f, xs)\r\tset mf to mReturn(f)\r\t\r\tscript enGroup\r\t\ton |λ|(a, x)\r\t\t\tif length of (active of a) > 0 then\r\t\t\t\tset h to item 1 of active of a\r\t\t\telse\r\t\t\t\tset h to missing value\r\t\t\tend if\r\t\t\t\r\t\t\tif h is not missing value and mf's |λ|(h, x) then\r\t\t\t\t{active:(active of a) & {x}, sofar:sofar of a}\r\t\t\telse\r\t\t\t\t{active:{x}, sofar:(sofar of a) & {active of a}}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tif length of xs > 0 then\r\t\tset dct to foldl(enGroup, {active:{item 1 of xs}, sofar:{}}, tail(xs))\r\t\tif length of (active of dct) > 0 then\r\t\t\tsofar of dct & {active of dct}\r\t\telse\r\t\t\tsofar of dct\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend groupBy"
+    }
+  ]
+}

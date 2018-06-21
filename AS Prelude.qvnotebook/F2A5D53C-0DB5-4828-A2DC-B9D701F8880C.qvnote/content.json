@@ -1,0 +1,10 @@
+{
+  "title": "product",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- product :: [Num] -> Num\ron product(xs)\r\tscript multiply\r\t\ton |λ|(a, b)\r\t\t\ta * b\r\t\tend |λ|\r\tend script\r\t\r\tfoldl(multiply, 1, xs)\rend product"
+    }
+  ]
+}

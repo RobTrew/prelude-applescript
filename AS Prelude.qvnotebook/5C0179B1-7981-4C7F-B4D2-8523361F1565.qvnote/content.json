@@ -1,0 +1,10 @@
+{
+  "title": "comparing",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- comparing :: (a -> b) -> (a -> a -> Ordering)\ron comparing(f)\r\tscript\r\t\ton |λ|(a, b)\r\t\t\ttell mReturn(f)\r\t\t\t\tset fa to |λ|(a)\r\t\t\t\tset fb to |λ|(b)\r\t\t\t\tif fa < fb then\r\t\t\t\t\t-1\r\t\t\t\telse if fa > fb then\r\t\t\t\t\t1\r\t\t\t\telse\r\t\t\t\t\t0\r\t\t\t\tend if\r\t\t\tend tell\r\t\tend |λ|\r\tend script\rend comparing"
+    }
+  ]
+}

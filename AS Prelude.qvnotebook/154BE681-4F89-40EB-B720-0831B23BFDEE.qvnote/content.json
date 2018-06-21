@@ -1,0 +1,10 @@
+{
+  "title": "plus",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- plus :: Num -> Num -> Num\ron plus(a, b)\r\ta + b\rend plus"
+    }
+  ]
+}

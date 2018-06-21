@@ -1,0 +1,10 @@
+{
+  "title": "deleteMap",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- deleteMap :: k -> Dict -> Dict\ron deleteMap(k, rec)\r\tset nsDct to (current application's ¬\r\t\tNSMutableDictionary's dictionaryWithDictionary:rec)\r\tnsDct's removeObjectForKey:(k)\r\tnsDct as record\rend deleteMap"
+    }
+  ]
+}

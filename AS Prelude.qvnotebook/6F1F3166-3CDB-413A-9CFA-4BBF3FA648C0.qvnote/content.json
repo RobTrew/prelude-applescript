@@ -1,0 +1,10 @@
+{
+  "title": "unzip3",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unzip3 :: [(a,b,c)] -> ([a],[b],[c])\ron unzip3(xyzs)\r\tset xs to {}\r\tset ys to {}\r\tset zs to {}\r\trepeat with xyz in xyzs\r\t\tset end of xs to |1| of xyz\r\t\tset end of ys to |2| of xyz\r\t\tset end of zs to |3| of xyz\r\tend repeat\r\treturn Tuple3(xs, ys, zs)\rend unzip3"
+    }
+  ]
+}

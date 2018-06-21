@@ -1,0 +1,15 @@
+{
+  "title": "writeFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- use framework \"Foundation\""
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- writeFile :: FilePath -> String -> IO ()\ron writeFile(strPath, strText)\r\tset ca to current application\r\t(ca's NSString's stringWithString:strText)'s ¬\r\t\twriteToFile:(stringByStandardizingPath of ¬\r\t\t\t(ca's NSString's stringWithString:strPath)) atomically:true ¬\r\t\t\tencoding:(ca's NSUTF8StringEncoding) |error|:(missing value)\rend writeFile"
+    }
+  ]
+}

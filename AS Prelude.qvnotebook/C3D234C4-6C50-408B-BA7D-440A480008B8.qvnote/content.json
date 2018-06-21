@@ -1,0 +1,15 @@
+{
+  "title": "curry2",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Not distinct, in Applescript, from the default curry.\n-- (In JavaScript we have a choice between two-argument and N-argument currying,\n-- but for want of a way of detecting arity at run-time, the arbitrary\n-- N-argument version seems hard to implement in Applescript)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- curry2 :: ((a, b) -> c) -> a -> b -> c\non curry2(f)\n\tscript\n\t\ton |λ|(a)\n\t\t\tscript\n\t\t\t\ton |λ|(b)\n\t\t\t\t\t|λ|(a, b) of mReturn(f)\n\t\t\t\tend |λ|\n\t\t\tend script\n\t\tend |λ|\n\tend script\nend curry"
+    }
+  ]
+}

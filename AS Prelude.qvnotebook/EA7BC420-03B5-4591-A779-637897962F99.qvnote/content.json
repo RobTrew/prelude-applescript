@@ -1,0 +1,10 @@
+{
+  "title": "liftA2Maybe",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- liftA2Maybe :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c\ron liftA2Maybe(f, a, b)\r\tif Nothing of a then\r\t\ta\r\telse if Nothing of b then\r\t\tb\r\telse\r\t\tJust(|λ|(Just of a, Just of b) of mReturn(f))\r\tend if\rend liftA2Maybe"
+    }
+  ]
+}

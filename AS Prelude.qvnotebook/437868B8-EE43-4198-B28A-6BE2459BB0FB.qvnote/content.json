@@ -1,0 +1,10 @@
+{
+  "title": "showOrdering",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- showOrdering :: Ordering -> String\ron showOrdering(e)\r\tset v to value of e\r\tif v > 0 then\r\t\t\"GT\"\r\telse if v < 0 then\r\t\t\"LT\"\r\telse\r\t\t\"EQ\"\r\tend if\rend showOrdering"
+    }
+  ]
+}

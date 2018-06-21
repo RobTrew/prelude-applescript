@@ -1,0 +1,10 @@
+{
+  "title": "fileStatus",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fileStatus :: FilePath -> Either String Dict\ron fileStatus(fp)\r\tset e to reference\r\tset {v, e} to current application's NSFileManager's defaultManager's ¬\r\t\tattributesOfItemAtPath:fp |error|:e\r\tif v is not missing value then\r\t\t|Right|(v as record)\r\telse\r\t\t|Left|((localizedDescription of e) as string)\r\tend if\rend fileStatus"
+    }
+  ]
+}

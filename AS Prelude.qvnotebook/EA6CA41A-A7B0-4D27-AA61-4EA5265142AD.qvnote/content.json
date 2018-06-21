@@ -1,0 +1,10 @@
+{
+  "title": "showRatio",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- showRatio :: Ratio -> String\ron showRatio(r)\r\t(n of r as string) & \"/\" & (d of r as string)\rend showRatio"
+    }
+  ]
+}

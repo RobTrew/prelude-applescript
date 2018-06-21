@@ -1,0 +1,15 @@
+{
+  "title": "append (++)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Append two lists."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- append (++) :: [a] -> [a] -> [a]\r-- append (++) :: String -> String -> String\ron append(xs, ys)\r\txs & ys\rend append"
+    }
+  ]
+}

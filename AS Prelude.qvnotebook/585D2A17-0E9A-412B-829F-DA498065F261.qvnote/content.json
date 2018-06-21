@@ -1,0 +1,15 @@
+{
+  "title": "elemAtMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- If x is a Dictionary then reads the Int as an index\n-- into the lexically sorted keys of the Dict, \n-- returning a Maybe (Key, Value) pair.\n-- If x is a list, then return a Maybe a \n-- (In either case, returns Nothing for an Int out of range)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- elemAtMay :: Int -> Dict -> Maybe (String, a)\r-- elemAtMay :: Int -> [a] -> Maybe a\ron elemAtMay(i, x)\r\tset bln to class of x is record\r\tif bln then\r\t\tset ks to keys(x)\r\t\tif i ≤ |length|(ks) then\r\t\t\tset k to item i of sort(ks)\r\t\t\tscript pair\r\t\t\t\ton |λ|(v)\r\t\t\t\t\tJust(Tuple(k, v))\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tbindMay(lookup(k, x), pair)\r\t\tend if\r\telse\r\t\tif i ≤ |length|(x) then\r\t\t\tJust(item i of x)\r\t\telse\r\t\t\tNothing()\r\t\tend if\r\tend if\rend elemAtMay"
+    }
+  ]
+}

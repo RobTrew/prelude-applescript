@@ -1,0 +1,10 @@
+{
+  "title": "cartesianProduct",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- cartesianProduct :: [a] -> [b] -> [(a, b)]\ron cartesianProduct(xs, ys)\r\tscript\r\t\ton |λ|(x)\r\t\t\tscript\r\t\t\t\ton |λ|(y)\r\t\t\t\t\t{Tuple(x, y)}\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tconcatMap(result, ys)\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend cartesianProduct"
+    }
+  ]
+}

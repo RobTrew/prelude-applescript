@@ -1,0 +1,10 @@
+{
+  "title": "mapFromList",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- mapFromList :: [(k, v)] -> Dict\ron mapFromList(kvs)\r\tset tpl to unzip(kvs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tx as string\r\t\tend |λ|\r\tend script\r\t(current application's NSDictionary's ¬\r\t\tdictionaryWithObjects:(|2| of tpl) ¬\r\t\t\tforKeys:map(result, |1| of tpl)) as record\rend mapFromList"
+    }
+  ]
+}

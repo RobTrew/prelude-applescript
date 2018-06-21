@@ -1,0 +1,10 @@
+{
+  "title": "unQuoted",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- unQuoted :: String -> String\ron unQuoted(s)\r\tscript p\r\t\ton |λ|(x)\r\t\t\t--{34, 39} contains id of x\r\t\t\t34 = id of x\r\t\tend |λ|\r\tend script\r\tdropAround(p, s)\rend unQuoted"
+    }
+  ]
+}

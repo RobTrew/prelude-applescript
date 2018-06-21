@@ -1,0 +1,10 @@
+{
+  "title": "readMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- readMay :: Read a => String -> Maybe a\ron readMay(s)\r\ttry\r\t  Just(run script s)\r\ton error e\r\t\tNothing()\r\tend try\rend readMay"
+    }
+  ]
+}

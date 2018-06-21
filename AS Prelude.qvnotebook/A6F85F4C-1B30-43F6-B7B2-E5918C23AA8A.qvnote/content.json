@@ -1,0 +1,10 @@
+{
+  "title": "tempFilePath",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- tempFilePath :: String -> IO FilePath\ron tempFilePath(template)\r\t(current application's ¬\r\t\tNSTemporaryDirectory() as string) & ¬\r\t\ttakeBaseName(template) & ¬\r\t\ttext 3 thru -1 of ((random number) as string) & ¬\r\t\ttakeExtension(template)\rend tempFilePath"
+    }
+  ]
+}

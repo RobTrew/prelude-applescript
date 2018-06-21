@@ -1,0 +1,10 @@
+{
+  "title": "splitEvery",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- splitEvery :: Int -> [a] -> [[a]]\ron splitEvery(n, xs)\r\tif length of xs ≤ n then\r\t\t{xs}\r\telse\r\t\tset grp_t to splitAt(n, xs)\r\t\t{|1| of grp_t} & splitEvery(n, |2| of grp_t)\r\tend if\rend splitEvery"
+    }
+  ]
+}

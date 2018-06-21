@@ -1,0 +1,10 @@
+{
+  "title": "div",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- div :: Int -> Int -> Int\ron |div|(a, b)\r\ta div b\rend |div|"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Tuple",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Tuple (,) :: a -> b -> (a, b)\ron Tuple(a, b)\r\t{type:\"Tuple\", |1|:a, |2|:b}\rend Tuple"
+    }
+  ]
+}

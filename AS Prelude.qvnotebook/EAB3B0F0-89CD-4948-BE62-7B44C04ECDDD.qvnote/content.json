@@ -1,0 +1,10 @@
+{
+  "title": "getFinderDirectory",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- getFinderDirectory :: IO FilePath\ron getFinderDirectory()\r\ttell application \"Finder\" to POSIX path of (insertion location as alias)\rend getFinderDirectory"
+    }
+  ]
+}

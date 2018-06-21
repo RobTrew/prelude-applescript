@@ -1,0 +1,15 @@
+{
+  "title": "subsequences",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- subsequences([1,2,3]) -> [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]\n-- subsequences(\"abc\") -> [\"\",\"a\",\"b\",\"ab\",\"c\",\"ac\",\"bc\",\"abc\"]"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- subsequences :: [a] -> [[a]]\r-- subsequences :: String -> [String]\ron subsequences(xs)\r\tscript nonEmptySubsequences\r\t\ton |λ|(xxs)\r\t\t\tif length of xxs < 1 then\r\t\t\t\t{}\r\t\t\telse\r\t\t\t\tset {x, xs} to {item 1 of xxs, tail(xxs)}\r\t\t\r\t\t\t\tscript f\r\t\t\t\t\ton |λ|(ys, r)\r\t\t\t\t\t\tcons(ys, cons(cons(x, ys), r))\r\t\t\t\t\tend |λ|\r\t\t\t\tend script\r\t\t\t\t\r\t\t\t\tcons({x}, foldr(f, {}, |λ|(xs) of nonEmptySubsequences))\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tif class of xs is text then\r\t\tcons(\"\", map(my concat, |λ|(characters of xs) of nonEmptySubsequences))\r\telse\r\t\tcons([], |λ|(xs) of nonEmptySubsequences)\r\tend if\rend subsequences"
+    }
+  ]
+}

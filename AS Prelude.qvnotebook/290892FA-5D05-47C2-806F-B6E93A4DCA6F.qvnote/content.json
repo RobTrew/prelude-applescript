@@ -1,0 +1,15 @@
+{
+  "title": "kleisliCompose (>=>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Kleisli composition LR"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)\ron kleisliCompose(f, g)\r\tscript\r\t\ton |λ|(x)\r\t\t\tbind(mReturn(f)'s |λ|(x), g)\r\t\tend |λ|\r\tend script\rend kleisliCompose"
+    }
+  ]
+}

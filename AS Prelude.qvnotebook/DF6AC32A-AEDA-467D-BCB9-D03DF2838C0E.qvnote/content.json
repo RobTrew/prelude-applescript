@@ -1,0 +1,10 @@
+{
+  "title": "chars",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- chars :: String -> [Char]\ron chars(s)\r\tcharacters of s\rend chars"
+    }
+  ]
+}

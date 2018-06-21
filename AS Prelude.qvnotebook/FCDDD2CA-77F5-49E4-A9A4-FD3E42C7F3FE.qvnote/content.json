@@ -1,0 +1,15 @@
+{
+  "title": "isMaybe",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "use framework \"Foundation\"\nuse scripting additions"
+    },
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- isMaybe :: a -> Bool\ron isMaybe(x)\r\tif class of x is record then\r\t\tset ca to current application\r\t\tset v to ((ca's NSDictionary's ¬\r\t\t\tdictionaryWithDictionary:x)'s ¬\r\t\t\tobjectForKey:\"type\")\r\t\tv is not missing value ¬\r\t\t\tand (v's isKindOfClass:(ca's NSString)) ¬\r\t\t\tand (v as string = \"Maybe\")\r\telse\r\t  false\r\tend if\rend isMaybe"
+    }
+  ]
+}

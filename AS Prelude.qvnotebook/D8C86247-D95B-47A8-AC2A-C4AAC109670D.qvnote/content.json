@@ -1,0 +1,10 @@
+{
+  "title": "drawTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- drawTree :: Tree String -> String\ron drawTree(tree)\r\tunlines(draw(tree))\rend drawTree"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "isInfixOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isInfixOf :: Eq a => [a] -> [a] -> Bool\r-- isInfixOf :: String -> String -> Bool\ron isInfixOf(needle, haystack)\r\thaystack contains needle\rend isInfixOf"
+    }
+  ]
+}

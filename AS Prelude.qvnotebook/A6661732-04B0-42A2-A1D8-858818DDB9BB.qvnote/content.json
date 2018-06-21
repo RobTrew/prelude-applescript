@@ -1,0 +1,10 @@
+{
+  "title": "readJSON",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- readJSON :: String -> a\ron readJSON(strJSON)\r\tset ca to current application\r\tset {x, e} to ca's NSJSONSerialization's ¬\r\t\tJSONObjectWithData:((ca's NSString's stringWithString:strJSON)'s ¬\r\t\t\tdataUsingEncoding:(ca's NSUTF8StringEncoding)) ¬\r\t\t\toptions:0 |error|:(reference)\r\t\r\tif x is missing value then\r\t\terror e's localizedDescription() as text\r\telse\r\t\tif x's isKindOfClass:(ca's NSDictionary) then\r\t\t\tx as record\r\t\telse\r\t\t\tx as list\r\t\tend if\r\tend if\rend readJSON"
+    }
+  ]
+}

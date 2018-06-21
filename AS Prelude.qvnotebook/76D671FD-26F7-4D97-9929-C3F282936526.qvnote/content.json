@@ -1,0 +1,10 @@
+{
+  "title": "iterateUntil",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- iterateUntil :: (a -> Bool) -> (a -> a) -> a -> [a]\ron iterateUntil(p, f, x)\r\tscript\r\t\tproperty mp : mReturn(p)'s |λ|\r\t\tproperty mf : mReturn(f)'s |λ|\r\t\tproperty lst : {x}\r\t\ton |λ|(v)\r\t\t\trepeat until mp(v)\r\t\t\t\tset v to mf(v)\r\t\t\t\tset end of lst to v\r\t\t\tend repeat\r\t\t\treturn lst\r\t\tend |λ|\r\tend script\r\t|λ|(x) of result\rend iterateUntil"
+    }
+  ]
+}

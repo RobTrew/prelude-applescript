@@ -1,0 +1,10 @@
+{
+  "title": "pureList",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- pureList :: a -> [a]\ron pureList(x)\r\t\t{x}\rend pure"
+    }
+  ]
+}

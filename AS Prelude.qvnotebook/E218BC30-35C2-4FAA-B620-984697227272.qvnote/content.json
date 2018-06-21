@@ -1,0 +1,10 @@
+{
+  "title": "listDirectory",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- listDirectory :: FilePath -> [FilePath]\ron listDirectory(strPath)\r\tset ca to current application\r\tunwrap(ca's NSFileManager's defaultManager()'s ¬\r\t\tcontentsOfDirectoryAtPath:(unwrap(stringByStandardizingPath of ¬\r\t\t\twrap(strPath))) |error|:(missing value))\rend listDirectory"
+    }
+  ]
+}

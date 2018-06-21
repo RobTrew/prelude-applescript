@@ -1,0 +1,10 @@
+{
+  "title": "showMaybe",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showMaybe :: Maybe a -> String\ron showMaybe(mb)\r\tif Nothing of mb then\r\t\t\"Nothing\"\r\telse\r\t\t\"Just \" & unQuoted(show(Just of mb))\r\tend if\rend showMaybe"
+    }
+  ]
+}

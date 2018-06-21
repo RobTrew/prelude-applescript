@@ -1,0 +1,15 @@
+{
+  "title": "snoc",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Mirror image of cons\n-- New copy of the list, with an atom added at the end"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- snoc :: [a] -> a -> [a]\ron snoc(xs, x)\r\txs & {x}\rend snoc"
+    }
+  ]
+}

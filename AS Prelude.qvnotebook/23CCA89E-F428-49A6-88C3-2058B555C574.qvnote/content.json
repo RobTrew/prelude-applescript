@@ -1,0 +1,10 @@
+{
+  "title": "intersect",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intersect :: (Eq a) => [a] -> [a] -> [a]\ron intersect(xs, ys)\r\tif length of xs < length of ys then\r\t\tset {shorter, longer} to {xs, ys}\r\telse\r\t\tset {longer, shorter} to {xs, ys}\r\tend if\r\tif shorter ≠ {} then\r\t\tset lst to {}\r\t\trepeat with x in shorter\r\t\t\tif longer contains x then set end of lst to contents of x\r\t\tend repeat\r\t\tlst\r\telse\r\t\t{}\r\tend if\rend intersect"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "isUpper",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isUpper :: Char -> Bool\ron isUpper(c)\r\tset d to (id of c) - 65 -- id of \"A\"\r\td ≥ 0 and d < 26\rend isUpper"
+    }
+  ]
+}

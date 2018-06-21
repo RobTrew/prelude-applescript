@@ -1,0 +1,10 @@
+{
+  "title": "exp",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- exp :: Float -> Float\ron exp(n)\r\tJust of evalJSMay((\"Math.exp(\" & n as string) & \")\")\rend exp"
+    }
+  ]
+}

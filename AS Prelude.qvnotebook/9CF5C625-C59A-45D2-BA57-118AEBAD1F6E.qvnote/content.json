@@ -1,0 +1,10 @@
+{
+  "title": "bindList (>>=)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- bindList (>>=) :: [a] -> (a -> [b]) -> [b]\ron bindList(xs, f)\r\tset acc to {}\r\ttell mReturn(f)\r\t\trepeat with x in xs\r\t\t\tset acc to acc & |λ|(contents of x)\r\t\tend repeat\r\tend tell\r\treturn acc\rend bindList"
+    }
+  ]
+}

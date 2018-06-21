@@ -1,0 +1,10 @@
+{
+  "title": "EQ",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- EQ :: Ordering\rproperty |EQ| : {type:\"Ordering\", value:0}"
+    }
+  ]
+}

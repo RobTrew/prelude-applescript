@@ -1,0 +1,10 @@
+{
+  "title": "thenList (>>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- thenList (>>) :: [a] -> [b] -> [b]\ron thenList(xs, ys)\r\tscript\r\t\ton |λ|(_)\r\t\t\tys\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend thenList"
+    }
+  ]
+}

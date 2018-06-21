@@ -1,0 +1,10 @@
+{
+  "title": "snd",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- snd :: (a, b) -> b\ron snd(tpl)\r\tif class of tpl is record then\r\t\t|2| of tpl\r\telse\r\t\titem 2 of tpl\r\tend if\rend snd"
+    }
+  ]
+}

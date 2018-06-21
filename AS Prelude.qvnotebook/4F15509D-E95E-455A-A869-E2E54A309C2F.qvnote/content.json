@@ -1,0 +1,15 @@
+{
+  "title": "takeIterate",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeIterate n f x == [x, f x, f (f x), ...]"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- takeIterate :: Int -> (a -> a) -> a -> [a]\ron takeIterate(n, f, x)\r\tset v to x\r\tset vs to {v}\r\ttell mReturn(f)\r\t\trepeat with i from 1 to n - 1\r\t\t\tset v to |λ|(v)\r\t\t\tset end of vs to v\r\t\tend repeat\r\tend tell\r\treturn vs\rend takeIterate"
+    }
+  ]
+}

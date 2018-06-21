@@ -1,0 +1,15 @@
+{
+  "title": "uncurry",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Returns a function on a single tuple (containing 2 arguments)\n-- derived from an equivalent function with 2 distinct arguments"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- uncurry :: (a -> b -> c) -> ((a, b) -> c)\ron uncurry(f)\r\tscript\r\t\tproperty mf : mReturn(f)'s |λ|\r\t\ton |λ|(pair)\r\t\t\tmf(|1| of pair, |2| of pair)\r\t\tend |λ|\r\tend script\rend uncurry"
+    }
+  ]
+}

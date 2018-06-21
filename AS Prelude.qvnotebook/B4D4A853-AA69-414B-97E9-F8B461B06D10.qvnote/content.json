@@ -1,0 +1,10 @@
+{
+  "title": "findIndex",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- findIndex :: (a -> Bool) -> [a] -> Maybe Int\non findIndex(f, xs)\n\ttell mReturn(f)\n\t\tset lng to length of xs\n\t\trepeat with i from 1 to lng\n\t\t\tif |λ|(item i of xs) then return Just(i)\n\t\tend repeat\n\t\treturn Nothing()\n\tend tell\nend findIndex"
+    }
+  ]
+}

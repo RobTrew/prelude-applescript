@@ -1,0 +1,10 @@
+{
+  "title": "fmap (<$>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b\ron fmap(f, fa)\r\tif class of fa is record and keys(fa) contains \"type\" then\r\t\tset t to type of fa\r\t\tif t = \"Either\" then\r\t\t\tset fm to my fmapLR\r\t\telse if t = \"Maybe\" then\r\t\t\tset fm to my fmapMay\r\t\telse if t = \"Tree\" then\r\t\t\tset fm to my fmapTree\r\t\telse if t = \"Tuple\" then\r\t\t\tset fm to my fmapTuple\r\t\telse\r\t\t\tset fm to my map\r\t\tend if\r\t\t|λ|(f, fa) of mReturn(fm)\r\telse\r\t\tmap(f, fa)\r\tend if\rend fmap"
+    }
+  ]
+}

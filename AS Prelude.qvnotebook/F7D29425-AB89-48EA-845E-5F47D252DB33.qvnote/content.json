@@ -1,0 +1,10 @@
+{
+  "title": "properFraction",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- properFraction :: Real -> (Int, Real)\ron properFraction(n)\r\tset i to (n div 1)\r\tTuple(i, n - i)\rend properFraction"
+    }
+  ]
+}

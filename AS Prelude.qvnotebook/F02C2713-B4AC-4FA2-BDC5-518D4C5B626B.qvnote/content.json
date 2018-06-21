@@ -1,0 +1,10 @@
+{
+  "title": "fromMaybe",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fromMaybe :: a -> Maybe a -> a\ron fromMaybe(d, mb)\r\tif Nothing of mb then\r\t\tdef\r\telse\r\t\tJust of mb\r\tend if\rend fromMaybe"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "indented",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- indented :: String -> String -> String\ron indented(strIndent, s)\r\tscript\r\t\ton |λ|(x)\r\t\t\tif x ≠ \"\" then\r\t\t\t\tstrIndent & x\r\t\t\telse\r\t\t\t\tx\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tunlines(map(result, |lines|(s)))\rend indented"
+    }
+  ]
+}

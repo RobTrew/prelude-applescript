@@ -1,0 +1,10 @@
+{
+  "title": "insertMap",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- insertMap :: Dict -> String -> a -> Dict\ron insertMap(rec, k, v)\r\tset ca to current application\r\tset nsDct to (ca's NSMutableDictionary's dictionaryWithDictionary:rec)\r\tnsDct's setValue:v forKey:(k as string)\r\tnsDct as record\rend insertMap"
+    }
+  ]
+}

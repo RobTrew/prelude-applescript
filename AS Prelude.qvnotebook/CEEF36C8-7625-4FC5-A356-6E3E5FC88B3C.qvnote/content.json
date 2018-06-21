@@ -1,0 +1,10 @@
+{
+  "title": "partitionEithers",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- partitionEithers :: [Either a b] -> ([a], [b])\ron partitionEithers(xs)\r\tset ys to {}\r\tset zs to {}\r\trepeat with x in xs\r\t\tif isRight(x) then\r\t\t\tset end of zs to x\r\t\telse\r\t\t\tset end of ys to x\r\t\tend if\r\tend repeat\r\tTuple(ys, zs)\rend partitionEithers"
+    }
+  ]
+}

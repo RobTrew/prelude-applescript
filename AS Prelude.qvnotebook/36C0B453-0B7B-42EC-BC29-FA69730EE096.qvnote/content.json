@@ -1,0 +1,10 @@
+{
+  "title": "center",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- center :: Int -> Char -> String -> String\ron |center|(n, cFiller, strText)\r\tset lngFill to n - (length of strText)\r\tif lngFill > 0 then\r\t\tset strPad to replicate(lngFill div 2, cFiller) as text\r\t\tset strCenter to strPad & strText & strPad\r\t\tif lngFill mod 2 > 0 then\r\t\t\tcFiller & strCenter\r\t\telse\r\t\t\tstrCenter\r\t\tend if\r\telse\r\t\tstrText\r\tend if\rend |center|"
+    }
+  ]
+}

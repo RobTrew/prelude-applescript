@@ -1,0 +1,10 @@
+{
+  "title": "deleteAt",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- deleteAt :: Int -> [a] -> [a]\ron deleteAt(i, xs)\r\tset lr to splitAt(i, xs)\r\tset {l, r} to {|1| of lr, |2| of lr}\r\tif length of r > 1 then\r\t\tl & items 2 thru -1 of r\r\telse\r\t\tl\r\tend if\rend deleteAt"
+    }
+  ]
+}

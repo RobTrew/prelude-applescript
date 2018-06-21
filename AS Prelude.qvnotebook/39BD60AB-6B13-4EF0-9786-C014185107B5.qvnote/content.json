@@ -1,0 +1,15 @@
+{
+  "title": "showDate",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- ISO 8601 UTC "
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showDate :: Date -> String\ron showDate(dte)\r\t((dte - (time to GMT)) as «class isot» as string) & \".000Z\"\rend showDate"
+    }
+  ]
+}

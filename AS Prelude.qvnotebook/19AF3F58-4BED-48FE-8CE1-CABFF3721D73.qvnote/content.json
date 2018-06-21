@@ -1,0 +1,10 @@
+{
+  "title": "flatten",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- flatten :: NestedList a -> [a]\ron flatten(t)\r\tif list is class of t then\r\t\tconcatMap(my flatten, t)\r\telse\r\t\tt\r\tend if\rend flatten"
+    }
+  ]
+}

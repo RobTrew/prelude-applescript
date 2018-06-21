@@ -1,0 +1,10 @@
+{
+  "title": "justifyRight",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- justifyRight :: Int -> Char -> String -> String\ron justifyRight(n, cFiller, strText)\r\tif n > length of strText then\r\t\ttext -n thru -1 of ((replicate(n, cFiller) as text) & strText)\r\telse\r\t\tstrText\r\tend if\rend justifyRight"
+    }
+  ]
+}

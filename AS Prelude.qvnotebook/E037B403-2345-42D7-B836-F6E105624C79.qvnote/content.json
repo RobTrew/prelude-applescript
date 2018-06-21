@@ -1,0 +1,10 @@
+{
+  "title": "quotRem",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- quotRem :: Int -> Int -> (Int, Int)\ron quotRem(m, n)\r\tTuple(m div n, m mod n)\rend quotRem"
+    }
+  ]
+}

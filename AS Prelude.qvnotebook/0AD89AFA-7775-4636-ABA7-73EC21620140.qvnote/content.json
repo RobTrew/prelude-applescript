@@ -1,0 +1,10 @@
+{
+  "title": "foldTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- foldTree :: (a -> [b] -> b) -> Tree a -> b\ron foldTree(f, tree)\r\tscript go\r\t\tproperty g : mReturn(f)'s |λ|\r\t\ton |λ|(oNode)\r\t\t\tg(root of oNode, map(go, nest of oNode))\r\t\tend |λ|\r\tend script\r\t|λ|(tree) of go\rend foldTree"
+    }
+  ]
+}

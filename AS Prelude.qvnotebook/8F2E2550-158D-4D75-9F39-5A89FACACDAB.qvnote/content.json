@@ -1,0 +1,10 @@
+{
+  "title": "pureTuple",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- pureTuple :: a -> (a, a)\ron pureTuple(x)\r\tTuple(\"\", x)\rend pureTuple"
+    }
+  ]
+}

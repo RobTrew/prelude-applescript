@@ -1,0 +1,10 @@
+{
+  "title": "sequenceAList",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- sequenceAList :: Applicative f => [f a] -> f [a]\ron sequenceAList(us)\r\tif length of us > 0 then\r\t\tscript\r\t\t\ton |λ|(u, v)\r\t\t\t\tscript cons\r\t\t\t\t\ton |λ|(x)\r\t\t\t\t\t\tscript\r\t\t\t\t\t\t\ton |λ|(xs)\r\t\t\t\t\t\t\t\t{x} & xs\r\t\t\t\t\t\t\tend |λ|\r\t\t\t\t\t\tend script\r\t\t\t\t\tend |λ|\r\t\t\t\tend script\r\t\t\t\tap(fmap(cons, u), v)\r\t\t\tend |λ|\r\t\tend script\r\t\tfoldr(result, mReturn(pureT(item 1 of us))'s |λ|({}), us)\r\telse\r\t\tus\r\tend if\rend sequenceAList"
+    }
+  ]
+}

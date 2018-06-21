@@ -1,0 +1,10 @@
+{
+  "title": "dropWhile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- dropWhile :: (a -> Bool) -> [a] -> [a]\ron dropWhile(p, xs)\r\tset lng to length of xs\r\tset i to 1\r\ttell mReturn(p)\r\t\trepeat while i ≤ lng and |λ|(item i of xs)\r\t\t\tset i to i + 1\r\t\tend repeat\r\tend tell\r\tif i ≤ lng then\r\t\tif class of xs ≠ string then\r\t\t\titems i thru lng of xs\r\t\telse\r\t\t\ttext i thru lng of xs\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend dropWhile"
+    }
+  ]
+}

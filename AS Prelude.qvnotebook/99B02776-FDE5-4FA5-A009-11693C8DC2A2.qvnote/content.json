@@ -1,0 +1,15 @@
+{
+  "title": "unfoldl",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- > unfoldl (\\b -> if b == 0 then Nothing else Just (b, b-1)) 10\n-- > [1,2,3,4,5,6,7,8,9,10]"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unfoldl :: (b -> Maybe (a, b)) -> b -> [a]\ron unfoldl(f, v)\r\tset xr to Tuple(v, v) -- (value, remainder)\r\tset xs to {}\r\ttell mReturn(f)\r\t\trepeat -- Function applied to remainder.\r\t\t\tset mb to |λ|(|2| of xr)\r\t\t\tif Nothing of mb then\r\t\t\t\texit repeat\r\t\t\telse -- New (value, remainder) tuple,\r\t\t\t\tset xr to Just of mb\r\t\t\t\t-- and value appended to output list.\r\t\t\t\tset xs to ({|1| of xr} & xs)\r\t\t\tend if\r\t\tend repeat\r\tend tell\r\treturn xs\rend unfoldl"
+    }
+  ]
+}

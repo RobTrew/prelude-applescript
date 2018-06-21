@@ -1,0 +1,10 @@
+{
+  "title": "show",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- show :: a -> String\ron show(e)\r\tset c to class of e\r\tif c = list then\r\t\tshowList(e)\r\telse if c = record then\r\t\tset mb to lookupDict(\"type\", e)\r\t\tif Nothing of mb then\r\t\t\tshowDict(e)\r\t\telse\r\t\t\tscript\r\t\t\t\ton |λ|(t)\r\t\t\t\t\tif \"Either\" = t then\r\t\t\t\t\t\tset f to my showLR\r\t\t\t\t\telse if \"Maybe\" = t then\r\t\t\t\t\t\tset f to my showMaybe\r\t\t\t\t\telse if \"Ordering\" = t then\r\t\t\t\t\t\tset f to my showOrdering\r\t\t\t\t\telse if \"Ratio\" = t then\r\t\t\t\t\t\tset f to my showRatio\r\t\t\t\t\telse if \"Tuple\" = t then\r\t\t\t\t\t\tset f to my showTuple\r\t\t\t\t\telse if \"Tuple3\" = t then\r\t\t\t\t\t\tset f to my showTuple3\r\t\t\t\t\telse if \"Tuple4\" = t then\r\t\t\t\t\t\tset f to my showTuple4\r\t\t\t\t\telse\r\t\t\t\t\t\tset f to my showDict\r\t\t\t\t\tend if\r\t\t\t\t\ttell mReturn(f) to |λ|(e)\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\ttell result to |λ|(Just of mb)\r\t\tend if\r\telse if c = date then\r\t\t\"\\\"\" & showDate(e) & \"\\\"\"\r\telse if c = text then\r\t\t\"'\" & e & \"'\"\r\telse if (c = integer or c = real) then\r\t\te as text\r\telse if c = class then\r\t\t\"null\"\r\telse\r\t\ttry\r\t\t\te as text\r\t\ton error\r\t\t\t(\"«\" & c as text) & \"»\"\r\t\tend try\r\tend if\rend show"
+    }
+  ]
+}

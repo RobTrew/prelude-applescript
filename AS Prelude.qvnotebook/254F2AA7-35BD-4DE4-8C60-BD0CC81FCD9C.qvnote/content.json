@@ -1,0 +1,10 @@
+{
+  "title": "min",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- min :: Ord a => a -> a -> a\non min(x, y)\n    if y < x then\n        y\n    else\n        x\n    end if\nend min"
+    }
+  ]
+}

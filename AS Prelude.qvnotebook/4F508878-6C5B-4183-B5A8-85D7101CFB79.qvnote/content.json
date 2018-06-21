@@ -1,0 +1,10 @@
+{
+  "title": "isChar",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isChar :: a -> Bool\ron isChar(x)\r\tclass of x is string and length of x is 1\rend isChar"
+    }
+  ]
+}

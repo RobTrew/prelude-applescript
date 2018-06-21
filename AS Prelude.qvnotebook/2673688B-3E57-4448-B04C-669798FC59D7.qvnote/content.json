@@ -1,0 +1,10 @@
+{
+  "title": "signum",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- signum :: Num -> Num\ron signum(x)\r\tif x < 0 then\r\t\t-1\r\telse if x = 0 then\r\t\t0\r\telse\r\t\t1\r\tend if\rend signum"
+    }
+  ]
+}

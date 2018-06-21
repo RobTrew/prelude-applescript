@@ -1,0 +1,10 @@
+{
+  "title": "delete",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- delete :: Eq a => a -> [a] -> [a]\ron |delete|(x, xs)\r\tset mbIndex to elemIndex(x, xs)\r\tset lng to length of xs\r\t\r\tif Nothing of mbIndex then\r\t\txs\r\telse\r\t\tif lng > 1 then\r\t\t\tset i to Just of mbIndex\r\t\t\tif i = 1 then\r\t\t\t\titems 2 thru -1 of xs\r\t\t\telse if i = lng then\r\t\t\t\titems 1 thru -2 of xs\r\t\t\telse\r\t\t\t\ttell xs to items 1 thru (i - 1) & items (i + 1) thru -1\r\t\t\tend if\r\t\telse\r\t\t\t{}\r\t\tend if\r\tend if\rend |delete|"
+    }
+  ]
+}

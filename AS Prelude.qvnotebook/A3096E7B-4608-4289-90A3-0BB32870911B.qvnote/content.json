@@ -1,0 +1,10 @@
+{
+  "title": "findIndices",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- findIndices :: (a -> Bool) -> [a] -> [Int]\ron findIndices(p, xs)\r\tscript\r\t\tproperty f : mReturn(p)'s |λ|\r\t\ton |λ|(x, i)\r\t\t\tif f(x) then\r\t\t\t\t{i}\r\t\t\telse\r\t\t\t\t{}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend findIndices"
+    }
+  ]
+}

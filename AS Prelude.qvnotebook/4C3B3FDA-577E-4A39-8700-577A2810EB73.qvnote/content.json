@@ -1,0 +1,10 @@
+{
+  "title": "setCurrentDirectory",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- setCurrentDirectory :: String -> IO ()\ron setCurrentDirectory(strPath)\r\tif doesDirectoryExist(strPath) then\r\t\tset ca to current application\r\t\tset oPath to (ca's NSString's stringWithString:strPath)'s ¬\r\t\t\tstringByStandardizingPath\r\t\tca's NSFileManager's defaultManager()'s ¬\r\t\t\tchangeCurrentDirectoryPath:oPath\r\tend if\rend setCurrentDirectory"
+    }
+  ]
+}

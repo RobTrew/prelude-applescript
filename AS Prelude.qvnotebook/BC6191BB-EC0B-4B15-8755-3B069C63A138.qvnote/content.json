@@ -1,0 +1,15 @@
+{
+  "title": "partition",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- partition :: predicate -> List -> (Matches, nonMatches)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- partition :: (a -> Bool) -> [a] -> ([a], [a])\ron partition(f, xs)\r\ttell mReturn(f)\r\t\tset ys to {}\r\t\tset zs to {}\r\t\trepeat with x in xs\r\t\t\tset v to contents of x\r\t\t\tif |λ|(v) then\r\t\t\t\tset end of ys to v\r\t\t\telse\r\t\t\t\tset end of zs to v\r\t\t\tend if\r\t\tend repeat\r\tend tell\r\tTuple(ys, zs)\rend partition"
+    }
+  ]
+}

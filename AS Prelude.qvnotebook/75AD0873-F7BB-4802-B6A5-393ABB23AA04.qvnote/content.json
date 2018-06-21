@@ -1,0 +1,10 @@
+{
+  "title": "GT",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- GT :: Ordering\nproperty |GT| : {type:\"Ordering\", value:1}"
+    }
+  ]
+}

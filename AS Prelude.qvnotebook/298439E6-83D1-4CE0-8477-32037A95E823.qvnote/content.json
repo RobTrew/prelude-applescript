@@ -1,0 +1,10 @@
+{
+  "title": "const_",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- const_ :: a -> b -> a\ron const_(k, _)\r\tk\rend const_"
+    }
+  ]
+}

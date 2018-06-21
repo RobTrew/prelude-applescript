@@ -1,0 +1,10 @@
+{
+  "title": "initMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- initMay :: [a] -> Maybe [a]\r-- initMay :: [String] -> Maybe [String]\ron initMay(xs)\r\tset blnString to class of xs = string\r\tset lng to length of xs\r\tif lng > 1 then\r\t\tif blnString then\r\t\t\tJust(text 1 thru -2 of xs)\r\t\telse\r\t\t\tJust(items 1 thru -2 of xs)\r\t\tend if\r\telse if lng > 0 then\r\t\tif blnString then\r\t\t\tJust(\"\")\r\t\telse\r\t\t\tJust({})\r\t\tend if\r\telse\r\t\tNothing()\r\tend if\rend initMay"
+    }
+  ]
+}

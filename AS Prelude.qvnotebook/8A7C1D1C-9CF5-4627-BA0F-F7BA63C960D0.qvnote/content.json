@@ -1,0 +1,10 @@
+{
+  "title": "drop",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- drop :: Int -> [a] -> [a]\ron drop(n, xs)\r\tif n < length of xs then\r\t\tif class of xs is text then\r\t\t\ttext (n + 1) thru -1 of xs\r\t\telse\r\t\t\titems (n + 1) thru -1 of xs\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend drop"
+    }
+  ]
+}

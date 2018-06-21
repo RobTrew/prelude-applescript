@@ -1,0 +1,10 @@
+{
+  "title": "approxRatio",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- approxRatio :: Real -> Real -> Ratio\ron approxRatio(epsilon, n)\r\tif epsilon is missing value then\r\t\tset e to 1 / 10000\r\telse\r\t\tset e to epsilon\r\tend if\r\t\r\tscript gcde\r\t\ton |λ|(e, x, y)\r\t\t\tscript _gcd\r\t\t\t\ton |λ|(a, b)\r\t\t\t\t\tif b < e then\r\t\t\t\t\t\ta\r\t\t\t\t\telse\r\t\t\t\t\t\t|λ|(b, a mod b)\r\t\t\t\t\tend if\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\t|λ|(abs(x), abs(y)) of _gcd\r\t\tend |λ|\r\tend script\r\t\r\tset c to |λ|(e, 1, n) of gcde\r\tRatio((n div c), (1 div c))\rend approxRatio"
+    }
+  ]
+}

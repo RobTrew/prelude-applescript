@@ -1,0 +1,10 @@
+{
+  "title": "bindMay (>>=)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b\ron bindMay(mb, mf)\r\tif Nothing of mb then\r\t\tmb\r\telse\r\t\ttell mReturn(mf) to |λ|(Just of mb)\r\tend if\rend bindMay"
+    }
+  ]
+}

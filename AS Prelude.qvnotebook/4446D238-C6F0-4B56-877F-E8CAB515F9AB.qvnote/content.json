@@ -1,0 +1,10 @@
+{
+  "title": "lefts",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- lefts :: [Either a b] -> [a]\ron lefts(xs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tif class of x is record then\r\t\t\t\tset ks to keys(x)\r\t\t\t\tks contains \"type\" and ks contains \"Left\"\r\t\t\telse\r\t\t\t\tfalse\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tfilter(result, xs)\rend lefts"
+    }
+  ]
+}

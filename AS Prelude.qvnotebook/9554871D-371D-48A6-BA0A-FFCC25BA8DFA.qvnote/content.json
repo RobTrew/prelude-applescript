@@ -1,0 +1,10 @@
+{
+  "title": "raise",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- raise :: Num -> Int -> Num\ron raise(m, n)\r\tm ^ n\rend raise"
+    }
+  ]
+}

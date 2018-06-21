@@ -1,0 +1,15 @@
+{
+  "title": "replicateM",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Instance for lists only here\n\n-- e.g. replicateM(3, {1, 2})) -> \n-- {{1, 1, 1}, {1, 1, 2}, {1, 2, 1}, {1, 2, 2}, {2, 1, 1}, \n--  {2, 1, 2}, {2, 2, 1}, {2, 2, 2}}"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- replicateM :: Int -> [a] -> [[a]]\ron replicateM(n, xs)\r\tscript go\r\t\tscript cons\r\t\t\ton |λ|(a, bs)\r\t\t\t\t{a} & bs\r\t\t\tend |λ|\r\t\tend script\r\t\ton |λ|(x)\r\t\t\tif x ≤ 0 then\r\t\t\t\t{{}}\r\t\t\telse\r\t\t\t\tliftA2List(cons, xs, |λ|(x - 1))\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\ttell go to |λ|(n)\rend replicateM"
+    }
+  ]
+}

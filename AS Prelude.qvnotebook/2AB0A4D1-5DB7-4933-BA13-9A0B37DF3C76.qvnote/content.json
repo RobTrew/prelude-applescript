@@ -1,0 +1,10 @@
+{
+  "title": "fromEnum",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fromEnum :: Enum a => a -> Int\ron fromEnum(x)\r\tset c to class of x\r\tif c is boolean then\r\t\tif x then\r\t\t\t1\r\t\telse\r\t\t\t0\r\t\tend if\r\telse if c is text then\r\t\tif x ≠ \"\" then\r\t\t\tid of x\r\t\telse\r\t\t\tmissing value\r\t\tend if\r\telse\r\t\tx as integer\r\tend if\rend fromEnum"
+    }
+  ]
+}

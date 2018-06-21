@@ -1,0 +1,10 @@
+{
+  "title": "deleteFirstsBy",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- deleteFirstsBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\ron deleteFirstsBy(fnEq, xs, ys)\r\tscript\r\t\ton |λ|(x, y)\r\t\t\tdeleteBy(fnEq, y, x)\r\t\tend |λ|\r\tend script\r\tfoldl(result, xs, ys)\rend deleteFirstsBy"
+    }
+  ]
+}

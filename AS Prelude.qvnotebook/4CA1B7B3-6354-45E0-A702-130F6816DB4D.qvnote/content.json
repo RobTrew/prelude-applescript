@@ -1,0 +1,10 @@
+{
+  "title": "getDirectoryContents",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- getDirectoryContents :: FilePath -> IO [FilePath]\ron getDirectoryContents(strPath)\r\tset ca to current application\r\tunwrap(ca's NSFileManager's defaultManager()'s contentsOfDirectoryAtPath:¬\r\t\tunwrap(stringByStandardizingPath of wrap(strPath)) |error|:(missing value))\rend getDirectoryContents"
+    }
+  ]
+}

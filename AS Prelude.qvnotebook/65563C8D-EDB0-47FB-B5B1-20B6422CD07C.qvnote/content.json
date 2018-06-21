@@ -1,0 +1,10 @@
+{
+  "title": "uncons",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- uncons :: [a] -> Maybe (a, [a])\ron uncons(xs)\r\tif xs = {} then\r\t\tNothing()\r\telse\r\t\tif class of xs is string then\r\t\t\tset cs to text items of xs\r\t\t\tJust(Tuple(item 1 of cs, rest of cs))\r\t\telse\r\t\t\tJust(Tuple(item 1 of xs, rest of xs))\r\t\tend if\r\tend if\rend uncons"
+    }
+  ]
+}

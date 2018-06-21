@@ -1,0 +1,10 @@
+{
+  "title": "lookupDict",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- lookupDict :: a -> Dict -> Maybe b\ron lookupDict(k, dct)\r\tset ca to current application\r\tset v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k\r\tif v ≠ missing value then\r\t\tJust(item 1 of ((ca's NSArray's arrayWithObject:v) as list))\r\telse\r\t\tNothing()\r\tend if\rend lookupDict"
+    }
+  ]
+}

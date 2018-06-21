@@ -1,0 +1,10 @@
+{
+  "title": "takeExtension",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- takeExtension :: FilePath -> String\ron takeExtension(strPath)\r\tset xs to splitOn(\".\", strPath)\r\tif length of xs > 1 then\r\t\t\".\" & item -1 of xs\r\telse\r\t\t\"\"\r\tend if\rend takeExtension"
+    }
+  ]
+}

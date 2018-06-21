@@ -1,0 +1,10 @@
+{
+  "title": "concatMap",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- concatMap :: (a -> [b]) -> [a] -> [b]\ron concatMap(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\tset acc to {}\r\t\trepeat with i from 1 to lng\r\t\t\tset acc to acc & |λ|(item i of xs, i, xs)\r\t\tend repeat\r\tend tell\r\treturn acc\rend concatMap"
+    }
+  ]
+}

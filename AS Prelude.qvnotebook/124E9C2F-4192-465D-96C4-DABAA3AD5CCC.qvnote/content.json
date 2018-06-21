@@ -1,0 +1,15 @@
+{
+  "title": "any",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Applied to a predicate and a list, \n-- |any| returns true if at least one element of the \n-- list satisfies the predicate."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- any :: (a -> Bool) -> [a] -> Bool\ron |any|(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\trepeat with i from 1 to lng\r\t\t\tif |λ|(item i of xs) then return true\r\t\tend repeat\r\t\tfalse\r\tend tell\rend |any|"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "dropWhileEnd",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- dropWhileEnd :: (Char -> Bool) -> String -> String\r-- dropWhileEnd :: (a -> Bool) -> [a] -> [a]\ron dropWhileEnd(p, xs)\r\tset i to length of xs\r\ttell mReturn(p)\r\t\trepeat while i > 0 and |λ|(item i of xs)\r\t\t\tset i to i - 1\r\t\tend repeat\r\tend tell\r\tif i > 0 then\r\t\tif class of xs ≠ string then\r\t\t\titems 1 thru i of xs\r\t\telse\r\t\t\ttext 1 thru i of xs\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend dropWhileEnd"
+    }
+  ]
+}

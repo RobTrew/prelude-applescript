@@ -1,0 +1,10 @@
+{
+  "title": "unzip",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- unzip :: [(a,b)] -> ([a],[b])\ron unzip(xys)\r\tset xs to {}\r\tset ys to {}\r\trepeat with xy in xys\r\t\tset end of xs to |1| of xy\r\t\tset end of ys to |2| of xy\r\tend repeat\r\treturn Tuple(xs, ys)\rend unzip"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "eq (==)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- eq (==) :: Eq a => a -> a -> Bool\ron eq(a, b)\r\ta = b\rend eq"
+    }
+  ]
+}

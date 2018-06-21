@@ -1,0 +1,10 @@
+{
+  "title": "insert",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- insert :: Ord a => a -> [a] -> [a]\ron insert(x, ys)\r\tinsertBy(my compare, x, ys)\rend insert"
+    }
+  ]
+}

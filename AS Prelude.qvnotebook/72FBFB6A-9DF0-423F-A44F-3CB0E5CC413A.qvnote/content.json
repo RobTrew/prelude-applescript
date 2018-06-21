@@ -1,0 +1,10 @@
+{
+  "title": "notElem",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- notElem :: Eq a => a -> [a] -> Bool\ron notElem(x, xs)\r\txs does not contain x\rend notElem"
+    }
+  ]
+}

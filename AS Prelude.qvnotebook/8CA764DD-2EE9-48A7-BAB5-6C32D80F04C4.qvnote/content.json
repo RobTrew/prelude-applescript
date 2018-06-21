@@ -1,0 +1,10 @@
+{
+  "title": "wrap",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- wrap :: a -> NSObject\non wrap(v)\n\tset ca to current application\n\tca's (NSArray's arrayWithObject:v)'s objectAtIndex:0\nend wrap"
+    }
+  ]
+}

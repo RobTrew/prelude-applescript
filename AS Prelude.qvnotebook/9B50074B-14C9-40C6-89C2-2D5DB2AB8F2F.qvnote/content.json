@@ -1,0 +1,10 @@
+{
+  "title": "toLower",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- toLower :: String -> String\non toLower(str)\n\tset ca to current application\n\t((ca's NSString's stringWithString:(str))'s ¬\n\t\tlowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toLower"
+    }
+  ]
+}

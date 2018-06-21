@@ -1,0 +1,10 @@
+{
+  "title": "showTuple3",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showTuple3 :: Tuple3 -> String\ron showTuple3(tpl)\r\t\"(\" & unQuoted(show(|1| of tpl)) & \", \" & ¬\r\t\tunQuoted(show(|2| of tpl)) & \", \" & ¬\r\t\tunQuoted(show(|3| of tpl)) & \")\"\rend showTuple3"
+    }
+  ]
+}

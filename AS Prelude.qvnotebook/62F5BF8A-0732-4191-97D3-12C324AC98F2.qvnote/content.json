@@ -1,0 +1,10 @@
+{
+  "title": "showUndefined",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showUndefined :: () -> String\ron showUndefined()\r\t\"⊥\"\rend showUndefined"
+    }
+  ]
+}

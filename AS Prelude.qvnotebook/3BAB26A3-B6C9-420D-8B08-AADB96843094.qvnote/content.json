@@ -1,0 +1,10 @@
+{
+  "title": "odd",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- odd :: Int -> Bool\ron odd(x)\r\tnot even(x)\rend odd"
+    }
+  ]
+}

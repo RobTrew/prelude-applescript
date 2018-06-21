@@ -1,0 +1,10 @@
+{
+  "title": "permutations",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- permutations :: [a] -> [[a]]\non permutations(xs)\n\tscript firstElement\n\t\ton |λ|(x)\n\t\t\tscript tailElements\n\t\t\t\ton |λ|(ys)\n\t\t\t\t\t{{x} & ys}\n\t\t\t\tend |λ|\n\t\t\tend script\n\t\t\t\n\t\t\tconcatMap(tailElements, permutations(|delete|(x, xs)))\n\t\tend |λ|\n\tend script\n\t\n\tif length of xs > 0 then\n\t\tconcatMap(firstElement, xs)\n\telse\n\t\t{{}}\n\tend if\nend permutations"
+    }
+  ]
+}

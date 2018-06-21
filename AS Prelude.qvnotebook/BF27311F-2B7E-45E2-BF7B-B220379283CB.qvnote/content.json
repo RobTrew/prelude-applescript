@@ -1,0 +1,10 @@
+{
+  "title": "removeFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- removeFile :: FilePath -> Either String String\ron removeFile(fp)\r\tset e to reference\r\tset {bln, obj} to current application's NSFileManager's ¬\r\t\tdefaultManager's removeItemAtPath:(fp) |error|:(e)\r\tif bln then\r\t\t|Right|(\"Removed: \" & fp)\r\telse\r\t\t|Left|(obj's localizedDescription as string)\r\tend if\rend removeFile"
+    }
+  ]
+}

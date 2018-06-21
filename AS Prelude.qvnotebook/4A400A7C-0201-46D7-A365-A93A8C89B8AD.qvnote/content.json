@@ -1,0 +1,10 @@
+{
+  "title": "splitAt",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- splitAt :: Int -> [a] -> ([a],[a])\ron splitAt(n, xs)\r\tif n > 0 and n < length of xs then\r\t\tif class of xs is text then\r\t\t\tTuple(items 1 thru n of xs as text, items (n + 1) thru -1 of xs as text)\r\t\telse\r\t\t\tTuple(items 1 thru n of xs, items (n + 1) thru -1 of xs)\r\t\tend if\r\telse\r\t\tif n < 1 then\r\t\t\tTuple({}, xs)\r\t\telse\r\t\t\tTuple(xs, {})\r\t\tend if\r\tend if\rend splitAt"
+    }
+  ]
+}

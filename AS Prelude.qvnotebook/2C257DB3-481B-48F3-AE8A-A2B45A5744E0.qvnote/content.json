@@ -1,0 +1,10 @@
+{
+  "title": "showHex",
+  "cells": [
+    {
+      "type": "code",
+      "language": "javascript",
+      "data": "-- showHex :: Int -> String\ron showHex(n)\r\tshowIntAtBase(16, mReturn(intToDigit), n, \"\")\rend showHex"
+    }
+  ]
+}

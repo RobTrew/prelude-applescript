@@ -1,0 +1,10 @@
+{
+  "title": "find",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- find :: (a -> Bool) -> [a] -> Maybe a\ron find(p, xs)\r\ttell mReturn(p)\r\t\tset lng to length of xs\r\t\trepeat with i from 1 to lng\r\t\t\tif |λ|(item i of xs) then return Just(item i of xs)\r\t\tend repeat\r\t\tNothing()\r\tend tell\rend find"
+    }
+  ]
+}

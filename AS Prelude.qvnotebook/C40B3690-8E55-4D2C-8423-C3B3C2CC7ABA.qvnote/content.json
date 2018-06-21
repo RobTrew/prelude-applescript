@@ -1,0 +1,10 @@
+{
+  "title": "intercalate",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- intercalate :: [a] -> [[a]] -> [a]\r-- intercalate :: String -> [String] -> String\ron intercalate(sep, xs)\r  concat(intersperse(sep, xs))\rend intercalate"
+    }
+  ]
+}

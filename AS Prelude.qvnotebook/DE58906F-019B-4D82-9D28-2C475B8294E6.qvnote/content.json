@@ -1,0 +1,10 @@
+{
+  "title": "chunksOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- chunksOf :: Int -> [a] -> [[a]]\ron chunksOf(k, xs)\r\tscript\r\t\ton go(ys)\r\t\t\tset ab to splitAt(k, ys)\r\t\t\tset a to |1| of ab\r\t\t\tif isNull(a) then\r\t\t\t\t{}\r\t\t\telse\r\t\t\t\t{a} & go(|2| of ab)\r\t\t\tend if\r\t\tend go\r\tend script\r\tresult's go(xs)\rend chunksOf"
+    }
+  ]
+}

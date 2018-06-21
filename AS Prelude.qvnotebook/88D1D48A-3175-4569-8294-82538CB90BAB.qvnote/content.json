@@ -1,0 +1,10 @@
+{
+  "title": "map",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- map :: (a -> b) -> [a] -> [b]\ron map(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\tset lst to {}\r\t\trepeat with i from 1 to lng\r\t\t\tset end of lst to |λ|(item i of xs, i, xs)\r\t\tend repeat\r\t\treturn lst\r\tend tell\rend map"
+    }
+  ]
+}

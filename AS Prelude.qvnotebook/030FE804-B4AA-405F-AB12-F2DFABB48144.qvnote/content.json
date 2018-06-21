@@ -1,0 +1,10 @@
+{
+  "title": "toUpper",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- toUpper :: String -> String\non toUpper(str)\n\tset ca to current application\n\t((ca's NSString's stringWithString:(str))'s ¬\n\t\tuppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toUpper"
+    }
+  ]
+}
