@@ -1211,7 +1211,7 @@ end wrap
 
 -- writeFile :: FilePath -> String -> IO ()on writeFile(strPath, strText)	set ca to current application	(ca's NSString's stringWithString:strText)'s ¬		writeToFile:(stringByStandardizingPath of ¬			(ca's NSString's stringWithString:strPath)) atomically:true ¬			encoding:(ca's NSUTF8StringEncoding) |error|:(missing value)end writeFile
 
--- writeFileMay :: FilePath -> String -> Maybe FilePathon writeFileMay(strPath, strText)	set ca to current application	set strFullPath to stringByStandardizingPath of ¬		wrap(strPath)	if wrap(strText)'s writeToFile:(strFullPath) atomically:false ¬		encoding:(ca's NSUTF8StringEncoding) |error|:(missing value) then		Just(unwrap(strFullPath))	else		Nothing()	end ifend writeFileMay
+-- writeFileLR :: FilePath -> Either String IO FilePathon writeFileLR(strPath, strText)	set ca to current application	set fp to stringByStandardizingPath of ¬		(ca's NSString's stringWithString:strPath)	set {bln, e} to (ca's NSString's stringWithString:strText)'s ¬		writeToFile:(fp) atomically:true ¬			encoding:(ca's NSUTF8StringEncoding) |error|:(reference)	if bln and e is missing value then		|Right|(fp as string)	else		|Left|(e's localizedDescription() as string)	end ifend writeFileLR
 
 -- writeTempFile :: String -> String -> IO FilePathon writeTempFile(template, txt)	set strPath to (current application's ¬		NSTemporaryDirectory() as string) & ¬		takeBaseName(template) & ¬		text 3 thru -1 of ((random number) as string) & ¬		takeExtension(template)	-- Effect	writeFile(strPath, txt)	-- Value	strPathend writeTempFile
 
