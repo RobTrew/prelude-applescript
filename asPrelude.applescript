@@ -693,6 +693,8 @@ end min
 
 -- mod :: Int -> Int -> Inton |mod|(n, d)	n mod dend |mod|
 
+-- modificationTime :: FilePath -> Either String Dateon modificationTime(fp)	script fs		on |λ|(rec)			|Right|(NSFileModificationDate of rec)		end |λ|	end script	bindLR(my fileStatus(fp), fs)end modificationTime
+
 -- mReturn :: First-class m => (a -> b) -> m (a -> b)on mReturn(f)	if class of f is script then		f	else		script			property |λ| : f		end script	end ifend mReturn
 
 -- negate :: Num -> Numon |negate|(n)	-nend |negate|
