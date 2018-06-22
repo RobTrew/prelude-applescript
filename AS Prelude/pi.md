@@ -1,3 +1,0 @@
-```applescript
--- pi :: Floatpi
-```
