@@ -386,7 +386,7 @@ end foldr1
 
 -- getCurrentDirectory :: IO FilePathon getCurrentDirectory()	set ca to current application	ca's NSFileManager's defaultManager()'s currentDirectoryPath as stringend getCurrentDirectory
 
--- getDirectoryContents :: FilePath -> IO [FilePath]on getDirectoryContents(strPath)	set ca to current application	unwrap(ca's NSFileManager's defaultManager()'s contentsOfDirectoryAtPath:¬		unwrap(stringByStandardizingPath of wrap(strPath)) |error|:(missing value))end getDirectoryContents
+-- getDirectoryContents :: FilePath -> IO [FilePath]on getDirectoryContents(strPath)	set ca to current application	(ca's NSFileManager's defaultManager()'s ¬		contentsOfDirectoryAtPath:(stringByStandardizingPath of (¬			ca's NSString's stringWithString:(strPath))) ¬			|error|:(missing value)) as listend getDirectoryContents
 
 -- getFinderDirectory :: IO FilePathon getFinderDirectory()	tell application "Finder" to POSIX path of (insertion location as alias)end getFinderDirectory
 
