@@ -2926,6 +2926,16 @@ on plus(a, b)
     a + b
 end plus
 
+-- postorder :: Tree a -> [a]
+on postorder(node)
+    script go
+        on |λ|(xs, x)
+            foldl(go, xs, nest of x) & {root of x}
+        end |λ|
+    end script
+    go's |λ|({}, node)
+end postorder
+
 -- pred :: Enum a => a -> a
 on pred(x)
     if isChar(x) then
