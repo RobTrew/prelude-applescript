@@ -4,5 +4,13 @@
 ```
 
 ```applescript
--- isSortedBy :: (a -> a -> Bool) -> [a] -> Boolon isSortedBy(cmp, xs)	script LE		on |λ|(x)			x < 1		end |λ|	end script	(length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))end isSortedBy
+-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool
+on isSortedBy(cmp, xs)
+    script LE
+        on |λ|(x)
+            x < 1
+        end |λ|
+    end script
+    (length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))
+end isSortedBy
 ```

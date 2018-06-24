@@ -4,5 +4,8 @@
 ```
 
 ```applescript
--- snoc :: [a] -> a -> [a]on snoc(xs, x)	xs & {x}end snoc
+-- snoc :: [a] -> a -> [a]
+on snoc(xs, x)
+    xs & {x}
+end snoc
 ```

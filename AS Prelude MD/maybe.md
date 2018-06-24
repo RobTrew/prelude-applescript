@@ -6,5 +6,12 @@
 ```
 
 ```applescript
--- maybe :: b -> (a -> b) -> Maybe a -> bon maybe(n, f, mb)	if Nothing of mb then		n	else		tell mReturn(f) to |λ|(Just of mb)	end ifend maybe
+-- maybe :: b -> (a -> b) -> Maybe a -> b
+on maybe(n, f, mb)
+    if Nothing of mb then
+        n
+    else
+        tell mReturn(f) to |λ|(Just of mb)
+    end if
+end maybe
 ```

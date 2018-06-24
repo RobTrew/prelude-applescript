@@ -3,5 +3,14 @@
 ```
 
 ```applescript
--- mReturn :: First-class m => (a -> b) -> m (a -> b)on mReturn(f)	if class of f is script then		f	else		script			property |λ| : f		end script	end ifend mReturn
+-- mReturn :: First-class m => (a -> b) -> m (a -> b)
+on mReturn(f)
+    if class of f is script then
+        f
+    else
+        script
+            property |λ| : f
+        end script
+    end if
+end mReturn
 ```

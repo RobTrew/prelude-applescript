@@ -1,3 +1,6 @@
 ```applescript
--- Nothing :: () -> Nothingon Nothing()	{type:"Maybe", Nothing:true}end Nothing
+-- Nothing :: () -> Nothing
+on Nothing()
+    {type:"Maybe", Nothing:true}
+end Nothing
 ```
