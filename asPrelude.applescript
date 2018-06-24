@@ -271,7 +271,7 @@ end bindList
 
 -- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
 on bindLR(m, mf)
-    if isRight(m) then
+    if missing value is not |Right| of m then
         mReturn(mf)'s |λ|(|Right| of m)
     else
         m
@@ -1170,6 +1170,16 @@ on flatten(t)
         t
     end if
 end flatten
+
+-- flattenTree :: Tree a -> [a]
+on flattenTree(node)
+    script go
+        on |λ|(x, xs)
+            {root of x} & foldr(go, xs, nest of x)
+        end |λ|
+    end script
+    go's |λ|(node, {})
+end flattenTree
 
 -- flip :: (a -> b -> c) -> b -> a -> c
 on flip(f)
