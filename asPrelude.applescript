@@ -8,7 +8,7 @@ on abs(x)
         -x
     else
         x
-    end if    
+    end if
 end abs
 
 -- all :: (a -> Bool) -> [a] -> Bool
@@ -572,8 +572,7 @@ on const_(k, _)
     k
 end const_
 
--- createDirectoryIfMissingLR :: Bool -> FilePath ->
---      Either String String
+-- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 on createDirectoryIfMissingLR(blnParents, fp)
     if doesPathExist(fp) then
         |Right|("Found: '" & fp & "'")
@@ -783,7 +782,7 @@ on draw(tree)
     paragraphs of (root of tree) & |λ|(nest of tree) of drawSubTrees
 end draw
 
--- drawForest :: Forest String -> String
+-- drawForest :: [Tree String] -> String
 on drawForest(trees)
     intercalate("\n\n", map(my drawTree, trees))
 end drawForest
@@ -1054,7 +1053,7 @@ on filePath(s)
         stringByStandardizingPath()) as string
 end filePath
 
--- filePathTree :: filePath -> [Tree String] -> Tree filePath
+-- filePathTree :: filePath -> [Tree String] -> Tree FilePath
 on filePathTree(fpAnchor, trees)
     script go
         on |λ|(fp)
@@ -1816,8 +1815,8 @@ on intersectionBy(fnEq, xs)
     foldr1(result, xs)
 end intersectionBy
 
--- intersperse :: Char -> String -> String
 -- intersperse :: a -> [a] -> [a]
+-- intersperse :: Char -> String -> String
 on intersperse(sep, xs)
     set lng to length of xs
     if lng > 1 then
@@ -1844,7 +1843,7 @@ on intToDigit(n)
     end if
 end intToDigit
 
--- isAlpha::Char - > Bool
+-- isAlpha :: Char -> Bool
 on isAlpha(c)
     set ca to current application
     set oRgx to ca's NSRegularExpression's ¬
@@ -3717,7 +3716,7 @@ on sortOn(f, xs)
         sortedArrayUsingDescriptors:map(descrip, bs)) as list)
 end sortOn
 
--- span :: (a -> Bool) -> [a] -> ([a],[a])
+-- span :: (a -> Bool) -> [a] -> ([a], [a])
 on span(f, xs)
     set lng to length of xs
     set i to 0
@@ -4417,7 +4416,7 @@ on uncurry(f)
     end script
 end uncurry
 
--- unfoldForest :: (b -> (a, [b])) -> [b] -> Forest
+-- unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
 on unfoldForest(f, xs)
     set g to mReturn(f)
     script

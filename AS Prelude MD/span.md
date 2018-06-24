@@ -9,7 +9,7 @@
 ```
 
 ```applescript
--- span :: (a -> Bool) -> [a] -> ([a],[a])
+-- span :: (a -> Bool) -> [a] -> ([a], [a])
 on span(f, xs)
 	set lng to length of xs
 	set i to 0
