@@ -81,8 +81,12 @@
 						<false/>
 						<key>MacroActionType</key>
 						<string>ExecuteAppleScript</string>
+						<key>NotifyOnFailure</key>
+						<false/>
 						<key>Path</key>
 						<string></string>
+						<key>StopOnFailure</key>
+						<false/>
 						<key>Text</key>
 						<string>use AppleScript version "2.4"use framework "Foundation"use scripting additions--    Rob Trew (c) 2018 MIT--	macOS menu for choosing and pastting a set of generic --	and file system Applescript functions.on run	tell application "Keyboard Maestro Engine"		set jsonPath to getvariable "preludeApplescript"	end tell		script functionMenu		on |λ|(recFns)			set ks to sort(keys(recFns))			tell application "System Events"				activate				set choice to choose from list ks ¬					with title "Applescript Prelude" with prompt "( " &amp; ¬					(length of ks) &amp; " functions )" &amp; ¬					linefeed &amp; linefeed &amp; ¬					"Choose one or more to paste:" default items {item 1 of ks} ¬					with multiple selections allowed								if choice is not false then					script sourceCode						on |λ|(k)							set mbSource to lookupDict(k, recFns)							if Nothing of mbSource then								{}							else								{Just of mbSource}							end if						end |λ|					end script					set strFns to my intercalate(linefeed &amp; ¬						linefeed, my concatMap(sourceCode, choice))										-- VALUE RETURNED					set the clipboard to strFns					my |Right|(strFns)				else					my |Left|("User cancelled.")				end if			end tell		end |λ|	end script		if doesFileExist(jsonPath) then		set lrJSON to readFileLR(jsonPath)	else		set lrJSON to |Left|("File not found: " &amp; jsonPath)	end if		return bindLR(bindLR(lrJSON, jsonParseLR), functionMenu)end run-- GENERIC FUNCTIONS-- Left :: a -&gt; Either a bon |Left|(x)	{type:"Either", |Left|:x, |Right|:missing value}end |Left|-- Right :: b -&gt; Either a bon |Right|(x)	{type:"Either", |Left|:missing value, |Right|:x}end |Right|-- Just :: a -&gt; Just aon Just(x)	{type:"Maybe", Nothing:false, Just:x}end Just-- Nothing :: () -&gt; Nothingon Nothing()	{type:"Maybe", Nothing:true}end Nothing-- bindLR (&gt;&gt;=) :: Either a -&gt; (a -&gt; Either b) -&gt; Either bon bindLR(m, mf)	if missing value is not |Right| of m then		mReturn(mf)'s |λ|(|Right| of m)	else		m	end ifend bindLR-- concat :: [[a]] -&gt; [a]-- concat :: [String] -&gt; Stringon concat(xs)	if length of xs &gt; 0 and class of (item 1 of xs) is string then		set acc to ""	else		set acc to {}	end if	repeat with i from 1 to length of xs		set acc to acc &amp; item i of xs	end repeat	accend concat-- concatMap :: (a -&gt; [b]) -&gt; [a] -&gt; [b]on concatMap(f, xs)	tell mReturn(f)		set lng to length of xs		set acc to {}		repeat with i from 1 to lng			set acc to acc &amp; |λ|(item i of xs, i, xs)		end repeat	end tell	return accend concatMap-- doesFileExist :: FilePath -&gt; IO Boolon doesFileExist(strPath)	set ca to current application	set oPath to (ca's NSString's stringWithString:strPath)'s ¬		stringByStandardizingPath	set {bln, int} to (ca's NSFileManager's defaultManager's ¬		fileExistsAtPath:oPath isDirectory:(reference))	bln and (int ≠ 1)end doesFileExist-- intercalate :: [a] -&gt; [[a]] -&gt; [a]-- intercalate :: String -&gt; [String] -&gt; Stringon intercalate(sep, xs)	concat(intersperse(sep, xs))end intercalate-- intersperse(0, [1,2,3]) -&gt; [1, 0, 2, 0, 3]-- intersperse :: a -&gt; [a] -&gt; [a]-- intersperse :: Char -&gt; String -&gt; Stringon intersperse(sep, xs)	set lng to length of xs	if lng &gt; 1 then		set acc to {item 1 of xs}		repeat with i from 2 to lng			set acc to acc &amp; {sep, item i of xs}		end repeat		if class of xs is string then			concat(acc)		else			acc		end if	else		xs	end ifend intersperse-- jsonParseLR :: String -&gt; Either String aon jsonParseLR(s)	set ca to current application	set {x, e} to ca's NSJSONSerialization's ¬		JSONObjectWithData:((ca's NSString's stringWithString:s)'s ¬			dataUsingEncoding:(ca's NSUTF8StringEncoding)) ¬			options:0 |error|:(reference)		if x is missing value then		|Left|(e's localizedDescription() as string)	else		if 1 = (x's isKindOfClass:(ca's NSArray)) as integer then			|Right|(x as list)		else			|Right|(item 1 of (x as list))		end if	end ifend jsonParseLR-- keys :: Dict -&gt; [String]on keys(rec)	(current application's NSDictionary's dictionaryWithDictionary:rec)'s allKeys() as listend keys-- lookupDict :: a -&gt; Dict -&gt; Maybe bon lookupDict(k, dct)	set ca to current application	set v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k	if v ≠ missing value then		Just(item 1 of ((ca's NSArray's arrayWithObject:v) as list))	else		Nothing()	end ifend lookupDict-- Lift 2nd class handler function into 1st class script wrapper -- mReturn :: First-class m =&gt; (a -&gt; b) -&gt; m (a -&gt; b)on mReturn(f)	if class of f is script then		f	else		script			property |λ| : f		end script	end ifend mReturn-- readFileLR :: FilePath -&gt; Either String Stringon readFileLR(strPath)	set ca to current application	set e to reference	set {s, e} to (ca's NSString's ¬		stringWithContentsOfFile:((ca's NSString's ¬			stringWithString:strPath)'s ¬			stringByStandardizingPath) ¬			encoding:(ca's NSUTF8StringEncoding) |error|:(e))	if e is missing value then		|Right|(s as string)	else		|Left|(message of e)	end ifend readFileLR-- sort :: Ord a =&gt; [a] -&gt; [a]on sort(xs)	((current application's NSArray's arrayWithArray:xs)'s ¬		sortedArrayUsingSelector:"compare:") as listend sort</string>
 						<key>TimeOutAbortsMacro</key>
@@ -146,8 +150,6 @@
 						<true/>
 					</dict>
 					<dict>
-						<key>ActionName</key>
-						<string>Clear variables</string>
 						<key>DisplayKind</key>
 						<string>None</string>
 						<key>IncludeStdErr</key>
@@ -155,7 +157,7 @@
 						<key>IsDisclosed</key>
 						<false/>
 						<key>MacroActionType</key>
-						<string>ExecuteJavaScriptForAutomation</string>
+						<string>ExecuteAppleScript</string>
 						<key>Path</key>
 						<string></string>
 						<key>Text</key>
@@ -577,7 +579,7 @@ end unlines</string>
 				AAD9kf//+6L///2jAAAD3AAAwGw=
 				</data>
 				<key>ModificationDate</key>
-				<real>551635326.914446</real>
+				<real>551641421.78228104</real>
 				<key>Name</key>
 				<string>Choose and paste from 350+ generic AppleScript functions</string>
 				<key>Triggers</key>
