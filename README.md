@@ -86,7 +86,7 @@ end run
 
 -- prelude :: FilePath -> Script
 on prelude(filePath)
-    -- (path to a library file returns a 'me' value)
+    -- (path to a library file which returns a 'me' value)
 
     set ca to current application
     set {bln, int} to (ca's NSFileManager's defaultManager's ¬
