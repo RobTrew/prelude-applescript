@@ -3111,8 +3111,8 @@ on readFile(strPath)
     end if
 end readFile
 
--- readFileMay :: FilePath -> Maybe String
-on readFileMay(strPath)
+-- readFileLR :: FilePath -> Either String String
+on readFileLR(strPath)
     set ca to current application
     set e to reference
     set {s, e} to (ca's NSString's ¬
@@ -3121,11 +3121,11 @@ on readFileMay(strPath)
             stringByStandardizingPath) ¬
             encoding:(ca's NSUTF8StringEncoding) |error|:(e))
     if e is missing value then
-        Just(s as string)
+        |Right|(s as string)
     else
-        Nothing()
+        |Left|(message of e)
     end if
-end readFileMay
+end readFileLR
 
 -- readJSON :: String -> a
 on readJSON(strJSON)
