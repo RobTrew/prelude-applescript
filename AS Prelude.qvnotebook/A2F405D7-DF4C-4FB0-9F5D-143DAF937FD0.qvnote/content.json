@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fmapTree :: (a -> b) -> Tree a -> Tree b\ron fmapTree(f, tree)\r\tscript go\r\t\tproperty g : |λ| of mReturn(f)\r\t\ton |λ|(x)\r\t\t\tset xs to nest of x\r\t\t\tif xs ≠ {} then\r\t\t\t\tset ys to map(go, xs)\r\t\t\telse\r\t\t\t\tset ys to xs\r\t\t\tend if\r\t\t\tNode(g(root of x), ys)\r\t\tend |λ|\r\tend script\r  |λ|(tree) of go\rend fmapTree"
+      "data": "-- fmapTree :: (a -> b) -> Tree a -> Tree b\non fmapTree(f, tree)\n    script go\n        property g : |λ| of mReturn(f)\n        on |λ|(x)\n            set xs to nest of x\n            if xs ≠ {} then\n                set ys to map(go, xs)\n            else\n                set ys to xs\n            end if\n            Node(g(root of x), ys)\n        end |λ|\n    end script\n  |λ|(tree) of go\nend fmapTree"
     }
   ]
 }

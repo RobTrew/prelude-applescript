@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- tailMay :: [a] -> Maybe [a]\ron tailMay(xs)\r\tif xs = {} then\r\t\tNothing()\r\telse\r\t\tJust(rest of xs)\r\tend if\rend tailMay"
+      "data": "-- tailMay :: [a] -> Maybe [a]\non tailMay(xs)\n    if xs = {} then\n        Nothing()\n    else\n        Just(rest of xs)\n    end if\nend tailMay"
     }
   ]
 }

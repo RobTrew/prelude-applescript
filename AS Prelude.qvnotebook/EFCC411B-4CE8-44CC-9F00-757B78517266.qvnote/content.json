@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- init :: [a] -> [a]\r-- init :: [String] -> [String]\ron init(xs)\r\tset blnString to class of xs = string\r\tset lng to length of xs\r\t\r\tif lng > 1 then\r\t\tif blnString then\r\t\t\ttext 1 thru -2 of xs\r\t\telse\r\t\t\titems 1 thru -2 of xs\r\t\tend if\r\telse if lng > 0 then\r\t\tif blnString then\r\t\t\t\"\"\r\t\telse\r\t\t\t{}\r\t\tend if\r\telse\r\t\tmissing value\r\tend if\rend init\r"
+      "data": "-- init :: [a] -> [a]\n-- init :: [String] -> [String]\non init(xs)\n    set blnString to class of xs = string\n    set lng to length of xs\n    \n    if lng > 1 then\n        if blnString then\n            text 1 thru -2 of xs\n        else\n            items 1 thru -2 of xs\n        end if\n    else if lng > 0 then\n        if blnString then\n            \"\"\n        else\n            {}\n        end if\n    else\n        missing value\n    end if\nend init\n"
     }
   ]
 }

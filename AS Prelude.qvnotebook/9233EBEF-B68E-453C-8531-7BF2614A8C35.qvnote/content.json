@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- toRatio :: Real -> Ratio\ron toRatio(n)\r\tapproxRatio(1.0E-12, n)\rend toRatio"
+      "data": "-- toRatio :: Real -> Ratio\non toRatio(n)\n    approxRatio(1.0E-12, n)\nend toRatio"
     }
   ]
 }

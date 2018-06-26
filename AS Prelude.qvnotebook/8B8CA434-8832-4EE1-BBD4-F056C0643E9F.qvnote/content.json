@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- levelNodes :: Tree a -> [[Tree a]]\ron levelNodes(tree)\r\tscript p\r\t\ton |λ|(xs)\r\t\t\tlength of xs < 1\r\t\tend |λ|\r\tend script\r\t\r\tscript f\r\t\ton |λ|(xs)\r\t\t\tscript nest\r\t\t\t\ton |λ|(Node)\r\t\t\t\t\tnest of Node\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tconcatMap(nest, xs)\r\t\tend |λ|\r\tend script\r\t\r\titerateUntil(p, f, {tree})\rend levelNodes"
+      "data": "-- levelNodes :: Tree a -> [[Tree a]]\non levelNodes(tree)\n    script p\n        on |λ|(xs)\n            length of xs < 1\n        end |λ|\n    end script\n    \n    script f\n        on |λ|(xs)\n            script nest\n                on |λ|(Node)\n                    nest of Node\n                end |λ|\n            end script\n            concatMap(nest, xs)\n        end |λ|\n    end script\n    \n    iterateUntil(p, f, {tree})\nend levelNodes"
     }
   ]
 }

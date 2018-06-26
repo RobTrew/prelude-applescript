@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- difference (\\\\) :: Eq a => [a] -> [a] -> [a]\non difference(xs, ys)\n    script \n        on |λ|(a, y)\n            if a contains y then\n                my |delete|(y, a)\n            else\n                a\n            end if\n        end |λ|\n    end script\n \n    foldl(result, xs, ys)\nend difference"
+      "data": "-- difference :: Eq a => [a] -> [a] -> [a]\non difference(xs, ys)\n    script \n        on |λ|(a, y)\n            if a contains y then\n                my |delete|(y, a)\n            else\n                a\n            end if\n        end |λ|\n    end script\n \n    foldl(result, xs, ys)\nend difference"
     }
   ]
 }

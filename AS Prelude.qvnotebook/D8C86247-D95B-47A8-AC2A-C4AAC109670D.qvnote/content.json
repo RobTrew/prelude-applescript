@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- drawTree :: Tree String -> String\ron drawTree(tree)\r\tunlines(draw(tree))\rend drawTree"
+      "data": "-- drawTree :: Tree String -> String\non drawTree(tree)\n    unlines(draw(tree))\nend drawTree"
     }
   ]
 }

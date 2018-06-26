@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromToChar :: Char -> Char -> [Char]\ron enumFromToChar(m, n)\r\tset {intM, intN} to {id of m, id of n}\r\tif intM ≤ intN then\r\t\tset xs to {}\r\t\trepeat with i from intM to intN\r\t\t\tset end of xs to character id i\r\t\tend repeat\r\t\treturn xs\r\telse\r\t\t{}\r\tend if\rend enumFromToChar"
+      "data": "-- enumFromToChar :: Char -> Char -> [Char]\non enumFromToChar(m, n)\n    set {intM, intN} to {id of m, id of n}\n    if intM ≤ intN then\n        set xs to {}\n        repeat with i from intM to intN\n            set end of xs to character id i\n        end repeat\n        return xs\n    else\n        {}\n    end if\nend enumFromToChar"
     }
   ]
 }

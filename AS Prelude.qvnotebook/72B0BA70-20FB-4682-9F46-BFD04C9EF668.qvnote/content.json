@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- jsonLog :: a -> IO ()\non jsonLog(e)\n\tlog showJSON(e)\nend jsonLog"
+      "data": "-- jsonLog :: a -> IO ()\non jsonLog(e)\n    log showJSON(e)\nend jsonLog"
     }
   ]
 }

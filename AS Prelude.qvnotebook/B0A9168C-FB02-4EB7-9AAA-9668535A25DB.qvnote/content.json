@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mappendTuple (<>) :: (a, b) -> (a, b) -> (a, b)\ron mappendTuple(a, b)\r\tTuple(mappend(|1| of a, |1| of b), mappend(|2| of a, |2| of b))\rend mappendTuple"
+      "data": "-- mappendTuple (<>) :: (a, b) -> (a, b) -> (a, b)\non mappendTuple(a, b)\n    Tuple(mappend(|1| of a, |1| of b), mappend(|2| of a, |2| of b))\nend mappendTuple"
     }
   ]
 }

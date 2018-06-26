@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- words :: String -> [String]\ron |words|(s)\r\twords of s\rend |words|"
+      "data": "-- words :: String -> [String]\non |words|(s)\n    words of s\nend |words|"
     }
   ]
 }

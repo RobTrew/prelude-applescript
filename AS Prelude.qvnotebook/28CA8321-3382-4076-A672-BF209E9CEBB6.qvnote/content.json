@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- snoc :: [a] -> a -> [a]\ron snoc(xs, x)\r\txs & {x}\rend snoc"
+      "data": "-- snoc :: [a] -> a -> [a]\non snoc(xs, x)\n    xs & {x}\nend snoc"
     }
   ]
 }

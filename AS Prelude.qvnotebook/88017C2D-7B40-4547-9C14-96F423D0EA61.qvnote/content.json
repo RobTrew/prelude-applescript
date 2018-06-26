@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)\ron liftA2Tuple(f, a, b)\r\tTuple(mappend(|1| of a, |1| of b), mReturn(f)'s |λ|(|2| of a, |2| of b))\rend liftA2Tuple"
+      "data": "-- liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)\non liftA2Tuple(f, a, b)\n    Tuple(mappend(|1| of a, |1| of b), mReturn(f)'s |λ|(|2| of a, |2| of b))\nend liftA2Tuple"
     }
   ]
 }

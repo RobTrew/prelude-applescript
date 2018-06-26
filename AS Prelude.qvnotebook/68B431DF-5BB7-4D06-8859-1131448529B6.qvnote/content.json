@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mod :: Int -> Int -> Int\ron |mod|(n, d)\r\tn mod d\rend |mod|"
+      "data": "-- mod :: Int -> Int -> Int\non |mod|(n, d)\n    n mod d\nend |mod|"
     }
   ]
 }

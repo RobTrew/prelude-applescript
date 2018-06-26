@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- exp :: Float -> Float\ron exp(n)\r\tJust of evalJSMay((\"Math.exp(\" & n as string) & \")\")\rend exp"
+      "data": "-- exp :: Float -> Float\non exp(n)\n    Just of evalJSMay((\"Math.exp(\" & n as string) & \")\")\nend exp"
     }
   ]
 }

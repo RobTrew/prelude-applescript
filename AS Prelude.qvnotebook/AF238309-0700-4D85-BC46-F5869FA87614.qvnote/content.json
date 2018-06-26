@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- TupleN :: a -> b ...  -> (a, b ... )\ron TupleN(xs)\r\ttupleFromArray(xs)\rend Tuple"
+      "data": "-- TupleN :: a -> b ...  -> (a, b ... )\non TupleN(xs)\n    tupleFromArray(xs)\nend Tuple"
     }
   ]
 }

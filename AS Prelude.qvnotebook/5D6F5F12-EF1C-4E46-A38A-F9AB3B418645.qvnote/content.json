@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- rights :: [Either a b] -> [b]\ron rights(xs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tif class of x is record then\r\t\t\t\tset ks to keys(x)\r\t\t\t\tks contains \"type\" and ks contains \"Right\"\r\t\t\telse\r\t\t\t\tfalse\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tfilter(result, xs)\rend rights"
+      "data": "-- rights :: [Either a b] -> [b]\non rights(xs)\n    script\n        on |λ|(x)\n            if class of x is record then\n                set ks to keys(x)\n                ks contains \"type\" and ks contains \"Right\"\n            else\n                false\n            end if\n        end |λ|\n    end script\n    filter(result, xs)\nend rights"
     }
   ]
 }

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\ron mapAccumR(f, acc, xs)\r\tscript\r\t\ton |λ|(x, a, i)\r\t\t\ttell mReturn(f) to set pair to |λ|(|1| of a, x, i)\r\t\t\tTuple(|1| of pair, (|2| of pair) & |2| of a)\r\t\tend |λ|\r\tend script\r\tfoldr(result, Tuple(acc, []), xs)\rend mapAccumR"
+      "data": "-- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\non mapAccumR(f, acc, xs)\n    script\n        on |λ|(x, a, i)\n            tell mReturn(f) to set pair to |λ|(|1| of a, x, i)\n            Tuple(|1| of pair, (|2| of pair) & |2| of a)\n        end |λ|\n    end script\n    foldr(result, Tuple(acc, []), xs)\nend mapAccumR"
     }
   ]
 }

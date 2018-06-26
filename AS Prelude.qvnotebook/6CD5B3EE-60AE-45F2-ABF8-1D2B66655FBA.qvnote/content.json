@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- pureLR :: a -> Either e a\ron pureLR(x)\r\t|Right|(x)\rend pureLR"
+      "language": "applescript",
+      "data": "-- pureLR :: a -> Either e a\non pureLR(x)\n    |Right|(x)\nend pureLR"
     }
   ]
 }

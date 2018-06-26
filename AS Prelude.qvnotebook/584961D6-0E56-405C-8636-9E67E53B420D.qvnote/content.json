@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- zip :: [a] -> [b] -> [(a, b)]\ron zip(xs, ys)\r\tset lng to min(length of xs, length of ys)\r\tset lst to {}\r\trepeat with i from 1 to lng\r\t\tset end of lst to Tuple(item i of xs, item i of ys)\r\tend repeat\r\treturn lst\rend zip"
+      "data": "-- zip :: [a] -> [b] -> [(a, b)]\non zip(xs, ys)\n    set lng to min(length of xs, length of ys)\n    set lst to {}\n    repeat with i from 1 to lng\n        set end of lst to Tuple(item i of xs, item i of ys)\n    end repeat\n    return lst\nend zip"
     }
   ]
 }

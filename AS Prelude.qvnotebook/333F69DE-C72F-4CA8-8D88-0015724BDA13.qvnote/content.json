@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- elemIndices :: Eq a => a -> [a] -> [Int]\ron elemIndices(x, xs)\r\tscript\r\t\ton |λ|(y, i)\r\t\t\tif y = x then\r\t\t\t\t{i}\r\t\t\telse\r\t\t\t\t{}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend elemIndices"
+      "data": "-- elemIndices :: Eq a => a -> [a] -> [Int]\non elemIndices(x, xs)\n    script\n        on |λ|(y, i)\n            if y = x then\n                {i}\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    concatMap(result, xs)\nend elemIndices"
     }
   ]
 }

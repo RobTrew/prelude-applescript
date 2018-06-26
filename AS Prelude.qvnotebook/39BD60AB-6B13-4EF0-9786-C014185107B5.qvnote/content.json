@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showDate :: Date -> String\ron showDate(dte)\r\t((dte - (time to GMT)) as «class isot» as string) & \".000Z\"\rend showDate"
+      "data": "-- showDate :: Date -> String\non showDate(dte)\n    ((dte - (time to GMT)) as «class isot» as string) & \".000Z\"\nend showDate"
     }
   ]
 }

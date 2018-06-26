@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fileStatus :: FilePath -> Either String Dict\ron fileStatus(fp)\r\tset e to reference\r\tset {v, e} to current application's NSFileManager's defaultManager's ¬\r\t\tattributesOfItemAtPath:fp |error|:e\r\tif v is not missing value then\r\t\t|Right|(v as record)\r\telse\r\t\t|Left|((localizedDescription of e) as string)\r\tend if\rend fileStatus"
+      "data": "-- fileStatus :: FilePath -> Either String Dict\non fileStatus(fp)\n    set e to reference\n    set {v, e} to current application's NSFileManager's defaultManager's ¬\n        attributesOfItemAtPath:fp |error|:e\n    if v is not missing value then\n        |Right|(v as record)\n    else\n        |Left|((localizedDescription of e) as string)\n    end if\nend fileStatus"
     }
   ]
 }

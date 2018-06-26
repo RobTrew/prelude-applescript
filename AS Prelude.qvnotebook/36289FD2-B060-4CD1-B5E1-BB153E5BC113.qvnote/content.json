@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- sort :: Ord a => [a] -> [a]\non sort(xs)\n\t((current application's NSArray's arrayWithArray:xs)'s ¬\n\t\tsortedArrayUsingSelector:\"compare:\") as list\nend sort"
+      "data": "-- sort :: Ord a => [a] -> [a]\non sort(xs)\n    ((current application's NSArray's arrayWithArray:xs)'s ¬\n        sortedArrayUsingSelector:\"compare:\") as list\nend sort"
     }
   ]
 }

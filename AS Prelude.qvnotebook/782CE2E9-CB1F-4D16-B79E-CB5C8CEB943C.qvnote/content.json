@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- truncate :: Num -> Int\ron truncate(x)\r\titem 1 of properFraction(x)\rend truncate"
+      "data": "-- truncate :: Num -> Int\non truncate(x)\n    item 1 of properFraction(x)\nend truncate"
     }
   ]
 }

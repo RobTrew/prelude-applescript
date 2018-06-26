@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pred :: Enum a => a -> a\ron pred(x)\r\tif isChar(x) then\r\t\tchr(ord(x) - 1)\r\telse\r\t\t(-1) + x\r\tend if\rend pred"
+      "data": "-- pred :: Enum a => a -> a\non pred(x)\n    if isChar(x) then\n        chr(ord(x) - 1)\n    else\n        (-1) + x\n    end if\nend pred"
     }
   ]
 }

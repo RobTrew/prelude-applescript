@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showLog :: a -> IO ()\ron showLog(e)\r\tlog show(e)\rend showLog"
+      "data": "-- showLog :: a -> IO ()\non showLog(e)\n    log show(e)\nend showLog"
     }
   ]
 }

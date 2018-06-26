@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- findIndices :: (a -> Bool) -> [a] -> [Int]\ron findIndices(p, xs)\r\tscript\r\t\tproperty f : mReturn(p)'s |λ|\r\t\ton |λ|(x, i)\r\t\t\tif f(x) then\r\t\t\t\t{i}\r\t\t\telse\r\t\t\t\t{}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tconcatMap(result, xs)\rend findIndices"
+      "data": "-- findIndices :: (a -> Bool) -> [a] -> [Int]\non findIndices(p, xs)\n    script\n        property f : mReturn(p)'s |λ|\n        on |λ|(x, i)\n            if f(x) then\n                {i}\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    concatMap(result, xs)\nend findIndices"
     }
   ]
 }

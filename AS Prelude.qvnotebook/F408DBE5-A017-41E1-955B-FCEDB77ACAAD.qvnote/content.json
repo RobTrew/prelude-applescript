@@ -1,0 +1,15 @@
+{
+  "title": "flattenTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- The root elements of a tree in pre-order."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- flattenTree :: Tree a -> [a]\non flattenTree(node)\n    script go\n        on |λ|(x, xs)\n            {root of x} & foldr(go, xs, nest of x)\n        end |λ|\n    end script\n    go's |λ|(node, {})\nend flattenTree"
+    }
+  ]
+}

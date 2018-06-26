@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- toLower :: String -> String\non toLower(str)\n\tset ca to current application\n\t((ca's NSString's stringWithString:(str))'s ¬\n\t\tlowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toLower"
+      "data": "-- toLower :: String -> String\non toLower(str)\n    set ca to current application\n    ((ca's NSString's stringWithString:(str))'s ¬\n        lowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toLower"
     }
   ]
 }

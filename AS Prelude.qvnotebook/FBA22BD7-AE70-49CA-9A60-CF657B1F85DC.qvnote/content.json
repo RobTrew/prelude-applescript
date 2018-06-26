@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- getTemporaryDirectory :: IO FilePath\ron getTemporaryDirectory()\r\tcurrent application's NSTemporaryDirectory() as string\rend getTemporaryDirectory"
+      "data": "-- getTemporaryDirectory :: IO FilePath\non getTemporaryDirectory()\n    current application's NSTemporaryDirectory() as string\nend getTemporaryDirectory"
     }
   ]
 }

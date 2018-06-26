@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- odd :: Int -> Bool\ron odd(x)\r\tnot even(x)\rend odd"
+      "data": "-- odd :: Int -> Bool\non odd(x)\n    not even(x)\nend odd"
     }
   ]
 }

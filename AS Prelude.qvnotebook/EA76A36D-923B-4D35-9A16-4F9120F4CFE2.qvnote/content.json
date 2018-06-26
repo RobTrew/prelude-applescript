@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- takeWhileR :: (a -> Bool) -> [a] -> [a]\ron takeWhileR(p, xs)\r\tset bln to false\r\ttell mReturn(p)\r\t\tset lng to length of xs\r\t\trepeat with i from lng to 1 by -1\r\t\t\tif not |λ|(item i of xs) then\r\t\t\t\tset bln to true\r\t\t\t\texit repeat\r\t\t\tend if\r\t\tend repeat\r\tend tell\r\tif bln then\r\t\tif i > 1 then\r\t\t\titems (1 + i) thru (-1) of xs\r\t\telse\r\t\t\t{}\r\t\tend if\r\telse\r\t\txs\r\tend if\rend takeWhileR"
+      "data": "-- takeWhileR :: (a -> Bool) -> [a] -> [a]\non takeWhileR(p, xs)\n    set bln to false\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from lng to 1 by -1\n            if not |λ|(item i of xs) then\n                set bln to true\n                exit repeat\n            end if\n        end repeat\n    end tell\n    if bln then\n        if i > 1 then\n            items (1 + i) thru (-1) of xs\n        else\n            {}\n        end if\n    else\n        xs\n    end if\nend takeWhileR"
     }
   ]
 }

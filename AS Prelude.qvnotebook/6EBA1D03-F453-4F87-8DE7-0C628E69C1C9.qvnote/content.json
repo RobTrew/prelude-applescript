@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- nubBy :: (a -> a -> Bool) -> [a] -> [a]\ron nubBy(f, xs)\r\tset g to mReturn(f)'s |λ|\r\t\r\tscript notEq\r\t\tproperty fEq : g\r\t\ton |λ|(a)\r\t\t\tscript\r\t\t\t\ton |λ|(b)\r\t\t\t\t\tnot fEq(a, b)\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\tend |λ|\r\tend script\r\t\r\tscript go\r\t\ton |λ|(xs)\r\t\t\tif (length of xs) > 1 then\r\t\t\t\tset x to item 1 of xs\r\t\t\t\t{x} & go's |λ|(filter(notEq's |λ|(x), items 2 thru -1 of xs))\r\t\t\telse\r\t\t\t\txs\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tgo's |λ|(xs)\rend nubBy"
+      "data": "-- nubBy :: (a -> a -> Bool) -> [a] -> [a]\non nubBy(f, xs)\n    set g to mReturn(f)'s |λ|\n    \n    script notEq\n        property fEq : g\n        on |λ|(a)\n            script\n                on |λ|(b)\n                    not fEq(a, b)\n                end |λ|\n            end script\n        end |λ|\n    end script\n    \n    script go\n        on |λ|(xs)\n            if (length of xs) > 1 then\n                set x to item 1 of xs\n                {x} & go's |λ|(filter(notEq's |λ|(x), items 2 thru -1 of xs))\n            else\n                xs\n            end if\n        end |λ|\n    end script\n    \n    go's |λ|(xs)\nend nubBy"
     }
   ]
 }

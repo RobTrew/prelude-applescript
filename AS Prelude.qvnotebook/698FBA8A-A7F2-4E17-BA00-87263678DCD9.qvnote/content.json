@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- stripStart :: String -> String\ron stripStart(s)\r\tdropWhile(my isSpace, s)\rend stripStart"
+      "data": "-- stripStart :: String -> String\non stripStart(s)\n    dropWhile(my isSpace, s)\nend stripStart"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- const_ :: a -> b -> a\ron const_(k, _)\r\tk\rend const_"
+      "data": "-- const_ :: a -> b -> a\non const_(k, _)\n    k\nend const_"
     }
   ]
 }

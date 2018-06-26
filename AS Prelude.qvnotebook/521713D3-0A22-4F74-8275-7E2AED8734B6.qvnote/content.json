@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool\ron isSortedBy(cmp, xs)\r\tscript LE\r\t\ton |λ|(x)\r\t\t\tx < 1\r\t\tend |λ|\r\tend script\r\t(length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))\rend isSortedBy"
+      "data": "-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool\non isSortedBy(cmp, xs)\n    script LE\n        on |λ|(x)\n            x < 1\n        end |λ|\n    end script\n    (length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))\nend isSortedBy"
     }
   ]
 }

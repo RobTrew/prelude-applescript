@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- scanr1 :: (a -> a -> a) -> [a] -> [a]\ron scanr1(f, xs)\r\tif length of xs > 0 then\r\t\tscanr(f, item -1 of xs, init(xs))\r\telse\r\t\t{}\r\tend if\rend scanr1"
+      "data": "-- scanr1 :: (a -> a -> a) -> [a] -> [a]\non scanr1(f, xs)\n    if length of xs > 0 then\n        scanr(f, item -1 of xs, init(xs))\n    else\n        {}\n    end if\nend scanr1"
     }
   ]
 }

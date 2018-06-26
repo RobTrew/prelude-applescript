@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- foldMapTree :: Monoid m => (a -> m) -> Tree a -> m\ron foldMapTree(f, tree)\r\tscript go\r\t\tproperty g : mReturn(f)'s |λ|\r\t\ton |λ|(x)\r\t\t\tif length of (nest of x) > 0 then\r\t\t\t\tmappend(g(root of x), ¬\r\t\t\t\t\tfoldl1(my mappend, (map(go, nest of x))))\r\t\t\telse\r\t\t\t\tg(root of x)\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\t|λ|(tree) of go\rend foldMapTree"
+      "data": "-- foldMapTree :: Monoid m => (a -> m) -> Tree a -> m\non foldMapTree(f, tree)\n    script go\n        property g : mReturn(f)'s |λ|\n        on |λ|(x)\n            if length of (nest of x) > 0 then\n                mappend(g(root of x), ¬\n                    foldl1(my mappend, (map(go, nest of x))))\n            else\n                g(root of x)\n            end if\n        end |λ|\n    end script\n    \n    |λ|(tree) of go\nend foldMapTree"
     }
   ]
 }

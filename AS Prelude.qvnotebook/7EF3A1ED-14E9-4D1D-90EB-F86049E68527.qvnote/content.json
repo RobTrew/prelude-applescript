@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- elem :: Eq a => a -> [a] -> Bool\ron elem(x, xs)\r\tconsidering case\r\t\txs contains x\r\tend considering\rend elem"
+      "data": "-- elem :: Eq a => a -> [a] -> Bool\non elem(x, xs)\n    considering case\n        xs contains x\n    end considering\nend elem"
     }
   ]
 }

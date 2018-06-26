@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- genericIndexMay :: [a] -> Int -> Maybe a\ron genericIndexMay(xs, i)\r\tif i < (length of xs) and i ≥ 0 then\r\t\tJust(item (i + 1) of xs)\r\telse\r\t\tNothing()\r\tend if\rend genericIndexMay"
+      "data": "-- genericIndexMay :: [a] -> Int -> Maybe a\non genericIndexMay(xs, i)\n    if i < (length of xs) and i ≥ 0 then\n        Just(item (i + 1) of xs)\n    else\n        Nothing()\n    end if\nend genericIndexMay"
     }
   ]
 }

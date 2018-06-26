@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- wrap :: a -> NSObject\non wrap(v)\n\tset ca to current application\n\tca's (NSArray's arrayWithObject:v)'s objectAtIndex:0\nend wrap"
+      "data": "-- wrap :: a -> NSObject\non wrap(v)\n    set ca to current application\n    ca's (NSArray's arrayWithObject:v)'s objectAtIndex:0\nend wrap"
     }
   ]
 }

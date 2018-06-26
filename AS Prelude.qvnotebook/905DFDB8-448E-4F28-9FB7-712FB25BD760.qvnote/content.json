@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- not :: Bool -> Bool\ron |not|(p)\r\tnot p\rend |not|"
+      "data": "-- not :: Bool -> Bool\non |not|(p)\n    not p\nend |not|"
     }
   ]
 }

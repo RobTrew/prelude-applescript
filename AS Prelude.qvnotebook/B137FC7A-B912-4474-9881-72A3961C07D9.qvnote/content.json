@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- negate :: Num -> Num\ron |negate|(n)\r\t-n\rend |negate|"
+      "data": "-- negate :: Num -> Num\non |negate|(n)\n    -n\nend |negate|"
     }
   ]
 }

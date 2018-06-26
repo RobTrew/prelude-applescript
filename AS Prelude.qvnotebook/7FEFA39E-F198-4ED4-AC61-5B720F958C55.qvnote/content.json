@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- fromLeft :: a -> Either a b -> a\ron fromLeft(def, lr)\r\tif isLeft(lr) then\r\t\t|Left| of lr\r\telse\r\t\tdef\r\tend if\rend fromLeft"
+      "language": "applescript",
+      "data": "-- fromLeft :: a -> Either a b -> a\non fromLeft(def, lr)\n    if isLeft(lr) then\n        |Left| of lr\n    else\n        def\n    end if\nend fromLeft"
     }
   ]
 }

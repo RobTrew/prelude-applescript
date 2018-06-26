@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- foldlTree :: (b -> a -> b) -> b -> Tree a -> b\ron foldlTree(f, acc, tree)\r\tscript go\r\t\tproperty g : |λ| of mReturn(f)\r\t\ton |λ|(a, x)\r\t\t\tset xs to nest of x\r\t\t\tif xs ≠ {} then\r\t\t\t\tfoldl(go, g(a, root of x), xs)\r\t\t\telse\r\t\t\t\tg(a, root of x)\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t|λ|(acc, tree) of go\rend foldlTree"
+      "data": "-- foldlTree :: (b -> a -> b) -> b -> Tree a -> b\non foldlTree(f, acc, tree)\n    script go\n        property g : |λ| of mReturn(f)\n        on |λ|(a, x)\n            set xs to nest of x\n            if xs ≠ {} then\n                foldl(go, g(a, root of x), xs)\n            else\n                g(a, root of x)\n            end if\n        end |λ|\n    end script\n    |λ|(acc, tree) of go\nend foldlTree"
     }
   ]
 }

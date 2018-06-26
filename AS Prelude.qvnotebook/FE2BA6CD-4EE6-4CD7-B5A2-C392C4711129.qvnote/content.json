@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- snd :: (a, b) -> b\ron snd(tpl)\r\tif class of tpl is record then\r\t\t|2| of tpl\r\telse\r\t\titem 2 of tpl\r\tend if\rend snd"
+      "data": "-- snd :: (a, b) -> b\non snd(tpl)\n    if class of tpl is record then\n        |2| of tpl\n    else\n        item 2 of tpl\n    end if\nend snd"
     }
   ]
 }

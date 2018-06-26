@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- liftA2Maybe :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c\ron liftA2Maybe(f, a, b)\r\tif Nothing of a then\r\t\ta\r\telse if Nothing of b then\r\t\tb\r\telse\r\t\tJust(|λ|(Just of a, Just of b) of mReturn(f))\r\tend if\rend liftA2Maybe"
+      "language": "applescript",
+      "data": "-- liftA2Maybe :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c\non liftA2Maybe(f, a, b)\n    if Nothing of a then\n        a\n    else if Nothing of b then\n        b\n    else\n        Just(|λ|(Just of a, Just of b) of mReturn(f))\n    end if\nend liftA2Maybe"
     }
   ]
 }

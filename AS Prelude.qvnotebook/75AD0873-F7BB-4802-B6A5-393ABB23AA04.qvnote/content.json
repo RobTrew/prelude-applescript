@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- GT :: Ordering\nproperty |GT| : {type:\"Ordering\", value:1}"
     }
   ]

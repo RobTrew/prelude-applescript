@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- dropAround :: (Char -> Bool) -> String -> String\ron dropAround(p, s)\r\tdropWhile(p, dropWhileEnd(p, s))\rend dropAround"
+      "data": "-- dropAround :: (Char -> Bool) -> String -> String\non dropAround(p, s)\n    dropWhile(p, dropWhileEnd(p, s))\nend dropAround"
     }
   ]
 }

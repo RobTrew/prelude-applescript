@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pureTree :: a -> Tree a\ron pureTree(x)\r\tNode(x, [])\rend pureTree"
+      "data": "-- pureTree :: a -> Tree a\non pureTree(x)\n    Node(x, [])\nend pureTree"
     }
   ]
 }

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- firstArrow :: (a -> b) -> ((a, c) -> (b, c))\ron firstArrow(f)\r\tscript\r\t\ton |λ|(xy)\r\t\t\tTuple(mReturn(f)'s |λ|(|1| of xy), |2| of xy)\r\t\tend |λ|\r\tend script\rend |first|"
+      "data": "-- firstArrow :: (a -> b) -> ((a, c) -> (b, c))\non firstArrow(f)\n    script\n        on |λ|(xy)\n            Tuple(mReturn(f)'s |λ|(|1| of xy), |2| of xy)\n        end |λ|\n    end script\nend |first|"
     }
   ]
 }

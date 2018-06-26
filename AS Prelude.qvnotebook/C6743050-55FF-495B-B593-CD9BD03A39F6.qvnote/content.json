@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- span :: (a -> Bool) -> [a] -> ([a],[a])\non span(f, xs)\n\tset lng to length of xs\n\tset i to 0\n\ttell mReturn(f)\n\t\trepeat while i < lng and |λ|(item (i + 1) of xs)\n\t\t\tset i to i + 1\n\t\tend repeat\n\tend tell\n\tsplitAt(i, xs)\nend span"
+      "data": "-- span :: (a -> Bool) -> [a] -> ([a], [a])\non span(f, xs)\n    set lng to length of xs\n    set i to 0\n    tell mReturn(f)\n        repeat while i < lng and |λ|(item (i + 1) of xs)\n            set i to i + 1\n        end repeat\n    end tell\n    splitAt(i, xs)\nend span"
     }
   ]
 }

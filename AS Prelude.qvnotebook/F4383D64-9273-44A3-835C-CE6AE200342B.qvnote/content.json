@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- subtract :: Num -> Num -> Num\ron subtract(x, y)\r\ty - x\rend subtract"
+      "data": "-- subtract :: Num -> Num -> Num\non subtract(x, y)\n    y - x\nend subtract"
     }
   ]
 }

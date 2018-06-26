@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- deleteMap :: k -> Dict -> Dict\ron deleteMap(k, rec)\r\tset nsDct to (current application's ¬\r\t\tNSMutableDictionary's dictionaryWithDictionary:rec)\r\tnsDct's removeObjectForKey:(k)\r\tnsDct as record\rend deleteMap"
+      "data": "-- deleteMap :: k -> Dict -> Dict\non deleteMap(k, rec)\n    set nsDct to (current application's ¬\n        NSMutableDictionary's dictionaryWithDictionary:rec)\n    nsDct's removeObjectForKey:(k)\n    nsDct as record\nend deleteMap"
     }
   ]
 }

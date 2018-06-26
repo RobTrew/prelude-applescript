@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apMaybe (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\ron apMaybe(mf, mx)\r\tif Nothing of mf or Nothing of mx then\r\t\tNothing()\r\telse\r\t\tJust(|λ|(Just of mx) of mReturn(Just of mf))\r\tend if\rend apMaybe"
+      "data": "-- apMaybe (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\non apMaybe(mf, mx)\n    if Nothing of mf or Nothing of mx then\n        Nothing()\n    else\n        Just(|λ|(Just of mx) of mReturn(Just of mf))\n    end if\nend apMaybe"
     }
   ]
 }

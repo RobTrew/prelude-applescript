@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- group :: Eq a => [a] -> [[a]]\non group(xs)\n\tscript eq\n\t\ton |λ|(a, b)\n\t\t\ta = b\n\t\tend |λ|\n\tend script\n\t\n\tgroupBy(eq, xs)\nend group"
+      "data": "-- group :: Eq a => [a] -> [[a]]\non group(xs)\n    script eq\n        on |λ|(a, b)\n            a = b\n        end |λ|\n    end script\n    \n    groupBy(eq, xs)\nend group"
     }
   ]
 }

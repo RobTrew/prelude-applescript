@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- takeDropCycle :: Int -> [a] -> [a]\ron takeDropCycle(n, i, xs)\r\tset lng to length of xs\r\tset m to n + i\r\t\r\tif lng ≥ m then\r\t\tset ys to xs\r\telse\r\t\tset ys to concat(replicate(ceiling(m / lng), xs))\r\tend if\r\t\r\tdrop(i, take(m, ys))\rend takeDropCycle"
+      "data": "-- takeDropCycle :: Int -> [a] -> [a]\non takeDropCycle(n, i, xs)\n    set lng to length of xs\n    set m to n + i\n    \n    if lng ≥ m then\n        set ys to xs\n    else\n        set ys to concat(replicate(ceiling(m / lng), xs))\n    end if\n    \n    drop(i, take(m, ys))\nend takeDropCycle"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromThenToInt :: Int -> Int -> Int -> [Int]\ron enumFromThenToInt(x1, x2, y)\r\tset xs to {}\r\trepeat with i from x1 to y by (x2 - x1)\r\t\tset end of xs to i\r\tend repeat\r\treturn xs\rend enumFromThenToInt\r"
+      "data": "-- enumFromThenToInt :: Int -> Int -> Int -> [Int]\non enumFromThenToInt(x1, x2, y)\n    set xs to {}\n    repeat with i from x1 to y by (x2 - x1)\n        set end of xs to i\n    end repeat\n    return xs\nend enumFromThenToInt\n"
     }
   ]
 }

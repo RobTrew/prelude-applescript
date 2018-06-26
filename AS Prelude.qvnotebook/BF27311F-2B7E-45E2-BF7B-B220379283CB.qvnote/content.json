@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- removeFile :: FilePath -> Either String String\ron removeFile(fp)\r\tset e to reference\r\tset {bln, obj} to current application's NSFileManager's ¬\r\t\tdefaultManager's removeItemAtPath:(fp) |error|:(e)\r\tif bln then\r\t\t|Right|(\"Removed: \" & fp)\r\telse\r\t\t|Left|(obj's localizedDescription as string)\r\tend if\rend removeFile"
+      "language": "applescript",
+      "data": "-- removeFile :: FilePath -> Either String String\non removeFile(fp)\n    set e to reference\n    set {bln, obj} to current application's NSFileManager's ¬\n        defaultManager's removeItemAtPath:(fp) |error|:(e)\n    if bln then\n        |Right|(\"Removed: \" & fp)\n    else\n        |Left|(obj's localizedDescription as string)\n    end if\nend removeFile"
     }
   ]
 }

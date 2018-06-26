@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- setCurrentDirectory :: String -> IO ()\ron setCurrentDirectory(strPath)\r\tif doesDirectoryExist(strPath) then\r\t\tset ca to current application\r\t\tset oPath to (ca's NSString's stringWithString:strPath)'s ¬\r\t\t\tstringByStandardizingPath\r\t\tca's NSFileManager's defaultManager()'s ¬\r\t\t\tchangeCurrentDirectoryPath:oPath\r\tend if\rend setCurrentDirectory"
+      "data": "-- setCurrentDirectory :: String -> IO ()\non setCurrentDirectory(strPath)\n    if doesDirectoryExist(strPath) then\n        set ca to current application\n        set oPath to (ca's NSString's stringWithString:strPath)'s ¬\n            stringByStandardizingPath\n        ca's NSFileManager's defaultManager()'s ¬\n            changeCurrentDirectoryPath:oPath\n    end if\nend setCurrentDirectory"
     }
   ]
 }

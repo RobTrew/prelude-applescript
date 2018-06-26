@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- replicateM :: Int -> [a] -> [[a]]\ron replicateM(n, xs)\r\tscript go\r\t\tscript cons\r\t\t\ton |λ|(a, bs)\r\t\t\t\t{a} & bs\r\t\t\tend |λ|\r\t\tend script\r\t\ton |λ|(x)\r\t\t\tif x ≤ 0 then\r\t\t\t\t{{}}\r\t\t\telse\r\t\t\t\tliftA2List(cons, xs, |λ|(x - 1))\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\ttell go to |λ|(n)\rend replicateM"
+      "data": "-- replicateM :: Int -> [a] -> [[a]]\non replicateM(n, xs)\n    script go\n        script cons\n            on |λ|(a, bs)\n                {a} & bs\n            end |λ|\n        end script\n        on |λ|(x)\n            if x ≤ 0 then\n                {{}}\n            else\n                liftA2List(cons, xs, |λ|(x - 1))\n            end if\n        end |λ|\n    end script\n    \n    tell go to |λ|(n)\nend replicateM"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intersectBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\non intersectBy(eq, xs, ys)\n\tif length of xs > 0 and length of ys > 0 then\n\t\tset p to curry(eq)\n\t\tscript matchFound\n\t\t\ton |λ|(x)\n\t\t\t\tany(p's |λ|(x), ys)\n\t\t\tend |λ|\n\t\tend script\n\t\t\n\t\tfilter(matchFound, xs)\n\telse\n\t\t{}\n\tend if\nend intersectBy"
+      "data": "-- intersectBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\non intersectBy(eq, xs, ys)\n    if length of xs > 0 and length of ys > 0 then\n        set p to curry(eq)\n        script matchFound\n            on |λ|(x)\n                any(p's |λ|(x), ys)\n            end |λ|\n        end script\n        \n        filter(matchFound, xs)\n    else\n        {}\n    end if\nend intersectBy"
     }
   ]
 }

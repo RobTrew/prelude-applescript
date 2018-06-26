@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]\ron deleteBy(fnEq, x, xs)\r\tif length of xs > 0 then\r\t\tset mb to uncons(xs)\r\t\tif Nothing of mb then\r\t\t\txs\r\t\telse\r\t\t\tset ht to Just of mb\r\t\t\tset {h, t} to {|1| of ht, |2| of ht}\r\t\t\tif |λ|(x, h) of mReturn(fnEq) then\r\t\t\t\tt\r\t\t\telse\r\t\t\t\t{h} & deleteBy(fnEq, x, t)\r\t\t\tend if\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend deleteBy"
+      "data": "-- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]\non deleteBy(fnEq, x, xs)\n    if length of xs > 0 then\n        set mb to uncons(xs)\n        if Nothing of mb then\n            xs\n        else\n            set ht to Just of mb\n            set {h, t} to {|1| of ht, |2| of ht}\n            if |λ|(x, h) of mReturn(fnEq) then\n                t\n            else\n                {h} & deleteBy(fnEq, x, t)\n            end if\n        end if\n    else\n        {}\n    end if\nend deleteBy"
     }
   ]
 }

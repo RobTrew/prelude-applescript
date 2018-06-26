@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- succ :: Enum a => a -> a\ron succ(x)\r\tif isChar(x) then\r\t\tchr(ord(x) + 1)\r\telse\r\t\t1 + x\r\tend if\rend succ"
+      "data": "-- succ :: Enum a => a -> a\non succ(x)\n    if isChar(x) then\n        chr(ord(x) + 1)\n    else\n        1 + x\n    end if\nend succ"
     }
   ]
 }

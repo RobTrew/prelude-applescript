@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- tail :: [a] -> [a]\ron tail(xs)\r\tif xs = {} then\r\t\tmissing value\r\telse\r\t\trest of xs\r\tend if\rend tailDef"
+      "data": "-- tail :: [a] -> [a]\non tail(xs)\n    if xs = {} then\n        missing value\n    else\n        rest of xs\n    end if\nend tailDef"
     }
   ]
 }

@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- unQuoted :: String -> String\ron unQuoted(s)\r\tscript p\r\t\ton |λ|(x)\r\t\t\t--{34, 39} contains id of x\r\t\t\t34 = id of x\r\t\tend |λ|\r\tend script\r\tdropAround(p, s)\rend unQuoted"
+      "language": "applescript",
+      "data": "-- unQuoted :: String -> String\non unQuoted(s)\n    script p\n        on |λ|(x)\n            --{34, 39} contains id of x\n            34 = id of x\n        end |λ|\n    end script\n    dropAround(p, s)\nend unQuoted"
     }
   ]
 }

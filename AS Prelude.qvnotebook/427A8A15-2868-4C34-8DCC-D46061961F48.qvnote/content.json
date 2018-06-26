@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- toListTree :: Tree a -> [a]\ron toListTree(tree)\r\tscript go\r\t\ton |λ|(x)\r\t\t\t{root of x} & concatMap(go, nest of x)\r\t\tend |λ|\r\tend script\r\t|λ|(tree) of go\rend toListTree"
+      "data": "-- toListTree :: Tree a -> [a]\non toListTree(tree)\n    script go\n        on |λ|(x)\n            {root of x} & concatMap(go, nest of x)\n        end |λ|\n    end script\n    |λ|(tree) of go\nend toListTree"
     }
   ]
 }

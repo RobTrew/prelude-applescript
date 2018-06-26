@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- properFraction :: Real -> (Int, Real)\ron properFraction(n)\r\tset i to (n div 1)\r\tTuple(i, n - i)\rend properFraction"
+      "data": "-- properFraction :: Real -> (Int, Real)\non properFraction(n)\n    set i to (n div 1)\n    Tuple(i, n - i)\nend properFraction"
     }
   ]
 }

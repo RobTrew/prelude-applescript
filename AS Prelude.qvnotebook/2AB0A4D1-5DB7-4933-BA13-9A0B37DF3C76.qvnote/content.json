@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fromEnum :: Enum a => a -> Int\ron fromEnum(x)\r\tset c to class of x\r\tif c is boolean then\r\t\tif x then\r\t\t\t1\r\t\telse\r\t\t\t0\r\t\tend if\r\telse if c is text then\r\t\tif x ≠ \"\" then\r\t\t\tid of x\r\t\telse\r\t\t\tmissing value\r\t\tend if\r\telse\r\t\tx as integer\r\tend if\rend fromEnum"
+      "data": "-- fromEnum :: Enum a => a -> Int\non fromEnum(x)\n    set c to class of x\n    if c is boolean then\n        if x then\n            1\n        else\n            0\n        end if\n    else if c is text then\n        if x ≠ \"\" then\n            id of x\n        else\n            missing value\n        end if\n    else\n        x as integer\n    end if\nend fromEnum"
     }
   ]
 }

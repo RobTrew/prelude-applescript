@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Right :: b -> Either a b\ron |Right|(x)\r\t{type:\"Either\", |Left|:missing value, |Right|:x}\rend |Right|"
+      "data": "-- Right :: b -> Either a b\non |Right|(x)\n    {type:\"Either\", |Left|:missing value, |Right|:x}\nend |Right|"
     }
   ]
 }

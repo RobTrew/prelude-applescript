@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- maybe :: b -> (a -> b) -> Maybe a -> b\ron maybe(n, f, mb)\r\tif Nothing of mb then\r\t\tn\r\telse\r\t\ttell mReturn(f) to |λ|(Just of mb)\r\tend if\rend maybe"
+      "data": "-- maybe :: b -> (a -> b) -> Maybe a -> b\non maybe(n, f, mb)\n    if Nothing of mb then\n        n\n    else\n        tell mReturn(f) to |λ|(Just of mb)\n    end if\nend maybe"
     }
   ]
 }

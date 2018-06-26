@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unwrap :: NSObject -> a\non unwrap(objCValue)\n\tif objCValue is missing value then\n\t\tmissing value\n\telse\n\t\tset ca to current application\n\t\titem 1 of ((ca's NSArray's arrayWithObject:objCValue) as list)\n\tend if\nend unwrap"
+      "data": "-- unwrap :: NSObject -> a\non unwrap(objCValue)\n    if objCValue is missing value then\n        missing value\n    else\n        set ca to current application\n        item 1 of ((ca's NSArray's arrayWithObject:objCValue) as list)\n    end if\nend unwrap"
     }
   ]
 }

@@ -1,0 +1,15 @@
+{
+  "title": "postorder",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Root elements of tree flattened bottom-up\n-- into a postorder list."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- postorder :: Tree a -> [a]\non postorder(node)\n    script go\n        on |λ|(xs, x)\n            foldl(go, xs, nest of x) & {root of x}\n        end |λ|\n    end script\n    go's |λ|({}, node)\nend postorder"
+    }
+  ]
+}

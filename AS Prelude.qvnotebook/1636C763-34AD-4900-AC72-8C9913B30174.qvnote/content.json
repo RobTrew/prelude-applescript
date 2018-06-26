@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Ratio :: Int -> Int -> Ratio\ron Ratio(n, d)\r\t{type:\"Ratio\", n:n, d:d}\rend Ratio"
+      "data": "-- Ratio :: Int -> Int -> Ratio\non Ratio(n, d)\n    {type:\"Ratio\", n:n, d:d}\nend Ratio"
     }
   ]
 }

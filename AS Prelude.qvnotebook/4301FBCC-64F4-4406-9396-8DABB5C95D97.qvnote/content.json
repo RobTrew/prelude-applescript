@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- Split a filename into directory and file. combine is the inverse."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- splitFileName :: FilePath -> (String, String)\ron splitFileName(strPath)\r\tif strPath ≠ \"\" then\r\t\tif last character of strPath ≠ \"/\" then\r\t\t\tset xs to splitOn(\"/\", strPath)\r\t\t\tset stem to init(xs)\r\t\t\tif stem ≠ {} then\r\t\t\t\tTuple(intercalate(\"/\", stem) & \"/\", |last|(xs))\r\t\t\telse\r\t\t\t\tTuple(\"./\", |last|(xs))\r\t\t\tend if\r\t\telse\r\t\t\tTuple(strPath, \"\")\r\t\tend if\r\telse\r\t\tTuple(\"./\", \"\")\r\tend if\rend splitFileName"
+      "data": "-- splitFileName :: FilePath -> (String, String)\non splitFileName(strPath)\n    if strPath ≠ \"\" then\n        if last character of strPath ≠ \"/\" then\n            set xs to splitOn(\"/\", strPath)\n            set stem to init(xs)\n            if stem ≠ {} then\n                Tuple(intercalate(\"/\", stem) & \"/\", |last|(xs))\n            else\n                Tuple(\"./\", |last|(xs))\n            end if\n        else\n            Tuple(strPath, \"\")\n        end if\n    else\n        Tuple(\"./\", \"\")\n    end if\nend splitFileName"
     }
   ]
 }

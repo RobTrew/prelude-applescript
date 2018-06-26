@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- readMay :: Read a => String -> Maybe a\ron readMay(s)\r\ttry\r\t  Just(run script s)\r\ton error e\r\t\tNothing()\r\tend try\rend readMay"
+      "data": "-- readMay :: Read a => String -> Maybe a\non readMay(s)\n    try\n      Just(run script s)\n    on error e\n        Nothing()\n    end try\nend readMay"
     }
   ]
 }

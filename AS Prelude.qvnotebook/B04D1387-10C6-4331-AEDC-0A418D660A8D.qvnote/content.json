@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- flip :: (a -> b -> c) -> b -> a -> c\non flip(f)\n\tscript\n\t\tproperty g : f\n\t\ton |λ|(x, y)\n\t\t\tg(y, x)\n\t\tend |λ|\n\tend script\nend flip"
+      "data": "-- flip :: (a -> b -> c) -> b -> a -> c\non flip(f)\n    script\n        property g : f\n        on |λ|(x, y)\n            g(y, x)\n        end |λ|\n    end script\nend flip"
     }
   ]
 }

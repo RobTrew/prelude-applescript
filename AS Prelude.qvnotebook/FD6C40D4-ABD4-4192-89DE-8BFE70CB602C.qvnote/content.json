@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b\ron apLR(flr, lr)\r\tif isRight(flr) then\r\t\tif isRight(lr) then\r\t\t\t|Right|(|λ|(|Right| of lr) of mReturn(|Right| of flr))\r\t\telse\r\t\t\tlr\r\t\tend if\r\telse\r\t\tflr\r\tend if\rend apLR"
+      "data": "-- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b\non apLR(flr, lr)\n    if isRight(flr) then\n        if isRight(lr) then\n            |Right|(|λ|(|Right| of lr) of mReturn(|Right| of flr))\n        else\n            lr\n        end if\n    else\n        flr\n    end if\nend apLR"
     }
   ]
 }

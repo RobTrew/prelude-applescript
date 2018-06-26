@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- quotRem :: Int -> Int -> (Int, Int)\ron quotRem(m, n)\r\tTuple(m div n, m mod n)\rend quotRem"
+      "data": "-- quotRem :: Int -> Int -> (Int, Int)\non quotRem(m, n)\n    Tuple(m div n, m mod n)\nend quotRem"
     }
   ]
 }

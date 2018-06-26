@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isRight :: Either a b -> Bool\ron isRight(x)\r\tset dct to current application's ¬\r\t\tNSDictionary's dictionaryWithDictionary:x\r\t(dct's objectForKey:\"type\") as text = \"Either\" and ¬\r\t\t(dct's objectForKey:\"Left\") as list = {missing value}\rend isRight"
+      "data": "-- isRight :: Either a b -> Bool\non isRight(x)\n    set dct to current application's ¬\n        NSDictionary's dictionaryWithDictionary:x\n    (dct's objectForKey:\"type\") as text = \"Either\" and ¬\n        (dct's objectForKey:\"Left\") as list = {missing value}\nend isRight"
     }
   ]
 }

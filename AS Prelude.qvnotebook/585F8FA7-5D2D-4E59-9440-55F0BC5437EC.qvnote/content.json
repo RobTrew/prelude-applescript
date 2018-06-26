@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apply ($) :: (a -> b) -> a -> b\ron apply(f, x)\r\tmReturn(f)'s |λ|(x)\rend apply"
+      "data": "-- apply ($) :: (a -> b) -> a -> b\non apply(f, x)\n    mReturn(f)'s |λ|(x)\nend apply"
     }
   ]
 }

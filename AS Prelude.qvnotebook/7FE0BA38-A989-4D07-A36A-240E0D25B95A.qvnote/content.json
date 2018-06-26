@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- thenIO (>>) :: IO a -> IO b -> IO b\ron thenIO(ma, mb)\r\tmb\rend thenIO"
+      "data": "-- thenIO (>>) :: IO a -> IO b -> IO b\non thenIO(ma, mb)\n    mb\nend thenIO"
     }
   ]
 }

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- curry2 :: ((a, b) -> c) -> a -> b -> c\non curry2(f)\n\tscript\n\t\ton |λ|(a)\n\t\t\tscript\n\t\t\t\ton |λ|(b)\n\t\t\t\t\t|λ|(a, b) of mReturn(f)\n\t\t\t\tend |λ|\n\t\t\tend script\n\t\tend |λ|\n\tend script\nend curry"
+      "data": "-- curry2 :: ((a, b) -> c) -> a -> b -> c\non curry2(f)\n    script\n        on |λ|(a)\n            script\n                on |λ|(b)\n                    |λ|(a, b) of mReturn(f)\n                end |λ|\n            end script\n        end |λ|\n    end script\nend curry"
     }
   ]
 }

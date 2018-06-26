@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- minimumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a\ron minimumByMay(f, xs)\r\tset lng to length of xs\r\tif lng < 1 then\r\t\tNothing()\r\telse if lng > 1 then\r\t\ttell mReturn(f)\r\t\t\tset v to item 1 of xs\r\t\t\trepeat with x in xs\r\t\t\t\tif |λ|(x, v) < 0 then set v to contents of x\r\t\t\tend repeat\r\t\t\treturn Just(v)\r\t\tend tell\r\telse\r\t\tJust(item 1 of xs)\r\tend if\rend minimumByMay"
+      "data": "-- minimumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a\non minimumByMay(f, xs)\n    set lng to length of xs\n    if lng < 1 then\n        Nothing()\n    else if lng > 1 then\n        tell mReturn(f)\n            set v to item 1 of xs\n            repeat with x in xs\n                if |λ|(x, v) < 0 then set v to contents of x\n            end repeat\n            return Just(v)\n        end tell\n    else\n        Just(item 1 of xs)\n    end if\nend minimumByMay"
     }
   ]
 }

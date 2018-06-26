@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- round :: a -> Int\ron |round|(n)\r\tround n\rend |round|"
+      "data": "-- round :: a -> Int\non |round|(n)\n    round n\nend |round|"
     }
   ]
 }

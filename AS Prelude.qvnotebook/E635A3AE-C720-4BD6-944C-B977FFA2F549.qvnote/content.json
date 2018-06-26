@@ -3,7 +3,7 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- LT :: Ordering\nproperty |LT| : {type:\"Ordering\", value:-1}"
     }
   ]

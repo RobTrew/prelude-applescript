@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b\ron bindMay(mb, mf)\r\tif Nothing of mb then\r\t\tmb\r\telse\r\t\ttell mReturn(mf) to |λ|(Just of mb)\r\tend if\rend bindMay"
+      "data": "-- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b\non bindMay(mb, mf)\n    if Nothing of mb then\n        mb\n    else\n        tell mReturn(mf) to |λ|(Just of mb)\n    end if\nend bindMay"
     }
   ]
 }

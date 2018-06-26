@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- drop :: Int -> [a] -> [a]\ron drop(n, xs)\r\tif n < length of xs then\r\t\tif class of xs is text then\r\t\t\ttext (n + 1) thru -1 of xs\r\t\telse\r\t\t\titems (n + 1) thru -1 of xs\r\t\tend if\r\telse\r\t\t{}\r\tend if\rend drop"
+      "data": "-- drop :: Int -> [a] -> [a]\non drop(n, xs)\n    if n < length of xs then\n        if class of xs is text then\n            text (n + 1) thru -1 of xs\n        else\n            items (n + 1) thru -1 of xs\n        end if\n    else\n        {}\n    end if\nend drop"
     }
   ]
 }

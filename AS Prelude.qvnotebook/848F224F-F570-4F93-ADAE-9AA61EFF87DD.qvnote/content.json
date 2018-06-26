@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))\ron splitArrow(f, g)\r\tscript\r\t\ton |λ|(xy)\r\t\t\tTuple(mReturn(f)'s |λ|(|1| of xy), mReturn(g)'s |λ|(|2| of xy))\r\t\tend |λ|\r\tend script\rend splitArrow"
+      "data": "-- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))\non splitArrow(f, g)\n    script\n        on |λ|(xy)\n            Tuple(mReturn(f)'s |λ|(|1| of xy), mReturn(g)'s |λ|(|2| of xy))\n        end |λ|\n    end script\nend splitArrow"
     }
   ]
 }

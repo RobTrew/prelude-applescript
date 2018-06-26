@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- or :: [Bool] -> Bool\ron |or|(ps)\r\trepeat with p in ps\r\t\tif p then return true\r\tend repeat\r\treturn false\rend |or|"
+      "data": "-- or :: [Bool] -> Bool\non |or|(ps)\n    repeat with p in ps\n        if p then return true\n    end repeat\n    return false\nend |or|"
     }
   ]
 }

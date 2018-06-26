@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapKeys :: (Key -> Key) -> IntMap a -> IntMap a\ron mapKeys(f, dct)\r\tscript\r\t\tproperty g : mReturn(f)\r\t\ton |λ|(kv)\r\t\t\tset {k, v} to kv\r\t\t\t{g's |λ|(k), v}\r\t\tend |λ|\r\tend script\r\tmap(result, zip(keys(dct), elems(dct)))\rend mapKeys"
+      "data": "-- mapKeys :: (Key -> Key) -> IntMap a -> IntMap a\non mapKeys(f, dct)\n    script\n        property g : mReturn(f)\n        on |λ|(kv)\n            set {k, v} to kv\n            {g's |λ|(k), v}\n        end |λ|\n    end script\n    map(result, zip(keys(dct), elems(dct)))\nend mapKeys"
     }
   ]
 }

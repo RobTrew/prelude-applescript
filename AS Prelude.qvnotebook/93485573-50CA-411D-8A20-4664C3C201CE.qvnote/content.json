@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromTo :: Enum a => a -> a -> [a]\ron enumFromTo(m, n)\r\tif class of m is integer then\r\t\tenumFromToInt(m, n)\r\telse\r\t\tenumFromToChar(m, n)\r\tend if\rend enumFromTo"
+      "data": "-- enumFromTo :: Enum a => a -> a -> [a]\non enumFromTo(m, n)\n    if class of m is integer then\n        enumFromToInt(m, n)\n    else\n        enumFromToChar(m, n)\n    end if\nend enumFromTo"
     }
   ]
 }

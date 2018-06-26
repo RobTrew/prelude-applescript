@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- thenMay (>>) :: Maybe a -> Maybe b -> Maybe b\ron thenMay(ma, mb)\r\tif Nothing of ma then\r\t\tma\r\telse\r\t\tmb\r\tend if\rend thenMay "
+      "data": "-- thenMay (>>) :: Maybe a -> Maybe b -> Maybe b\non thenMay(ma, mb)\n    if Nothing of ma then\n        ma\n    else\n        mb\n    end if\nend thenMay "
     }
   ]
 }

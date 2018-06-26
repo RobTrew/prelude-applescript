@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\ron ap(mf, mx)\r\tif class of mx is list then\r\t\tapList(mf, mx)\r\telse if class of mf is record then\r\t\tset ks to keys(mf)\r\t\tif ks contains \"type\" then\r\t\t\tset t to type of mx\r\t\t\tif t = \"Either\" then\r\t\t\t\tapEither(mf, mx)\r\t\t\telse if t = \"Maybe\" then\r\t\t\t\tapMaybe(mf, mx)\r\t\t\telse if t = \"Tuple\" then\r\t\t\t\tapTuple(mf, mx)\r\t\t\telse\r\t\t\t\tmissing value\r\t\t\tend if\r\t\telse\r\t\t\tmissing value\r\t\tend if\r\tend if\rend ap"
+      "data": "-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\non ap(mf, mx)\n    if class of mx is list then\n        apList(mf, mx)\n    else if class of mf is record then\n        set ks to keys(mf)\n        if ks contains \"type\" then\n            set t to type of mx\n            if t = \"Either\" then\n                apEither(mf, mx)\n            else if t = \"Maybe\" then\n                apMaybe(mf, mx)\n            else if t = \"Tuple\" then\n                apTuple(mf, mx)\n            else if t = \"Node\" then\n                apTree(mf, mx)\n            else\n                missing value\n            end if\n        else\n            missing value\n        end if\n    end if\nend ap"
     }
   ]
 }

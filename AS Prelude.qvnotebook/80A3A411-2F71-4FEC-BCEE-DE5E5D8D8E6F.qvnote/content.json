@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- justifyLeft :: Int -> Char -> String -> String\ron justifyLeft(n, cFiller, strText)\r\tif n > length of strText then\r\t\ttext 1 thru n of (strText & replicate(n, cFiller))\r\telse\r\t\tstrText\r\tend if\rend justifyLeft"
+      "data": "-- justifyLeft :: Int -> Char -> String -> String\non justifyLeft(n, cFiller, strText)\n    if n > length of strText then\n        text 1 thru n of (strText & replicate(n, cFiller))\n    else\n        strText\n    end if\nend justifyLeft"
     }
   ]
 }

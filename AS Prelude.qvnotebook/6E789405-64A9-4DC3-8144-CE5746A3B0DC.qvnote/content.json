@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)\ron mapAccumL_Tree(f, acc, tree)\r\tscript go\r\t\tproperty mf : mReturn(f)'s |λ|\r\t\ton |λ|(a, x)\r\t\t\tset pair to f(a, root of x)\r\t\t\tset tpl to mapAccumL(go, item 1 of pair, nest of x)\r\t\t\tTuple(item 1 of tpl, Node(item 2 of pair, item 2 of tpl))\r\t\tend |λ|\r\tend script\r\t|λ|(acc, tree) of go\rend mapAccumL_Tree"
+      "data": "-- mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)\non mapAccumL_Tree(f, acc, tree)\n    script go\n        property mf : mReturn(f)'s |λ|\n        on |λ|(a, x)\n            set pair to f(a, root of x)\n            set tpl to mapAccumL(go, item 1 of pair, nest of x)\n            Tuple(item 1 of tpl, Node(item 2 of pair, item 2 of tpl))\n        end |λ|\n    end script\n    |λ|(acc, tree) of go\nend mapAccumL_Tree"
     }
   ]
 }

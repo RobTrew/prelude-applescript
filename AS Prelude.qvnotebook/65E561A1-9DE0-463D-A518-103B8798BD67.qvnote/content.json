@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- lookupDict :: a -> Dict -> Maybe b\ron lookupDict(k, dct)\r\tset ca to current application\r\tset v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k\r\tif v ≠ missing value then\r\t\tJust(item 1 of ((ca's NSArray's arrayWithObject:v) as list))\r\telse\r\t\tNothing()\r\tend if\rend lookupDict"
+      "language": "applescript",
+      "data": "-- lookupDict :: a -> Dict -> Maybe b\non lookupDict(k, dct)\n    set ca to current application\n    set v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k\n    if v ≠ missing value then\n        Just(item 1 of ((ca's NSArray's arrayWithObject:v) as list))\n    else\n        Nothing()\n    end if\nend lookupDict"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- permutationsWithRepetition :: Int -> [a] -> [[a]]\non permutationsWithRepetition(n, xs)\n\tif length of xs > 0 then\n\t\tfoldl1(curry(my cartesianProduct)'s |λ|(xs), replicate(n, xs))\n\telse\n\t\t{}\n\tend if\nend permutationsWithRepetition"
+      "data": "-- permutationsWithRepetition :: Int -> [a] -> [[a]]\non permutationsWithRepetition(n, xs)\n    if length of xs > 0 then\n        foldl1(curry(my cartesianProduct)'s |λ|(xs), replicate(n, xs))\n    else\n        {}\n    end if\nend permutationsWithRepetition"
     }
   ]
 }

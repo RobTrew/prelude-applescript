@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- drawForest :: Forest String -> String\ron drawForest(trees)\r\tintercalate(\"\\n\\n\", map(my drawTree, trees))\rend drawForest"
+      "data": "-- drawForest :: [Tree String] -> String\non drawForest(trees)\n    intercalate(\"\\n\\n\", map(my drawTree, trees))\nend drawForest"
     }
   ]
 }

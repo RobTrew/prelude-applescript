@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- recip :: Num -> Num\ron recip(n)\r\tif n ≠ 0 then\r\t\t1 / n\r\telse\r\t\tmissing value\r\tend if\rend recip"
+      "data": "-- recip :: Num -> Num\non recip(n)\n    if n ≠ 0 then\n        1 / n\n    else\n        missing value\n    end if\nend recip"
     }
   ]
 }

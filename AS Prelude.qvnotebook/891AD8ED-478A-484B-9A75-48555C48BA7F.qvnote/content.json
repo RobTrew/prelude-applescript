@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intersectionBy:: (a -> a -> Bool) -> [[a]] -> [a]\ron intersectionBy(fnEq, xs)\r\tscript\r\t\tproperty eq : mReturn(fnEq)\r\t\ton |λ|(a, x)\r\t\t\tintersectBy(eq, a, x)\r\t\tend |λ|\r\tend script\r\tfoldr1(result, xs)\rend intersectionBy"
+      "data": "-- intersectionBy:: (a -> a -> Bool) -> [[a]] -> [a]\non intersectionBy(fnEq, xs)\n    script\n        property eq : mReturn(fnEq)\n        on |λ|(a, x)\n            intersectBy(eq, a, x)\n        end |λ|\n    end script\n    foldr1(result, xs)\nend intersectionBy"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- stripPrefix :: Eq a => [a] -> [a] -> Maybe [a]\r-- stripPrefix :: String -> String -> Maybe String\ron stripPrefix(pfx, s)\r\tset blnString to class of pfx is text\r\tif blnString then\r\t\tset {xs, ys} to {characters of pfx, characters of s}\r\telse\r\t\tset {xs, ys} to {pfx, s}\r\tend if\r\t\r\tscript\r\t\ton |λ|(xs, ys)\r\t\t\tif length of xs < 1 then\r\t\t\t\tif blnString then\r\t\t\t\t\tset v to intercalate(\"\", ys)\r\t\t\t\telse\r\t\t\t\t\tset v to ys\r\t\t\t\tend if\r\t\t\t\tJust(v)\r\t\t\telse\r\t\t\t\tif (length of ys < 1) or (item 1 of xs ≠ item 1 of ys) then\r\t\t\t\t\tNothing()\r\t\t\t\telse\r\t\t\t\t\t|λ|(tail(xs), tail(ys))\r\t\t\t\tend if\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t|λ|(xs, ys) of result\rend stripPrefix"
+      "data": "-- stripPrefix :: Eq a => [a] -> [a] -> Maybe [a]\n-- stripPrefix :: String -> String -> Maybe String\non stripPrefix(pfx, s)\n    set blnString to class of pfx is text\n    if blnString then\n        set {xs, ys} to {characters of pfx, characters of s}\n    else\n        set {xs, ys} to {pfx, s}\n    end if\n    \n    script\n        on |λ|(xs, ys)\n            if length of xs < 1 then\n                if blnString then\n                    set v to intercalate(\"\", ys)\n                else\n                    set v to ys\n                end if\n                Just(v)\n            else\n                if (length of ys < 1) or (item 1 of xs ≠ item 1 of ys) then\n                    Nothing()\n                else\n                    |λ|(tail(xs), tail(ys))\n                end if\n            end if\n        end |λ|\n    end script\n    |λ|(xs, ys) of result\nend stripPrefix"
     }
   ]
 }

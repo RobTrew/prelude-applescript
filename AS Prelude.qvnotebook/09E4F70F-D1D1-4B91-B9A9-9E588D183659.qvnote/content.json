@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- The listToMaybe function returns Nothing on \r-- an empty list or Just the head of the list."
+      "data": "-- The listToMaybe function returns Nothing on \n-- an empty list or Just the head of the list."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- listToMaybe :: [a] -> Maybe a\ron listToMaybe(xs)\r\tif xs ≠ {} then\r\t\tJust(item 1 of xs)\r\telse\r\t\tNothing()\r\tend if\rend listToMaybe"
+      "data": "-- listToMaybe :: [a] -> Maybe a\non listToMaybe(xs)\n    if xs ≠ {} then\n        Just(item 1 of xs)\n    else\n        Nothing()\n    end if\nend listToMaybe"
     }
   ]
 }

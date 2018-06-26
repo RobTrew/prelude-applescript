@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b\ron bindLR(m, mf)\r\tif isRight(m) then\r\t\tmReturn(mf)'s |λ|(|Right| of m)\r\telse\r\t\tm\r\tend if\rend bindLR"
+      "data": "-- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b\non bindLR(m, mf)\n    if missing value is not |Right| of m then\n        mReturn(mf)'s |λ|(|Right| of m)\n    else\n        m\n    end if\nend bindLR"
     }
   ]
 }

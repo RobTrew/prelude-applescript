@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- center :: Int -> Char -> String -> String\ron |center|(n, cFiller, strText)\r\tset lngFill to n - (length of strText)\r\tif lngFill > 0 then\r\t\tset strPad to replicate(lngFill div 2, cFiller) as text\r\t\tset strCenter to strPad & strText & strPad\r\t\tif lngFill mod 2 > 0 then\r\t\t\tcFiller & strCenter\r\t\telse\r\t\t\tstrCenter\r\t\tend if\r\telse\r\t\tstrText\r\tend if\rend |center|"
+      "data": "-- center :: Int -> Char -> String -> String\non |center|(n, cFiller, strText)\n    set lngFill to n - (length of strText)\n    if lngFill > 0 then\n        set strPad to replicate(lngFill div 2, cFiller) as text\n        set strCenter to strPad & strText & strPad\n        if lngFill mod 2 > 0 then\n            cFiller & strCenter\n        else\n            strCenter\n        end if\n    else\n        strText\n    end if\nend |center|"
     }
   ]
 }

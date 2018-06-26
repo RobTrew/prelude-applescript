@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- safeMay :: (a -> Bool) -> (a -> b) -> Maybe b\ron safeMay(p, f, x)\r\tif p(x) then\r\t\tJust(f(x))\r\telse\r\t\tNothing()\r\tend if\rend safeMay"
+      "data": "-- safeMay :: (a -> Bool) -> (a -> b) -> Maybe b\non safeMay(p, f, x)\n    if p(x) then\n        Just(f(x))\n    else\n        Nothing()\n    end if\nend safeMay"
     }
   ]
 }

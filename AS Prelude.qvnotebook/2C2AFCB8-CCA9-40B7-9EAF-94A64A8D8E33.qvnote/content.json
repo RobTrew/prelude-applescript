@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- quickSort :: (Ord a) => [a] -> [a]\ron quickSort(xs)\r\tif length of xs > 1 then\r\t\tset h to item 1 of xs\r\t\tscript\r\t\t\ton |λ|(x)\r\t\t\t\tx ≤ h\r\t\t\tend |λ|\r\t\tend script\r\t\tset {less, more} to partition(result, rest of xs)\r\t\tquickSort(less) & h & quickSort(more)\r\telse\r\t\txs\r\tend if\rend quickSort"
+      "data": "-- quickSort :: (Ord a) => [a] -> [a]\non quickSort(xs)\n    if length of xs > 1 then\n        set h to item 1 of xs\n        script\n            on |λ|(x)\n                x ≤ h\n            end |λ|\n        end script\n        set {less, more} to partition(result, rest of xs)\n        quickSort(less) & h & quickSort(more)\n    else\n        xs\n    end if\nend quickSort"
     }
   ]
 }

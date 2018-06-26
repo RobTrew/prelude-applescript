@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isChar :: a -> Bool\ron isChar(x)\r\tclass of x is string and length of x is 1\rend isChar"
+      "data": "-- isChar :: a -> Bool\non isChar(x)\n    class of x is string and length of x is 1\nend isChar"
     }
   ]
 }

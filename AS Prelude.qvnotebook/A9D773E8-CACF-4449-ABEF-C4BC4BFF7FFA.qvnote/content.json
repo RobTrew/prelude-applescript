@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- read :: Read a => String -> a\ron read (s)\r\trun script s\rend read"
+      "data": "-- read :: Read a => String -> a\non read (s)\n    run script s\nend read"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- recipMay :: Num -> Maybe Num\ron recipMay(n)\r\tif n ≠ 0 then\r\t\tJust(1 / n)\r\telse\r\t\tNothing()\r\tend if\rend recipMay"
+      "data": "-- recipMay :: Num -> Maybe Num\non recipMay(n)\n    if n ≠ 0 then\n        Just(1 / n)\n    else\n        Nothing()\n    end if\nend recipMay"
     }
   ]
 }

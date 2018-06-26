@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unionBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\ron unionBy(fnEq, xs, ys)\r\tscript flipDeleteByEq\r\t\ton |λ|(xs, x)\r\t\t\tdeleteBy(fnEq, x, xs)\r\t\tend |λ|\r\tend script\r\txs & foldl(flipDeleteByEq, nubBy(fnEq, ys), xs)\rend unionBy"
+      "data": "-- unionBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\non unionBy(fnEq, xs, ys)\n    script flipDeleteByEq\n        on |λ|(xs, x)\n            deleteBy(fnEq, x, xs)\n        end |λ|\n    end script\n    xs & foldl(flipDeleteByEq, nubBy(fnEq, ys), xs)\nend unionBy"
     }
   ]
 }

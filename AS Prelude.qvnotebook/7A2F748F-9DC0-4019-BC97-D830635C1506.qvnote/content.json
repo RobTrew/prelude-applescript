@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- delete :: Eq a => a -> [a] -> [a]\ron |delete|(x, xs)\r\tset mbIndex to elemIndex(x, xs)\r\tset lng to length of xs\r\t\r\tif Nothing of mbIndex then\r\t\txs\r\telse\r\t\tif lng > 1 then\r\t\t\tset i to Just of mbIndex\r\t\t\tif i = 1 then\r\t\t\t\titems 2 thru -1 of xs\r\t\t\telse if i = lng then\r\t\t\t\titems 1 thru -2 of xs\r\t\t\telse\r\t\t\t\ttell xs to items 1 thru (i - 1) & items (i + 1) thru -1\r\t\t\tend if\r\t\telse\r\t\t\t{}\r\t\tend if\r\tend if\rend |delete|"
+      "data": "-- delete :: Eq a => a -> [a] -> [a]\non |delete|(x, xs)\n    set mbIndex to elemIndex(x, xs)\n    set lng to length of xs\n    \n    if Nothing of mbIndex then\n        xs\n    else\n        if lng > 1 then\n            set i to Just of mbIndex\n            if i = 1 then\n                items 2 thru -1 of xs\n            else if i = lng then\n                items 1 thru -2 of xs\n            else\n                tell xs to items 1 thru (i - 1) & items (i + 1) thru -1\n            end if\n        else\n            {}\n        end if\n    end if\nend |delete|"
     }
   ]
 }

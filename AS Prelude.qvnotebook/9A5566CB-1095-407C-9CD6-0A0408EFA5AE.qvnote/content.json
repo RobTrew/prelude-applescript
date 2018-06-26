@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- sqrtMay :: Num -> Maybe Num\ron sqrtMay(n)\r\tif n ≥ 0 then\r\t\tJust(n ^ (1 / 2))\r\telse\r\t\tNothing()\r\tend if\rend sqrtMay"
+      "data": "-- sqrtMay :: Num -> Maybe Num\non sqrtMay(n)\n    if n ≥ 0 then\n        Just(n ^ (1 / 2))\n    else\n        Nothing()\n    end if\nend sqrtMay"
     }
   ]
 }

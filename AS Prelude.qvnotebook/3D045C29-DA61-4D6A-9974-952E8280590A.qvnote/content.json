@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- bindTuple (>>=) :: Monoid a => (a, a) -> (a -> (a, b)) -> (a, b)\ron bindTuple(tpl, f)\r\tset t2 to mReturn(f)'s |λ|(|2| of tpl)\r\tTuple(mappend(|1| of tpl, |1| of t2), |2| of t2)\rend bindTuple"
+      "data": "-- bindTuple (>>=) :: Monoid a => (a, a) -> (a -> (a, b)) -> (a, b)\non bindTuple(tpl, f)\n    set t2 to mReturn(f)'s |λ|(|2| of tpl)\n    Tuple(mappend(|1| of tpl, |1| of t2), |2| of t2)\nend bindTuple"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- swap :: (a, b) -> (b, a)\ron swap(ab)\r\tif class of ab is record then\r\t\tTuple(|2| of ab, |1| of ab)\r\telse\r\t\t{item 2 of ab, item 1 of ab}\r\tend if\rend swap"
+      "data": "-- swap :: (a, b) -> (b, a)\non swap(ab)\n    if class of ab is record then\n        Tuple(|2| of ab, |1| of ab)\n    else\n        {item 2 of ab, item 1 of ab}\n    end if\nend swap"
     }
   ]
 }

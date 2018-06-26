@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Just :: a -> Just a\ron Just(x)\r\t{type: \"Maybe\", Nothing:false, Just:x}\rend Just"
+      "data": "-- Just :: a -> Just a\non Just(x)\n    {type: \"Maybe\", Nothing:false, Just:x}\nend Just"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- rotate :: Int -> [a] -> [a]\ron rotate(n, xs)\r\tset lng to length of xs\r\tif lng > 0 then\r\t\ttakeDropCycle(lng, n, xs)\r\telse\r\t\t{}\r\tend if\rend rotate"
+      "data": "-- rotate :: Int -> [a] -> [a]\non rotate(n, xs)\n    set lng to length of xs\n    if lng > 0 then\n        takeDropCycle(lng, n, xs)\n    else\n        {}\n    end if\nend rotate"
     }
   ]
 }

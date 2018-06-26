@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- mappendMaybe (<>) :: Maybe a -> Maybe a -> Maybe a\ron mappendMaybe(a, b)\r\tif Nothing of a then\r\t\tb\r\telse if Nothing of b then\r\t\ta\r\telse\r\t\tJust(mappend(Just of a, Just of b))\r\tend if\rend mappendMaybe"
+      "language": "applescript",
+      "data": "-- mappendMaybe (<>) :: Maybe a -> Maybe a -> Maybe a\non mappendMaybe(a, b)\n    if Nothing of a then\n        b\n    else if Nothing of b then\n        a\n    else\n        Just(mappend(Just of a, Just of b))\n    end if\nend mappendMaybe"
     }
   ]
 }

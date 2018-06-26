@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showUndefined :: () -> String\ron showUndefined()\r\t\"⊥\"\rend showUndefined"
+      "data": "-- showUndefined :: () -> String\non showUndefined()\n    \"⊥\"\nend showUndefined"
     }
   ]
 }

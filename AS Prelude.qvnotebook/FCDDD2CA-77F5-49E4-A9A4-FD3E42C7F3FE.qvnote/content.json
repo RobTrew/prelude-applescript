@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "use framework \"Foundation\"\nuse scripting additions"
     },
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- isMaybe :: a -> Bool\ron isMaybe(x)\r\tif class of x is record then\r\t\tset ca to current application\r\t\tset v to ((ca's NSDictionary's ¬\r\t\t\tdictionaryWithDictionary:x)'s ¬\r\t\t\tobjectForKey:\"type\")\r\t\tv is not missing value ¬\r\t\t\tand (v's isKindOfClass:(ca's NSString)) ¬\r\t\t\tand (v as string = \"Maybe\")\r\telse\r\t  false\r\tend if\rend isMaybe"
+      "language": "applescript",
+      "data": "-- isMaybe :: a -> Bool\non isMaybe(x)\n    if class of x is record then\n        set ca to current application\n        set v to ((ca's NSDictionary's ¬\n            dictionaryWithDictionary:x)'s ¬\n            objectForKey:\"type\")\n        v is not missing value ¬\n            and (v's isKindOfClass:(ca's NSString)) ¬\n            and (v as string = \"Maybe\")\n    else\n      false\n    end if\nend isMaybe"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- indented :: String -> String -> String\ron indented(strIndent, s)\r\tscript\r\t\ton |λ|(x)\r\t\t\tif x ≠ \"\" then\r\t\t\t\tstrIndent & x\r\t\t\telse\r\t\t\t\tx\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tunlines(map(result, |lines|(s)))\rend indented"
+      "data": "-- indented :: String -> String -> String\non indented(strIndent, s)\n    script\n        on |λ|(x)\n            if x ≠ \"\" then\n                strIndent & x\n            else\n                x\n            end if\n        end |λ|\n    end script\n    unlines(map(result, |lines|(s)))\nend indented"
     }
   ]
 }

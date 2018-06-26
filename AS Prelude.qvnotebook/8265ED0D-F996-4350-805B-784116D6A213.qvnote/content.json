@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]\ron liftM2(f, a, b)\r\tap(map(curry(f), a), b)\rend liftM2"
+      "data": "-- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]\non liftM2(f, a, b)\n    liftA2(f, a, b)\nend liftM2"
     }
   ]
 }

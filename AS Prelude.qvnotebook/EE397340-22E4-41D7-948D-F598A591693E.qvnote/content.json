@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]\ron zip3(xs, ys, zs)\r\tscript\r\t\ton |λ|(x, i)\r\t\t\tTuple3(x, item i of ys, item i of zs)\r\t\tend |λ|\r\tend script\r\tmap(result, items 1 thru ¬\r\t\tminimum({length of xs, length of ys, length of zs}) of xs)\rend zip3"
+      "data": "-- zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]\non zip3(xs, ys, zs)\n    script\n        on |λ|(x, i)\n            Tuple3(x, item i of ys, item i of zs)\n        end |λ|\n    end script\n    map(result, items 1 thru ¬\n        minimum({length of xs, length of ys, length of zs}) of xs)\nend zip3"
     }
   ]
 }

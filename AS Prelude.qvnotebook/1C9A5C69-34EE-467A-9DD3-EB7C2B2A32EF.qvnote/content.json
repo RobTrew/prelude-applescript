@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- stripEnd :: String -> String\ron stripEnd(s)\r\tdropWhileEnd(my isSpace, s)\rend stripEnd"
+      "data": "-- stripEnd :: String -> String\non stripEnd(s)\n    dropWhileEnd(my isSpace, s)\nend stripEnd"
     }
   ]
 }

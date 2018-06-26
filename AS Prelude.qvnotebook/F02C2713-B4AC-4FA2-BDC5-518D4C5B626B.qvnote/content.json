@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fromMaybe :: a -> Maybe a -> a\ron fromMaybe(d, mb)\r\tif Nothing of mb then\r\t\tdef\r\telse\r\t\tJust of mb\r\tend if\rend fromMaybe"
+      "data": "-- fromMaybe :: a -> Maybe a -> a\non fromMaybe(d, mb)\n    if Nothing of mb then\n        def\n    else\n        Just of mb\n    end if\nend fromMaybe"
     }
   ]
 }

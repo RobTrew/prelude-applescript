@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- log :: Float -> Float\ron |log|(n)\r\tJust of evalJSMay((\"Math.log(\" & n as string) & \")\")\rend |log|"
+      "data": "-- log :: Float -> Float\non |log|(n)\n    Just of evalJSMay((\"Math.log(\" & n as string) & \")\")\nend |log|"
     }
   ]
 }

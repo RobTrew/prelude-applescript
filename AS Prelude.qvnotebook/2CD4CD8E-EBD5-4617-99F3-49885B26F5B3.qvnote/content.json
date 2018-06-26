@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- lines :: String -> [String]\ron |lines|(xs)\r\tparagraphs of xs\rend |lines|"
+      "data": "-- lines :: String -> [String]\non |lines|(xs)\n    paragraphs of xs\nend |lines|"
     }
   ]
 }

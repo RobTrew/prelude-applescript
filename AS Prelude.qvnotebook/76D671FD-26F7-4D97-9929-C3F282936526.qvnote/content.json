@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- iterateUntil :: (a -> Bool) -> (a -> a) -> a -> [a]\ron iterateUntil(p, f, x)\r\tscript\r\t\tproperty mp : mReturn(p)'s |λ|\r\t\tproperty mf : mReturn(f)'s |λ|\r\t\tproperty lst : {x}\r\t\ton |λ|(v)\r\t\t\trepeat until mp(v)\r\t\t\t\tset v to mf(v)\r\t\t\t\tset end of lst to v\r\t\t\tend repeat\r\t\t\treturn lst\r\t\tend |λ|\r\tend script\r\t|λ|(x) of result\rend iterateUntil"
+      "data": "-- iterateUntil :: (a -> Bool) -> (a -> a) -> a -> [a]\non iterateUntil(p, f, x)\n    script\n        property mp : mReturn(p)'s |λ|\n        property mf : mReturn(f)'s |λ|\n        property lst : {x}\n        on |λ|(v)\n            repeat until mp(v)\n                set v to mf(v)\n                set end of lst to v\n            end repeat\n            return lst\n        end |λ|\n    end script\n    |λ|(x) of result\nend iterateUntil"
     }
   ]
 }

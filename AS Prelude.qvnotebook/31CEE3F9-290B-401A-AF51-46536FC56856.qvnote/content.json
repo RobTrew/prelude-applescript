@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- toTitle :: String -> String\ron toTitle(str)\r\tset ca to current application\r\t((ca's NSString's stringWithString:(str))'s ¬\r\t\tcapitalizedStringWithLocale:(ca's NSLocale's currentLocale())) as text\rend toTitle"
+      "data": "-- toTitle :: String -> String\non toTitle(str)\n    set ca to current application\n    ((ca's NSString's stringWithString:(str))'s ¬\n        capitalizedStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toTitle"
     }
   ]
 }

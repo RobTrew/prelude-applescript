@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pureMay :: a -> Maybe a\ron pureMay(x)\r\tJust(x)\rend pureMay"
+      "data": "-- pureMay :: a -> Maybe a\non pureMay(x)\n    Just(x)\nend pureMay"
     }
   ]
 }

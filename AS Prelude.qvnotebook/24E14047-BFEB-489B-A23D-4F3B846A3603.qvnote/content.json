@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- elems :: Dict -> [a]\ron elems(rec)\r\tset ca to current application\r\t(ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list\rend elems"
+      "data": "-- elems :: Dict -> [a]\non elems(rec)\n    set ca to current application\n    (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list\nend elems"
     }
   ]
 }

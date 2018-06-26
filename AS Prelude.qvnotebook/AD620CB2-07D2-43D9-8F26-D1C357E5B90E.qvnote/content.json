@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isUpper :: Char -> Bool\ron isUpper(c)\r\tset d to (id of c) - 65 -- id of \"A\"\r\td ≥ 0 and d < 26\rend isUpper"
+      "data": "-- isUpper :: Char -> Bool\non isUpper(c)\n    set d to (id of c) - 65 -- id of \"A\"\n    d ≥ 0 and d < 26\nend isUpper"
     }
   ]
 }

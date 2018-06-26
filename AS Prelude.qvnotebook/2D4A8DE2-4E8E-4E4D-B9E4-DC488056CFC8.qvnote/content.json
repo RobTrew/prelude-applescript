@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- subsequences :: [a] -> [[a]]\r-- subsequences :: String -> [String]\ron subsequences(xs)\r\tscript nonEmptySubsequences\r\t\ton |λ|(xxs)\r\t\t\tif length of xxs < 1 then\r\t\t\t\t{}\r\t\t\telse\r\t\t\t\tset {x, xs} to {item 1 of xxs, tail(xxs)}\r\t\t\r\t\t\t\tscript f\r\t\t\t\t\ton |λ|(ys, r)\r\t\t\t\t\t\tcons(ys, cons(cons(x, ys), r))\r\t\t\t\t\tend |λ|\r\t\t\t\tend script\r\t\t\t\t\r\t\t\t\tcons({x}, foldr(f, {}, |λ|(xs) of nonEmptySubsequences))\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tif class of xs is text then\r\t\tcons(\"\", map(my concat, |λ|(characters of xs) of nonEmptySubsequences))\r\telse\r\t\tcons([], |λ|(xs) of nonEmptySubsequences)\r\tend if\rend subsequences"
+      "data": "-- subsequences :: [a] -> [[a]]\n-- subsequences :: String -> [String]\non subsequences(xs)\n    script nonEmptySubsequences\n        on |λ|(xxs)\n            if length of xxs < 1 then\n                {}\n            else\n                set {x, xs} to {item 1 of xxs, tail(xxs)}\n        \n                script f\n                    on |λ|(ys, r)\n                        cons(ys, cons(cons(x, ys), r))\n                    end |λ|\n                end script\n                \n                cons({x}, foldr(f, {}, |λ|(xs) of nonEmptySubsequences))\n            end if\n        end |λ|\n    end script\n    if class of xs is text then\n        cons(\"\", map(my concat, |λ|(characters of xs) of nonEmptySubsequences))\n    else\n        cons([], |λ|(xs) of nonEmptySubsequences)\n    end if\nend subsequences"
     }
   ]
 }

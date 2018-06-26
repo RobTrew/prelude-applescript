@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- until :: (a -> Bool) -> (a -> a) -> a -> a\ron |until|(p, f, x)\r\tset v to x\r\tset mp to mReturn(p)\r\tset mf to mReturn(f)\r\trepeat until mp's |λ|(v)\r\t\tset v to mf's |λ|(v)\r\tend repeat\rend |until|"
+      "data": "-- until :: (a -> Bool) -> (a -> a) -> a -> a\non |until|(p, f, x)\n    set v to x\n    set mp to mReturn(p)\n    set mf to mReturn(f)\n    repeat until mp's |λ|(v)\n        set v to mf's |λ|(v)\n    end repeat\nend |until|"
     }
   ]
 }

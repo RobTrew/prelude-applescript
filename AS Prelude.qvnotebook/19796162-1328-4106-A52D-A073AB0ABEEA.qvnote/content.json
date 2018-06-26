@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- findIndexR :: (a -> Bool) -> [a] -> Maybe Int\ron findIndexR(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\trepeat with i from lng to 1 by -1\r\t\t\tif |λ|(item i of xs) then return Just(i)\r\t\tend repeat\r\t\treturn Nothing()\r\tend tell\rend findIndexR"
+      "data": "-- findIndexR :: (a -> Bool) -> [a] -> Maybe Int\non findIndexR(f, xs)\n    tell mReturn(f)\n        set lng to length of xs\n        repeat with i from lng to 1 by -1\n            if |λ|(item i of xs) then return Just(i)\n        end repeat\n        return Nothing()\n    end tell\nend findIndexR"
     }
   ]
 }

@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- takeExtension :: FilePath -> String\ron takeExtension(strPath)\r\tset xs to splitOn(\".\", strPath)\r\tif length of xs > 1 then\r\t\t\".\" & item -1 of xs\r\telse\r\t\t\"\"\r\tend if\rend takeExtension"
+      "language": "applescript",
+      "data": "-- takeExtension :: FilePath -> String\non takeExtension(strPath)\n    set xs to splitOn(\".\", strPath)\n    if length of xs > 1 then\n        \".\" & item -1 of xs\n    else\n        \"\"\n    end if\nend takeExtension"
     }
   ]
 }

@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- Sentence case - initial string capitalized and rest lowercase"
     },
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- toSentence :: String -> String\ron toSentence(str)\r\tset ca to current application\r\tif length of str > 0 then\r\t\tset locale to ca's NSLocale's currentLocale()\r\t\tset ws to ca's NSString\r\t\t(((ws's stringWithString:(text 1 of str))'s ¬\r\t\t\tuppercaseStringWithLocale:(locale)) as text) & ¬\r\t\t\t((ws's stringWithString:(text 2 thru -1 of str))'s ¬\r\t\t\t\tlowercaseStringWithLocale:(locale)) as text\r\telse\r\t\tstr\r\tend if\rend toSentence"
+      "language": "applescript",
+      "data": "-- toSentence :: String -> String\non toSentence(str)\n    set ca to current application\n    if length of str > 0 then\n        set locale to ca's NSLocale's currentLocale()\n        set ws to ca's NSString\n        (((ws's stringWithString:(text 1 of str))'s ¬\n            uppercaseStringWithLocale:(locale)) as text) & ¬\n            ((ws's stringWithString:(text 2 thru -1 of str))'s ¬\n                lowercaseStringWithLocale:(locale)) as text\n    else\n        str\n    end if\nend toSentence"
     }
   ]
 }

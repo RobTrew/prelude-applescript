@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fmapLR (<$>) :: (a -> b) -> Either a a -> Either a b\ron fmapLR(f, lr)\r\tif isRight(lr) then\r\t\t|Right|(|λ|(|Right| of lr) of mReturn(f))\r\telse\r\t\tlr\r\tend if\rend fmapLR"
+      "data": "-- fmapLR (<$>) :: (a -> b) -> Either a a -> Either a b\non fmapLR(f, lr)\n    if isRight(lr) then\n        |Right|(|λ|(|Right| of lr) of mReturn(f))\n    else\n        lr\n    end if\nend fmapLR"
     }
   ]
 }

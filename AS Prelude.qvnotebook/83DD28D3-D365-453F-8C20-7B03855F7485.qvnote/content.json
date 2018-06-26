@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- maximumMay :: Ord a => [a] -> Maybe a\ron maximumMay(xs)\r\tfoldl1May(max, xs)\rend maximumMay"
+      "data": "-- maximumMay :: Ord a => [a] -> Maybe a\non maximumMay(xs)\n    foldl1May(max, xs)\nend maximumMay"
     }
   ]
 }

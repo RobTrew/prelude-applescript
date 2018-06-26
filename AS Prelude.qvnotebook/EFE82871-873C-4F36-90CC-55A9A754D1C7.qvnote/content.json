@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- cons :: a -> [a] -> [a]\ron cons(x, xs)\r\t{x} & xs\rend cons"
+      "data": "-- cons :: a -> [a] -> [a]\non cons(x, xs)\n    {x} & xs\nend cons"
     }
   ]
 }

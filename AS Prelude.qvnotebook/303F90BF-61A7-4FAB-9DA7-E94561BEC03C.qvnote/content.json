@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- sortBy :: (a -> a -> Ordering) -> [a] -> [a]\ron sortBy(f, xs)\r\tif length of xs > 1 then\r\t\tset h to item 1 of xs\r\t\tset f to mReturn(f)\r\t\tscript\r\t\t\ton |λ|(x)\r\t\t\t\tf's |λ|(x, h) ≤ 0\r\t\t\tend |λ|\r\t\tend script\r\t\tset lessMore to partition(result, rest of xs)\r\t\tsortBy(f, |1| of lessMore) & {h} & ¬\r\t\t\tsortBy(f, |2| of lessMore)\r\telse\r\t\txs\r\tend if\rend sortBy"
+      "data": "-- sortBy :: (a -> a -> Ordering) -> [a] -> [a]\non sortBy(f, xs)\n    if length of xs > 1 then\n        set h to item 1 of xs\n        set f to mReturn(f)\n        script\n            on |λ|(x)\n                f's |λ|(x, h) ≤ 0\n            end |λ|\n        end script\n        set lessMore to partition(result, rest of xs)\n        sortBy(f, |1| of lessMore) & {h} & ¬\n            sortBy(f, |2| of lessMore)\n    else\n        xs\n    end if\nend sortBy"
     }
   ]
 }

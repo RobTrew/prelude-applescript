@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- The mapMaybe function is a version of map which can throw out\r-- elements. In particular, the functional argument returns\r-- something of type Maybe b. If this is Nothing, no element is\r-- added on to the result list. If it just Just b, then b is\r-- included in the result list."
+      "data": "-- The mapMaybe function is a version of map which can throw out\n-- elements. In particular, the functional argument returns\n-- something of type Maybe b. If this is Nothing, no element is\n-- added on to the result list. If it just Just b, then b is\n-- included in the result list."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\ron mapMaybe(mf, xs)\r\tconcatMap(compose(mf, my maybeToList), xs)\rend mapMaybe"
+      "data": "-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\non mapMaybe(mf, xs)\n    concatMap(compose(mf, my maybeToList), xs)\nend mapMaybe"
     }
   ]
 }

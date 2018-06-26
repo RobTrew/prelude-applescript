@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- div :: Int -> Int -> Int\ron |div|(a, b)\r\ta div b\rend |div|"
+      "data": "-- div :: Int -> Int -> Int\non |div|(a, b)\n    a div b\nend |div|"
     }
   ]
 }

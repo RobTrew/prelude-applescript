@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- catMaybes :: [Maybe a] -> [a]\ron catMaybes(mbs)\r\tscript emptyOrListed\r\t\ton |λ|(m)\r\t\t\tif Nothing of m then\r\t\t\t\t{}\r\t\t\telse\r\t\t\t\t{Just of m}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\tconcatMap(emptyOrListed, mbs)\rend catMaybes"
+      "language": "applescript",
+      "data": "-- catMaybes :: [Maybe a] -> [a]\non catMaybes(mbs)\n    script emptyOrListed\n        on |λ|(m)\n            if Nothing of m then\n                {}\n            else\n                {Just of m}\n            end if\n        end |λ|\n    end script\n    concatMap(emptyOrListed, mbs)\nend catMaybes"
     }
   ]
 }

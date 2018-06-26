@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fmapMay (<$>) :: (a -> b) -> Maybe a -> Maybe b\ron fmapMay(f, mb)\r\tif Nothing of mb then\r\t\tmb\r\telse\r\t\tJust(|λ|(Just of mb) of mReturn(f))\r\tend if\rend fmapMay"
+      "data": "-- fmapMay (<$>) :: (a -> b) -> Maybe a -> Maybe b\non fmapMay(f, mb)\n    if Nothing of mb then\n        mb\n    else\n        Just(|λ|(Just of mb) of mReturn(f))\n    end if\nend fmapMay"
     }
   ]
 }

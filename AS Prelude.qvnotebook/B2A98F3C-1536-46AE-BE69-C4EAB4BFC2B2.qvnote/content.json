@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unwords :: [String] -> String\ron unwords(xs)\r\tintercalate(space, xs)\rend unwords"
+      "data": "-- unwords :: [String] -> String\non unwords(xs)\n    intercalate(space, xs)\nend unwords"
     }
   ]
 }

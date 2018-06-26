@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- rem :: Int -> Int -> Int\ron rem(m, n)\r\tm mod n\rend rem"
+      "data": "-- rem :: Int -> Int -> Int\non rem(m, n)\n    m mod n\nend rem"
     }
   ]
 }

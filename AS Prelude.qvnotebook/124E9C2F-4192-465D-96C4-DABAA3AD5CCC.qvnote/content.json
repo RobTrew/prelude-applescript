@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- any :: (a -> Bool) -> [a] -> Bool\ron |any|(f, xs)\r\ttell mReturn(f)\r\t\tset lng to length of xs\r\t\trepeat with i from 1 to lng\r\t\t\tif |λ|(item i of xs) then return true\r\t\tend repeat\r\t\tfalse\r\tend tell\rend |any|"
+      "data": "-- any :: (a -> Bool) -> [a] -> Bool\non |any|(f, xs)\n    tell mReturn(f)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then return true\n        end repeat\n        false\n    end tell\nend |any|"
     }
   ]
 }

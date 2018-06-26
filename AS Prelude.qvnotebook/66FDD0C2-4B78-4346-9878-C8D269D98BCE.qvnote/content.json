@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isNull :: [a] -> Bool\r-- isNull :: String -> Bool\ron isNull(xs)\r\tif class of xs is string then\r\t\txs = \"\"\r\telse\r\t\txs = {}\r\tend if\rend isNull"
+      "data": "-- isNull :: [a] -> Bool\n-- isNull :: String -> Bool\non isNull(xs)\n    if class of xs is string then\n        xs = \"\"\n    else\n        xs = {}\n    end if\nend isNull"
     }
   ]
 }

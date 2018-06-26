@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- insertBy :: (a -> a -> Ordering) -> a -> [a] -> [a]\ron insertBy(cmp, x, ys)\r\tset lng to length of ys\r\tif lng > 0 then\r\t\ttell mReturn(cmp)\r\t\t\tset bln to false\r\t\t\trepeat with i from 1 to lng\r\t\t\t\tif |λ|(item i of ys, x) > 0 then\r\t\t\t\t\tset bln to true\r\t\t\t\t\texit repeat\r\t\t\t\tend if\r\t\t\tend repeat\r\t\tend tell\r\t\tif bln then\r\t\t\tif i > 1 then\r\t\t\t\titems 1 thru (i - 1) of ys & x & items i thru -1 of ys\r\t\t\telse\r\t\t\t\t{x} & ys\r\t\t\tend if\r\t\telse\r\t\t\tys & x\r\t\tend if\r\telse\r\t\t{x}\r\tend if\rend insertBy"
+      "data": "-- insertBy :: (a -> a -> Ordering) -> a -> [a] -> [a]\non insertBy(cmp, x, ys)\n    set lng to length of ys\n    if lng > 0 then\n        tell mReturn(cmp)\n            set bln to false\n            repeat with i from 1 to lng\n                if |λ|(item i of ys, x) > 0 then\n                    set bln to true\n                    exit repeat\n                end if\n            end repeat\n        end tell\n        if bln then\n            if i > 1 then\n                items 1 thru (i - 1) of ys & x & items i thru -1 of ys\n            else\n                {x} & ys\n            end if\n        else\n            ys & x\n        end if\n    else\n        {x}\n    end if\nend insertBy"
     }
   ]
 }

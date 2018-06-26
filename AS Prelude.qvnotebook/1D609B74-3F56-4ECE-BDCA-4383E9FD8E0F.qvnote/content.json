@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]"
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intersperse :: Char -> String -> String\r-- intersperse :: a -> [a] -> [a]\ron intersperse(sep, xs)\r\tset lng to length of xs\r\tif lng > 1 then\r\t\tset acc to {item 1 of xs}\r\t\trepeat with i from 2 to lng\r\t\t\tset acc to acc & {sep, item i of xs}\r\t\tend repeat\r\t\tif class of xs is string then\r\t\t\tconcat(acc)\r\t\telse\r\t\t\tacc\r\t\tend if\r\telse\r\t\txs\r\tend if\rend intersperse"
+      "data": "-- intersperse :: a -> [a] -> [a]\n-- intersperse :: Char -> String -> String\non intersperse(sep, xs)\n    set lng to length of xs\n    if lng > 1 then\n        set acc to {item 1 of xs}\n        repeat with i from 2 to lng\n            set acc to acc & {sep, item i of xs}\n        end repeat\n        if class of xs is string then\n            concat(acc)\n        else\n            acc\n        end if\n    else\n        xs\n    end if\nend intersperse"
     }
   ]
 }

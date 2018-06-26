@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- notElem :: Eq a => a -> [a] -> Bool\ron notElem(x, xs)\r\txs does not contain x\rend notElem"
+      "data": "-- notElem :: Eq a => a -> [a] -> Bool\non notElem(x, xs)\n    xs does not contain x\nend notElem"
     }
   ]
 }

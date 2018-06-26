@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mReturn :: First-class m => (a -> b) -> m (a -> b)\ron mReturn(f)\r\tif class of f is script then\r\t\tf\r\telse\r\t\tscript\r\t\t\tproperty |λ| : f\r\t\tend script\r\tend if\rend mReturn"
+      "data": "-- mReturn :: First-class m => (a -> b) -> m (a -> b)\non mReturn(f)\n    if class of f is script then\n        f\n    else\n        script\n            property |λ| : f\n        end script\n    end if\nend mReturn"
     }
   ]
 }

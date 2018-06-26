@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- Ordering :: Int -> Ordering\ron Ordering(e)\r\tif e > 0 then\r\t\tset v to 1\r\telse if e < 0 then\r\t\tset v to -1\r\telse\r\t\tset v to 0\r\tend if\r\t{type:\"Ordering\", value:v}\rend Ordering"
+      "language": "applescript",
+      "data": "-- Ordering :: Int -> Ordering\non Ordering(e)\n    if e > 0 then\n        set v to 1\n    else if e < 0 then\n        set v to -1\n    else\n        set v to 0\n    end if\n    {type:\"Ordering\", value:v}\nend Ordering"
     }
   ]
 }

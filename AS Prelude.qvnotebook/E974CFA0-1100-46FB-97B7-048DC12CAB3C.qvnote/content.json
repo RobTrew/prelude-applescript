@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- composeListLR :: [(a -> a)] -> (a -> a)\ron composeListLR(fs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tscript\r\t\t\t\ton |λ|(a, f)\r\t\t\t\t\tmReturn(f)'s |λ|(a)\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\t\r\t\t\tfoldl(result, x, fs)\r\t\tend |λ|\r\tend script\rend composeListLR"
+      "data": "-- composeListLR :: [(a -> a)] -> (a -> a)\non composeListLR(fs)\n    script\n        on |λ|(x)\n            script\n                on |λ|(a, f)\n                    mReturn(f)'s |λ|(a)\n                end |λ|\n            end script\n            \n            foldl(result, x, fs)\n        end |λ|\n    end script\nend composeListLR"
     }
   ]
 }

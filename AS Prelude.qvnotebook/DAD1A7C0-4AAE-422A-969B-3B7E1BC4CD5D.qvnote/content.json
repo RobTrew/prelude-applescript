@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showMaybe :: Maybe a -> String\ron showMaybe(mb)\r\tif Nothing of mb then\r\t\t\"Nothing\"\r\telse\r\t\t\"Just \" & unQuoted(show(Just of mb))\r\tend if\rend showMaybe"
+      "data": "-- showMaybe :: Maybe a -> String\non showMaybe(mb)\n    if Nothing of mb then\n        \"Nothing\"\n    else\n        \"Just \" & unQuoted(show(Just of mb))\n    end if\nend showMaybe"
     }
   ]
 }

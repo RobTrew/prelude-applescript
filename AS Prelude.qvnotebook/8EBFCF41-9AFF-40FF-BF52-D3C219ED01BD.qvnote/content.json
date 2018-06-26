@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- maximumBy :: (a -> a -> Ordering) -> [a] -> a\non maximumBy(f, xs)\n\tset cmp to mReturn(f)\n\tscript max\n\t\ton |λ|(a, b)\n\t\t\tif a is missing value or cmp's |λ|(a, b) < 0 then\n\t\t\t\tb\n\t\t\telse\n\t\t\t\ta\n\t\t\tend if\n\t\tend |λ|\n\tend script\n\t\n\tfoldl(max, missing value, xs)\nend maximumBy"
+      "data": "-- maximumBy :: (a -> a -> Ordering) -> [a] -> a\non maximumBy(f, xs)\n    set cmp to mReturn(f)\n    script max\n        on |λ|(a, b)\n            if a is missing value or cmp's |λ|(a, b) < 0 then\n                b\n            else\n                a\n            end if\n        end |λ|\n    end script\n    \n    foldl(max, missing value, xs)\nend maximumBy"
     }
   ]
 }

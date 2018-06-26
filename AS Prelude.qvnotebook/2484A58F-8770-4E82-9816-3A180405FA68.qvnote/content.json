@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mappendOrdering (<>) :: Ordering -> Ordering -> Ordering\ron mappendOrdering(a, b)\r\tif my |EQ| = a then\r\t\tb\r\telse\r\t\ta\r\tend if\rend mappendOrdering"
+      "data": "-- mappendOrdering (<>) :: Ordering -> Ordering -> Ordering\non mappendOrdering(a, b)\n    if my |EQ| = a then\n        b\n    else\n        a\n    end if\nend mappendOrdering"
     }
   ]
 }

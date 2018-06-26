@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- getHomeDirectory :: IO FilePath\ron getHomeDirectory()\r\tcurrent application's NSHomeDirectory() as string\rend getHomeDirectory"
+      "data": "-- getHomeDirectory :: IO FilePath\non getHomeDirectory()\n    current application's NSHomeDirectory() as string\nend getHomeDirectory"
     }
   ]
 }

@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- pureT :: f a -> (a -> f a)\ron pureT(x)\r\tif class of x is record and keys(x) contains \"type\" then\r\t\tset t to type of x\r\t\tif t = \"Either\" then\r\t\t\tpureLR\r\t\telse if t = \"Maybe\" then\r\t\t\tpureMay\r\t\telse if t = \"Tree\" then\r\t\t\tpureTree\r\t\telse if t = \"Tuple\" then\r\t\t\tpureTuple\r\t\telse\r\t\t\tpureList\r\t\tend if\r\telse\r\t\tpureList\r\tend if\rend pureT"
+      "language": "applescript",
+      "data": "-- pureT :: f a -> (a -> f a)\non pureT(x)\n    if class of x is record and keys(x) contains \"type\" then\n        set t to type of x\n        if t = \"Either\" then\n            pureLR\n        else if t = \"Maybe\" then\n            pureMay\n        else if t = \"Tree\" then\n            pureTree\n        else if t = \"Tuple\" then\n            pureTuple\n        else\n            pureList\n        end if\n    else\n        pureList\n    end if\nend pureT"
     }
   ]
 }

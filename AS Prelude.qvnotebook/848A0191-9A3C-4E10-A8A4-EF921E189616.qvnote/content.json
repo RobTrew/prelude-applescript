@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromToInt :: Int -> Int -> [Int]\ron enumFromToInt(m, n)\r\tif m ≤ n then\r\t\tset lst to {}\r\t\trepeat with i from m to n\r\t\t\tset end of lst to i\r\t\tend repeat\r\t\treturn lst\r\telse\r\t\treturn {}\r\tend if\rend enumFromToInt"
+      "data": "-- enumFromToInt :: Int -> Int -> [Int]\non enumFromToInt(m, n)\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        return lst\n    else\n        return {}\n    end if\nend enumFromToInt"
     }
   ]
 }

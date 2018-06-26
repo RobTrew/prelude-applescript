@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- reverse :: [a] -> [a]\ron |reverse|(xs)\r\tif class of xs is text then\r\t\t(reverse of characters of xs) as text\r\telse\r\t\treverse of xs\r\tend if\rend |reverse|"
+      "data": "-- reverse :: [a] -> [a]\non |reverse|(xs)\n    if class of xs is text then\n        (reverse of characters of xs) as text\n    else\n        reverse of xs\n    end if\nend |reverse|"
     }
   ]
 }

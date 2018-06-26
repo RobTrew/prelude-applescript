@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- zipWith4 :: (a -> b -> c -> d -> e) -> [a] -> [b] -> [c] -> [d] -> [e]\ron zipWith4(f, ws, xs, ys, zs)\r\tset lng to minimum({length of ws, length of xs, length of ys, length of zs})\r\tif lng < 1 then return {}\r\tset lst to {}\r\ttell mReturn(f)\r\t\trepeat with i from 1 to lng\r\t\t\tset end of lst to |λ|(item i of ws, item i of xs, item i of ys, item i of zs)\r\t\tend repeat\r\t\treturn lst\r\tend tell\rend zipWith4"
+      "language": "applescript",
+      "data": "-- zipWith4 :: (a -> b -> c -> d -> e) -> [a] -> [b] -> [c] -> [d] -> [e]\non zipWith4(f, ws, xs, ys, zs)\n    set lng to minimum({length of ws, length of xs, length of ys, length of zs})\n    if lng < 1 then return {}\n    set lst to {}\n    tell mReturn(f)\n        repeat with i from 1 to lng\n            set end of lst to |λ|(item i of ws, item i of xs, item i of ys, item i of zs)\n        end repeat\n        return lst\n    end tell\nend zipWith4"
     }
   ]
 }

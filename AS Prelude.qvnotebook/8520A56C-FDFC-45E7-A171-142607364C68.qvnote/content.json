@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- takeAround :: (a -> Bool) -> [a] -> [a]\ron takeAround(p, xs)\r\tset ys to takeWhile(p, xs)\r\tif length of ys < length of xs then\r\t\tys & takeWhileR(p, xs)\r\telse\r\t\tys\r\tend if\rend takeAround"
+      "data": "-- takeAround :: (a -> Bool) -> [a] -> [a]\non takeAround(p, xs)\n    set ys to takeWhile(p, xs)\n    if length of ys < length of xs then\n        ys & takeWhileR(p, xs)\n    else\n        ys\n    end if\nend takeAround"
     }
   ]
 }

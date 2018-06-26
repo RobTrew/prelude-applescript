@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fmapTuple (<$>) :: (a -> b) -> (a, a) -> (a, b)\ron fmapTuple(f, tpl)\r\tTuple(|1| of tpl, |λ|(|2| of tpl) of mReturn(f))\rend fmapTuple"
+      "data": "-- fmapTuple (<$>) :: (a -> b) -> (a, a) -> (a, b)\non fmapTuple(f, tpl)\n    Tuple(|1| of tpl, |λ|(|2| of tpl) of mReturn(f))\nend fmapTuple"
     }
   ]
 }

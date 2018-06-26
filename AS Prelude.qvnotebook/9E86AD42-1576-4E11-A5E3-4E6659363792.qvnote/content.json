@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- maximum :: Ord a => [a] -> a\non maximum(xs)\n\tscript\n\t\ton |λ|(a, b)\n\t\t\tif a is missing value or b > a then\n\t\t\t\tb\n\t\t\telse\n\t\t\t\ta\n\t\t\tend if\n\t\tend |λ|\n\tend script\n\t\n\tfoldl(result, missing value, xs)\nend maximum"
+      "data": "-- maximum :: Ord a => [a] -> a\non maximum(xs)\n    script\n        on |λ|(a, b)\n            if a is missing value or b > a then\n                b\n            else\n                a\n            end if\n        end |λ|\n    end script\n    \n    foldl(result, missing value, xs)\nend maximum"
     }
   ]
 }

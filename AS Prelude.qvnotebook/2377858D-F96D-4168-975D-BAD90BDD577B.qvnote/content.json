@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showDict :: Dict -> String\ron showDict(dct)\r  showJSON(dct)\rend showDict"
+      "data": "-- showDict :: Dict -> String\non showDict(dct)\n  showJSON(dct)\nend showDict"
     }
   ]
 }

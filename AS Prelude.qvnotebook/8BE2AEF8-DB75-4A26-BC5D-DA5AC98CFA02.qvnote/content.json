@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- then (>>) :: Monad m => m a -> m b -> m b\ron |then|(ma, mb)\r\tset c to class of ma\r\tif c is list then\r\t\tthenList(ma, mb)\r\telse if c is record then\r\t\tif keys(ma) contains \"Maybe\" then\r\t\t\tthenMay(ma, mb)\r\t\telse\r\t\t\tthenIO(ma, mb)\r\t\tend if\r\telse\r\t\tthenIO(ma, mb)\r\tend if\rend |then|"
+      "data": "-- then (>>) :: Monad m => m a -> m b -> m b\non |then|(ma, mb)\n    set c to class of ma\n    if c is list then\n        thenList(ma, mb)\n    else if c is record then\n        if keys(ma) contains \"Maybe\" then\n            thenMay(ma, mb)\n        else\n            thenIO(ma, mb)\n        end if\n    else\n        thenIO(ma, mb)\n    end if\nend |then|"
     }
   ]
 }

@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "use framework \"Foundation\"\r-- File name template -> string data -> temporary path\r-- (Random digit sequence inserted between template base and extension)"
+      "language": "applescript",
+      "data": "use framework \"Foundation\"\n-- File name template -> string data -> temporary path\n-- (Random digit sequence inserted between template base and extension)"
     },
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- writeTempFile :: String -> String -> IO FilePath\ron writeTempFile(template, txt)\r\tset strPath to (current application's ¬\r\t\tNSTemporaryDirectory() as string) & ¬\r\t\ttakeBaseName(template) & ¬\r\t\ttext 3 thru -1 of ((random number) as string) & ¬\r\t\ttakeExtension(template)\r\t-- Effect\r\twriteFile(strPath, txt)\r\t-- Value\r\tstrPath\rend writeTempFile"
+      "language": "applescript",
+      "data": "-- writeTempFile :: String -> String -> IO FilePath\non writeTempFile(template, txt)\n    set strPath to (current application's ¬\n        NSTemporaryDirectory() as string) & ¬\n        takeBaseName(template) & ¬\n        text 3 thru -1 of ((random number) as string) & ¬\n        takeExtension(template)\n    -- Effect\n    writeFile(strPath, txt)\n    -- Value\n    strPath\nend writeTempFile"
     }
   ]
 }

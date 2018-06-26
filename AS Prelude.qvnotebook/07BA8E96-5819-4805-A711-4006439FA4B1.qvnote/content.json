@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- | Build a forest from a list of seed values"
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unfoldForest :: (b -> (a, [b])) -> [b] -> Forest\ron unfoldForest(f, xs)\r\tset g to mReturn(f)\r\tscript\r\t\ton |λ|(x)\r\t\t\tunfoldTree(g, x)\r\t\tend |λ|\r\tend script\r\tmap(result, xs)\rend unfoldForest"
+      "data": "-- unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]\non unfoldForest(f, xs)\n    set g to mReturn(f)\n    script\n        on |λ|(x)\n            unfoldTree(g, x)\n        end |λ|\n    end script\n    map(result, xs)\nend unfoldForest"
     }
   ]
 }

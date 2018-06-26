@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- product :: [Num] -> Num\ron product(xs)\r\tscript multiply\r\t\ton |λ|(a, b)\r\t\t\ta * b\r\t\tend |λ|\r\tend script\r\t\r\tfoldl(multiply, 1, xs)\rend product"
+      "data": "-- product :: [Num] -> Num\non product(xs)\n    script multiply\n        on |λ|(a, b)\n            a * b\n        end |λ|\n    end script\n    \n    foldl(multiply, 1, xs)\nend product"
     }
   ]
 }

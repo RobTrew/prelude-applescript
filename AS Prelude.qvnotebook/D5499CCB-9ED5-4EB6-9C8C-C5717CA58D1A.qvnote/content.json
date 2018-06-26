@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showTuple :: Tuple -> String\ron showTuple(tpl)\r\t\"(\" & unQuoted(show(|1| of tpl)) & \", \" & unQuoted(show(|2| of tpl)) & \")\"\rend showTuple"
+      "data": "-- showTuple :: Tuple -> String\non showTuple(tpl)\n    \"(\" & unQuoted(show(|1| of tpl)) & \", \" & unQuoted(show(|2| of tpl)) & \")\"\nend showTuple"
     }
   ]
 }

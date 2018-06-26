@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- foldr1May :: (a -> a -> a) -> [a] -> Maybe a\ron foldr1May(f, xs)\r\tset lng to length of xs\r\tif lng > 0 then\r\t\ttell mReturn(f)\r\t\t\tset v to item -1 of xs\r\t\t\trepeat with i from lng - 1 to 1 by -1\r\t\t\t\tset v to |λ|(item i of xs, v, i, xs)\r\t\t\tend repeat\r\t\t\treturn Just(v)\r\t\tend tell\r\telse\r\t\tNothing()\r\tend if\rend foldr1May"
+      "data": "-- foldr1May :: (a -> a -> a) -> [a] -> Maybe a\non foldr1May(f, xs)\n    set lng to length of xs\n    if lng > 0 then\n        tell mReturn(f)\n            set v to item -1 of xs\n            repeat with i from lng - 1 to 1 by -1\n                set v to |λ|(item i of xs, v, i, xs)\n            end repeat\n            return Just(v)\n        end tell\n    else\n        Nothing()\n    end if\nend foldr1May"
     }
   ]
 }

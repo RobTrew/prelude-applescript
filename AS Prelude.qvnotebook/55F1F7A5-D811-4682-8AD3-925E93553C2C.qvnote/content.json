@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- treeLeaves :: Node -> [Node]\ron treeLeaves(oNode)\r\tscript go\r\t\ton |λ|(x)\r\t\t\tset lst to nest of x\r\t\t\tif length of lst > 0 then\r\t\t\t\tconcatMap(my treeLeaves, lst)\r\t\t\telse\r\t\t\t\t{x}\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t|λ|(oNode) of go\rend treeLeaves"
+      "data": "-- treeLeaves :: Tree -> [Tree]\non treeLeaves(oNode)\n    script go\n        on |λ|(x)\n            set lst to nest of x\n            if length of lst > 0 then\n                concatMap(my treeLeaves, lst)\n            else\n                {x}\n            end if\n        end |λ|\n    end script\n    |λ|(oNode) of go\nend treeLeaves"
     }
   ]
 }

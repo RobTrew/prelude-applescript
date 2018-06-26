@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Retuns the conjunction of a Boolean \n-- list. For the result to be true, \n-- all values in the list must be true."
+      "data": "-- Returns the conjunction of a Boolean \n-- list. For the result to be true, \n-- all values in the list must be true."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- and :: [Bool] -> Bool\ron |and|(xs)\r\trepeat with x in xs\r\t\tif not (contents of x) then return false\r\tend repeat\r\treturn true\rend |and|"
+      "data": "-- and :: [Bool] -> Bool\non |and|(xs)\n    repeat with x in xs\n        if not (contents of x) then return false\n    end repeat\n    return true\nend |and|"
     }
   ]
 }

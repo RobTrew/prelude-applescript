@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intercalate :: [a] -> [[a]] -> [a]\r-- intercalate :: String -> [String] -> String\ron intercalate(sep, xs)\r  concat(intersperse(sep, xs))\rend intercalate"
+      "data": "-- intercalate :: [a] -> [[a]] -> [a]\n-- intercalate :: String -> [String] -> String\non intercalate(sep, xs)\n  concat(intersperse(sep, xs))\nend intercalate"
     }
   ]
 }

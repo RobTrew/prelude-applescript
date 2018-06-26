@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- chr :: Int -> Char\ron chr(n)\r\tcharacter id n\rend chr"
+      "data": "-- chr :: Int -> Char\non chr(n)\n    character id n\nend chr"
     }
   ]
 }

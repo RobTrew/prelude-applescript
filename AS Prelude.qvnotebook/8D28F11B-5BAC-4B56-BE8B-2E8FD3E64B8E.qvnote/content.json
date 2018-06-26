@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- deleteFirstsBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\ron deleteFirstsBy(fnEq, xs, ys)\r\tscript\r\t\ton |λ|(x, y)\r\t\t\tdeleteBy(fnEq, y, x)\r\t\tend |λ|\r\tend script\r\tfoldl(result, xs, ys)\rend deleteFirstsBy"
+      "data": "-- deleteFirstsBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]\non deleteFirstsBy(fnEq, xs, ys)\n    script\n        on |λ|(x, y)\n            deleteBy(fnEq, y, x)\n        end |λ|\n    end script\n    foldl(result, xs, ys)\nend deleteFirstsBy"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- union :: [a] -> [a] -> [a]\ron union(xs, ys)\r\tscript flipDelete\r\t\ton |λ|(xs, x)\r\t\t\tmy |delete|(x, xs)\r\t\tend |λ|\r\tend script\r\t\r\tset sx to nub(xs)\r\tsx & foldl(flipDelete, nub(ys), sx)\rend union"
+      "data": "-- union :: [a] -> [a] -> [a]\non union(xs, ys)\n    script flipDelete\n        on |λ|(xs, x)\n            my |delete|(x, xs)\n        end |λ|\n    end script\n    \n    set sx to nub(xs)\n    sx & foldl(flipDelete, nub(ys), sx)\nend union"
     }
   ]
 }

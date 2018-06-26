@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String\ron showIntAtBase(base, toChr, n, rs)\r\tscript showIt\r\t\ton |λ|(nd_, r)\r\t\t\tset {n, d} to nd_\r\t\t\tset r_ to toChr's |λ|(d) & r\r\t\t\tif n > 0 then\r\t\t\t\t|λ|(quotRem(n, base), r_)\r\t\t\telse\r\t\t\t\tr_\r\t\t\tend if\r\t\tend |λ|\r\tend script\r\t\r\tif base ≤ 1 then\r\t\t\"error: showIntAtBase applied to unsupported base\"\r\telse if n < 0 then\r\t\t\"error: showIntAtBase applied to negative number\"\r\telse\r\t\tshowIt's |λ|(quotRem(n, base), rs)\r\tend if\rend showIntAtBase"
+      "data": "-- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String\non showIntAtBase(base, toChr, n, rs)\n    script showIt\n        on |λ|(nd_, r)\n            set {n, d} to nd_\n            set r_ to toChr's |λ|(d) & r\n            if n > 0 then\n                |λ|(quotRem(n, base), r_)\n            else\n                r_\n            end if\n        end |λ|\n    end script\n    \n    if base ≤ 1 then\n        \"error: showIntAtBase applied to unsupported base\"\n    else if n < 0 then\n        \"error: showIntAtBase applied to negative number\"\n    else\n        showIt's |λ|(quotRem(n, base), rs)\n    end if\nend showIntAtBase"
     }
   ]
 }

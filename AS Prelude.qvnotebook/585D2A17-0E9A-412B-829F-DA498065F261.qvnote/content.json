@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- elemAtMay :: Int -> Dict -> Maybe (String, a)\r-- elemAtMay :: Int -> [a] -> Maybe a\ron elemAtMay(i, x)\r\tset bln to class of x is record\r\tif bln then\r\t\tset ks to keys(x)\r\t\tif i ≤ |length|(ks) then\r\t\t\tset k to item i of sort(ks)\r\t\t\tscript pair\r\t\t\t\ton |λ|(v)\r\t\t\t\t\tJust(Tuple(k, v))\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tbindMay(lookup(k, x), pair)\r\t\tend if\r\telse\r\t\tif i ≤ |length|(x) then\r\t\t\tJust(item i of x)\r\t\telse\r\t\t\tNothing()\r\t\tend if\r\tend if\rend elemAtMay"
+      "data": "-- elemAtMay :: Int -> Dict -> Maybe (String, a)\n-- elemAtMay :: Int -> [a] -> Maybe a\non elemAtMay(i, x)\n    set bln to class of x is record\n    if bln then\n        set ks to keys(x)\n        if i ≤ |length|(ks) then\n            set k to item i of sort(ks)\n            script pair\n                on |λ|(v)\n                    Just(Tuple(k, v))\n                end |λ|\n            end script\n            bindMay(lookup(k, x), pair)\n        end if\n    else\n        if i ≤ |length|(x) then\n            Just(item i of x)\n        else\n            Nothing()\n        end if\n    end if\nend elemAtMay"
     }
   ]
 }

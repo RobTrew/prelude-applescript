@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- nub :: [a] -> [a]\ron nub(xs)\r\tscript\r\t\ton |λ|(a, b)\r\t\t\ta = b\r\t\tend |λ|\r\tend script\r\tnubBy(result, xs)\rend nub"
+      "data": "-- nub :: [a] -> [a]\non nub(xs)\n    script\n        on |λ|(a, b)\n            a = b\n        end |λ|\n    end script\n    nubBy(result, xs)\nend nub"
     }
   ]
 }

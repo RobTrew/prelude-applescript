@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- getCurrentDirectory :: IO FilePath\ron getCurrentDirectory()\r\tset ca to current application\r\tca's NSFileManager's defaultManager()'s currentDirectoryPath as string\rend getCurrentDirectory"
+      "data": "-- getCurrentDirectory :: IO FilePath\non getCurrentDirectory()\n    set ca to current application\n    ca's NSFileManager's defaultManager()'s currentDirectoryPath as string\nend getCurrentDirectory"
     }
   ]
 }

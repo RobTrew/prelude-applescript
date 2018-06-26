@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- append (++) :: [a] -> [a] -> [a]\r-- append (++) :: String -> String -> String\ron append(xs, ys)\r\txs & ys\rend append"
+      "data": "-- append (++) :: [a] -> [a] -> [a]\n-- append (++) :: String -> String -> String\non append(xs, ys)\n    xs & ys\nend append"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- quot :: Int -> Int -> Int\non quot(m, n)\n\tm div n\nend quot"
+      "data": "-- quot :: Int -> Int -> Int\non quot(m, n)\n    m div n\nend quot"
     }
   ]
 }

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- outdented :: String -> String\ron outdented(s)\r\tset xs to |lines|(s)\r\tscript dent\r\t\ton |λ|(x)\r\t\t\tscript isSpace\r\t\t\t\ton |λ|(c)\r\t\t\t\t\tid of c = 32\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\t\tlength of takeWhile(isSpace, x)\r\t\tend |λ|\r\tend script\r\tset n to |λ|(minimumBy(comparing(dent), xs)) of dent\r\tif n < 1 then\r\t\ts\r\telse\r\t\tunlines(map(|λ|(n) of curry(drop), xs))\r\tend if\rend outdented"
+      "data": "-- outdented :: String -> String\non outdented(s)\n    set xs to |lines|(s)\n    script dent\n        on |λ|(x)\n            script isSpace\n                on |λ|(c)\n                    id of c = 32\n                end |λ|\n            end script\n            length of takeWhile(isSpace, x)\n        end |λ|\n    end script\n    set n to |λ|(minimumBy(comparing(dent), xs)) of dent\n    if n < 1 then\n        s\n    else\n        unlines(map(|λ|(n) of curry(drop), xs))\n    end if\nend outdented"
     }
   ]
 }

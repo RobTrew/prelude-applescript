@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intersect :: (Eq a) => [a] -> [a] -> [a]\ron intersect(xs, ys)\r\tif length of xs < length of ys then\r\t\tset {shorter, longer} to {xs, ys}\r\telse\r\t\tset {longer, shorter} to {xs, ys}\r\tend if\r\tif shorter ≠ {} then\r\t\tset lst to {}\r\t\trepeat with x in shorter\r\t\t\tif longer contains x then set end of lst to contents of x\r\t\tend repeat\r\t\tlst\r\telse\r\t\t{}\r\tend if\rend intersect"
+      "data": "-- intersect :: (Eq a) => [a] -> [a] -> [a]\non intersect(xs, ys)\n    if length of xs < length of ys then\n        set {shorter, longer} to {xs, ys}\n    else\n        set {longer, shorter} to {xs, ys}\n    end if\n    if shorter ≠ {} then\n        set lst to {}\n        repeat with x in shorter\n            if longer contains x then set end of lst to contents of x\n        end repeat\n        lst\n    else\n        {}\n    end if\nend intersect"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapFromList :: [(k, v)] -> Dict\ron mapFromList(kvs)\r\tset tpl to unzip(kvs)\r\tscript\r\t\ton |λ|(x)\r\t\t\tx as string\r\t\tend |λ|\r\tend script\r\t(current application's NSDictionary's ¬\r\t\tdictionaryWithObjects:(|2| of tpl) ¬\r\t\t\tforKeys:map(result, |1| of tpl)) as record\rend mapFromList"
+      "data": "-- mapFromList :: [(k, v)] -> Dict\non mapFromList(kvs)\n    set tpl to unzip(kvs)\n    script\n        on |λ|(x)\n            x as string\n        end |λ|\n    end script\n    (current application's NSDictionary's ¬\n        dictionaryWithObjects:(|2| of tpl) ¬\n            forKeys:map(result, |1| of tpl)) as record\nend mapFromList"
     }
   ]
 }

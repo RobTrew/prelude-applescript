@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- createDirectoryIfMissingLR :: Bool -> FilePath ->\r--      Either String String\ron createDirectoryIfMissingLR(blnParents, fp)\r\tif doesPathExist(fp) then\r\t\t|Right|(\"Found: '\" & fp & \"'\")\r\telse\r\t\tset e to reference\r\t\tset ca to current application\r\t\tset oPath to (ca's NSString's stringWithString:(fp))'s ¬\r\t\t\tstringByStandardizingPath\r\t\tset {blnOK, e} to ca's NSFileManager's ¬\r\t\t\tdefaultManager's createDirectoryAtPath:(oPath) ¬\r\t\t\twithIntermediateDirectories:(blnParents) ¬\r\t\t\tattributes:(missing value) |error|:(e)\r\t\tif blnOK then\r\t\t\t|Right|(\"Created: '\" & fp & \"'\")\r\t\telse\r\t\t\t|Left|((localizedDescription of e) as string)\r\t\tend if\r\tend if\rend createDirectoryIfMissingLR"
+      "language": "applescript",
+      "data": "-- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String\non createDirectoryIfMissingLR(blnParents, fp)\n    if doesPathExist(fp) then\n        |Right|(\"Found: '\" & fp & \"'\")\n    else\n        set e to reference\n        set ca to current application\n        set oPath to (ca's NSString's stringWithString:(fp))'s ¬\n            stringByStandardizingPath\n        set {blnOK, e} to ca's NSFileManager's ¬\n            defaultManager's createDirectoryAtPath:(oPath) ¬\n            withIntermediateDirectories:(blnParents) ¬\n            attributes:(missing value) |error|:(e)\n        if blnOK then\n            |Right|(fp)\n        else\n            |Left|((localizedDescription of e) as string)\n        end if\n    end if\nend createDirectoryIfMissingLR"
     }
   ]
 }

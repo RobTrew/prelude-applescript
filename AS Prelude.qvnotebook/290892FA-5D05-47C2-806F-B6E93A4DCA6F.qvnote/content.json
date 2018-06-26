@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)\ron kleisliCompose(f, g)\r\tscript\r\t\ton |λ|(x)\r\t\t\tbind(mReturn(f)'s |λ|(x), g)\r\t\tend |λ|\r\tend script\rend kleisliCompose"
+      "data": "-- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)\non kleisliCompose(f, g)\n    script\n        on |λ|(x)\n            bind(mReturn(f)'s |λ|(x), g)\n        end |λ|\n    end script\nend kleisliCompose"
     }
   ]
 }

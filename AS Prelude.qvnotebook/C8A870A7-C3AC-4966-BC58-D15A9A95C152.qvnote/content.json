@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromThenToChar :: Char -> Char -> Char -> [Char]\ron enumFromThenToChar(x1, x2, y)\r\tset {int1, int2, intY} to {id of x1, id of x2, id of y}\r\tset xs to {}\r\trepeat with i from int1 to intY by (int2 - int1)\r\t\tset end of xs to character id i\r\tend repeat\r\treturn xs\rend enumFromThenToChar"
+      "data": "-- enumFromThenToChar :: Char -> Char -> Char -> [Char]\non enumFromThenToChar(x1, x2, y)\n    set {int1, int2, intY} to {id of x1, id of x2, id of y}\n    set xs to {}\n    repeat with i from int1 to intY by (int2 - int1)\n        set end of xs to character id i\n    end repeat\n    return xs\nend enumFromThenToChar"
     }
   ]
 }

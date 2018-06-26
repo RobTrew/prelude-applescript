@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c\ron |on|(f, g)\r\tscript\r\t\ton |λ|(a, b)\r\t\t\ttell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}\r\t\t\ttell mReturn(f) to |λ|(va, vb)\r\t\tend |λ|\r\tend script\rend |on|"
+      "data": "-- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c\non |on|(f, g)\n    script\n        on |λ|(a, b)\n            tell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}\n            tell mReturn(f) to |λ|(va, vb)\n        end |λ|\n    end script\nend |on|"
     }
   ]
 }

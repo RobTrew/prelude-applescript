@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- foldl :: (a -> b -> a) -> a -> [b] -> a\non foldl(f, startValue, xs)\n\ttell mReturn(f)\n\t  set v to startValue\n\t  set lng to length of xs\n\t  repeat with i from 1 to lng\n\t\t  set v to |λ|(v, item i of xs, i, xs)\n\t  end repeat\n\t  return v\n\t  end tell\nend foldl"
+      "data": "-- foldl :: (a -> b -> a) -> a -> [b] -> a\non foldl(f, startValue, xs)\n    tell mReturn(f)\n      set v to startValue\n      set lng to length of xs\n      repeat with i from 1 to lng\n          set v to |λ|(v, item i of xs, i, xs)\n      end repeat\n      return v\n      end tell\nend foldl"
     }
   ]
 }

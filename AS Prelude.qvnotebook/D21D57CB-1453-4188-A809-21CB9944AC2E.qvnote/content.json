@@ -1,10 +1,10 @@
 {
-  "title": "readFileMay",
+  "title": "readFileLR",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- readFileMay :: FilePath -> Maybe String\ron readFileMay(strPath)\r\tset ca to current application\r\tset e to reference\r\tset {s, e} to (ca's NSString's ¬\r\t\tstringWithContentsOfFile:((ca's NSString's ¬\r\t\t\tstringWithString:strPath)'s ¬\r\t\t\tstringByStandardizingPath) ¬\r\t\t\tencoding:(ca's NSUTF8StringEncoding) |error|:(e))\r\tif e is missing value then\r\t\tJust(s as string)\r\telse\r\t\tNothing()\r\tend if\rend readFileMay"
+      "data": "-- readFileLR :: FilePath -> Either String String\non readFileLR(strPath)\n    set ca to current application\n    set e to reference\n    set {s, e} to (ca's NSString's ¬\n        stringWithContentsOfFile:((ca's NSString's ¬\n            stringWithString:strPath)'s ¬\n            stringByStandardizingPath) ¬\n            encoding:(ca's NSUTF8StringEncoding) |error|:(e))\n    if e is missing value then\n        |Right|(s as string)\n    else\n        |Left|(message of e)\n    end if\nend readFileLR"
     }
   ]
 }

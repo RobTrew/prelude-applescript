@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- e.g. [(*2),(/2), sqrt] <*> [1,2,3]\r-- -->  ap([dbl, hlf, root], [1, 2, 3])\r-- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]\r\r-- Each member of a list of functions applied to\r-- each of a list of arguments, deriving a list of new values"
+      "data": "-- e.g. [(*2),(/2), sqrt] <*> [1,2,3]\n-- -->  ap([dbl, hlf, root], [1, 2, 3])\n-- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]\n\n-- Each member of a list of functions applied to\n-- each of a list of arguments, deriving a list of new values"
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apList (<*>) :: [(a -> b)] -> [a] -> [b]\ron apList(fs, xs)\r\tset lst to {}\r\trepeat with f in fs\r\t\ttell mReturn(contents of f)\r\t\t\trepeat with x in xs\r\t\t\t\tset end of lst to |λ|(contents of x)\r\t\t\tend repeat\r\t\tend tell\r\tend repeat\r\treturn lst\rend apList"
+      "data": "-- apList (<*>) :: [(a -> b)] -> [a] -> [b]\non apList(fs, xs)\n    set lst to {}\n    repeat with f in fs\n        tell mReturn(contents of f)\n            repeat with x in xs\n                set end of lst to |λ|(contents of x)\n            end repeat\n        end tell\n    end repeat\n    return lst\nend apList"
     }
   ]
 }

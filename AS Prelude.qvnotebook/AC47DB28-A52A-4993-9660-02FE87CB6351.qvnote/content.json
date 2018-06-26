@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- breakOnAll :: String -> String -> [(String, String)]\ron breakOnAll(pat, src)\r\tif pat ≠ \"\" then\r\t\tscript\r\t\t\ton |λ|(a, _, i, xs)\r\t\t\t\tif i > 1 then\r\t\t\t\t\ta & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\r\t\t\t\t\t\tpat & intercalate(pat, drop(i - 1, xs)))}\r\t\t\t\telse\r\t\t\t\t\ta\r\t\t\t\tend if\r\t\t\tend |λ|\r\t\tend script\r\t\tfoldl(result, {}, splitOn(pat, src))\r\telse\r\t\tmissing value\r\tend if\rend breakOnAll"
+      "data": "-- breakOnAll :: String -> String -> [(String, String)]\non breakOnAll(pat, src)\n    if pat ≠ \"\" then\n        script\n            on |λ|(a, _, i, xs)\n                if i > 1 then\n                    a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\n                        pat & intercalate(pat, drop(i - 1, xs)))}\n                else\n                    a\n                end if\n            end |λ|\n        end script\n        foldl(result, {}, splitOn(pat, src))\n    else\n        missing value\n    end if\nend breakOnAll"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- headMay :: [a] -> Maybe a\ron headMay(xs)\r\tif xs = {} then\r\t\tNothing()\r\telse\r\t\tJust(item 1 of xs)\r\tend if\rend headMay"
+      "data": "-- headMay :: [a] -> Maybe a\non headMay(xs)\n    if xs = {} then\n        Nothing()\n    else\n        Just(item 1 of xs)\n    end if\nend headMay"
     }
   ]
 }

@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- enumFromThenTo :: Enum a => a -> a -> a -> [a]\ron enumFromThenTo(x1, x2, y)\r\tif class of x1 is integer then\r\t\tenumFromThenToInt(x1, x2, y)\r\telse\r\t\tenumFromThenToChar(x1, x2, y)\r\tend if\rend enumFromThenTo"
+      "language": "applescript",
+      "data": "-- enumFromThenTo :: Enum a => a -> a -> a -> [a]\non enumFromThenTo(x1, x2, y)\n    if class of x1 is integer then\n        enumFromThenToInt(x1, x2, y)\n    else\n        enumFromThenToChar(x1, x2, y)\n    end if\nend enumFromThenTo"
     }
   ]
 }

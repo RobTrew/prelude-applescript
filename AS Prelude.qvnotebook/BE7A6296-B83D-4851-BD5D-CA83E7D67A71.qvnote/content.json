@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))\ron fanArrow(f, g)\r\tscript\r\t\ton |λ|(x)\r\t\t\tTuple(mReturn(f)'s |λ|(x), mReturn(g)'s |λ|(x))\r\t\tend |λ|\r\tend script\rend fanArrow"
+      "data": "-- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))\non fanArrow(f, g)\n    script\n        on |λ|(x)\n            Tuple(mReturn(f)'s |λ|(x), mReturn(g)'s |λ|(x))\n        end |λ|\n    end script\nend fanArrow"
     }
   ]
 }

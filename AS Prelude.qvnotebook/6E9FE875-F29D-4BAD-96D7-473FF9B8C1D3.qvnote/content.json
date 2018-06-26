@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- minimumMay :: [a] -> Maybe a\ron minimumMay(xs)\r\tset lng to length of xs\r\tif lng < 1 then\r\t\tNothing()\r\telse if lng > 1 then\r\t\tset m to item 1 of xs\r\t\trepeat with x in xs\r\t\t\tset v to contents of x\r\t\t\tif v < m then set m to v\r\t\tend repeat\r\t\tJust(m)\r\telse\r\t\tJust(item 1 of xs)\r\tend if\rend minimumMay"
+      "data": "-- minimumMay :: [a] -> Maybe a\non minimumMay(xs)\n    set lng to length of xs\n    if lng < 1 then\n        Nothing()\n    else if lng > 1 then\n        set m to item 1 of xs\n        repeat with x in xs\n            set v to contents of x\n            if v < m then set m to v\n        end repeat\n        Just(m)\n    else\n        Just(item 1 of xs)\n    end if\nend minimumMay"
     }
   ]
 }

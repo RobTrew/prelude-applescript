@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- use framework \"Foundation\"\n-- use scripting additions"
     },
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- lookup :: Eq a => a -> Container -> Maybe b\ron lookup(k, m)\r\tset c to class of m\r\tif c is list then\r\t\tlookupTuples(k, m)\r\telse if c = record then\r\t\tlookupDict(k, m)\r\telse\r\t\tNothing()\r\tend if\rend lookup"
+      "language": "applescript",
+      "data": "-- lookup :: Eq a => a -> Container -> Maybe b\non lookup(k, m)\n    set c to class of m\n    if c is list then\n        lookupTuples(k, m)\n    else if c = record then\n        lookupDict(k, m)\n    else\n        Nothing()\n    end if\nend lookup"
     }
   ]
 }

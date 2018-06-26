@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- ord :: Char -> Int\ron ord(c)\r\tid of c\rend ord"
+      "data": "-- ord :: Char -> Int\non ord(c)\n    id of c\nend ord"
     }
   ]
 }

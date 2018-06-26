@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- lookupTuples :: Eq a => a -> [(a, b)] -> Maybe b\ron lookupTuples(k, xs)\r\tscript keyMatch\r\t\ton |λ|(x)\r\t\t\tk = fst(x)\r\t\tend |λ|\r\tend script\r\t\r\tscript harvestMay\r\t\ton |λ|(kv)\r\t\t\tJust(snd(kv))\r\t\tend |λ|\r\tend script\r\t\r\tbindMay(find(keyMatch, xs), harvestMay)\rend lookupTuples"
+      "data": "-- lookupTuples :: Eq a => a -> [(a, b)] -> Maybe b\non lookupTuples(k, xs)\n    script keyMatch\n        on |λ|(x)\n            k = fst(x)\n        end |λ|\n    end script\n    \n    script harvestMay\n        on |λ|(kv)\n            Just(snd(kv))\n        end |λ|\n    end script\n    \n    bindMay(find(keyMatch, xs), harvestMay)\nend lookupTuples"
     }
   ]
 }

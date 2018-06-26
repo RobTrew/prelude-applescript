@@ -3,13 +3,13 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
+      "language": "applescript",
       "data": "-- isPrefixOf takes two lists or strings and returns \n--  true if and only if the first is a prefix of the second."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isPrefixOf :: [a] -> [a] -> Bool\r-- isPrefixOf :: String -> String -> Bool\ron isPrefixOf(xs, ys)\r  set intX to length of xs\r\tif intX < 1 then\r\t\ttrue\r\telse if intX > length of ys then\r\t\tfalse\r\telse if class of xs is string then\r\t\t(offset of xs in ys) = 1\r\telse\r\t\tset {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\r\t\t((|1| of xxt) = (|1| of yyt)) and isPrefixOf(|2| of xxt, |2| of yyt)\r\tend if\rend isPrefixOf"
+      "data": "-- isPrefixOf :: [a] -> [a] -> Bool\n-- isPrefixOf :: String -> String -> Bool\non isPrefixOf(xs, ys)\n  set intX to length of xs\n    if intX < 1 then\n        true\n    else if intX > length of ys then\n        false\n    else if class of xs is string then\n        (offset of xs in ys) = 1\n    else\n        set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\n        ((|1| of xxt) = (|1| of yyt)) and isPrefixOf(|2| of xxt, |2| of yyt)\n    end if\nend isPrefixOf"
     }
   ]
 }

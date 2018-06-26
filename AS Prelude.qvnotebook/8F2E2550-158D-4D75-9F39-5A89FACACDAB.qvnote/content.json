@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pureTuple :: a -> (a, a)\ron pureTuple(x)\r\tTuple(\"\", x)\rend pureTuple"
+      "data": "-- pureTuple :: a -> (a, a)\non pureTuple(x)\n    Tuple(\"\", x)\nend pureTuple"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- raise :: Num -> Int -> Num\ron raise(m, n)\r\tm ^ n\rend raise"
+      "data": "-- raise :: Num -> Int -> Num\non raise(m, n)\n    m ^ n\nend raise"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- initMay :: [a] -> Maybe [a]\r-- initMay :: [String] -> Maybe [String]\ron initMay(xs)\r\tset blnString to class of xs = string\r\tset lng to length of xs\r\tif lng > 1 then\r\t\tif blnString then\r\t\t\tJust(text 1 thru -2 of xs)\r\t\telse\r\t\t\tJust(items 1 thru -2 of xs)\r\t\tend if\r\telse if lng > 0 then\r\t\tif blnString then\r\t\t\tJust(\"\")\r\t\telse\r\t\t\tJust({})\r\t\tend if\r\telse\r\t\tNothing()\r\tend if\rend initMay"
+      "data": "-- initMay :: [a] -> Maybe [a]\n-- initMay :: [String] -> Maybe [String]\non initMay(xs)\n    set blnString to class of xs = string\n    set lng to length of xs\n    if lng > 1 then\n        if blnString then\n            Just(text 1 thru -2 of xs)\n        else\n            Just(items 1 thru -2 of xs)\n        end if\n    else if lng > 0 then\n        if blnString then\n            Just(\"\")\n        else\n            Just({})\n        end if\n    else\n        Nothing()\n    end if\nend initMay"
     }
   ]
 }

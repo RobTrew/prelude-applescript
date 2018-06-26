@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- caseOf :: [(a -> Bool, b)] -> b -> a ->  b\ron caseOf (pvs, otherwise, x)\r\trepeat with tpl in pvs\r\t\tif mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl\r\tend repeat\r\treturn otherwise\rend caseOf"
+      "data": "-- caseOf :: [(a -> Bool, b)] -> b -> a ->  b\non caseOf (pvs, otherwise, x)\n    repeat with tpl in pvs\n        if mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl\n    end repeat\n    return otherwise\nend caseOf"
     }
   ]
 }

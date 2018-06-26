@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fileSize :: FilePath -> Either String Int\ron fileSize(fp)\r\tscript fs\r\t\ton |λ|(rec)\r\t\t\t|Right|(NSFileSize of rec)\r\t\tend |λ|\r\tend script\r\tbindLR(my fileStatus(fp), fs)\rend fileSize"
+      "data": "-- fileSize :: FilePath -> Either String Int\non fileSize(fp)\n    script fs\n        on |λ|(rec)\n            |Right|(NSFileSize of rec)\n        end |λ|\n    end script\n    bindLR(my fileStatus(fp), fs)\nend fileSize"
     }
   ]
 }

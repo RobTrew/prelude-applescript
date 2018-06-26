@@ -1,0 +1,10 @@
+{
+  "title": "apTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- apTree :: Tree (a -> b) -> Tree a -> Tree b\non apTree(tf, tx)\n    set fmap to curry(my fmapTree)\n    script go\n        on |λ|(t)\n            set f to root of t\n            Node(mReturn(f)'s |λ|(root of tx), ¬\n                map(fmap's |λ|(f), nest of tx) & ¬\n                map(go, nest of t))\n        end |λ|\n    end script\n    \n    return go's |λ|(tf)\nend apTree"
+    }
+  ]
+}

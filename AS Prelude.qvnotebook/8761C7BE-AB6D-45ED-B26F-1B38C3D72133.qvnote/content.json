@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- mappend (<>) :: Monoid a => a -> a -> a\ron mappend(a, b)\r\tif class of a is record and class of b is record then\r\t\tscript instanceMay\r\t\t\ton |λ|(strType)\r\t\t\t\tset mb to lookup(strType, ¬\r\t\t\t\t\t{Maybe:mappendMaybe, Ordering:mappendOrdering, Tuple:mappendTuple})\r\t\t\tend |λ|\r\t\tend script\r\t\tset mbi to bindMay(lookup(\"type\", a), instanceMay)\r\t\tif Nothing of mbi then\r\t\t\ta & b\r\t\telse\r\t\t\tmReturn(Just of mbi)'s |λ|(a, b)\r\t\tend if\r\telse\r\t\ta & b\r\tend if\rend mappend"
+      "language": "applescript",
+      "data": "-- mappend (<>) :: Monoid a => a -> a -> a\non mappend(a, b)\n    if class of a is record and class of b is record then\n        script instanceMay\n            on |λ|(strType)\n                set mb to lookup(strType, ¬\n                    {Maybe:mappendMaybe, Ordering:mappendOrdering, Tuple:mappendTuple})\n            end |λ|\n        end script\n        set mbi to bindMay(lookup(\"type\", a), instanceMay)\n        if Nothing of mbi then\n            a & b\n        else\n            mReturn(Just of mbi)'s |λ|(a, b)\n        end if\n    else\n        a & b\n    end if\nend mappend"
     }
   ]
 }

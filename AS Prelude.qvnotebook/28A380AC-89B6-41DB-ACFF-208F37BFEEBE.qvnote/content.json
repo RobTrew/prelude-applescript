@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- eq (==) :: Eq a => a -> a -> Bool\ron eq(a, b)\r\ta = b\rend eq"
+      "language": "applescript",
+      "data": "-- eq (==) :: Eq a => a -> a -> Bool\non eq(a, b)\n    a = b\nend eq"
     }
   ]
 }

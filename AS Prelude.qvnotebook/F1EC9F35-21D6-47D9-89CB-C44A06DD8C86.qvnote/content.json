@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- gcd :: Int -> Int -> Int\ron gcd(a, b)\r\tset x to abs(a)\r\tset y to abs(b)\r\trepeat until y = 0\r\t\tif x > y then\r\t\t\tset x to x - y\r\t\telse\r\t\t\tset y to y - x\r\t\tend if\r\tend repeat\r\treturn x\rend gcd"
+      "data": "-- gcd :: Int -> Int -> Int\non gcd(a, b)\n    set x to abs(a)\n    set y to abs(b)\n    repeat until y = 0\n        if x > y then\n            set x to x - y\n        else\n            set y to y - x\n        end if\n    end repeat\n    return x\nend gcd"
     }
   ]
 }

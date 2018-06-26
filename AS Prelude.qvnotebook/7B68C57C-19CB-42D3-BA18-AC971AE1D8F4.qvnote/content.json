@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intToDigit :: Int -> Char\ron intToDigit(n)\r\tif n ≥ 0 and n < 16 then\r\t\tcharacter (n + 1) of \"0123456789ABCDEF\"\r\telse\r\t\t\"?\"\r\tend if\rend intToDigit"
+      "data": "-- intToDigit :: Int -> Char\non intToDigit(n)\n    if n ≥ 0 and n < 16 then\n        character (n + 1) of \"0123456789ABCDEF\"\n    else\n        \"?\"\n    end if\nend intToDigit"
     }
   ]
 }

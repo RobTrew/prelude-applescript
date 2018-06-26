@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- breakOn :: String -> String -> (String, String)\ron breakOn(pat, src)\r\tif pat ≠ \"\" then\r\t\tset {dlm, my text item delimiters} to {my text item delimiters, pat}\r\t\t\r\t\tset lstParts to text items of src\r\t\tset lngParts to length of lstParts\r\t\t\r\t\tif lngParts > 1 then\r\t\t\tset tpl to Tuple(item 1 of lstParts, pat & ¬\r\t\t\t\t((items 2 thru -1 of lstParts) as text))\r\t\telse\r\t\t\tset tpl to Tuple(src, \"\")\r\t\tend if\r\t\t\r\t\tset my text item delimiters to dlm\r\t\treturn tpl\r\telse\r\t\tmissing value\r\tend if\rend breakOn"
+      "data": "-- breakOn :: String -> String -> (String, String)\non breakOn(pat, src)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        set lngParts to length of lstParts\n        \n        if lngParts > 1 then\n            set tpl to Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text))\n        else\n            set tpl to Tuple(src, \"\")\n        end if\n        \n        set my text item delimiters to dlm\n        return tpl\n    else\n        missing value\n    end if\nend breakOn"
     }
   ]
 }

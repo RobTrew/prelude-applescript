@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- filePath :: String -> FilePath\ron filePath(s)\r\t((current application's ¬\r\t\tNSString's stringWithString:s)'s ¬\r\t\tstringByStandardizingPath()) as string\rend filePath"
+      "data": "-- filePath :: String -> FilePath\non filePath(s)\n    ((current application's ¬\n        NSString's stringWithString:s)'s ¬\n        stringByStandardizingPath()) as string\nend filePath"
     }
   ]
 }

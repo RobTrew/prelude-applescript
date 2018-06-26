@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mean :: [Num] -> Num\ron mean(xs)\r\tscript\r\t\ton |λ|(a, x)\r\t\t\ta + x\r\t\tend |λ|\r\tend script\r\tfoldl(result, 0, xs) / (length of xs)\rend mean"
+      "data": "-- mean :: [Num] -> Num\non mean(xs)\n    script\n        on |λ|(a, x)\n            a + x\n        end |λ|\n    end script\n    foldl(result, 0, xs) / (length of xs)\nend mean"
     }
   ]
 }

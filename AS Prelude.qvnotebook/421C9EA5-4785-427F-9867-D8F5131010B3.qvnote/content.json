@@ -3,8 +3,8 @@
   "cells": [
     {
       "type": "code",
-      "language": "javascript",
-      "data": "-- EQ :: Ordering\rproperty |EQ| : {type:\"Ordering\", value:0}"
+      "language": "applescript",
+      "data": "-- EQ :: Ordering\nproperty |EQ| : {type:\"Ordering\", value:0}"
     }
   ]
 }
