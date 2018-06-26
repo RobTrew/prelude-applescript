@@ -201,22 +201,17 @@ end approxRatio
 
 -- apTree :: Tree (a -> b) -> Tree a -> Tree b
 on apTree(tf, tx)
-    set f to mReturn(root of tf)
-    
-    script apTx
-        on |λ|(tg)
-            apTree(tg, tx)
+    set fmap to curry(my fmapTree)
+    script go
+        on |λ|(t)
+            set f to root of t
+            Node(mReturn(f)'s |λ|(root of tx), ¬
+                map(fmap's |λ|(f), nest of tx) & ¬
+                map(go, nest of t))
         end |λ|
     end script
     
-    script fmapf
-        on |λ|(xs)
-            fmapTree(f, xs)
-        end |λ|
-    end script
-    
-    Node(|λ|(root of tx) of f, ¬
-        map(fmapf, nest of tx) & map(apTx, nest of tf))
+    return go's |λ|(tf)
 end apTree
 
 -- apTuple (<*>) :: Monoid m => (m, (a -> b)) -> (m, a) -> (m, b)
@@ -2289,7 +2284,7 @@ on liftA2Tree(f, tx, ty)
     
     script fx
         on |λ|(y)
-            |λ|(root of tx, y) of mReturn(f)
+            mReturn(f)'s |λ|(root of tx, y)
         end |λ|
     end script
     
@@ -2305,7 +2300,7 @@ on liftA2Tree(f, tx, ty)
         end |λ|
     end script
     
-    Node(|λ|(root of tx, root of ty) of mReturn(f), ¬
+    Node(mReturn(f)'s |λ|(root of tx, root of ty), ¬
         map(fmapT, nest of ty) & map(liftA2T, nest of tx))
 end liftA2Tree
 

@@ -4,7 +4,7 @@ on liftA2Tree(f, tx, ty)
     
     script fx
         on |λ|(y)
-            |λ|(root of tx, y) of mReturn(f)
+            mReturn(f)'s |λ|(root of tx, y)
         end |λ|
     end script
     
@@ -20,7 +20,7 @@ on liftA2Tree(f, tx, ty)
         end |λ|
     end script
     
-    Node(|λ|(root of tx, root of ty) of mReturn(f), ¬
+    Node(mReturn(f)'s |λ|(root of tx, root of ty), ¬
         map(fmapT, nest of ty) & map(liftA2T, nest of tx))
 end liftA2Tree
 ```
