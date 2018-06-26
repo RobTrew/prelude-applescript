@@ -199,7 +199,7 @@ on approxRatio(epsilon, n)
     Ratio((n div c), (1 div c))
 end approxRatio
 
--- apTree :: Tree (a -> b) -> Tree a -> Tree b
+-- apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b
 on apTree(tf, tx)
     set fmap to curry(my fmapTree)
     script go
