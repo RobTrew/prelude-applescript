@@ -7,6 +7,7 @@ on apTree(tf, tx)
         on |λ|(tg)
             apTree(tg, tx)
         end |λ|
+    end script
     
     script fmapf
         on |λ|(xs)
