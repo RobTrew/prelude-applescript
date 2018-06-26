@@ -197,6 +197,26 @@ on approxRatio(epsilon, n)
     Ratio((n div c), (1 div c))
 end approxRatio
 
+-- apTree :: Tree (a -> b) -> Tree a -> Tree b
+on apTree(tf, tx)
+    set f to mReturn(root of tf)
+    
+    script apTx
+        on |λ|(tg)
+            apTree(tg, tx)
+        end |λ|
+    end script
+    
+    script fmapf
+        on |λ|(xs)
+            fmapTree(f, xs)
+        end |λ|
+    end script
+    
+    Node(|λ|(root of tx) of f, ¬
+        map(fmapf, nest of tx) & map(apTx, nest of tf))
+end apTree
+
 -- apTuple (<*>) :: Monoid m => (m, (a -> b)) -> (m, a) -> (m, b)
 on apTuple(tf, tx)
     Tuple(mappend(|1| of tf, |1| of tx), |λ|(|2| of tx) of mReturn(|2| of tf))
