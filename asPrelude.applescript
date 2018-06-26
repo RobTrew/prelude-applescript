@@ -55,6 +55,8 @@ on ap(mf, mx)
                 apMaybe(mf, mx)
             else if t = "Tuple" then
                 apTuple(mf, mx)
+            else if t = "Node" then
+                apTree(mf, mx)
             else
                 missing value
             end if
@@ -2232,6 +2234,8 @@ on liftA2(f, a, b)
             liftA2Maybe(f, a, b)
         else if "Tuple" = t then
             liftA2Tuple(f, a, b)
+        else if "Node" = t then
+            liftA2Tree(f, a, b)
         else
             missing value
         end if
@@ -2279,6 +2283,31 @@ on liftA2Maybe(f, a, b)
         Just(|λ|(Just of a, Just of b) of mReturn(f))
     end if
 end liftA2Maybe
+
+-- liftA2Tree :: Tree (a -> b -> c) -> Tree a -> Tree b -> Tree c
+on liftA2Tree(f, tx, ty)
+    
+    script fx
+        on |λ|(y)
+            |λ|(root of tx, y) of mReturn(f)
+        end |λ|
+    end script
+    
+    script fmapT
+        on |λ|(t)
+            fmapTree(fx, t)
+        end |λ|
+    end script
+    
+    script liftA2T
+        on |λ|(t)
+            liftA2Tree(f, t, ty)
+        end |λ|
+    end script
+    
+    Node(|λ|(root of tx, root of ty) of mReturn(f), ¬
+        map(fmapT, nest of ty) & map(liftA2T, nest of tx))
+end liftA2Tree
 
 -- liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)
 on liftA2Tuple(f, a, b)
