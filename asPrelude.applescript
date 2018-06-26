@@ -2206,11 +2206,11 @@ on liftA2(f, a, b)
         liftA2List(f, a, b)
     else if c is record and keys(a) contains "type" then
         set t to type of a
-        if t = "Either" then
+        if "Either" = t then
             liftA2LR(f, a, b)
-        else if t = "Maybe" then
+        else if "Maybe" = t then
             liftA2Maybe(f, a, b)
-        else if t = "Tuple" then
+        else if "Tuple" = t then
             liftA2Tuple(f, a, b)
         else
             missing value
@@ -2267,7 +2267,7 @@ end liftA2Tuple
 
 -- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]
 on liftM2(f, a, b)
-    ap(map(curry(f), a), b)
+    liftA2(f, a, b)
 end liftM2
 
 -- liftMmay :: (a -> b) -> (Maybe a -> Maybe b)

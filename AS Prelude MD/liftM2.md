@@ -5,6 +5,6 @@
 ```applescript
 -- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]
 on liftM2(f, a, b)
-    ap(map(curry(f), a), b)
+    liftA2(f, a, b)
 end liftM2
 ```
