@@ -49,13 +49,13 @@ on ap(mf, mx)
         set ks to keys(mf)
         if ks contains "type" then
             set t to type of mx
-            if t = "Either" then
+            if "Either" = t then
                 apEither(mf, mx)
-            else if t = "Maybe" then
+            else if "Maybe" = t then
                 apMaybe(mf, mx)
-            else if t = "Tuple" then
+            else if "Tuple" = t then
                 apTuple(mf, mx)
-            else if t = "Node" then
+            else if "Node" = t then
                 apTree(mf, mx)
             else
                 missing value
@@ -1223,13 +1223,13 @@ end floor
 on fmap(f, fa)
     if class of fa is record and keys(fa) contains "type" then
         set t to type of fa
-        if t = "Either" then
+        if "Either" = t then
             set fm to my fmapLR
-        else if t = "Maybe" then
+        else if "Maybe" = t then
             set fm to my fmapMay
-        else if t = "Tree" then
+        else if "Tree" = t then
             set fm to my fmapTree
-        else if t = "Tuple" then
+        else if "Tuple" = t then
             set fm to my fmapTuple
         else
             set fm to my map
@@ -3021,25 +3021,21 @@ on pureMay(x)
     Just(x)
 end pureMay
 
--- pureT :: f a -> (a -> f a)
-on pureT(x)
-    if class of x is record and keys(x) contains "type" then
-        set t to type of x
-        if t = "Either" then
-            pureLR
-        else if t = "Maybe" then
-            pureMay
-        else if t = "Tree" then
-            pureTree
-        else if t = "Tuple" then
-            pureTuple
-        else
-            pureList
-        end if
+-- pureT :: String -> f a -> (a -> f a)
+on pureT(t, x)
+    if "List" = t then
+        pureList(x)
+    else if "Either" = t then
+        pureLR(x)
+    else if "Maybe" = t then
+        pureMay(x)
+    else if "Tree" = t then
+        pureTree(x)
+    else if "Tuple" = t then
+        pureTuple(x)
     else
-        pureList
-    end if
-end pureT
+        pureList(x)
+    end i
 
 -- pureTree :: a -> Tree a
 on pureTree(x)
@@ -3454,25 +3450,12 @@ end |second|
 
 -- sequenceAList :: Applicative f => [f a] -> f [a]
 on sequenceAList(us)
-    if length of us > 0 then
-        script
-            on |λ|(u, v)
-                script cons
-                    on |λ|(x)
-                        script
-                            on |λ|(xs)
-                                {x} & xs
-                            end |λ|
-                        end script
-                    end |λ|
-                end script
-                ap(fmap(cons, u), v)
-            end |λ|
-        end script
-        foldr(result, mReturn(pureT(item 1 of us))'s |λ|({}), us)
-    else
-        us
-    end if
+    script |id|
+        on |λ|(x)
+            x
+        end |λ|
+    end script
+    traverseList(|id|, us)
 end sequenceAList
 
 -- setCurrentDirectory :: String -> IO ()
@@ -4388,9 +4371,32 @@ on transpose(xxs)
     map(cols, item 1 of rows)
 end transpose
 
--- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f (t b)
+-- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f [b]
 on traverseList(f, xs)
-  sequenceAList(fmap(f, xs))
+    set lng to length of xs
+    if 0 < lng then
+        set mf to mReturn(f)
+        
+        set vLast to mf's |λ|(item -1 of xs)
+        if class of vLast is record and ¬
+            keys(vLast) contains "type" then
+            set t to type of vLast
+        else
+            set t to "List"
+        end if
+        
+        script cons_f
+            on |λ|(x, ys)
+                liftA2(my cons, mf's |λ|(x), ys)
+            end |λ|
+        end script
+        
+        foldr(cons_f, ¬
+            liftA2(my cons, vLast, pureT(t, [])), ¬
+            items 1 thru -2 of xs)
+    else
+        {}
+    end if
 end traverseList
 
 -- treeLeaves :: Tree -> [Tree]

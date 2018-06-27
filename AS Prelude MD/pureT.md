@@ -1,21 +1,23 @@
 ```applescript
--- pureT :: f a -> (a -> f a)
-on pureT(x)
-    if class of x is record and keys(x) contains "type" then
-        set t to type of x
-        if t = "Either" then
-            pureLR
-        else if t = "Maybe" then
-            pureMay
-        else if t = "Tree" then
-            pureTree
-        else if t = "Tuple" then
-            pureTuple
-        else
-            pureList
-        end if
+-- Given a type name string, returns a 
+-- specialised 'pure', where
+-- 'pure' lifts a value into a particular functor.
+```
+
+```applescript
+-- pureT :: String -> f a -> (a -> f a)
+on pureT(t, x)
+    if "List" = t then
+        pureList(x)
+    else if "Either" = t then
+        pureLR(x)
+    else if "Maybe" = t then
+        pureMay(x)
+    else if "Tree" = t then
+        pureTree(x)
+    else if "Tuple" = t then
+        pureTuple(x)
     else
-        pureList
-    end if
-end pureT
+        pureList(x)
+    end i
 ```
