@@ -3858,12 +3858,29 @@ on splitFileName(strPath)
     end if
 end splitFileName
 
+-- splitOn :: a -> [a] -> [[a]]
 -- splitOn :: String -> String -> [String]
-on splitOn(strDelim, strMain)
-    set {dlm, my text item delimiters} to {my text item delimiters, strDelim}
-    set xs to text items of strMain
-    set my text item delimiters to dlm
-    return xs
+on splitOn(needle, haystack)
+    if class of haystack is text then
+        set {dlm, my text item delimiters} to ¬
+            {my text item delimiters, needle}
+        set xs to text items of haystack
+        set my text item delimiters to dlm
+        return xs
+    else
+        script triage
+            on |λ|(a, x)
+                if needle = x then
+                    Tuple(|1| of a & {|2| of a}, {})
+                else
+                    Tuple(|1| of a, (|2| of a) & x)
+                end if
+            end |λ|
+        end script
+        
+        set tpl to foldl(triage, Tuple({}, {}), haystack)
+        return |1| of tpl & {|2| of tpl}
+    end if
 end splitOn
 
 -- splitRegex :: Regex -> String -> [String]
