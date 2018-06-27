@@ -4416,6 +4416,24 @@ on traverseList(f, xs)
     end if
 end traverseList
 
+-- traverseLR :: Applicative f => (t -> f b) -> Either a t -> f (Either a b)
+on traverseLR(f, lr)
+    if |Left| of lr is not missing value then
+        {lr}
+    else
+        fmap(my |Right|, mReturn(f)'s |λ|(|Right| of lr))
+    end if
+end traverseLR
+
+-- traverseMay :: Applicative f => (t -> f a) -> Maybe t -> f (Maybe a)
+on traverseMay(f, mb)
+    if Nothing of mb then
+        {mb}
+    else
+        fmap(my Just, mReturn(f)'s |λ|(Just of mb))
+    end if
+end traverseMay
+
 -- treeLeaves :: Tree -> [Tree]
 on treeLeaves(oNode)
     script go
