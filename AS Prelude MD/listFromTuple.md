@@ -1,5 +1,5 @@
 ```applescript
--- listFromTuple (a, a ...) -> [a]
+-- listFromTuple :: (a, a ...) -> [a]
 on listFromTuple(tpl)
     script
         on |λ|(k)

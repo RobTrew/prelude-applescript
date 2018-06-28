@@ -1,5 +1,5 @@
 ```applescript
--- intersectionBy:: (a -> a -> Bool) -> [[a]] -> [a]
+-- intersectionBy :: (a -> a -> Bool) -> [[a]] -> [a]
 on intersectionBy(fnEq, xs)
     script
         property eq : mReturn(fnEq)

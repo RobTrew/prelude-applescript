@@ -1242,7 +1242,7 @@ end fmap
 
 -- fmapLR (<$>) :: (a -> b) -> Either a a -> Either a b
 on fmapLR(f, lr)
-    if isRight(lr) then
+    if |Left| of lr is missing value then
         |Right|(|λ|(|Right| of lr) of mReturn(f))
     else
         lr
@@ -1831,7 +1831,7 @@ on intersectBy(eq, xs, ys)
     end if
 end intersectBy
 
--- intersectionBy:: (a -> a -> Bool) -> [[a]] -> [a]
+-- intersectionBy :: (a -> a -> Bool) -> [[a]] -> [a]
 on intersectionBy(fnEq, xs)
     script
         property eq : mReturn(fnEq)
@@ -2340,7 +2340,7 @@ on listDirectory(strPath)
             wrap(strPath))) |error|:(missing value))
 end listDirectory
 
--- listFromTuple (a, a ...) -> [a]
+-- listFromTuple :: (a, a ...) -> [a]
 on listFromTuple(tpl)
     script
         on |λ|(k)
@@ -4434,6 +4434,12 @@ on traverseMay(f, mb)
     end if
 end traverseMay
 
+-- traverseTuple :: Functor f => (t -> f b) -> (a, t) -> f (a, b)
+on traverseTuple(f, tpl)
+    fmap(curry(my Tuple)'s |λ|(|1| of tpl), ¬
+        mReturn(f)'s |λ|(|2| of tpl))
+end traverseTuple
+
 -- treeLeaves :: Tree -> [Tree]
 on treeLeaves(oNode)
     script go
@@ -4459,7 +4465,7 @@ on Tuple(a, b)
     {type:"Tuple", |1|:a, |2|:b}
 end Tuple
 
--- tupleFromArray [a] -> (a, a ...)
+-- tupleFromArray :: [a] -> (a, a ...)
 on tupleFromArray(xs)
     set lng to length of xs
     if lng > 1 then

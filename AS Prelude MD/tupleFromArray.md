@@ -1,5 +1,5 @@
 ```applescript
--- tupleFromArray [a] -> (a, a ...)
+-- tupleFromArray :: [a] -> (a, a ...)
 on tupleFromArray(xs)
     set lng to length of xs
     if lng > 1 then
