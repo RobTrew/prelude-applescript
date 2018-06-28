@@ -1,6 +1,6 @@
 ```applescript
--- dropWhileEnd :: (Char -> Bool) -> String -> String
 -- dropWhileEnd :: (a -> Bool) -> [a] -> [a]
+-- dropWhileEnd :: (Char -> Bool) -> String -> String
 on dropWhileEnd(p, xs)
     set i to length of xs
     tell mReturn(p)
