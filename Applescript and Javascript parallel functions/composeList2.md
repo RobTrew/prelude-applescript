@@ -1,6 +1,6 @@
 ```applescript
--- composeListLR :: [(a -> a)] -> (a -> a)
-on composeListLR(fs)
+-- composeList2 :: [(a -> a)] -> (a -> a)
+on composeList2(fs)
     script
         on |λ|(x)
             script
@@ -13,4 +13,10 @@ on composeListLR(fs)
         end |λ|
     end script
 end composeListLR
+```
+
+```js
+// composeList2 :: [(a -> a)] -> (a -> a)
+const composeList2 = fs =>
+    x => fs.reduce((a, f) => f(a), x);
 ```

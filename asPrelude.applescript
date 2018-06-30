@@ -523,6 +523,15 @@ on compose(f, g)
     end script
 end compose
 
+-- compose2 (>>>) :: (a -> b) -> (b -> c) -> a -> c
+on compose2(f, g)
+    script
+        on |λ|(x)
+            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)
+        end |λ|
+    end script
+end compose
+
 -- composeList :: [(a -> a)] -> (a -> a)
 on composeList(fs)
     script
@@ -538,8 +547,8 @@ on composeList(fs)
     end script
 end composeListRL
 
--- composeListLTR :: [(a -> a)] -> (a -> a)
-on composeListLTR(fs)
+-- composeList2 :: [(a -> a)] -> (a -> a)
+on composeList2(fs)
     script
         on |λ|(x)
             script
@@ -552,15 +561,6 @@ on composeListLTR(fs)
         end |λ|
     end script
 end composeListLR
-
--- composeLTR (>>>) :: (a -> b) -> (b -> c) -> a -> c
-on composeLTR(f, g)
-    script
-        on |λ|(x)
-            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)
-        end |λ|
-    end script
-end compose
 
 -- concat :: [[a]] -> [a]
 -- concat :: [String] -> String

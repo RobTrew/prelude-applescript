@@ -1,16 +1,16 @@
 ```applescript
--- composeListRL :: [(a -> a)] -> (a -> a)
-on composeListRL(fs)
+-- composeList2 :: [(a -> a)] -> (a -> a)
+on composeList2(fs)
     script
         on |λ|(x)
             script
-                on |λ|(f, a)
+                on |λ|(a, f)
                     mReturn(f)'s |λ|(a)
                 end |λ|
             end script
             
-            foldr(result, x, fs)
+            foldl(result, x, fs)
         end |λ|
     end script
-end composeListRL
+end composeListLR
 ```
