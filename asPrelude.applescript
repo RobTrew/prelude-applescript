@@ -514,7 +514,7 @@ on comparing(f)
     end script
 end comparing
 
--- compose :: (b -> c) -> (a -> b) -> a -> c
+-- compose (<<<) :: (b -> c) -> (a -> b) -> a -> c
 on compose(f, g)
     script
         on |λ|(x)
@@ -523,8 +523,23 @@ on compose(f, g)
     end script
 end compose
 
--- composeListLR :: [(a -> a)] -> (a -> a)
-on composeListLR(fs)
+-- composeList :: [(a -> a)] -> (a -> a)
+on composeList(fs)
+    script
+        on |λ|(x)
+            script
+                on |λ|(f, a)
+                    mReturn(f)'s |λ|(a)
+                end |λ|
+            end script
+            
+            foldr(result, x, fs)
+        end |λ|
+    end script
+end composeListRL
+
+-- composeListLTR :: [(a -> a)] -> (a -> a)
+on composeListLTR(fs)
     script
         on |λ|(x)
             script
@@ -538,20 +553,14 @@ on composeListLR(fs)
     end script
 end composeListLR
 
--- composeListRL :: [(a -> a)] -> (a -> a)
-on composeListRL(fs)
+-- composeLTR (>>>) :: (a -> b) -> (b -> c) -> a -> c
+on composeLTR(f, g)
     script
         on |λ|(x)
-            script
-                on |λ|(f, a)
-                    mReturn(f)'s |λ|(a)
-                end |λ|
-            end script
-            
-            foldr(result, x, fs)
+            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)
         end |λ|
     end script
-end composeListRL
+end compose
 
 -- concat :: [[a]] -> [a]
 -- concat :: [String] -> String
@@ -2919,7 +2928,7 @@ on partition(f, xs)
     Tuple(ys, zs)
 end partition
 
--- partitionEithers :: [Either a b] -> ([a], [b])
+-- partitionEithers :: [Either a b] -> ([a],[b])
 on partitionEithers(xs)
     set ys to {}
     set zs to {}
@@ -3167,44 +3176,6 @@ on readFileLR(strPath)
         |Left|(message of e)
     end if
 end readFileLR
-
--- readJSON :: String -> a
-on readJSON(strJSON)
-    set ca to current application
-    set {x, e} to ca's NSJSONSerialization's ¬
-        JSONObjectWithData:((ca's NSString's stringWithString:strJSON)'s ¬
-            dataUsingEncoding:(ca's NSUTF8StringEncoding)) ¬
-            options:0 |error|:(reference)
-    
-    if x is missing value then
-        error e's localizedDescription() as text
-    else
-        if x's isKindOfClass:(ca's NSDictionary) then
-            x as record
-        else
-            x as list
-        end if
-    end if
-end readJSON
-
--- readJSONLR :: Read a => String -> Either String a
-on readJSONLR(strJSON)
-    set ca to current application
-    set {x, e} to ca's NSJSONSerialization's ¬
-        JSONObjectWithData:((ca's NSString's stringWithString:strJSON)'s ¬
-            dataUsingEncoding:(ca's NSUTF8StringEncoding)) ¬
-            options:0 |error|:(reference)
-    
-    if x is missing value then
-        |Left|(e's localizedDescription() as text)
-    else
-        if x's isKindOfClass:(ca's NSDictionary) then
-            |Right|(x as record)
-        else
-            |Right|(x as list)
-        end if
-    end if
-end readJSONLR
 
 -- readMay :: Read a => String -> Maybe a
 on readMay(s)

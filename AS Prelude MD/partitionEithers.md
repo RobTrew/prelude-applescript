@@ -1,5 +1,5 @@
 ```applescript
--- partitionEithers :: [Either a b] -> ([a], [b])
+-- partitionEithers :: [Either a b] -> ([a],[b])
 on partitionEithers(xs)
     set ys to {}
     set zs to {}
