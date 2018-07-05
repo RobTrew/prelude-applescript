@@ -32,7 +32,7 @@ on traverseList(f, xs)
             liftA2(my cons, vLast, pureT(t, [])), ¬
             items 1 thru -2 of xs)
     else
-        {}
+        {{}}
     end if
 end traverseList
 ```

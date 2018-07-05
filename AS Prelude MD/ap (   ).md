@@ -9,21 +9,17 @@
 on ap(mf, mx)
     if class of mx is list then
         apList(mf, mx)
-    else if class of mf is record then
-        set ks to keys(mf)
-        if ks contains "type" then
-            set t to type of mx
-            if "Either" = t then
-                apEither(mf, mx)
-            else if "Maybe" = t then
-                apMaybe(mf, mx)
-            else if "Tuple" = t then
-                apTuple(mf, mx)
-            else if "Node" = t then
-                apTree(mf, mx)
-            else
-                missing value
-            end if
+    else if class of mf is record and ¬
+        keys(mf) contains "type" then
+        set t to type of mf
+        if "Either" = t then
+            apLR(mf, mx)
+        else if "Maybe" = t then
+            apMay(mf, mx)
+        else if "Node" = t then
+            apTree(mf, mx)
+        else if "Tuple" = t then
+            apTuple(mf, mx)
         else
             missing value
         end if

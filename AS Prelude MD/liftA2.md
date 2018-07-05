@@ -9,14 +9,14 @@
 -- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 on liftA2(f, a, b)
     set c to class of a
-    if c is list then
+    if c is list or c is text then
         liftA2List(f, a, b)
     else if c is record and keys(a) contains "type" then
         set t to type of a
         if "Either" = t then
             liftA2LR(f, a, b)
         else if "Maybe" = t then
-            liftA2Maybe(f, a, b)
+            liftA2May(f, a, b)
         else if "Tuple" = t then
             liftA2Tuple(f, a, b)
         else if "Node" = t then
@@ -25,7 +25,7 @@ on liftA2(f, a, b)
             missing value
         end if
     else
-        missing value
+        liftA2List
     end if
 end liftA2
 ```

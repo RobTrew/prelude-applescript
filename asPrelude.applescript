@@ -45,21 +45,17 @@ end |any|
 on ap(mf, mx)
     if class of mx is list then
         apList(mf, mx)
-    else if class of mf is record then
-        set ks to keys(mf)
-        if ks contains "type" then
-            set t to type of mx
-            if "Either" = t then
-                apEither(mf, mx)
-            else if "Maybe" = t then
-                apMaybe(mf, mx)
-            else if "Tuple" = t then
-                apTuple(mf, mx)
-            else if "Node" = t then
-                apTree(mf, mx)
-            else
-                missing value
-            end if
+    else if class of mf is record and ¬
+        keys(mf) contains "type" then
+        set t to type of mf
+        if "Either" = t then
+            apLR(mf, mx)
+        else if "Maybe" = t then
+            apMay(mf, mx)
+        else if "Node" = t then
+            apTree(mf, mx)
+        else if "Tuple" = t then
+            apTuple(mf, mx)
         else
             missing value
         end if
@@ -92,14 +88,14 @@ on apLR(flr, lr)
     end if
 end apLR
 
--- apMaybe (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
-on apMaybe(mf, mx)
+-- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
+on apMay(mf, mx)
     if Nothing of mf or Nothing of mx then
         Nothing()
     else
         Just(|λ|(Just of mx) of mReturn(Just of mf))
     end if
-end apMaybe
+end apMay
 
 -- append (++) :: [a] -> [a] -> [a]
 -- append (++) :: String -> String -> String
@@ -523,15 +519,6 @@ on compose(f, g)
     end script
 end compose
 
--- compose2 (>>>) :: (a -> b) -> (b -> c) -> a -> c
-on compose2(f, g)
-    script
-        on |λ|(x)
-            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)
-        end |λ|
-    end script
-end compose
-
 -- composeList :: [(a -> a)] -> (a -> a)
 on composeList(fs)
     script
@@ -547,8 +534,8 @@ on composeList(fs)
     end script
 end composeListRL
 
--- composeList2 :: [(a -> a)] -> (a -> a)
-on composeList2(fs)
+-- composeListR :: [(a -> a)] -> (a -> a)
+on composeListR(fs)
     script
         on |λ|(x)
             script
@@ -561,6 +548,15 @@ on composeList2(fs)
         end |λ|
     end script
 end composeListLR
+
+-- composeR (>>>) :: (a -> b) -> (b -> c) -> a -> c
+on composeR(f, g)
+    script
+        on |λ|(x)
+            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)
+        end |λ|
+    end script
+end composeR
 
 -- concat :: [[a]] -> [a]
 -- concat :: [String] -> String
@@ -578,11 +574,16 @@ end concat
 
 -- concatMap :: (a -> [b]) -> [a] -> [b]
 on concatMap(f, xs)
+    if class of xs is text then
+        set ys to characters of xs
+    else
+        set ys to xs
+    end if
     tell mReturn(f)
-        set lng to length of xs
+        set lng to length of ys
         set acc to {}
         repeat with i from 1 to lng
-            set acc to acc & |λ|(item i of xs, i, xs)
+            set acc to acc & |λ|(item i of ys, i, ys)
         end repeat
     end tell
     return acc
@@ -856,6 +857,7 @@ on dropFileName(strPath)
 end dropFileName
 
 -- dropWhile :: (a -> Bool) -> [a] -> [a]
+-- dropWhileEnd :: (Char -> Bool) -> String -> String
 on dropWhile(p, xs)
     set lng to length of xs
     set i to 1
@@ -1787,10 +1789,11 @@ end insertBy
 
 -- insertMap :: Dict -> String -> a -> Dict
 on insertMap(rec, k, v)
-    set ca to current application
-    set nsDct to (ca's NSMutableDictionary's dictionaryWithDictionary:rec)
-    nsDct's setValue:v forKey:(k as string)
-    nsDct as record
+    tell (current application's NSMutableDictionary's ¬
+        dictionaryWithDictionary:rec)
+        its setValue:v forKey:(k as string)
+        return it as record
+    end tell
 end insertMap
 
 -- intercalate :: [a] -> [[a]] -> [a]
@@ -1899,8 +1902,8 @@ end isChar
 
 -- isDigit :: Char -> Bool
 on isDigit(c)
-    set d to (id of c) - 48 -- id of "0"
-    d ≥ 0 and d ≤ 9
+    set n to (id of c)
+    48 ≤ n and 57 ≥ n
 end isDigit
 
 -- isInfixOf :: Eq a => [a] -> [a] -> Bool
@@ -2229,14 +2232,14 @@ end levels
 -- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 on liftA2(f, a, b)
     set c to class of a
-    if c is list then
+    if c is list or c is text then
         liftA2List(f, a, b)
     else if c is record and keys(a) contains "type" then
         set t to type of a
         if "Either" = t then
             liftA2LR(f, a, b)
         else if "Maybe" = t then
-            liftA2Maybe(f, a, b)
+            liftA2May(f, a, b)
         else if "Tuple" = t then
             liftA2Tuple(f, a, b)
         else if "Node" = t then
@@ -2245,7 +2248,7 @@ on liftA2(f, a, b)
             missing value
         end if
     else
-        missing value
+        liftA2List
     end if
 end liftA2
 
@@ -2278,8 +2281,8 @@ on liftA2LR(f, a, b)
     end if
 end liftA2LR
 
--- liftA2Maybe :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
-on liftA2Maybe(f, a, b)
+-- liftA2May :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
+on liftA2May(f, a, b)
     if Nothing of a then
         a
     else if Nothing of b then
@@ -2287,7 +2290,7 @@ on liftA2Maybe(f, a, b)
     else
         Just(|λ|(Just of a, Just of b) of mReturn(f))
     end if
-end liftA2Maybe
+end liftA2May
 
 -- liftA2Tree :: Tree (a -> b -> c) -> Tree a -> Tree b -> Tree c
 on liftA2Tree(f, tx, ty)
@@ -4360,6 +4363,28 @@ on transpose(xxs)
     map(cols, item 1 of rows)
 end transpose
 
+-- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
+on traverse(f, tx)
+    if class of tx is list then
+        traverseList(f, tx)
+    else if class of tx is record and keys(tx) contains "type" then
+        set t to type of mx
+        if "Either" = t then
+            traverseEither(f, tx)
+        else if "Maybe" = t then
+            traverseMay(f, tx)
+        else if "Node" = t then
+            traverseTree(f, tx)
+        else if "Tuple" = t then
+            traverseTuple
+        else
+            missing value
+        end if
+    else
+        missing value
+    end if
+end traverse
+
 -- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f [b]
 on traverseList(f, xs)
     set lng to length of xs
@@ -4384,7 +4409,7 @@ on traverseList(f, xs)
             liftA2(my cons, vLast, pureT(t, [])), ¬
             items 1 thru -2 of xs)
     else
-        {}
+        {{}}
     end if
 end traverseList
 
@@ -4406,6 +4431,18 @@ on traverseMay(f, mb)
     end if
 end traverseMay
 
+-- traverse f (Node x ts) = liftA2 Node (f x) (traverse (traverse f) ts)
+on traverseTree(f, oNode)
+    script go
+        on |λ|(x)
+            liftA2(my Node, ¬
+                mReturn(f)'s |λ|(root of x), ¬
+                traverseList(go, nest of x))
+        end |λ|
+    end script
+    go's |λ|(oNode)
+end traverseTree
+
 -- traverseTuple :: Functor f => (t -> f b) -> (a, t) -> f (a, b)
 on traverseTuple(f, tpl)
     fmap(curry(my Tuple)'s |λ|(|1| of tpl), ¬
@@ -4417,7 +4454,7 @@ on treeLeaves(oNode)
     script go
         on |λ|(x)
             set lst to nest of x
-            if length of lst > 0 then
+            if 0 < length of lst then
                 concatMap(my treeLeaves, lst)
             else
                 {x}
@@ -4434,14 +4471,14 @@ end truncate
 
 -- Tuple (,) :: a -> b -> (a, b)
 on Tuple(a, b)
-    {type:"Tuple", |1|:a, |2|:b}
+    {type:"Tuple", |1|:a, |2|:b, length:2}
 end Tuple
 
 -- tupleFromArray :: [a] -> (a, a ...)
 on tupleFromArray(xs)
     set lng to length of xs
-    if lng > 1 then
-        if lng > 2 then
+    if 1 < lng then
+        if 2 < lng then
             set strSuffix to lng as string
         else
             set strSuffix to ""
@@ -4451,7 +4488,7 @@ on tupleFromArray(xs)
                 insertMap(a, (i as string), x)
             end |λ|
         end script
-        foldl(kv, {type:"Tuple" & strSuffix}, xs)
+        foldl(kv, {type:"Tuple" & strSuffix}, xs) & {length:lng}
     else
         missing value
     end if
@@ -4733,7 +4770,7 @@ on writeFileLR(strPath, strText)
     set {bln, e} to (ca's NSString's stringWithString:strText)'s ¬
         writeToFile:(fp) atomically:true ¬
             encoding:(ca's NSUTF8StringEncoding) |error|:(reference)
-    if bln and e is missing value then
+    if bln and (missing value is e) then
         |Right|(fp as string)
     else
         |Left|(e's localizedDescription() as string)
@@ -4788,7 +4825,7 @@ end zip4
 -- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 on zipWith(f, xs, ys)
     set lng to min(length of xs, length of ys)
-    if lng < 1 then return {}
+    if 1 > lng then return {}
     set lst to {}
     tell mReturn(f)
         repeat with i from 1 to lng
@@ -4801,7 +4838,7 @@ end zipWith
 -- zipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]
 on zipWith3(f, xs, ys, zs)
     set lng to minimum({length of xs, length of ys, length of zs})
-    if lng < 1 then return {}
+    if 1 > lng then return {}
     set lst to {}
     tell mReturn(f)
         repeat with i from 1 to lng
@@ -4814,7 +4851,7 @@ end zipWith3
 -- zipWith4 :: (a -> b -> c -> d -> e) -> [a] -> [b] -> [c] -> [d] -> [e]
 on zipWith4(f, ws, xs, ys, zs)
     set lng to minimum({length of ws, length of xs, length of ys, length of zs})
-    if lng < 1 then return {}
+    if 1 > lng then return {}
     set lst to {}
     tell mReturn(f)
         repeat with i from 1 to lng
