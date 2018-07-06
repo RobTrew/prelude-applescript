@@ -3424,15 +3424,15 @@ on secondArrow(f)
     end script
 end |second|
 
--- sequenceAList :: Applicative f => [f a] -> f [a]
-on sequenceAList(us)
+-- sequenceA :: (Applicative f, Traversable t) => t (f a) -> f (t a)
+on sequenceA(tfa)
     script |id|
         on |λ|(x)
             x
         end |λ|
     end script
-    traverseList(|id|, us)
-end sequenceAList
+    traverse(|id|, tfa)
+end sequenceA
 
 -- setCurrentDirectory :: String -> IO ()
 on setCurrentDirectory(strPath)
