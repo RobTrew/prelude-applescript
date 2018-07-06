@@ -3048,7 +3048,8 @@ on pureT(t, x)
         pureTuple(x)
     else
         pureList(x)
-    end i
+    end if
+end pureT
 
 -- pureTree :: a -> Tree a
 on pureTree(x)
@@ -3180,14 +3181,14 @@ on readFileLR(strPath)
     end if
 end readFileLR
 
--- readMay :: Read a => String -> Maybe a
-on readMay(s)
+-- readLR :: Read a => String -> Either String a
+on readLR(s)
     try
-      Just(run script s)
+        |Right|(run script s)
     on error e
-        Nothing()
+        |Left|(e)
     end try
-end readMay
+end readLR
 
 -- recip :: Num -> Num
 on recip(n)
@@ -4432,7 +4433,7 @@ on traverseMay(f, mb)
 end traverseMay
 
 -- traverse f (Node x ts) = liftA2 Node (f x) (traverse (traverse f) ts)
-on traverseTree(f, oNode)
+on traverseTree(f, tree)
     script go
         on |λ|(x)
             liftA2(my Node, ¬
@@ -4440,7 +4441,7 @@ on traverseTree(f, oNode)
                 traverseList(go, nest of x))
         end |λ|
     end script
-    go's |λ|(oNode)
+    go's |λ|(tree)
 end traverseTree
 
 -- traverseTuple :: Functor f => (t -> f b) -> (a, t) -> f (a, b)
