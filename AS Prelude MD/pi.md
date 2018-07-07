@@ -1,4 +1,6 @@
 ```applescript
 -- pi :: Float
-pi
+on |pi|()
+    pi
+end |pi|
 ```

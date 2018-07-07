@@ -1250,8 +1250,10 @@ on fmap(f, fa)
         |λ|(f, fa) of mReturn(fm)
     else if c is text then
         map(f, characters of fa)
-    else
+    else if c is list then
         map(f, fa)
+    else
+        missing value
     end if
 end fmap
 
@@ -2979,7 +2981,9 @@ on permutationsWithRepetition(n, xs)
 end permutationsWithRepetition
 
 -- pi :: Float
-pi
+on |pi|()
+    pi
+end |pi|
 
 -- plus :: Num -> Num -> Num
 on plus(a, b)
@@ -4372,7 +4376,7 @@ on traverse(f, tx)
     if class of tx is list then
         traverseList(f, tx)
     else if class of tx is record and keys(tx) contains "type" then
-        set t to type of mx
+        set t to type of tx
         if "Either" = t then
             traverseEither(f, tx)
         else if "Maybe" = t then
