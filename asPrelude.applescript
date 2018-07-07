@@ -257,7 +257,7 @@ on bind(m, mf)
             if t = "Maybe" then
                 bindMay(m, mf)
             else if t = "Either" then
-                bindEither(m, mf)
+                bindLR(m, mf)
             else if t = "Tuple" then
                 bindTuple(m, mf)
             else
@@ -4378,7 +4378,7 @@ on traverse(f, tx)
     else if class of tx is record and keys(tx) contains "type" then
         set t to type of tx
         if "Either" = t then
-            traverseEither(f, tx)
+            traverseLR(f, tx)
         else if "Maybe" = t then
             traverseMay(f, tx)
         else if "Node" = t then
@@ -4415,7 +4415,7 @@ on traverseList(f, xs)
         
         foldr(cons_f, ¬
             liftA2(my cons, vLast, pureT(t, [])), ¬
-            items 1 thru -2 of xs)
+            init(xs))
     else
         {{}}
     end if
