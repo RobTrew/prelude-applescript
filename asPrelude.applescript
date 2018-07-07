@@ -1233,7 +1233,8 @@ end floor
 
 -- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b
 on fmap(f, fa)
-    if class of fa is record and keys(fa) contains "type" then
+    set c to class of fa
+    if c is record and keys(fa) contains "type" then
         set t to type of fa
         if "Either" = t then
             set fm to my fmapLR
@@ -1247,6 +1248,8 @@ on fmap(f, fa)
             set fm to my map
         end if
         |λ|(f, fa) of mReturn(fm)
+    else if c is text then
+        map(f, characters of fa)
     else
         map(f, fa)
     end if
