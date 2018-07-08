@@ -1235,12 +1235,12 @@ end floor
 on fmap(f, fa)
     set c to class of fa
     if c is record and keys(fa) contains "type" then
-        set t to type of fa
+        set t to |type| of fa
         if "Either" = t then
             set fm to my fmapLR
         else if "Maybe" = t then
             set fm to my fmapMay
-        else if "Tree" = t then
+        else if "Node" = t then
             set fm to my fmapTree
         else if "Tuple" = t then
             set fm to my fmapTuple
@@ -2276,7 +2276,12 @@ end liftA2List
 -- liftA2LR :: (a -> b -> c) -> Either d a -> Either d b -> Either d c
 on liftA2LR(f, a, b)
     set x to |Right| of a
-    set y to |Right| of b
+    if class of b is list then
+        set y to {}
+    else
+        set y to |Right| of b
+    end if
+    
     if x is missing value then
         a
     else if y is missing value then
@@ -2318,13 +2323,27 @@ on liftA2Tree(f, tx, ty)
         end |λ|
     end script
     
-    Node(mReturn(f)'s |λ|(root of tx, root of ty), ¬
-        map(fmapT, nest of ty) & map(liftA2T, nest of tx))
+    if class of ty is list then
+        set rootLabel to {}
+        set forest to {}
+    else
+        set rootLabel to root of ty
+        set forest to map(fmapT, nest of ty) & map(liftA2T, nest of tx)
+    end if
+    
+    Node(mReturn(f)'s |λ|(root of tx, rootLabel), forest)
 end liftA2Tree
 
 -- liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)
 on liftA2Tuple(f, a, b)
-    Tuple(mappend(|1| of a, |1| of b), mReturn(f)'s |λ|(|2| of a, |2| of b))
+    if class of b is list then
+        set b1 to {}
+        set b2 to {}
+    else
+        set b1 to |1| of b
+        set b2 to |2| of b
+    end if
+    Tuple(mappend(|1| of a, b1), mReturn(f)'s |λ|(|2| of a, b2))
 end liftA2Tuple
 
 -- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]
@@ -3049,7 +3068,7 @@ on pureT(t, x)
         pureLR(x)
     else if "Maybe" = t then
         pureMay(x)
-    else if "Tree" = t then
+    else if "Node" = t then
         pureTree(x)
     else if "Tuple" = t then
         pureTuple(x)
@@ -3060,7 +3079,7 @@ end pureT
 
 -- pureTree :: a -> Tree a
 on pureTree(x)
-    Node(x, [])
+    Node(x, {})
 end pureTree
 
 -- pureTuple :: a -> (a, a)
@@ -4200,6 +4219,7 @@ end takeIterate
 -- takeWhile :: (a -> Bool) -> [a] -> [a]
 on takeWhile(p, xs)
     set bln to false
+    set blnText to (class of xs) is text
     tell mReturn(p)
         repeat with i from 1 to length of xs
             if not |λ|(item i of xs) then
@@ -4210,9 +4230,17 @@ on takeWhile(p, xs)
     end tell
     if bln then
         if i > 1 then
-            items 1 thru (i - 1) of xs
+            if blnText then
+                text 1 thru (i - 1) of xs
+            else
+                items 1 thru (i - 1) of xs
+            end if
         else
-            {}
+            if blnText then
+                ""
+            else
+                {}
+            end if
         end if
     else
         xs
@@ -4222,6 +4250,7 @@ end takeWhile
 -- takeWhileR :: (a -> Bool) -> [a] -> [a]
 on takeWhileR(p, xs)
     set bln to false
+    set blnText to (class of xs) is text
     tell mReturn(p)
         set lng to length of xs
         repeat with i from lng to 1 by -1
@@ -4233,9 +4262,17 @@ on takeWhileR(p, xs)
     end tell
     if bln then
         if i > 1 then
-            items (1 + i) thru (-1) of xs
+            if blnText then
+                text (1 + i) thru (-1) of xs
+            else
+                items (1 + i) thru (-1) of xs
+            end if
         else
-            {}
+            if blnText then
+                ""
+            else
+                {}
+            end if
         end if
     else
         xs
@@ -4384,7 +4421,7 @@ on traverse(f, tx)
         else if "Node" = t then
             traverseTree(f, tx)
         else if "Tuple" = t then
-            traverseTuple
+            traverseTuple(f, tx)
         else
             missing value
         end if

@@ -20,7 +20,14 @@ on liftA2Tree(f, tx, ty)
         end |λ|
     end script
     
-    Node(mReturn(f)'s |λ|(root of tx, root of ty), ¬
-        map(fmapT, nest of ty) & map(liftA2T, nest of tx))
+    if class of ty is list then
+        set rootLabel to {}
+        set forest to {}
+    else
+        set rootLabel to root of ty
+        set forest to map(fmapT, nest of ty) & map(liftA2T, nest of tx)
+    end if
+    
+    Node(mReturn(f)'s |λ|(root of tx, rootLabel), forest)
 end liftA2Tree
 ```
