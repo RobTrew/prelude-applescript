@@ -1182,6 +1182,41 @@ on findIndices(p, xs)
     concatMap(result, xs)
 end findIndices
 
+-- findTree :: (a -> Bool) -> Tree a -> Maybe Tree a
+on findTree(p, tree)
+    script go
+        property pf : mReturn(p)'s |λ|
+        on |λ|(oNode)
+            if pf(root of oNode) then
+                Just(oNode)
+            else
+                set xs to nest of oNode
+                set lng to length of xs
+                
+                script inNest
+                    on |λ|(tpl)
+                        lng < fst(tpl) or (not (Nothing of snd(tpl)))
+                    end |λ|
+                end script
+                
+                script nextPeer
+                    on |λ|(tpl)
+                        Tuple(1 + fst(tpl), go's |λ|(item (fst(tpl)) of xs))
+                    end |λ|
+                end script
+                
+                if 0 < lng then
+                    snd(|until|(inNest, nextPeer, Tuple(1, Nothing())))
+                else
+                    Nothing()
+                end if
+            end if
+        end |λ|
+    end script
+    
+    go's |λ|(tree)
+end findTree
+
 -- firstArrow :: (a -> b) -> ((a, c) -> (b, c))
 on firstArrow(f)
     script
@@ -1950,9 +1985,9 @@ end isMaybe
 -- isNull :: String -> Bool
 on isNull(xs)
     if class of xs is string then
-        xs = ""
+        "" = xs
     else
-        xs = {}
+        {} = xs
     end if
 end isNull
 
@@ -2674,9 +2709,9 @@ on maximumMay(xs)
 end maximumMay
 
 -- maybe :: b -> (a -> b) -> Maybe a -> b
-on maybe(n, f, mb)
+on maybe(v, f, mb)
     if Nothing of mb then
-        n
+        v
     else
         tell mReturn(f) to |λ|(Just of mb)
     end if
@@ -2840,12 +2875,7 @@ end Nothing
 
 -- nub :: [a] -> [a]
 on nub(xs)
-    script
-        on |λ|(a, b)
-            a = b
-        end |λ|
-    end script
-    nubBy(result, xs)
+    nubBy(eq, xs)
 end nub
 
 -- nubBy :: (a -> a -> Bool) -> [a] -> [a]
@@ -4489,6 +4519,21 @@ on treeLeaves(oNode)
     end script
     |λ|(oNode) of go
 end treeLeaves
+
+-- treeMatches :: (a -> Bool) -> Tree a -> [Tree a]
+on treeMatches(p, tree)
+    script go
+        property pf : mReturn(p)'s |λ|
+        on |λ|(x)
+            if pf(root of x) then
+                {x}
+            else
+                concatMap(go, nest of x)
+            end if
+        end |λ|
+    end script
+    go's |λ|(tree)
+end treeMatches
 
 -- truncate :: Num -> Int
 on truncate(x)
