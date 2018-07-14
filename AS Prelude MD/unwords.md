@@ -1,6 +1,6 @@
 ```applescript
 -- unwords :: [String] -> String
 on unwords(xs)
-    intercalate(space, xs)
+    intercalateS(space, xs)
 end unwords
 ```

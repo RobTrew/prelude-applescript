@@ -4750,7 +4750,7 @@ end |until|
 
 -- unwords :: [String] -> String
 on unwords(xs)
-    intercalate(space, xs)
+    intercalateS(space, xs)
 end unwords
 
 -- unwrap :: NSObject -> a
@@ -4815,7 +4815,12 @@ end variance
 
 -- words :: String -> [String]
 on |words|(s)
-    words of s
+    set ca to current application
+    (((ca's NSString's stringWithString:(s))'s ¬
+        componentsSeparatedByCharactersInSet:(ca's ¬
+            NSCharacterSet's whitespaceAndNewlineCharacterSet()))'s ¬
+        filteredArrayUsingPredicate:(ca's ¬
+            NSPredicate's predicateWithFormat:"0 < length")) as list
 end |words|
 
 -- wrap :: a -> NSObject
