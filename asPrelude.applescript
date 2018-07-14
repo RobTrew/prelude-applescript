@@ -561,12 +561,13 @@ end composeR
 -- concat :: [[a]] -> [a]
 -- concat :: [String] -> String
 on concat(xs)
-    if length of xs > 0 and class of (item 1 of xs) is string then
+    set lng to length of xs
+    if 0 < lng and class of (item 1 of xs) is string then
         set acc to ""
     else
         set acc to {}
     end if
-    repeat with i from 1 to length of xs
+    repeat with i from 1 to lng
         set acc to acc & item i of xs
     end repeat
     acc
@@ -574,16 +575,15 @@ end concat
 
 -- concatMap :: (a -> [b]) -> [a] -> [b]
 on concatMap(f, xs)
-    if class of xs is text then
-        set ys to characters of xs
+    set lng to length of xs
+    if 0 < lng and class of (item 1 of xs) is string then
+        set acc to ""
     else
-        set ys to xs
+        set acc to {}
     end if
     tell mReturn(f)
-        set lng to length of ys
-        set acc to {}
         repeat with i from 1 to lng
-            set acc to acc & |λ|(item i of ys, i, ys)
+            set acc to acc & |λ|(item i of xs, i, xs)
         end repeat
     end tell
     return acc
