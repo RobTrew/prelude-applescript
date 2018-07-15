@@ -576,7 +576,7 @@ end concat
 -- concatMap :: (a -> [b]) -> [a] -> [b]
 on concatMap(f, xs)
     set lng to length of xs
-    if 0 < lng and class of (item 1 of xs) is string then
+    if 0 < lng and class of xs is string then
         set acc to ""
     else
         set acc to {}
