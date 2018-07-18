@@ -483,11 +483,11 @@ end chunksOf
 -- compare :: a -> a -> Ordering
 on compare(a, b)
     if a < b then
-        |LT|
+        -1
     else if a > b then
-        |GT|
+        1
     else
-        |EQ|
+        0
     end if
 end compare
 
@@ -1120,6 +1120,18 @@ on fileStatus(fp)
         |Left|((localizedDescription of e) as string)
     end if
 end fileStatus
+
+-- fileUTI :: FilePath -> String
+on fileUTI(fp)
+    set {uti, e} to (current application's ¬
+        NSWorkspace's sharedWorkspace()'s ¬
+        typeOfFile:fp |error|:(reference)) as list
+    if uti is missing value then
+        e's localizedDescription() as text
+    else
+        uti as text
+    end if
+end fileUTI
 
 -- filter :: (a -> Bool) -> [a] -> [a]
 on filter(f, xs)
