@@ -1,15 +1,18 @@
 ```applescript
--- Returns a function on a single tuple (containing 2 arguments)
--- derived from an equivalent function with 2 distinct arguments
+-- Given a curried function, return an
+-- equivalent function on a tuple or list pair
 ```
 
 ```applescript
 -- uncurry :: (a -> b -> c) -> ((a, b) -> c)
 on uncurry(f)
     script
-        property mf : mReturn(f)'s |λ|
-        on |λ|(pair)
-            mf(|1| of pair, |2| of pair)
+        on |λ|(ab)
+            if class of ab is list then
+                f's |λ|(item 1 of ab)'s |λ|(item 2 of ab)
+            else
+                f's |λ|(|1| of ab)'s |λ|(|2| of ab)
+            end if
         end |λ|
     end script
 end uncurry

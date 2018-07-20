@@ -248,17 +248,17 @@ end assocs
 -- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 on bind(m, mf)
     set c to class of m
-    if c = list then
+    if list = c then
         bindList(m, mf)
-    else if c = record then
+    else if record = c then
         set ks to keys(m)
         if ks contains "type" then
             set t to type of m
-            if t = "Maybe" then
+            if "Maybe" = t then
                 bindMay(m, mf)
-            else if t = "Either" then
+            else if "Either" = t then
                 bindLR(m, mf)
-            else if t = "Tuple" then
+            else if "Tuple" = t then
                 bindTuple(m, mf)
             else
                 Nothing()
@@ -4621,9 +4621,12 @@ end uncons
 -- uncurry :: (a -> b -> c) -> ((a, b) -> c)
 on uncurry(f)
     script
-        property mf : mReturn(f)'s |λ|
-        on |λ|(pair)
-            mf(|1| of pair, |2| of pair)
+        on |λ|(ab)
+            if class of ab is list then
+                f's |λ|(item 1 of ab)'s |λ|(item 2 of ab)
+            else
+                f's |λ|(|1| of ab)'s |λ|(|2| of ab)
+            end if
         end |λ|
     end script
 end uncurry
