@@ -1,6 +1,6 @@
 ```applescript
--- Given a curried function, return an
--- equivalent function on a tuple or list pair
+-- Given a curried function, returns an
+-- equivalent function on a tuple or list pair.
 ```
 
 ```applescript
