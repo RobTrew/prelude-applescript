@@ -2,17 +2,15 @@
 -- tails :: [a] -> [[a]]
 on tails(xs)
     if class of xs is text then
-        set xs_ to characters of xs
+        set es to characters of xs
     else
-        set xs_ to xs
+        set es to xs
     end if
-    
-    script
+    script residue
         on |λ|(_, i)
-            items i thru -1 of xs_
+            items i thru -1 of es
         end |λ|
     end script
-    
-    map(result, xs_) & {{}}
+    map(residue, es) & {{}}
 end tails
 ```
