@@ -4,7 +4,7 @@ use scripting additions
 
 -- abs :: Num -> Num
 on abs(x)
-    if x < 0 then
+    if 0 > x then
         -x
     else
         x
@@ -45,7 +45,7 @@ end |any|
 on ap(mf, mx)
     if class of mx is list then
         apList(mf, mx)
-    else if class of mf is record and ¬
+    else if record is class of mf and ¬
         keys(mf) contains "type" then
         set t to type of mf
         if "Either" = t then
@@ -111,7 +111,7 @@ on appendFile(strPath, txt)
     set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬
         fileExistsAtPath:oFullPath isDirectory:(reference))
     if blnExists then
-        if intFolder = 0 then
+        if 0 = intFolder then
             set oData to (ca's NSString's stringWithString:txt)'s ¬
                 dataUsingEncoding:(ca's NSUTF8StringEncoding)
             set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath
@@ -142,7 +142,7 @@ on appendFileMay(strPath, txt)
     set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬
         fileExistsAtPath:oFullPath isDirectory:(reference))
     if blnExists then
-        if intFolder = 0 then -- Not a directory
+        if 0 = intFolder then -- Not a directory
             set oData to (ca's NSString's stringWithString:txt)'s ¬
                 dataUsingEncoding:(ca's NSUTF8StringEncoding)
             set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath
@@ -170,7 +170,7 @@ end apply
 
 -- approxRatio :: Real -> Real -> Ratio
 on approxRatio(epsilon, n)
-    if epsilon is missing value then
+    if missing value is epsilon then
         set e to 1 / 10000
     else
         set e to epsilon
@@ -231,9 +231,9 @@ end argvLength
 -- assocs :: Map k a -> [(k, a)]
 on assocs(m)
     set c to class of m
-    if c is list then
+    if list is c then
       zip(enumFromTo(1, length of m), m)
-    else if c is record then
+    else record is c then
         set dict to (current application's ¬
             NSDictionary's ¬
             dictionaryWithDictionary:(m))
@@ -319,7 +319,7 @@ on break(p, xs)
         end repeat
     end tell
     if bln then
-        if i > 1 then
+        if 1 < i then
             Tuple(items 1 thru (i - 1) of xs, items i thru -1 of xs)
         else
             Tuple({}, xs)
@@ -337,7 +337,7 @@ on breakOn(pat, src)
         set lstParts to text items of src
         set lngParts to length of lstParts
         
-        if lngParts > 1 then
+        if 1 < lngParts then
             set tpl to Tuple(item 1 of lstParts, pat & ¬
                 ((items 2 thru -1 of lstParts) as text))
         else
@@ -353,10 +353,10 @@ end breakOn
 
 -- breakOnAll :: String -> String -> [(String, String)]
 on breakOnAll(pat, src)
-    if pat ≠ "" then
+    if "" ≠ pat then
         script
             on |λ|(a, _, i, xs)
-                if i > 1 then
+                if 1 < i then
                     a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬
                         pat & intercalate(pat, drop(i - 1, xs)))}
                 else
@@ -562,7 +562,7 @@ end composeR
 -- concat :: [String] -> String
 on concat(xs)
     set lng to length of xs
-    if 0 < lng and class of (item 1 of xs) is string then
+    if 0 < lng and string is class of (item 1 of xs) then
         set acc to ""
     else
         set acc to {}
@@ -654,11 +654,11 @@ on |delete|(x, xs)
     if Nothing of mbIndex then
         xs
     else
-        if lng > 1 then
+        if 1 < lng then
             set i to Just of mbIndex
-            if i = 1 then
+            if 1 = i then
                 items 2 thru -1 of xs
-            else if i = lng then
+            else if lng = i then
                 items 1 thru -2 of xs
             else
                 tell xs to items 1 thru (i - 1) & items (i + 1) thru -1
@@ -673,7 +673,7 @@ end |delete|
 on deleteAt(i, xs)
     set lr to splitAt(i, xs)
     set {l, r} to {|1| of lr, |2| of lr}
-    if length of r > 1 then
+    if 1 < length of r then
         l & items 2 thru -1 of r
     else
         l
@@ -793,8 +793,8 @@ on draw(tree)
     script drawSubTrees
         on |λ|(xs)
             set lng to length of xs
-            if lng > 0 then
-                if lng > 1 then
+            if 0 < lng then
+                if 1 < lng then
                     cons("│", append(shift's |λ|("├─ ", "│  ", draw(item 1 of xs)), ¬
                         |λ|(items 2 thru -1 of xs)))
                 else
@@ -822,7 +822,7 @@ end drawTree
 -- drop :: Int -> [a] -> [a]
 on drop(n, xs)
     if n < length of xs then
-        if class of xs is text then
+        if text is class of xs then
             text (n + 1) thru -1 of xs
         else
             items (n + 1) thru -1 of xs
@@ -1030,9 +1030,6 @@ on enumFromToInt(m, n)
         return {}
     end if
 end enumFromToInt
-
--- EQ :: Ordering
-property |EQ| : {type:"Ordering", value:0}
 
 -- eq (==) :: Eq a => a -> a -> Bool
 on eq(a, b)
@@ -1710,9 +1707,6 @@ on groupSortOn(f, xs)
         groupBy(aEq, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬
             sortedArrayUsingDescriptors:map(descrip, bs)) as list))
 end groupSortOn
-
--- GT :: Ordering
-property |GT| : {type:"Ordering", value:1}
 
 -- head :: [a] -> a
 on head(xs)
@@ -2504,9 +2498,6 @@ on lookupTuples(k, xs)
     
     bindMay(find(keyMatch, xs), harvestMay)
 end lookupTuples
-
--- LT :: Ordering
-property |LT| : {type:"Ordering", value:-1}
 
 -- map :: (a -> b) -> [a] -> [b]
 on map(f, xs)
