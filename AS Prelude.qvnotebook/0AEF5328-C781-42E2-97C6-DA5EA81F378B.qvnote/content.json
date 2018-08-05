@@ -1,10 +1,10 @@
 {
-  "title": "composeListRL",
+  "title": "composeList",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- composeListRL :: [(a -> a)] -> (a -> a)\non composeListRL(fs)\n    script\n        on |λ|(x)\n            script\n                on |λ|(f, a)\n                    mReturn(f)'s |λ|(a)\n                end |λ|\n            end script\n            \n            foldr(result, x, fs)\n        end |λ|\n    end script\nend composeListRL"
+      "data": "-- composeList :: [(a -> a)] -> (a -> a)\non composeList(fs)\n    script\n        on |λ|(x)\n            script\n                on |λ|(f, a)\n                    mReturn(f)'s |λ|(a)\n                end |λ|\n            end script\n            \n            foldr(result, x, fs)\n        end |λ|\n    end script\nend composeListRL"
     }
   ]
 }

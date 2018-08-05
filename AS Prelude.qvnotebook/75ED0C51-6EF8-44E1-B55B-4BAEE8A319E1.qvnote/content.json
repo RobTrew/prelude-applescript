@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- writeFileLR :: FilePath -> Either String IO FilePath\non writeFileLR(strPath, strText)\n    set ca to current application\n    set fp to stringByStandardizingPath of ¬\n        (ca's NSString's stringWithString:strPath)\n    set {bln, e} to (ca's NSString's stringWithString:strText)'s ¬\n        writeToFile:(fp) atomically:true ¬\n            encoding:(ca's NSUTF8StringEncoding) |error|:(reference)\n    if bln and e is missing value then\n        |Right|(fp as string)\n    else\n        |Left|(e's localizedDescription() as string)\n    end if\nend writeFileLR"
+      "data": "-- writeFileLR :: FilePath -> Either String IO FilePath\non writeFileLR(strPath, strText)\n    set ca to current application\n    set fp to stringByStandardizingPath of ¬\n        (ca's NSString's stringWithString:strPath)\n    set {bln, e} to (ca's NSString's stringWithString:strText)'s ¬\n        writeToFile:(fp) atomically:true ¬\n            encoding:(ca's NSUTF8StringEncoding) |error|:(reference)\n    if bln and (missing value is e) then\n        |Right|(fp as string)\n    else\n        |Left|(e's localizedDescription() as string)\n    end if\nend writeFileLR"
     }
   ]
 }

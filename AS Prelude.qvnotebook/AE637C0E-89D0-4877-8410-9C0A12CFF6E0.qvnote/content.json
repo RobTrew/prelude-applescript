@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Returns a function on a single tuple (containing 2 arguments)\n-- derived from an equivalent function with 2 distinct arguments"
+      "data": "-- Given a curried/default function, returns an\n-- equivalent function on a tuple or list pair."
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- uncurry :: (a -> b -> c) -> ((a, b) -> c)\non uncurry(f)\n    script\n        property mf : mReturn(f)'s |λ|\n        on |λ|(pair)\n            mf(|1| of pair, |2| of pair)\n        end |λ|\n    end script\nend uncurry"
+      "data": "-- uncurry :: (a -> b -> c) -> ((a, b) -> c)\non uncurry(f)\n    if 1 < argvLength(f) then\n        script\n            on |λ|(ab)\n                if class of ab is list then\n                    mReturn(f)'s |λ|(item 1 of ab, item 2 of ab)\n                else\n                    mReturn(f)'s |λ|(|1| of ab, |2| of ab)\n                end if\n            end |λ|\n        end script\n    else\n        script\n            on |λ|(ab)\n                if class of ab is list then\n                    f's |λ|(item 1 of ab)'s |λ|(item 2 of ab)\n                else\n                    f's |λ|(|1| of ab)'s |λ|(|2| of ab)\n                end if\n            end |λ|\n        end script\n    end if\nend uncurry"
     }
   ]
 }

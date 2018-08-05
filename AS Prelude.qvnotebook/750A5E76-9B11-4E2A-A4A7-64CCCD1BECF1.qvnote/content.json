@@ -1,0 +1,10 @@
+{
+  "title": "traverse",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)\non traverse(f, tx)\n    if class of tx is list then\n        traverseList(f, tx)\n    else if class of tx is record and keys(tx) contains \"type\" then\n        set t to type of tx\n        if \"Either\" = t then\n            traverseLR(f, tx)\n        else if \"Maybe\" = t then\n            traverseMay(f, tx)\n        else if \"Node\" = t then\n            traverseTree(f, tx)\n        else if \"Tuple\" = t then\n            traverseTuple(f, tx)\n        else\n            missing value\n        end if\n    else\n        missing value\n    end if\nend traverse"
+    }
+  ]
+}

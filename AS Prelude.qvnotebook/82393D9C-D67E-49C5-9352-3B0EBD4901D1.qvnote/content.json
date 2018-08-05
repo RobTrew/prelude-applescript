@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b\non fmap(f, fa)\n    if class of fa is record and keys(fa) contains \"type\" then\n        set t to type of fa\n        if t = \"Either\" then\n            set fm to my fmapLR\n        else if t = \"Maybe\" then\n            set fm to my fmapMay\n        else if t = \"Tree\" then\n            set fm to my fmapTree\n        else if t = \"Tuple\" then\n            set fm to my fmapTuple\n        else\n            set fm to my map\n        end if\n        |λ|(f, fa) of mReturn(fm)\n    else\n        map(f, fa)\n    end if\nend fmap"
+      "data": "-- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b\non fmap(f, fa)\n    set c to class of fa\n    if c is record and keys(fa) contains \"type\" then\n        set t to |type| of fa\n        if \"Either\" = t then\n            set fm to my fmapLR\n        else if \"Maybe\" = t then\n            set fm to my fmapMay\n        else if \"Node\" = t then\n            set fm to my fmapTree\n        else if \"Tuple\" = t then\n            set fm to my fmapTuple\n        else\n            set fm to my map\n        end if\n        |λ|(f, fa) of mReturn(fm)\n    else if c is text then\n        map(f, characters of fa)\n    else if c is list then\n        map(f, fa)\n    else\n        missing value\n    end if\nend fmap"
     }
   ]
 }

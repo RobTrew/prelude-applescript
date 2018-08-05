@@ -232,8 +232,8 @@ end argvLength
 on assocs(m)
     set c to class of m
     if list is c then
-      zip(enumFromTo(1, length of m), m)
-    else record is c then
+        zip(enumFromTo(1, length of m), m)
+    else if record is c then
         set dict to (current application's ¬
             NSDictionary's ¬
             dictionaryWithDictionary:(m))
@@ -2091,6 +2091,11 @@ on isSubsequenceOf(xs, ys)
     end if
 end isSubsequenceOf
 
+-- isSubsetOf :: Ord a => Set a -> Set a -> Bool
+on isSubsetOf(objcSetA, objcSetB)
+    objcSetA's isSubsetOfSet:(objcSetB)
+end isSubsetOf
+
 -- isSuffixOf :: Eq a => [a] -> [a] -> Bool
 -- isSuffixOf :: String -> String -> Bool 
 on isSuffixOf(suffix, main)
@@ -3524,6 +3529,29 @@ on setCurrentDirectory(strPath)
             changeCurrentDirectoryPath:oPath
     end if
 end setCurrentDirectory
+
+-- setFromList :: Ord a => [a] -> Set a
+on setFromList(xs)
+    set ca to current application
+    ca's NSMutableSet's ¬
+        setWithArray:(ca's NSArray's arrayWithArray:(xs))
+end setFromList
+
+-- setInsert :: Ord a => a -> Set a -> Set a
+on setInsert(x, objcSet)
+    objcSet's addObject:(x)
+    objcSet
+end setInsert
+
+-- setMember :: Ord a => a -> Set a -> Bool
+on setMember(x, objcSet)
+    missing value is not (objcSet's member:(x))
+end setMember
+
+-- setSize :: Set a -> Int
+on setSize(objcSet)
+    objcSet's |count|() as integer
+end setSize
 
 -- show :: a -> String
 on show(e)

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Tuple (,) :: a -> b -> (a, b)\non Tuple(a, b)\n    {type:\"Tuple\", |1|:a, |2|:b}\nend Tuple"
+      "data": "-- Tuple (,) :: a -> b -> (a, b)\non Tuple(a, b)\n    {type:\"Tuple\", |1|:a, |2|:b, length:2}\nend Tuple"
     }
   ]
 }

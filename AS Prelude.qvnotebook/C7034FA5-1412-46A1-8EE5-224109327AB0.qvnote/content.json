@@ -1,0 +1,15 @@
+{
+  "title": "treeMatches",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- A list of all nodes in the tree which match \n-- a predicate p.\n-- For the first match only, see findTree."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- treeMatches :: (a -> Bool) -> Tree a -> [Tree a]\non treeMatches(p, tree)\n    script go\n        property pf : mReturn(p)'s |λ|\n        on |λ|(x)\n            if pf(root of x) then\n                {x}\n            else\n                concatMap(go, nest of x)\n            end if\n        end |λ|\n    end script\n    go's |λ|(tree)\nend treeMatches"
+    }
+  ]
+}

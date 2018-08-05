@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b\non bind(m, mf)\n    set c to class of m\n    if c = list then\n        bindList(m, mf)\n    else if c = record then\n        set ks to keys(m)\n        if ks contains \"type\" then\n            set t to type of m\n            if t = \"Maybe\" then\n                bindMay(m, mf)\n            else if t = \"Either\" then\n                bindEither(m, mf)\n            else if t = \"Tuple\" then\n                bindTuple(m, mf)\n            else\n                Nothing()\n            end if\n        else\n            Nothing()\n        end if\n    else\n        Nothing()\n    end if\nend bind"
+      "data": "-- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b\non bind(m, mf)\n    set c to class of m\n    if list = c then\n        bindList(m, mf)\n    else if record = c then\n        set ks to keys(m)\n        if ks contains \"type\" then\n            set t to type of m\n            if \"Maybe\" = t then\n                bindMay(m, mf)\n            else if \"Either\" = t then\n                bindLR(m, mf)\n            else if \"Tuple\" = t then\n                bindTuple(m, mf)\n            else\n                Nothing()\n            end if\n        else\n            Nothing()\n        end if\n    else\n        Nothing()\n    end if\nend bind"
     }
   ]
 }

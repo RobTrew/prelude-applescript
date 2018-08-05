@@ -1,0 +1,10 @@
+{
+  "title": "traverseLR",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- traverseLR :: Applicative f => (t -> f b) -> Either a t -> f (Either a b)\non traverseLR(f, lr)\n    if |Left| of lr is not missing value then\n        {lr}\n    else\n        fmap(my |Right|, mReturn(f)'s |λ|(|Right| of lr))\n    end if\nend traverseLR"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isDigit :: Char -> Bool\non isDigit(c)\n    set d to (id of c) - 48 -- id of \"0\"\n    d ≥ 0 and d ≤ 9\nend isDigit"
+      "data": "-- isDigit :: Char -> Bool\non isDigit(c)\n    set n to (id of c)\n    48 ≤ n and 57 ≥ n\nend isDigit"
     }
   ]
 }

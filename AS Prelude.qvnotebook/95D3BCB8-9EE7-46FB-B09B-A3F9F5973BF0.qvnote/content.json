@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- dropWhileEnd :: (Char -> Bool) -> String -> String\n-- dropWhileEnd :: (a -> Bool) -> [a] -> [a]\non dropWhileEnd(p, xs)\n    set i to length of xs\n    tell mReturn(p)\n        repeat while i > 0 and |λ|(item i of xs)\n            set i to i - 1\n        end repeat\n    end tell\n    if i > 0 then\n        if class of xs ≠ string then\n            items 1 thru i of xs\n        else\n            text 1 thru i of xs\n        end if\n    else\n        {}\n    end if\nend dropWhileEnd"
+      "data": "-- dropWhileEnd :: (a -> Bool) -> [a] -> [a]\n-- dropWhileEnd :: (Char -> Bool) -> String -> String\non dropWhileEnd(p, xs)\n    set i to length of xs\n    tell mReturn(p)\n        repeat while i > 0 and |λ|(item i of xs)\n            set i to i - 1\n        end repeat\n    end tell\n    if i > 0 then\n        if class of xs ≠ string then\n            items 1 thru i of xs\n        else\n            text 1 thru i of xs\n        end if\n    else\n        {}\n    end if\nend dropWhileEnd"
     }
   ]
 }

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- compare :: a -> a -> Ordering\non compare(a, b)\n    if a < b then\n        |LT|\n    else if a > b then\n        |GT|\n    else\n        |EQ|\n    end if\nend compare"
+      "data": "-- compare :: a -> a -> Ordering\non compare(a, b)\n    if a < b then\n        -1\n    else if a > b then\n        1\n    else\n        0\n    end if\nend compare"
     }
   ]
 }

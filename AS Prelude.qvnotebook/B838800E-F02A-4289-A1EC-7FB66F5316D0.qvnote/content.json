@@ -1,5 +1,5 @@
 {
-  "title": "apMaybe (<*>)",
+  "title": "apMay (<*>)",
   "cells": [
     {
       "type": "code",
@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apMaybe (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\non apMaybe(mf, mx)\n    if Nothing of mf or Nothing of mx then\n        Nothing()\n    else\n        Just(|λ|(Just of mx) of mReturn(Just of mf))\n    end if\nend apMaybe"
+      "data": "-- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\non apMay(mf, mx)\n    if Nothing of mf or Nothing of mx then\n        Nothing()\n    else\n        Just(|λ|(Just of mx) of mReturn(Just of mf))\n    end if\nend apMay"
     }
   ]
 }

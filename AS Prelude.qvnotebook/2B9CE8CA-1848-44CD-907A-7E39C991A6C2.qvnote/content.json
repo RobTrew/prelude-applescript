@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "--    1. Map each element of a structure to an action,\n--    2. evaluate these actions from |Left| to |Right|, and\n--    3. collect the results.\n-- \n--     traverse :: (Traversable t, Applicative f) => (a -> f b) -> t a -> f (t b)\n--     traverse_ f = foldr cons_f (pure [])\n--        where cons_f x a = ((:) <$> (f x)) <*> a"
+      "data": "--    1. Map each element of a structure to an action,\n--    2. evaluate these actions from left to right, and\n--    3. collect the results.\n-- \n--    traverse f = List.foldr cons_f (pure [])\n--      where cons_f x ys = liftA2 (:) (f x) ys"
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f (t b)\non traverseList(f, xs)\n  sequenceAList(fmap(f, xs))\nend traverseList"
+      "data": "-- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f [b]\non traverseList(f, xs)\n    set lng to length of xs\n    if 0 < lng then\n        set mf to mReturn(f)\n        \n        set vLast to mf's |λ|(item -1 of xs)\n        if class of vLast is record and ¬\n            keys(vLast) contains \"type\" then\n            set t to type of vLast\n        else\n            set t to \"List\"\n        end if\n        \n        script cons_f\n            on |λ|(x, ys)\n                liftA2(my cons, mf's |λ|(x), ys)\n            end |λ|\n        end script\n        \n        foldr(cons_f, ¬\n            liftA2(my cons, vLast, pureT(t, [])), ¬\n            init(xs))\n    else\n        {{}}\n    end if\nend traverseList"
     }
   ]
 }

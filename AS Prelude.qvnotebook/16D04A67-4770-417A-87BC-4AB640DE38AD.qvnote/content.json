@@ -1,10 +1,10 @@
 {
-  "title": "readMay",
+  "title": "readLR",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- readMay :: Read a => String -> Maybe a\non readMay(s)\n    try\n      Just(run script s)\n    on error e\n        Nothing()\n    end try\nend readMay"
+      "data": "-- readLR :: Read a => String -> Either String a\non readLR(s)\n    try\n        |Right|(run script s)\n    on error e\n        |Left|(e)\n    end try\nend readLR"
     }
   ]
 }

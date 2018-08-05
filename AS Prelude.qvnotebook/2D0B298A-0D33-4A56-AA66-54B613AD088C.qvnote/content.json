@@ -4,7 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pureT :: f a -> (a -> f a)\non pureT(x)\n    if class of x is record and keys(x) contains \"type\" then\n        set t to type of x\n        if t = \"Either\" then\n            pureLR\n        else if t = \"Maybe\" then\n            pureMay\n        else if t = \"Tree\" then\n            pureTree\n        else if t = \"Tuple\" then\n            pureTuple\n        else\n            pureList\n        end if\n    else\n        pureList\n    end if\nend pureT"
+      "data": "-- Given a type name string, returns a \n-- specialised 'pure', where\n-- 'pure' lifts a value into a particular functor."
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- pureT :: String -> f a -> (a -> f a)\non pureT(t, x)\n    if \"List\" = t then\n        pureList(x)\n    else if \"Either\" = t then\n        pureLR(x)\n    else if \"Maybe\" = t then\n        pureMay(x)\n    else if \"Node\" = t then\n        pureTree(x)\n    else if \"Tuple\" = t then\n        pureTuple(x)\n    else\n        pureList(x)\n    end if\nend pureT"
     }
   ]
 }

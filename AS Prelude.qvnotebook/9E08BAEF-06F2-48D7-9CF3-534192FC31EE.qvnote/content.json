@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- words :: String -> [String]\non |words|(s)\n    words of s\nend |words|"
+      "data": "-- words :: String -> [String]\non |words|(s)\n    set ca to current application\n    (((ca's NSString's stringWithString:(s))'s ¬\n        componentsSeparatedByCharactersInSet:(ca's ¬\n            NSCharacterSet's whitespaceAndNewlineCharacterSet()))'s ¬\n        filteredArrayUsingPredicate:(ca's ¬\n            NSPredicate's predicateWithFormat:\"0 < length\")) as list\nend |words|"
     }
   ]
 }

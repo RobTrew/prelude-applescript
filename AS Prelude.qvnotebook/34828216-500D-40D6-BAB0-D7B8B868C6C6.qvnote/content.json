@@ -1,10 +1,10 @@
 {
-  "title": "compose",
+  "title": "compose (<<<)",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- compose :: (b -> c) -> (a -> b) -> a -> c\non compose(f, g)\n    script\n        on |λ|(x)\n            |λ|(|λ|(x) of mReturn(g)) of mReturn(f)\n        end |λ|\n    end script\nend compose"
+      "data": "-- compose (<<<) :: (b -> c) -> (a -> b) -> a -> c\non compose(f, g)\n    script\n        on |λ|(x)\n            |λ|(|λ|(x) of mReturn(g)) of mReturn(f)\n        end |λ|\n    end script\nend compose"
     }
   ]
 }

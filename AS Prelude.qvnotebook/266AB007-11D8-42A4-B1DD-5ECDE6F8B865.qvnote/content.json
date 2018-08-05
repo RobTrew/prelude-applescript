@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- concat :: [[a]] -> [a]\n-- concat :: [String] -> String\non concat(xs)\n    if length of xs > 0 and class of (item 1 of xs) is string then\n        set acc to \"\"\n    else\n        set acc to {}\n    end if\n    repeat with i from 1 to length of xs\n        set acc to acc & item i of xs\n    end repeat\n    acc\nend concat"
+      "data": "-- concat :: [[a]] -> [a]\n-- concat :: [String] -> String\non concat(xs)\n    set lng to length of xs\n    if 0 < lng and string is class of (item 1 of xs) then\n        set acc to \"\"\n    else\n        set acc to {}\n    end if\n    repeat with i from 1 to lng\n        set acc to acc & item i of xs\n    end repeat\n    acc\nend concat"
     }
   ]
 }

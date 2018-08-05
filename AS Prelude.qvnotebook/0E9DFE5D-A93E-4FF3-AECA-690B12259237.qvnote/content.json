@@ -1,0 +1,10 @@
+{
+  "title": "composeR (>>>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- composeR (>>>) :: (a -> b) -> (b -> c) -> a -> c\non composeR(f, g)\n    script\n        on |λ|(x)\n            |λ|(|λ|(x) of mReturn(f)) of mReturn(g)\n        end |λ|\n    end script\nend composeR"
+    }
+  ]
+}

@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- abs :: Num -> Num\non abs(x)\n    if x < 0 then\n        -x\n    else\n        x\n    end if\nend abs"
+      "data": "-- abs :: Num -> Num\non abs(x)\n    if 0 > x then\n        -x\n    else\n        x\n    end if\nend abs"
     }
   ]
 }

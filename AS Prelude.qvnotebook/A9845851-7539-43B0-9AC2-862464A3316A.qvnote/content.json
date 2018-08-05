@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- nub :: [a] -> [a]\non nub(xs)\n    script\n        on |λ|(a, b)\n            a = b\n        end |λ|\n    end script\n    nubBy(result, xs)\nend nub"
+      "data": "-- nub :: [a] -> [a]\non nub(xs)\n    nubBy(eq, xs)\nend nub"
     }
   ]
 }

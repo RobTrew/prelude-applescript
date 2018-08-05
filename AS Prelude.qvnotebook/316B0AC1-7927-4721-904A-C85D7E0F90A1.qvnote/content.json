@@ -1,0 +1,10 @@
+{
+  "title": "isSubsetOf",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- isSubsetOf :: Ord a => Set a -> Set a -> Bool\non isSubsetOf(objcSetA, objcSetB)\n    objcSetA's isSubsetOfSet:(objcSetB)\nend isSubsetOf"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
-  "title": "liftA2Maybe",
+  "title": "liftA2May",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- liftA2Maybe :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c\non liftA2Maybe(f, a, b)\n    if Nothing of a then\n        a\n    else if Nothing of b then\n        b\n    else\n        Just(|λ|(Just of a, Just of b) of mReturn(f))\n    end if\nend liftA2Maybe"
+      "data": "-- liftA2May :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c\non liftA2May(f, a, b)\n    if Nothing of a then\n        a\n    else if Nothing of b then\n        b\n    else\n        Just(|λ|(Just of a, Just of b) of mReturn(f))\n    end if\nend liftA2May"
     }
   ]
 }

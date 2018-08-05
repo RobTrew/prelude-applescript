@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- cons :: a -> [a] -> [a]\non cons(x, xs)\n    {x} & xs\nend cons"
+      "data": "-- cons :: a -> [a] -> [a]\non cons(x, xs)\n    if list is class of xs then\n        {x} & xs\n    else\n        x & xs\n    end if\nend cons"
     }
   ]
 }

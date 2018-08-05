@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- liftA2LR :: (a -> b -> c) -> Either d a -> Either d b -> Either d c\non liftA2LR(f, a, b)\n    set x to |Right| of a\n    set y to |Right| of b\n    if x is missing value then\n        a\n    else if y is missing value then\n        b\n    else\n        |Right|(|λ|(x, y) of mReturn(f))\n    end if\nend liftA2LR"
+      "data": "-- liftA2LR :: (a -> b -> c) -> Either d a -> Either d b -> Either d c\non liftA2LR(f, a, b)\n    set x to |Right| of a\n    if class of b is list then\n        set y to {}\n    else\n        set y to |Right| of b\n    end if\n    \n    if x is missing value then\n        a\n    else if y is missing value then\n        b\n    else\n        |Right|(|λ|(x, y) of mReturn(f))\n    end if\nend liftA2LR"
     }
   ]
 }

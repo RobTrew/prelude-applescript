@@ -1,0 +1,10 @@
+{
+  "title": "traverseTuple",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- traverseTuple :: Functor f => (t -> f b) -> (a, t) -> f (a, b)\non traverseTuple(f, tpl)\n    fmap(curry(my Tuple)'s |λ|(|1| of tpl), ¬\n        mReturn(f)'s |λ|(|2| of tpl))\nend traverseTuple"
+    }
+  ]
+}

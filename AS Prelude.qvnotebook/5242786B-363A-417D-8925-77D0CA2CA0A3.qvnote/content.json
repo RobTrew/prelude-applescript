@@ -1,0 +1,10 @@
+{
+  "title": "fileUTI",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fileUTI :: FilePath -> String\non fileUTI(fp)\n    set {uti, e} to (current application's ¬\n        NSWorkspace's sharedWorkspace()'s ¬\n        typeOfFile:fp |error|:(reference)) as list\n    if uti is missing value then\n        e's localizedDescription() as text\n    else\n        uti as text\n    end if\nend fileUTI"
+    }
+  ]
+}

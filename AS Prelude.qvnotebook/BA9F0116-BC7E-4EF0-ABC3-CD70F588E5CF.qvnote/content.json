@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- pi :: Float\npi"
+      "data": "-- pi :: Float\non |pi|()\n    pi\nend |pi|"
     }
   ]
 }

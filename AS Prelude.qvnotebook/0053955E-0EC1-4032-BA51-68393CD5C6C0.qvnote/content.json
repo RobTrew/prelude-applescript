@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- tails :: [a] -> [[a]]\non tails(xs)\n    if class of xs is text then\n        set xs_ to characters of xs\n    else\n        set xs_ to xs\n    end if\n    \n    script\n        on |λ|(_, i)\n            items i thru -1 of xs_\n        end |λ|\n    end script\n    \n    map(result, xs_) & {{}}\nend tails"
+      "data": "-- tails :: [a] -> [[a]]\non tails(xs)\n    if class of xs is text then\n        set es to characters of xs\n    else\n        set es to xs\n    end if\n    script residue\n        on |λ|(_, i)\n            items i thru -1 of es\n        end |λ|\n    end script\n    map(residue, es) & {{}}\nend tails"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "title": "sequenceAList",
+  "title": "sequenceA",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- sequenceAList :: Applicative f => [f a] -> f [a]\non sequenceAList(us)\n    if length of us > 0 then\n        script\n            on |λ|(u, v)\n                script cons\n                    on |λ|(x)\n                        script\n                            on |λ|(xs)\n                                {x} & xs\n                            end |λ|\n                        end script\n                    end |λ|\n                end script\n                ap(fmap(cons, u), v)\n            end |λ|\n        end script\n        foldr(result, mReturn(pureT(item 1 of us))'s |λ|({}), us)\n    else\n        us\n    end if\nend sequenceAList"
+      "data": "-- sequenceA :: (Applicative f, Traversable t) => t (f a) -> f (t a)\non sequenceA(tfa)\n    script |id|\n        on |λ|(x)\n            x\n        end |λ|\n    end script\n    traverse(|id|, tfa)\nend sequenceA"
     }
   ]
 }

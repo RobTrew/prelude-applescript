@@ -1,0 +1,10 @@
+{
+  "title": "setInsert",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- setInsert :: Ord a => a -> Set a -> Set a\non setInsert(x, objcSet)\n    objcSet's addObject:(x)\n    objcSet\nend setInsert"
+    }
+  ]
+}

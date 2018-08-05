@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- insertMap :: Dict -> String -> a -> Dict\non insertMap(rec, k, v)\n    set ca to current application\n    set nsDct to (ca's NSMutableDictionary's dictionaryWithDictionary:rec)\n    nsDct's setValue:v forKey:(k as string)\n    nsDct as record\nend insertMap"
+      "data": "-- insertMap :: Dict -> String -> a -> Dict\non insertMap(rec, k, v)\n    tell (current application's NSMutableDictionary's ¬\n        dictionaryWithDictionary:rec)\n        its setValue:v forKey:(k as string)\n        return it as record\n    end tell\nend insertMap"
     }
   ]
 }

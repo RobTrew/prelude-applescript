@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- partitionEithers :: [Either a b] -> ([a], [b])\non partitionEithers(xs)\n    set ys to {}\n    set zs to {}\n    repeat with x in xs\n        if isRight(x) then\n            set end of zs to x\n        else\n            set end of ys to x\n        end if\n    end repeat\n    Tuple(ys, zs)\nend partitionEithers"
+      "data": "-- partitionEithers :: [Either a b] -> ([a],[b])\non partitionEithers(xs)\n    set ys to {}\n    set zs to {}\n    repeat with x in xs\n        if isRight(x) then\n            set end of zs to x\n        else\n            set end of ys to x\n        end if\n    end repeat\n    Tuple(ys, zs)\nend partitionEithers"
     }
   ]
 }
