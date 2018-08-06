@@ -4,14 +4,14 @@ on subsets(xs)
     script go
         on |λ|(ys)
             if 0 < length of ys then
-                set subs to |λ|(rest of ys)
-                set y to item 1 of ys
-                script ycons
-                    on |λ|(zs)
-                        {y} & zs
+                set h to item 1 of ys
+                set zs to |λ|(rest of ys)
+                script hcons
+                    on |λ|(z)
+                        {h} & z
                     end |λ|
                 end script
-                subs & map(ycons, subs)
+                zs & map(hcons, zs)
             else
                 {{}}
             end if
