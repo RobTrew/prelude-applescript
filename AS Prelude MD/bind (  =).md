@@ -15,13 +15,15 @@ on bind(m, mf)
             else if "Tuple" = t then
                 bindTuple(m, mf)
             else
-                Nothing()
+                missing value
             end if
         else
-            Nothing()
+            missing value
         end if
+    else if handler is c or class is c then
+        bindFn(m, mf)
     else
-        Nothing()
+        missing value
     end if
 end bind
 ```

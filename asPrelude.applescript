@@ -170,10 +170,10 @@ end apply
 
 -- approxRatio :: Real -> Real -> Ratio
 on approxRatio(epsilon, n)
-    if missing value is epsilon then
-        set e to 1 / 10000
-    else
+    if {real, integer} contains (class of epsilon) and 0 < epsilon then
         set e to epsilon
+    else
+        set e to 1 / 10000
     end if
     
     script gcde
@@ -261,15 +261,33 @@ on bind(m, mf)
             else if "Tuple" = t then
                 bindTuple(m, mf)
             else
-                Nothing()
+                missing value
             end if
         else
-            Nothing()
+            missing value
         end if
+    else if handler is c or class is c then
+        bindFn(m, mf)
     else
-        Nothing()
+        missing value
     end if
 end bind
+
+-- bindFn :: (a -> b) -> (b -> c) -> a -> c
+on bindFn(m, mf)
+    script
+        property mnd : mReturn(m)
+        property f : mReturn(mf)'s |λ|
+        on |λ|(x)
+            script
+                on |λ|(y)
+                    mnd's |λ|(x, y)
+                end |λ|
+            end script
+            f(result)'s |λ|(x)
+        end |λ|
+    end script
+end bindFn
 
 -- bindList (>>=) :: [a] -> (a -> [b]) -> [b]
 on bindList(xs, f)
@@ -2142,6 +2160,11 @@ on iterateUntil(p, f, x)
     end script
     |λ|(x) of result
 end iterateUntil
+
+-- join :: Monad m => m (m a) -> m a
+on join(x)
+    bind(x, |id|)
+end join
 
 -- jsonLog :: a -> IO ()
 on jsonLog(e)
