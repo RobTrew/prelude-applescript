@@ -1753,6 +1753,15 @@ on |id|(x)
     x
 end |id|
 
+-- if_ :: Bool -> a -> a -> a
+on if_(bool, x, y)
+    if bool then
+        x
+    else
+        y
+    end if
+end if_
+
 -- indented :: String -> String -> String
 on indented(strIndent, s)
     script
@@ -4492,7 +4501,7 @@ on transpose(xxs)
         on |λ|(xs)
             set lng to |length|(xs)
             if lng < intMax then
-                append(xs, items (lng + 1) thru -1 of gaps)
+                xs & items (lng + 1) thru -1 of gaps
             else
                 xs
             end if
