@@ -2983,6 +2983,11 @@ on |on|(f, g)
     end script
 end |on|
 
+-- op :: String -> (a -> a -> b)
+on op(strOp)
+    run script "script\non |λ|(a, b)\na " & strOp & " b\nend |λ|\nend script"
+end op
+
 -- or :: [Bool] -> Bool
 on |or|(ps)
     repeat with p in ps
