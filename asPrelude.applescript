@@ -248,7 +248,6 @@ end assocs
 -- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 on bind(m, mf)
     set c to class of m
-    log c
     if list = c then
         bindList(m, mf)
     else if record = c then
@@ -889,15 +888,7 @@ on dropWhile(p, xs)
             set i to i + 1
         end repeat
     end tell
-    if i ≤ lng then
-        if class of xs ≠ string then
-            items i thru lng of xs
-        else
-            text i thru lng of xs
-        end if
-    else
-        {}
-    end if
+    drop(i - 1, xs)
 end dropWhile
 
 -- dropWhileEnd :: (a -> Bool) -> [a] -> [a]
@@ -909,15 +900,7 @@ on dropWhileEnd(p, xs)
             set i to i - 1
         end repeat
     end tell
-    if i > 0 then
-        if class of xs ≠ string then
-            items 1 thru i of xs
-        else
-            text 1 thru i of xs
-        end if
-    else
-        {}
-    end if
+    take(i, xs)
 end dropWhileEnd
 
 -- either :: (a -> c) -> (b -> c) -> Either a b -> c
