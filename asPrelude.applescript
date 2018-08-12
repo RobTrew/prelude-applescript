@@ -842,15 +842,20 @@ on drawTree(tree)
 end drawTree
 
 -- drop :: Int -> [a] -> [a]
+-- drop :: Int -> String -> String
 on drop(n, xs)
-    if n < length of xs then
-        if text is class of xs then
-            text (n + 1) thru -1 of xs
+    if class of xs is not string then
+        if n < length of xs then
+            items (1 + n) thru -1 of xs
         else
-            items (n + 1) thru -1 of xs
+            {}
         end if
     else
-        {}
+        if n < length of xs then
+            text (1 + n) thru -1 of xs
+        else
+            ""
+        end if
     end if
 end drop
 
@@ -4051,7 +4056,7 @@ on strip(s)
     script isSpace
         on |λ|(c)
             set i to id of c
-            i = 32 or (i ≥ 9 and i ≤ 13)
+            32 = i or (9 ≤ i and 13 ≥ i)
         end |λ|
     end script
     dropWhile(isSpace, dropWhileEnd(isSpace, s))
@@ -4214,15 +4219,16 @@ on tails(xs)
 end tails
 
 -- take :: Int -> [a] -> [a]
+-- take :: Int -> String -> String
 on take(n, xs)
     if class of xs is string then
-        if n > 0 then
+        if 0 < n then
             text 1 thru min(n, length of xs) of xs
         else
             ""
         end if
     else
-        if n > 0 then
+        if 0 < n then
             items 1 thru min(n, length of xs) of xs
         else
             {}
