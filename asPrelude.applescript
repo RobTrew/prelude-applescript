@@ -1207,9 +1207,9 @@ end findIndexR
 -- findIndices :: (a -> Bool) -> [a] -> [Int]
 on findIndices(p, xs)
     script
-        property f : mReturn(p)'s |λ|
-        on |λ|(x, i)
-            if f(x) then
+        property f : mReturn(p)
+        on |λ|(x, i, xs)
+            if f's |λ|(x, i, xs) then
                 {i}
             else
                 {}
@@ -2697,6 +2697,23 @@ on mappendTuple(a, b)
     Tuple(mappend(|1| of a, |1| of b), mappend(|2| of a, |2| of b))
 end mappendTuple
 
+-- matching :: [a] -> (a -> Int -> [a] -> Bool)
+on matching(pat)
+    set lng to length of pat
+    set bln to 0 < lng
+    if bln then
+        set h to item 1 of pat
+    else
+        set h to missing value
+    end if
+    script
+        on |λ|(x, i, src)
+            (h = x) and pat = ¬
+                (items i thru min(length of src, -1 + lng + i) of src)
+        end |λ|
+    end script
+end matching
+
 -- max :: Ord a => a -> a -> a
 on max(x, y)
     if x > y then
@@ -3968,28 +3985,26 @@ on splitFileName(strPath)
     end if
 end splitFileName
 
--- splitOn :: a -> [a] -> [[a]]
+-- splitOn :: [a] -> [a] -> [[a]]
 -- splitOn :: String -> String -> [String]
-on splitOn(needle, haystack)
-    if class of haystack is text then
+on splitOn(pat, src)
+    if class of src is text then
         set {dlm, my text item delimiters} to ¬
-            {my text item delimiters, needle}
-        set xs to text items of haystack
+            {my text item delimiters, pat}
+        set xs to text items of src
         set my text item delimiters to dlm
         return xs
     else
-        script triage
-            on |λ|(a, x)
-                if needle = x then
-                    Tuple(|1| of a & {|2| of a}, {})
-                else
-                    Tuple(|1| of a, (|2| of a) & x)
-                end if
+        set lng to length of pat
+        script residue
+            on |λ|(a, i)
+                Tuple(fst(a) & ¬
+                    {init(items snd(a) thru (i) of src)}, lng + i)
             end |λ|
         end script
-        
-        set tpl to foldl(triage, Tuple({}, {}), haystack)
-        return |1| of tpl & {|2| of tpl}
+        set tpl to foldl(residue, ¬
+            Tuple({}, 1), findIndices(matching(pat), src))
+        return fst(tpl) & {drop(snd(tpl) - 1, src)}
     end if
 end splitOn
 

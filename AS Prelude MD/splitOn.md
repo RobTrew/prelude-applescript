@@ -2,32 +2,31 @@
 -- splitOn("\r\n", "a\r\nb\r\nd\r\ne") --> ["a","b","d","e"]
 -- splitOn("aaa", "aaaXaaaXaaaXaaa") --> {"", "X", "X", "X", ""}
 -- splitOn("x", "x") --> {"", ""}
--- splitOn(5, {1, 5, 9, 2, 6, 5, 3, 5}) --> {{1}, {9, 2, 6}, {3}, {}}
+-- splitOn([3, 1], [1, 2, 3, 1, 2, 3, 1, 2, 3])
+--> {{1, 2}, {2}, {2, 3}}
 ```
 
 ```applescript
--- splitOn :: a -> [a] -> [[a]]
+-- splitOn :: [a] -> [a] -> [[a]]
 -- splitOn :: String -> String -> [String]
-on splitOn(needle, haystack)
-    if class of haystack is text then
+on splitOn(pat, src)
+    if class of src is text then
         set {dlm, my text item delimiters} to ¬
-            {my text item delimiters, needle}
-        set xs to text items of haystack
+            {my text item delimiters, pat}
+        set xs to text items of src
         set my text item delimiters to dlm
         return xs
     else
-        script triage
-            on |λ|(a, x)
-                if needle = x then
-                    Tuple(|1| of a & {|2| of a}, {})
-                else
-                    Tuple(|1| of a, (|2| of a) & x)
-                end if
+        set lng to length of pat
+        script residue
+            on |λ|(a, i)
+                Tuple(fst(a) & ¬
+                    {init(items snd(a) thru (i) of src)}, lng + i)
             end |λ|
         end script
-        
-        set tpl to foldl(triage, Tuple({}, {}), haystack)
-        return |1| of tpl & {|2| of tpl}
+        set tpl to foldl(residue, ¬
+            Tuple({}, 1), findIndices(matching(pat), src))
+        return fst(tpl) & {drop(snd(tpl) - 1, src)}
     end if
 end splitOn
 ```
