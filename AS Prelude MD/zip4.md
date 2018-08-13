@@ -3,7 +3,7 @@
 on zip4(ws, xs, ys, zs)
     script
         on |λ|(w, i)
-            Tuple4(w, item i of xs, item i of ys, item i of zs)
+            TupleN({w, item i of xs, item i of ys, item i of zs})
         end |λ|
     end script
     map(result, items 1 thru ¬

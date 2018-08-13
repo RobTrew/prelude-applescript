@@ -3,7 +3,7 @@
 on zip3(xs, ys, zs)
     script
         on |λ|(x, i)
-            Tuple3(x, item i of ys, item i of zs)
+            TupleN({x, item i of ys, item i of zs})
         end |λ|
     end script
     map(result, items 1 thru ¬

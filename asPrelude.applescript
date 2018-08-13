@@ -3616,12 +3616,8 @@ on show(e)
                         set f to my showOrdering
                     else if "Ratio" = t then
                         set f to my showRatio
-                    else if "Tuple" = t then
+                    else if class of t is text and t begins with "Tuple" then
                         set f to my showTuple
-                    else if "Tuple3" = t then
-                        set f to my showTuple3
-                    else if "Tuple4" = t then
-                        set f to my showTuple4
                     else
                         set f to my showDict
                     end if
@@ -3770,23 +3766,19 @@ end showRatio
 
 -- showTuple :: Tuple -> String
 on showTuple(tpl)
-    "(" & unQuoted(show(|1| of tpl)) & ", " & unQuoted(show(|2| of tpl)) & ")"
+    set ca to current application
+    script
+        on |λ|(n)
+            set v to (ca's NSDictionary's dictionaryWithDictionary:tpl)'s objectForKey:(n as string)
+            if v ≠ missing value then
+                unQuoted(show(item 1 of ((ca's NSArray's arrayWithObject:v) as list)))
+            else
+                missing value
+            end if
+        end |λ|
+    end script
+    "(" & intercalateS(", ", map(result, enumFromToInt(1, length of tpl))) & ")"
 end showTuple
-
--- showTuple3 :: Tuple3 -> String
-on showTuple3(tpl)
-    "(" & unQuoted(show(|1| of tpl)) & ", " & ¬
-        unQuoted(show(|2| of tpl)) & ", " & ¬
-        unQuoted(show(|3| of tpl)) & ")"
-end showTuple3
-
--- showTuple4 :: Tuple4 -> String
-on showTuple4(tpl)
-    "(" & unQuoted(show(|1| of tpl)) & ", " & ¬
-        unQuoted(show(|2| of tpl)) & ", " & ¬
-        unQuoted(show(|3| of tpl)) & ", " & ¬
-        unQuoted(show(|4| of tpl)) & ")"
-end showTuple4
 
 -- showUndefined :: () -> String
 on showUndefined()
@@ -4912,7 +4904,7 @@ on unzip3(xyzs)
         set end of ys to |2| of xyz
         set end of zs to |3| of xyz
     end repeat
-    return Tuple3(xs, ys, zs)
+    return TupleN({xs, ys, zs})
 end unzip3
 
 -- unzip4 :: [(a,b,c,d)] -> ([a],[b],[c],[d])
@@ -4927,7 +4919,7 @@ on unzip4(wxyzs)
         set end of ys to |3| of wxyz
         set end of zs to |4| of wxyz
     end repeat
-    return Tuple4(ws, xs, ys, zs)
+    return TupleN({ws, xs, ys, zs})
 end unzip4
 
 -- variance :: [Num] -> Num
@@ -5008,7 +5000,7 @@ end zip
 on zip3(xs, ys, zs)
     script
         on |λ|(x, i)
-            Tuple3(x, item i of ys, item i of zs)
+            TupleN({x, item i of ys, item i of zs})
         end |λ|
     end script
     map(result, items 1 thru ¬
@@ -5019,7 +5011,7 @@ end zip3
 on zip4(ws, xs, ys, zs)
     script
         on |λ|(w, i)
-            Tuple4(w, item i of xs, item i of ys, item i of zs)
+            TupleN({w, item i of xs, item i of ys, item i of zs})
         end |λ|
     end script
     map(result, items 1 thru ¬

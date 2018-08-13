@@ -19,12 +19,8 @@ on show(e)
                         set f to my showOrdering
                     else if "Ratio" = t then
                         set f to my showRatio
-                    else if "Tuple" = t then
+                    else if class of t is text and t begins with "Tuple" then
                         set f to my showTuple
-                    else if "Tuple3" = t then
-                        set f to my showTuple3
-                    else if "Tuple4" = t then
-                        set f to my showTuple4
                     else
                         set f to my showDict
                     end if

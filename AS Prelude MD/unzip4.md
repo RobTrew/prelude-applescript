@@ -11,6 +11,6 @@ on unzip4(wxyzs)
         set end of ys to |3| of wxyz
         set end of zs to |4| of wxyz
     end repeat
-    return Tuple4(ws, xs, ys, zs)
+    return TupleN({ws, xs, ys, zs})
 end unzip4
 ```

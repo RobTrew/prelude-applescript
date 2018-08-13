@@ -9,6 +9,6 @@ on unzip3(xyzs)
         set end of ys to |2| of xyz
         set end of zs to |3| of xyz
     end repeat
-    return Tuple3(xs, ys, zs)
+    return TupleN({xs, ys, zs})
 end unzip3
 ```
