@@ -908,11 +908,6 @@ on dropWhileEnd(p, xs)
     take(i, xs)
 end dropWhileEnd
 
--- eft :: Enum a => a -> a -> [a]
-on eft(m, n)
-    enumFromTo(m, n)
-end eft
-
 -- either :: (a -> c) -> (b -> c) -> Either a b -> c
 on either(lf, rf, e)
     if isRight(e) then
@@ -1566,6 +1561,11 @@ on fst(tpl)
         item 1 of tpl
     end if
 end fst
+
+-- ft :: Enum a => a -> a -> [a]
+on ft(m, n)
+    enumFromTo(m, n)
+end ft
 
 -- gcd :: Int -> Int -> Int
 on gcd(a, b)
