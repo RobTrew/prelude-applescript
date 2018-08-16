@@ -908,6 +908,11 @@ on dropWhileEnd(p, xs)
     take(i, xs)
 end dropWhileEnd
 
+-- eft :: Enum a => a -> a -> [a]
+on eft(m, n)
+    enumFromTo(m, n)
+end eft
+
 -- either :: (a -> c) -> (b -> c) -> Either a b -> c
 on either(lf, rf, e)
     if isRight(e) then
@@ -3795,6 +3800,11 @@ on signum(x)
         1
     end if
 end signum
+
+-- sj :: a -> String
+on sj(x)
+    showJSON(x)
+end sj
 
 -- snd :: (a, b) -> b
 on snd(tpl)
