@@ -1,10 +1,11 @@
 ```applescript
 -- findIndices(matching([2, 3]), [1, 2, 3, 1, 2, 3])
--- {2, 5}
+--> {2, 5}
 ```
 
 ```applescript
 -- findIndices :: (a -> Bool) -> [a] -> [Int]
+-- findIndices :: (String -> Bool) -> String -> [Int]
 on findIndices(p, xs)
     script
         property f : mReturn(p)

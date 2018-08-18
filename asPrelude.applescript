@@ -1201,6 +1201,7 @@ on findIndexR(f, xs)
 end findIndexR
 
 -- findIndices :: (a -> Bool) -> [a] -> [Int]
+-- findIndices :: (String -> Bool) -> String -> [Int]
 on findIndices(p, xs)
     script
         property f : mReturn(p)
