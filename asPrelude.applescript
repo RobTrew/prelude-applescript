@@ -594,11 +594,7 @@ end concat
 -- concatMap :: (a -> [b]) -> [a] -> [b]
 on concatMap(f, xs)
     set lng to length of xs
-    if 0 < lng and class of xs is string then
-        set acc to ""
-    else
-        set acc to {}
-    end if
+    set acc to {}
     tell mReturn(f)
         repeat with i from 1 to lng
             set acc to acc & |λ|(item i of xs, i, xs)
@@ -2703,17 +2699,23 @@ on mappendTuple(a, b)
 end mappendTuple
 
 -- matching :: [a] -> (a -> Int -> [a] -> Bool)
+-- matching :: String -> (Char -> Int -> String -> Bool)
 on matching(pat)
-    set lng to length of pat
+    if class of pat is text then
+        set xs to characters of pat
+    else
+        set xs to pat
+    end if
+    set lng to length of xs
     set bln to 0 < lng
     if bln then
-        set h to item 1 of pat
+        set h to item 1 of xs
     else
         set h to missing value
     end if
     script
         on |λ|(x, i, src)
-            (h = x) and pat = ¬
+            (h = x) and xs = ¬
                 (items i thru min(length of src, -1 + lng + i) of src)
         end |λ|
     end script
