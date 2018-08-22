@@ -2571,7 +2571,7 @@ end mapAccumL_Tree
 -- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumR(f, acc, xs)
     script
-        on |λ|(x, a, i)
+        on |λ|(a, x, i)
             tell mReturn(f) to set pair to |λ|(|1| of a, x, i)
             Tuple(|1| of pair, (|2| of pair) & |2| of a)
         end |λ|
@@ -3484,11 +3484,12 @@ end rights
 -- rotate :: Int -> [a] -> [a]
 on rotate(n, xs)
     set lng to length of xs
-    if lng > 0 then
-        takeDropCycle(lng, n, xs)
+    if 0 > n then
+        set d to (-n) mod lng
     else
-        {}
+        set d to lng - (n mod lng)
     end if
+    drop(d, xs) & take(d, xs)
 end rotate
 
 -- round :: a -> Int
@@ -3680,7 +3681,7 @@ end showHex
 on showIntAtBase(base, toChr, n, rs)
     script showIt
         on |λ|(nd_, r)
-            set {n, d} to nd_
+            set {n, d} to ({|1|, |2|} of nd_)
             set r_ to toChr's |λ|(d) & r
             if n > 0 then
                 |λ|(quotRem(n, base), r_)
@@ -4179,7 +4180,7 @@ end subtract
 -- succ :: Enum a => a -> a
 on succ(x)
     if isChar(x) then
-        chr(ord(x) + 1)
+        chr(1 + ord(x))
     else
         1 + x
     end if

@@ -2,10 +2,11 @@
 -- rotate :: Int -> [a] -> [a]
 on rotate(n, xs)
     set lng to length of xs
-    if lng > 0 then
-        takeDropCycle(lng, n, xs)
+    if 0 > n then
+        set d to (-n) mod lng
     else
-        {}
+        set d to lng - (n mod lng)
     end if
+    drop(d, xs) & take(d, xs)
 end rotate
 ```

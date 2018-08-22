@@ -2,7 +2,7 @@
 -- succ :: Enum a => a -> a
 on succ(x)
     if isChar(x) then
-        chr(ord(x) + 1)
+        chr(1 + ord(x))
     else
         1 + x
     end if
