@@ -879,6 +879,42 @@ on dropFileName(strPath)
     end if
 end dropFileName
 
+-- dropLength :: [a] -> [b] -> [b]
+on dropLength(xs, ys)
+    script go
+        on |λ|(x, y)
+            if 0 < length of x then
+                if 0 < length of y then
+                    |λ|(tail(x), tail(y))
+                else
+                    {}
+                end if
+            else
+                y
+            end if
+        end |λ|
+    end script
+    go's |λ|(xs, ys)
+end dropLength
+
+-- dropLengthMaybe :: [a] -> [b] -> Maybe [b]
+on dropLengthMaybe(xs, ys)
+    script go
+        on |λ|(x, y)
+            if 0 < length of x then
+                if 0 < length of y then
+                    |λ|(tail(x), tail(y))
+                else
+                    Nothing()
+                end if
+            else
+                Just(y)
+            end if
+        end |λ|
+    end script
+    go's |λ|(xs, ys)
+end dropLengthMaybe
+
 -- dropWhile :: (a -> Bool) -> [a] -> [a]
 -- dropWhile :: (Char -> Bool) -> String -> String
 on dropWhile(p, xs)
@@ -2115,27 +2151,13 @@ on isSubsetOf(objcSetA, objcSetB)
 end isSubsetOf
 
 -- isSuffixOf :: Eq a => [a] -> [a] -> Bool
--- isSuffixOf :: String -> String -> Bool 
-on isSuffixOf(suffix, main)
-    if class of suffix is string then
-        (offset of suffix in main) = 1 + (length of main) - (length of suffix)
-    else
-        set lngSuffix to length of suffix
-        if lngSuffix = 0 then
-            true
-        else
-            set lngMain to length of main
-            set lngDelta to lngMain - lngSuffix
-            if lngDelta < 0 or lngMain = 0 then
-                false
-            else
-                repeat with i from 1 to lngSuffix
-                    if item i of suffix ≠ item (lngDelta + i) of main then return false
-                end repeat
-                true
-            end if
-        end if
-    end if
+on isSuffixOf(ns, hs)
+    script go
+        on |λ|(delta)
+            ns = dropLength(delta, hs)
+        end |λ|
+    end script
+    bindMay(dropLengthMaybe(ns, hs), go)
 end isSuffixOf
 
 -- isUpper :: Char -> Bool
@@ -2571,7 +2593,7 @@ end mapAccumL_Tree
 -- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumR(f, acc, xs)
     script
-        on |λ|(a, x, i)
+        on |λ|(x, a, i)
             tell mReturn(f) to set pair to |λ|(|1| of a, x, i)
             Tuple(|1| of pair, (|2| of pair) & |2| of a)
         end |λ|
@@ -4208,12 +4230,25 @@ end swap
 
 -- tail :: [a] -> [a]
 on tail(xs)
-    if xs = {} then
-        missing value
+    set blnText to text is class of xs
+    if blnText then
+        set unit to ""
     else
-        rest of xs
+        set unit to {}
     end if
-end tailDef
+    set lng to length of xs
+    if 1 > lng then
+        missing value
+    else if 2 > lng then
+        unit
+    else
+        if blnText then
+            text 2 thru -1 of xs
+        else
+            rest of ys
+        end if
+    end if
+end tail
 
 -- tailMay :: [a] -> Maybe [a]
 on tailMay(xs)
@@ -4884,7 +4919,10 @@ end |until|
 
 -- unwords :: [String] -> String
 on unwords(xs)
-    intercalateS(space, xs)
+    set {dlm, my text item delimiters} to {my text item delimiters, space}
+    set s to xs as text
+    set my text item delimiters to dlm
+    return s
 end unwords
 
 -- unwrap :: NSObject -> a
