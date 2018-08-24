@@ -1,5 +1,6 @@
 ```applescript
 -- isSuffixOf :: Eq a => [a] -> [a] -> Bool
+-- isSuffixOf :: String -> String -> Bool
 on isSuffixOf(ns, hs)
     script go
         on |λ|(delta)

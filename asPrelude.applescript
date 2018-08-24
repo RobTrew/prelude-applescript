@@ -2151,6 +2151,7 @@ on isSubsetOf(objcSetA, objcSetB)
 end isSubsetOf
 
 -- isSuffixOf :: Eq a => [a] -> [a] -> Bool
+-- isSuffixOf :: String -> String -> Bool
 on isSuffixOf(ns, hs)
     script go
         on |λ|(delta)
@@ -4699,8 +4700,8 @@ on Tuple(a, b)
     {type:"Tuple", |1|:a, |2|:b, length:2}
 end Tuple
 
--- tupleFromArray :: [a] -> (a, a ...)
-on tupleFromArray(xs)
+-- tupleFromList :: [a] -> (a, a ...)
+on tupleFromList(xs)
     set lng to length of xs
     if 1 < lng then
         if 2 < lng then
