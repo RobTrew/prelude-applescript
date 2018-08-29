@@ -531,8 +531,10 @@ end comparing
 -- compose (<<<) :: (b -> c) -> (a -> b) -> a -> c
 on compose(f, g)
     script
+        property mf : mReturn(f)
+        property mg : mReturn(g)
         on |λ|(x)
-            |λ|(|λ|(x) of mReturn(g)) of mReturn(f)
+            mf's |λ|(mg's |λ|(x))
         end |λ|
     end script
 end compose
@@ -1327,13 +1329,7 @@ end flip
 
 -- floor :: Num -> Int
 on floor(x)
-    set nr to properFraction(x)
-    set n to |1| of nr
-    if (|2| of nr) < 0 then
-        n - 1
-    else
-        n
-    end if
+  x div 1
 end floor
 
 -- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b
@@ -3269,7 +3265,7 @@ end raise
 
 -- randomRInt :: Int -> Int -> Int
 on randomRInt(low, high)
-    floor(low + ((random number) * (1 + (high - low))))
+    (low + ((random number) * (1 + (high - low)))) div 1
 end randomRInt
 
 -- range :: Ix a => (a, a) -> [a]
