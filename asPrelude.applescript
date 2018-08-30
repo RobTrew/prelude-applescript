@@ -1800,9 +1800,30 @@ on indented(strIndent, s)
 end indented
 
 -- index (!!) :: [a] -> Int -> a
+-- index (!!) :: String -> Int -> Char
 on |index|(xs, i)
     item i of xs
 end |index|
+
+-- indexOf :: Eq a => [a] -> [a] -> Maybe Int
+-- indexOf :: String -> String -> Maybe Int
+on indexOf(pat, src)
+    if class of src is text then
+        set tpl to breakOn(pat, src)
+        if 0 < length of (|2| of tpl) then
+            Just((length of |1| of tpl) + 1)
+        else
+            Nothing()
+        end if
+    else
+        script pfx
+            on |λ|(xs)
+                isPrefixOf(pat, xs)
+            end |λ|
+        end script
+        findIndex(pfx, tails(src))
+    end if
+end indexOf
 
 -- init :: [a] -> [a]
 -- init :: [String] -> [String]
@@ -2076,17 +2097,22 @@ end iso8601Local
 -- isPrefixOf :: [a] -> [a] -> Bool
 -- isPrefixOf :: String -> String -> Bool
 on isPrefixOf(xs, ys)
-  set intX to length of xs
-    if intX < 1 then
-        true
-    else if intX > length of ys then
-        false
-    else if class of xs is string then
-        (offset of xs in ys) = 1
-    else
-        set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}
-        ((|1| of xxt) = (|1| of yyt)) and isPrefixOf(|2| of xxt, |2| of yyt)
-    end if
+    script go
+        on |λ|(xs, ys)
+            set intX to length of xs
+            if intX < 1 then
+                true
+            else if intX > length of ys then
+                false
+            else if class of xs is string then
+                (offset of xs in ys) = 1
+            else
+                set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}
+                ((|1| of xxt) = (|1| of yyt)) and |λ|(|2| of xxt, |2| of yyt)
+            end if
+        end |λ|
+    end script
+    go's |λ|(xs, ys)
 end isPrefixOf
 
 -- isRight :: Either a b -> Bool
