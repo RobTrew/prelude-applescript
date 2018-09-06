@@ -2189,6 +2189,22 @@ on isUpper(c)
     d ≥ 0 and d < 26
 end isUpper
 
+-- iterate :: (a -> a) -> a -> Generator [a]
+on iterate(f, x)
+    script
+        property v : missing value
+        property g : mReturn(f)'s |λ|
+        on |λ|()
+            if v is missing value then
+                set v to x
+            else
+                set v to g(v)
+            end if
+            return v
+        end |λ|
+    end script
+end iterate
+
 -- iterateUntil :: (a -> Bool) -> (a -> a) -> a -> [a]
 on iterateUntil(p, f, x)
     script
@@ -4268,7 +4284,7 @@ on tail(xs)
         if blnText then
             text 2 thru -1 of xs
         else
-            rest of ys
+            rest of xs
         end if
     end if
 end tail
@@ -4300,18 +4316,27 @@ end tails
 -- take :: Int -> [a] -> [a]
 -- take :: Int -> String -> String
 on take(n, xs)
-    if class of xs is string then
-        if 0 < n then
-            text 1 thru min(n, length of xs) of xs
-        else
-            ""
-        end if
-    else
+    set c to class of xs
+    if c is list then
         if 0 < n then
             items 1 thru min(n, length of xs) of xs
         else
             {}
         end if
+    else if c is string then
+        if 0 < n then
+            text 1 thru min(n, length of xs) of xs
+        else
+            ""
+        end if
+    else if c is script then
+        set ys to {}
+        repeat with i from 1 to n
+            set end of ys to xs's |λ|()
+        end repeat
+        return ys
+    else
+        missing value
     end if
 end take
 
