@@ -2667,7 +2667,18 @@ end mapKeys
 
 -- mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 on mapMaybe(mf, xs)
-    concatMap(compose(mf, my maybeToList), xs)
+    script
+        property g : mReturn(mf)
+        on |λ|(a, x)
+            set mb to g's |λ|(x)
+            if Nothing of mb then
+                a
+            else
+                a & (Just of mb)
+            end if
+        end |λ|
+    end script
+    foldl(result, {}, xs)
 end mapMaybe
 
 -- mappend (<>) :: Monoid a => a -> a -> a
