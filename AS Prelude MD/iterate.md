@@ -5,7 +5,7 @@ on iterate(f, x)
         property v : missing value
         property g : mReturn(f)'s |λ|
         on |λ|()
-            if v is missing value then
+            if missing value is v then
                 set v to x
             else
                 set v to g(v)

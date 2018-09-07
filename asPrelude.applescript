@@ -666,6 +666,27 @@ on curry2(f)
     end script
 end curry
 
+-- cycle :: [a] -> Generator [a]
+on cycle(xs)
+    script
+        property lng : 1 + (length of xs)
+        property i : missing value
+        on |λ|()
+            if missing value is i then
+                set i to 1
+            else
+                set nxt to (1 + i) mod lng
+                if 0 = ((1 + i) mod lng) then
+                    set i to 1
+                else
+                    set i to nxt
+                end if
+            end if
+            return item i of xs
+        end |λ|
+    end script
+end cycle
+
 -- delete :: Eq a => a -> [a] -> [a]
 on |delete|(x, xs)
     set mbIndex to elemIndex(x, xs)
@@ -2195,7 +2216,7 @@ on iterate(f, x)
         property v : missing value
         property g : mReturn(f)'s |λ|
         on |λ|()
-            if v is missing value then
+            if missing value is v then
                 set v to x
             else
                 set v to g(v)
