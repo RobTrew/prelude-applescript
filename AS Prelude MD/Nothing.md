@@ -1,5 +1,5 @@
 ```applescript
--- Nothing :: () -> Nothing
+-- Nothing :: Maybe a
 on Nothing()
     {type:"Maybe", Nothing:true}
 end Nothing

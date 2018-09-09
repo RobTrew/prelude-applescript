@@ -785,6 +785,27 @@ on difference(xs, ys)
     foldl(result, xs, ys)
 end difference
 
+-- digitToInt :: Char -> Int
+on digitToInt(c)
+    set oc to id of c
+    if 48 > oc or 102 < oc then
+        missing value
+    else
+        set dec to oc - (id of "0")
+        set hexu to oc - (id of "A")
+        set hexl to oc - (id of "a")
+        if 9 ≥ dec then
+            dec
+        else if 0 ≤ hexu and 5 ≥ hexu then
+            10 + hexu
+        else if 0 ≤ hexl and 5 ≥ hexl then
+            10 + hexl
+        else
+            missing value
+        end if
+    end if
+end digitToInt
+
 -- div :: Int -> Int -> Int
 on |div|(a, b)
     a div b
@@ -2272,7 +2293,7 @@ on jsonParseLR(s)
     end if
 end jsonParseLR
 
--- Just :: a -> Just a
+-- Just :: a -> Maybe a
 on Just(x)
     {type: "Maybe", Nothing:false, Just:x}
 end Just
@@ -3036,7 +3057,7 @@ on notElem(x, xs)
     xs does not contain x
 end notElem
 
--- Nothing :: () -> Nothing
+-- Nothing :: Maybe a
 on Nothing()
     {type:"Maybe", Nothing:true}
 end Nothing
