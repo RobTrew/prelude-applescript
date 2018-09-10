@@ -1633,9 +1633,17 @@ on fst(tpl)
     end if
 end fst
 
--- ft :: Enum a => a -> a -> [a]
+-- ft :: Int -> Int -> [Int]
 on ft(m, n)
-    enumFromTo(m, n)
+    if m ≤ n then
+        set lst to {}
+        repeat with i from m to n
+            set end of lst to i
+        end repeat
+        return lst
+    else
+        return {}
+    end if
 end ft
 
 -- gcd :: Int -> Int -> Int
@@ -4374,19 +4382,19 @@ end tails
 -- take :: Int -> String -> String
 on take(n, xs)
     set c to class of xs
-    if c is list then
+    if list is c then
         if 0 < n then
             items 1 thru min(n, length of xs) of xs
         else
             {}
         end if
-    else if c is string then
+    else if string is c then
         if 0 < n then
             text 1 thru min(n, length of xs) of xs
         else
             ""
         end if
-    else if c is script then
+    else if script is c then
         set ys to {}
         repeat with i from 1 to n
             set end of ys to xs's |λ|()
@@ -4508,14 +4516,31 @@ end takeIterate
 -- takeWhile :: (a -> Bool) -> [a] -> [a]
 -- takeWhile :: (Char -> Bool) -> String -> String
 on takeWhile(p, xs)
+    if script is class of xs then
+        takeWhileGen(p, xs)
+    else
+        tell mReturn(p)
+            repeat with i from 1 to length of xs
+                if not |λ|(item i of xs) then ¬
+                    return take(i - 1, xs)
+            end repeat
+        end tell
+        return xs
+    end if
+end takeWhile
+
+-- takeWhileGen :: (a -> Bool) -> Generator [a] -> [a]
+on takeWhileGen(p, xs)
+    set ys to {}
+    set v to |λ|() of xs
     tell mReturn(p)
-        repeat with i from 1 to length of xs
-            if not |λ|(item i of xs) then ¬
-                return take(i - 1, xs)
+        repeat while (|λ|(v))
+            set end of ys to v
+            set v to xs's |λ|()
         end repeat
     end tell
-    return xs
-end takeWhile
+    return ys
+end takeWhileGen
 
 -- takeWhileR :: (a -> Bool) -> [a] -> [a]
 on takeWhileR(p, xs)
