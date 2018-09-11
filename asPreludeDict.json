@@ -259,6 +259,7 @@
   "plus": "-- plus :: Num -> Num -> Num\non plus(a, b)\n    a + b\nend plus",
   "postorder": "-- Root elements of tree flattened bottom-up\n-- into a postorder list.\n-- postorder :: Tree a -> [a]\non postorder(node)\n    script go\n        on |λ|(xs, x)\n            foldl(go, xs, nest of x) & {root of x}\n        end |λ|\n    end script\n    go's |λ|({}, node)\nend postorder",
   "pred": "-- pred :: Enum a => a -> a\non pred(x)\n    if isChar(x) then\n        chr(ord(x) - 1)\n    else\n        (-1) + x\n    end if\nend pred",
+  "print": "-- print :: a -> IO ()\non print (x)\n    log x\n    return x\nend print",
   "product": "-- product :: [Num] -> Num\non product(xs)\n    script multiply\n        on |λ|(a, b)\n            a * b\n        end |λ|\n    end script\n    \n    foldl(multiply, 1, xs)\nend product",
   "properFraction": "-- properFraction :: Real -> (Int, Real)\non properFraction(n)\n    set i to (n div 1)\n    Tuple(i, n - i)\nend properFraction",
   "pureList": "-- pureList :: a -> [a]\non pureList(x)\n        {x}\nend pure",

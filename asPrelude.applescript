@@ -3264,6 +3264,12 @@ on pred(x)
     end if
 end pred
 
+-- print :: a -> IO ()
+on print (x)
+    log x
+    return x
+end print
+
 -- product :: [Num] -> Num
 on product(xs)
     script multiply
