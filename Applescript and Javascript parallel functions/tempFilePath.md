@@ -10,8 +10,8 @@ end tempFilePath
 ```
 
 ```js
-// File name template -> temporary path
-// (Random digit sequence inserted between template base and extension)
+// File name template to temporary path
+// Random digit sequence inserted between template base and extension
 ```
 
 ```js
