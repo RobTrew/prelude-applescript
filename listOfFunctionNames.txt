@@ -55,6 +55,7 @@ const_ :: a -> b -> a
 createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 curry :: ((a, b) -> c) -> a -> b -> c
 curry2 :: ((a, b) -> c) -> a -> b -> c
+curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
 cycle :: [a] -> Generator [a]
 delete :: Eq a => a -> [a] -> [a]
 deleteAt :: Int -> [a] -> [a]
@@ -287,6 +288,7 @@ recipMay :: Num -> Maybe Num
 regexMatches :: String -> String -> [[String]]
 rem :: Int -> Int -> Int
 removeFile :: FilePath -> Either String String
+repeat :: a -> Generator [a]
 replace :: String -> String -> String -> String
 replicate :: Int -> a -> [a]
 replicateM :: Int -> [a] -> [[a]]

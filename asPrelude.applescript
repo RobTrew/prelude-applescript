@@ -666,6 +666,23 @@ on curry2(f)
     end script
 end curry
 
+-- curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
+on curry3(f)
+    script
+        on |λ|(a)
+            script
+                on |λ|(b)
+                    script
+                        on |λ|(c)
+                            |λ|(a, b, c) of mReturn(f)
+                        end |λ|
+                    end script
+                end |λ|
+            end script
+        end |λ|
+    end script
+end curry3
+
 -- cycle :: [a] -> Generator [a]
 on cycle(xs)
     script
@@ -3526,6 +3543,15 @@ on removeFile(fp)
     end if
 end removeFile
 
+-- repeat :: a -> Generator [a]
+on |repeat|(x)
+    script
+        on |λ|()
+            return x
+        end |λ|
+    end script
+end |repeat|
+
 -- replace :: String -> String -> String -> String
 on replace(strNeedle, strNew, strHayStack)
     set {dlm, my text item delimiters} to {my text item delimiters, strNeedle}
@@ -3567,7 +3593,7 @@ on replicateM(n, xs)
         end |λ|
     end script
     
-    tell go to |λ|(n)
+    go's |λ|(n)
 end replicateM
 
 -- replicateString :: Int -> String -> String

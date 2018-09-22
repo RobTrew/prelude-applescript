@@ -24,6 +24,6 @@ on replicateM(n, xs)
         end |λ|
     end script
     
-    tell go to |λ|(n)
+    go's |λ|(n)
 end replicateM
 ```
