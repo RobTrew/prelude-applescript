@@ -901,18 +901,24 @@ end drawTree
 -- drop :: Int -> [a] -> [a]
 -- drop :: Int -> String -> String
 on drop(n, xs)
-    if class of xs is not string then
-        if n < length of xs then
-            items (1 + n) thru -1 of xs
+    set c to class of xs
+    if c is not script then
+        if c is not string then
+            if n < length of xs then
+                items (1 + n) thru -1 of xs
+            else
+                {}
+            end if
         else
-            {}
+            if n < length of xs then
+                text (1 + n) thru -1 of xs
+            else
+                ""
+            end if
         end if
     else
-        if n < length of xs then
-            text (1 + n) thru -1 of xs
-        else
-            ""
-        end if
+        take(n, xs) -- consumed
+        return xs
     end if
 end drop
 
@@ -3762,6 +3768,16 @@ end setMember
 on setSize(objcSet)
     objcSet's |count|() as integer
 end setSize
+
+-- shift :: Int -> [a] -> [a]
+on shift(n, xs)
+    set lng to |length|(xs)
+    if missing value is not lng then
+        take(lng, drop(n, cycle(xs)))
+    else
+        drop(n, xs)
+    end if
+end shift
 
 -- show :: a -> String
 on show(e)
