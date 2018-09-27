@@ -2410,7 +2410,7 @@ on |length|(xs)
     if list is c or string is c then
         length of xs
     else
-        missing value
+        2 ^ 30 -- (simple proxy for non-finite)
     end if
 end |length|
 
@@ -3652,13 +3652,12 @@ end rights
 
 -- rotate :: Int -> [a] -> [a]
 on rotate(n, xs)
-    set lng to length of xs
-    if 0 > n then
-        set d to (-n) mod lng
+    set lng to |length|(xs)
+    if missing value is not lng then
+        take(lng, drop(lng - n, cycle(xs)))
     else
-        set d to lng - (n mod lng)
+        lng
     end if
-    drop(d, xs) & take(d, xs)
 end rotate
 
 -- round :: a -> Int
@@ -3909,7 +3908,7 @@ end showJSON
 
 -- showList :: [a] -> String
 on showList(xs)
-  showJSON(xs)
+    "[" & intercalateS(", ", map(show, xs)) & "]"
 end showList
 
 -- showLog :: a -> IO ()
@@ -5223,12 +5222,7 @@ end writeTempFile
 
 -- zip :: [a] -> [b] -> [(a, b)]
 on zip(xs, ys)
-    set lng to min(length of xs, length of ys)
-    set lst to {}
-    repeat with i from 1 to lng
-        set end of lst to Tuple(item i of xs, item i of ys)
-    end repeat
-    return lst
+    zipWith(Tuple, xs, ys)
 end zip
 
 -- zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]
@@ -5255,12 +5249,14 @@ end zip4
 
 -- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 on zipWith(f, xs, ys)
-    set lng to min(length of xs, length of ys)
+    set lng to min(|length|(xs), |length|(ys))
     if 1 > lng then return {}
+    set xs_ to take(lng, xs) -- Allow for non-finite
+    set ys_ to take(lng, ys) -- generators like cycle etc
     set lst to {}
     tell mReturn(f)
         repeat with i from 1 to lng
-            set end of lst to |λ|(item i of xs, item i of ys)
+            set end of lst to |λ|(item i of xs_, item i of ys_)
         end repeat
         return lst
     end tell
