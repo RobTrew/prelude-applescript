@@ -1076,6 +1076,26 @@ on elems(rec)
     (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list
 end elems
 
+-- enumFrom :: a -> [a]
+on enumFrom(x)
+    script
+        property v : missing value
+        property blnNum : class of x is not text
+        on |λ|()
+            if missing value is not v then
+                if blnNum then
+                    set v to 1 + v
+                else
+                    set v to succ(v)
+                end if
+            else
+                set v to x
+            end if
+            return v
+        end |λ|
+    end script
+end enumFrom
+
 -- enumFromThenTo :: Enum a => a -> a -> a -> [a]
 on enumFromThenTo(x1, x2, y)
     if class of x1 is integer then
@@ -1422,6 +1442,22 @@ on fmap(f, fa)
         missing value
     end if
 end fmap
+
+-- fmapGen <$> :: (a -> b) -> Gen [a] -> Gen [b]
+on fmapGen(f, gen)
+    script
+        property g : gen
+        property mf : mReturn(f)'s |λ|
+        on |λ|()
+            set v to g's |λ|()
+            if v is missing value then
+                v
+            else
+                mf(v)
+            end if
+        end |λ|
+    end script
+end fmapGen
 
 -- fmapLR (<$>) :: (a -> b) -> Either a a -> Either a b
 on fmapLR(f, lr)
@@ -3908,7 +3944,7 @@ end showJSON
 
 -- showList :: [a] -> String
 on showList(xs)
-    "[" & intercalateS(", ", map(show, xs)) & "]"
+    "[" & intercalateS(", ", map(my show, xs)) & "]"
 end showList
 
 -- showLog :: a -> IO ()
@@ -4930,14 +4966,19 @@ end typeName
 
 -- uncons :: [a] -> Maybe (a, [a])
 on uncons(xs)
-    if xs = {} then
+    set lng to |length|(xs)
+    if 0 = lng then
         Nothing()
     else
-        if class of xs is string then
-            set cs to text items of xs
-            Just(Tuple(item 1 of cs, rest of cs))
+        if (2 ^ 29 - 1) as integer > lng then
+            if class of xs is string then
+                set cs to text items of xs
+                Just(Tuple(item 1 of cs, rest of cs))
+            else
+                Just(Tuple(item 1 of xs, rest of xs))
+            end if
         else
-            Just(Tuple(item 1 of xs, rest of xs))
+            Just(Tuple(item 1 of take(1, xs), xs))
         end if
     end if
 end uncons
@@ -5246,6 +5287,30 @@ on zip4(ws, xs, ys, zs)
     map(result, items 1 thru ¬
         minimum({length of xs, length of ys, length of zs}) of xs)
 end zip4
+
+-- zipGen :: Gen [a] -> Gen [b] -> Gen [(a, b)]
+on zipGen(ga, gb)
+    script
+        property ma : missing value
+        property mb : missing value
+        on |λ|()
+            if missing value is ma then
+                set ma to uncons(ga)
+                set mb to uncons(gb)
+            end if
+            if Nothing of ma or Nothing of mb then
+                missing value
+            else
+                set ta to Just of ma
+                set tb to Just of mb
+                set x to Tuple(|1| of ta, |1| of tb)
+                set ma to uncons(|2| of ta)
+                set mb to uncons(|2| of tb)
+                return x
+            end if
+        end |λ|
+    end script
+end zipGen
 
 -- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 on zipWith(f, xs, ys)
