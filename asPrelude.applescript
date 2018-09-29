@@ -2446,7 +2446,7 @@ on |length|(xs)
     if list is c or string is c then
         length of xs
     else
-        2 ^ 30 -- (simple proxy for non-finite)
+        (2 ^ 29 - 1) -- (maxInt - simple proxy for non-finite)
     end if
 end |length|
 
@@ -4485,7 +4485,12 @@ on take(n, xs)
     else if script is c then
         set ys to {}
         repeat with i from 1 to n
-            set end of ys to xs's |λ|()
+            set v to xs's |λ|()
+            if missing value is v then
+                return ys
+            else
+                set end of ys to v
+            end if
         end repeat
         return ys
     else
@@ -4978,7 +4983,12 @@ on uncons(xs)
                 Just(Tuple(item 1 of xs, rest of xs))
             end if
         else
-            Just(Tuple(item 1 of take(1, xs), xs))
+            set nxt to take(1, xs)
+            if {} is nxt then
+                Nothing()
+            else
+                Just(Tuple(item 1 of nxt, xs))
+            end if
         end if
     end if
 end uncons
