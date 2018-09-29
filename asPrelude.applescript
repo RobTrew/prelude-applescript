@@ -2298,7 +2298,7 @@ on isUpper(c)
     d ≥ 0 and d < 26
 end isUpper
 
--- iterate :: (a -> a) -> a -> Generator [a]
+-- iterate :: (a -> a) -> a -> Gen [a]
 on iterate(f, x)
     script
         property v : missing value
@@ -4617,7 +4617,7 @@ on takeWhile(p, xs)
     end if
 end takeWhile
 
--- takeWhileGen :: (a -> Bool) -> Generator [a] -> [a]
+-- takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
 on takeWhileGen(p, xs)
     set ys to {}
     set v to |λ|() of xs
