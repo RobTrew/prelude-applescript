@@ -12,8 +12,8 @@ on abs(x)
 end abs
 
 -- all :: (a -> Bool) -> [a] -> Bool
-on all(f, xs)
-    tell mReturn(f)
+on all(p, xs)
+    tell mReturn(p)
         set lng to length of xs
         repeat with i from 1 to lng
             if not |λ|(item i of xs, i, xs) then return false
@@ -614,10 +614,10 @@ on cons(x, xs)
     end if
 end cons
 
--- const_ :: a -> b -> a
-on const_(k, _)
+-- const :: a -> b -> a
+on const(k, _)
     k
-end const_
+end const
 
 -- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 on createDirectoryIfMissingLR(blnParents, fp)
@@ -2795,6 +2795,30 @@ on mapMaybe(mf, xs)
     foldl(result, {}, xs)
 end mapMaybe
 
+-- mapMaybeGen :: (a -> Maybe b) -> Gen [a] -> Gen [b]
+on mapMaybeGen(mf, gen)
+    script
+        property mg : mReturn(mf)
+        on |λ|()
+            set v to gen's |λ|()
+            if v is not missing value then
+                set mb to mg's |λ|(v)
+                repeat while (Nothing of mb) and not (missing value is v)
+                    set v to gen's |λ|()
+                    if missing value is not v then set mb to mg's |λ|(v)
+                end repeat
+                if not |Nothing| of mb then
+                    |Just| of mb
+                else
+                    missing value
+                end if
+            else
+                v
+            end if
+        end |λ|
+    end script
+end mapMaybeGen
+
 -- mappend (<>) :: Monoid a => a -> a -> a
 on mappend(a, b)
     if class of a is record and class of b is record then
@@ -3345,6 +3369,13 @@ on product(xs)
     foldl(multiply, 1, xs)
 end product
 
+-- properFracRatio :: Ratio -> (Int, Ratio)
+on properFracRatio(r)
+    set n to n of r
+    set d to d of r
+    Tuple(n div d, ratio(n mod d, d))
+end properFracRatio
+
 -- properFraction :: Real -> (Int, Real)
 on properFraction(n)
     set i to (n div 1)
@@ -3471,10 +3502,15 @@ on range(ab)
     end if
 end range
 
--- Ratio :: Int -> Int -> Ratio
-on Ratio(n, d)
-    {type:"Ratio", n:n, d:d}
-end Ratio
+-- ratio :: Int -> Int -> Ratio Int
+on ratio(n, d)
+    if 0 ≠ d then
+        set g to gcd(n, d)
+        {type:"Ratio", n:(n div g), d:(d div g)}
+    else
+        missing value
+    end if
+end ratio
 
 -- read :: Read a => String -> a
 on read (s)
