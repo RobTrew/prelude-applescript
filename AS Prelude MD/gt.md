@@ -9,12 +9,3 @@ on gt(x, y)
     end if
 end gt
 ```
-
-```js
-// gt :: Ord a => a -> a -> Bool
-const gt = (x, y) => {
-    return 'Tuple' === x.type ? (
-        fst(x) > fst(y)
-    ) : (x > y);
-};
-```

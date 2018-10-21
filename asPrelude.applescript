@@ -1862,6 +1862,16 @@ on groupSortOn(f, xs)
             sortedArrayUsingDescriptors:map(descrip, bs)) as list))
 end groupSortOn
 
+-- gt :: Ord a => a -> a -> Bool
+on gt(x, y)
+    set c to class of x
+    if record is c or list is c then
+        fst(x) > fst(y)
+    else
+        x > y
+    end if
+end gt
+
 -- head :: [a] -> a
 on head(xs)
     if xs = {} then
@@ -2934,7 +2944,7 @@ end matching
 
 -- max :: Ord a => a -> a -> a
 on max(x, y)
-    if x > y then
+    if gt(x, y) then
         x
     else
         y
