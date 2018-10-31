@@ -5,7 +5,7 @@
 
 ```applescript
 -- TupleN :: a -> b ...  -> (a, b ... )
-on TupleN(xs)
-    tupleFromArray(xs)
-end Tuple
+on TupleN(argv)
+    tupleFromList(argv)
+end TupleN
 ```
