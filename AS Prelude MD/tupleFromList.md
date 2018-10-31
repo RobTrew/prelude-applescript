@@ -17,5 +17,5 @@ on tupleFromList(xs)
     else
         missing value
     end if
-end tupleFromArray
+end tupleFromList
 ```

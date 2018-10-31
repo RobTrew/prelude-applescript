@@ -483,19 +483,19 @@ on chr(n)
 end chr
 
 -- chunksOf :: Int -> [a] -> [[a]]
-on chunksOf(k, xs)
-    script
-        on go(ys)
-            set ab to splitAt(k, ys)
-            set a to |1| of ab
-            if isNull(a) then
-                {}
+on chunksOf(n, xs)
+    set lng to length of xs
+    script go
+        on |λ|(a, i)
+            set x to (i + n) - 1
+            if x ≥ lng then
+                a & {items i thru -1 of xs}
             else
-                {a} & go(|2| of ab)
+                a & {items i thru x of xs}
             end if
-        end go
+        end |λ|
     end script
-    result's go(xs)
+    foldl(go, {}, enumFromThenTo(1, n, lng))
 end chunksOf
 
 -- compare :: a -> a -> Ordering
@@ -1118,12 +1118,12 @@ end enumFromThenToChar
 -- enumFromThenToInt :: Int -> Int -> Int -> [Int]
 on enumFromThenToInt(x1, x2, y)
     set xs to {}
-    repeat with i from x1 to y by (x2 - x1)
+    set d to max(1, (x2 - x1))
+    repeat with i from x1 to y by d
         set end of xs to i
     end repeat
     return xs
 end enumFromThenToInt
-
 
 -- enumFromTo :: Enum a => a -> a -> [a]
 on enumFromTo(m, n)
@@ -1511,6 +1511,23 @@ on foldl(f, startValue, xs)
       end tell
 end foldl
 
+-- or
+
+-- foldl :: (a -> b -> a) -> a -> [b] -> a
+-- on foldl(f, startValue, xs)
+--     script go
+--         property mf : mReturn(f)'s |λ|
+--         on |λ|(a, xs)
+--             if {} ≠ xs then
+--                 |λ|(mf(a, item 1 of xs), rest of xs)
+--             else
+--                 a
+--             end if
+--         end |λ|
+--     end script
+--     go's |λ|(startValue, xs)
+-- end foldl
+
 -- foldl1 :: (a -> a -> a) -> [a] -> a
 on foldl1(f, xs)
     if length of xs > 1 then
@@ -1790,7 +1807,7 @@ on groupBy(f, xs)
     end script
     
     if length of xs > 0 then
-        set dct to foldl(enGroup, {active:{item 1 of xs}, sofar:{}}, tail(xs))
+        set dct to foldl(enGroup, {active:{item 1 of xs}, sofar:{}}, rest of xs)
         if length of (active of dct) > 0 then
             sofar of dct & {active of dct}
         else
@@ -4186,7 +4203,7 @@ on splitArrow(f, g)
     end script
 end splitArrow
 
--- splitAt :: Int -> [a] -> ([a],[a])
+-- splitAt :: Int -> [a] -> ([a], [a])
 on splitAt(n, xs)
     if n > 0 and n < length of xs then
         if class of xs is text then
@@ -4995,7 +5012,7 @@ on tupleFromList(xs)
     else
         missing value
     end if
-end tupleFromArray
+end tupleFromList
 
 -- TupleN :: a -> b ...  -> (a, b ... )
 on TupleN(xs)
