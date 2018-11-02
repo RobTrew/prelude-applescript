@@ -4,7 +4,7 @@
 ```
 
 ```applescript
--- zipN :: [a] -> [b] ... -> [(a, b ...)]
+-- zipN :: [a] -> [b] -> ... -> [(a, b ...)]
 on zipN(argv)
     if 1 < length of argv then
         script go

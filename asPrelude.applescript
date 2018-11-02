@@ -5224,7 +5224,8 @@ end |until|
 
 -- unwords :: [String] -> String
 on unwords(xs)
-    set {dlm, my text item delimiters} to {my text item delimiters, space}
+    set {dlm, my text item delimiters} to ¬
+        {my text item delimiters, space}
     set s to xs as text
     set my text item delimiters to dlm
     return s
@@ -5414,7 +5415,7 @@ on zipGen(ga, gb)
     end script
 end zipGen
 
--- zipN :: [a] -> [b] ... -> [(a, b ...)]
+-- zipN :: [a] -> [b] -> ... -> [(a, b ...)]
 on zipN(argv)
     if 1 < length of argv then
         script go
