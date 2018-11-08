@@ -284,6 +284,7 @@ raise :: Num -> Int -> Num
 randomRInt :: Int -> Int -> Int
 range :: Ix a => (a, a) -> [a]
 ratio :: Int -> Int -> Ratio Int
+rational :: Num a => a -> Rational
 read :: Read a => String -> a
 readFile :: FilePath -> IO String
 readFileLR :: FilePath -> Either String String
