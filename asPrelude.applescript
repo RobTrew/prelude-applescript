@@ -1414,7 +1414,17 @@ end flip
 
 -- floor :: Num -> Int
 on floor(x)
-  x div 1
+    if class of x is record then
+        set nr to properFracRatio(x)
+    else
+        set nr to properFraction(x)
+    end if
+    set n to fst(nr)
+    if 0 > snd(nr) then
+        n - 1
+    else
+        n
+    end if
 end floor
 
 -- fmap (<$>) :: Functor f => (a -> b) -> f a -> f b
@@ -3548,6 +3558,29 @@ on ratio(x, y)
     go's |λ|(x * (signum(y)), abs(y))
 end ratio
 
+-- ratioDiv :: Rational -> Rational -> Rational
+on ratioDiv(n1, n2)
+    set r1 to rational(n1)
+    set r2 to rational(n2)
+    ratio((n of r1) * (d of r2), (d of r1) * (n of r2))
+end ratioDiv
+
+-- ratioMinus :: Rational -> Rational -> Rational
+on ratioMinus(n1, n2)
+    set r1 to rational(n1)
+    set r2 to rational(n2)
+    set d to lcm(d of r1, d of r2)
+    ratio((n of r1) * (d / (d of r1) - ¬
+        ((n of r2) * (d / (d of r2)))), d)
+end ratioMinus
+
+-- ratioMult :: Rational -> Rational -> Rational
+on ratioMult(n1, n2)
+    set r1 to rational(n1)
+    set r2 to rational(n2)
+    ratio((n of r1) * (n of r2), (d of r1) * (d of r2))
+end ratioMult
+
 -- rational :: Num a => a -> Rational
 on rational(x)
     set c to class of x
@@ -3559,6 +3592,15 @@ on rational(x)
         x
     end if
 end rational
+
+-- ratioPlus :: Rational -> Rational -> Rational
+on ratioPlus(n1, n2)
+    set r1 to rational(n1)
+    set r2 to rational(n2)
+    set d to lcm(d of r1, d of r2)
+    ratio((n of r1) * (d / (d of r1) + ¬
+        ((n of r2) * (d / (d of r2)))), d)
+end ratioPlus
 
 -- read :: Read a => String -> a
 on read (s)
