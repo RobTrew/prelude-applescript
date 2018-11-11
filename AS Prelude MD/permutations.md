@@ -2,25 +2,24 @@
 -- permutations :: [a] -> [[a]]
 on permutations(xs)
     script go
-        on |λ|(xs)
-            script h
-                on |λ|(x)
-                    script ts
-                        on |λ|(ys)
-                            {{x} & ys}
+        on |λ|(x, a)
+            script
+                on |λ|(ys)
+                    script infix
+                        on |λ|(n)
+                            if ys ≠ {} then
+                                take(n, ys) & x & drop(n, ys)
+                            else
+                                {x}
+                            end if
                         end |λ|
                     end script
-                    concatMap(ts, go's |λ|(|delete|(x, xs)))
+                    map(infix, enumFromTo(0, (length of ys)))
                 end |λ|
             end script
-            
-            if 0 < length of xs then
-                concatMap(h, xs)
-            else
-                {{}}
-            end if
+            concatMap(result, a)
         end |λ|
     end script
-    go's |λ|(xs)
+    foldr(go, {{}}, xs)
 end permutations
 ```
