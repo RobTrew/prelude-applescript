@@ -1118,19 +1118,24 @@ end enumFromThenToChar
 -- enumFromThenToInt :: Int -> Int -> Int -> [Int]
 on enumFromThenToInt(x1, x2, y)
     set xs to {}
-    set d to max(1, (x2 - x1))
+    set gap to x2 - x1
+    set d to max(1, abs(gap)) * (signum(gap))
     repeat with i from x1 to y by d
         set end of xs to i
     end repeat
     return xs
 end enumFromThenToInt
 
--- enumFromTo :: Enum a => a -> a -> [a]
+-- enumFromTo :: Int -> Int -> [Int]
 on enumFromTo(m, n)
-    if class of m is integer then
-        enumFromToInt(m, n)
+    if m ≤ n then
+        set lst to {}
+        repeat with i from m to n
+            set end of lst to i
+        end repeat
+        return lst
     else
-        enumFromToChar(m, n)
+        return {}
     end if
 end enumFromTo
 
@@ -1147,19 +1152,6 @@ on enumFromToChar(m, n)
         {}
     end if
 end enumFromToChar
-
--- enumFromToInt :: Int -> Int -> [Int]
-on enumFromToInt(m, n)
-    if m ≤ n then
-        set lst to {}
-        repeat with i from m to n
-            set end of lst to i
-        end repeat
-        return lst
-    else
-        return {}
-    end if
-end enumFromToInt
 
 -- eq (==) :: Eq a => a -> a -> Bool
 on eq(a, b)
