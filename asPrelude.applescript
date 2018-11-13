@@ -2850,7 +2850,8 @@ end mapMaybeGen
 
 -- mappend (<>) :: Monoid a => a -> a -> a
 on mappend(a, b)
-    if class of a is record and class of b is record then
+    set ca to class of a
+    if record is ca then
         script instanceMay
             on |λ|(strType)
                 set mb to lookup(strType, ¬
@@ -2863,6 +2864,8 @@ on mappend(a, b)
         else
             mReturn(Just of mbi)'s |λ|(a, b)
         end if
+    else if handler is ca then
+        mappendFn(a, b)
     else
         a & b
     end if
@@ -2912,6 +2915,17 @@ on mappendComparing2(fBools)
         end |λ|
     end script
 end mappendComparing
+
+-- mappendFn :: Monoid b => (a -> b) -> (a -> b) -> (a -> b)
+on mappendFn(f, g)
+    script
+        property mf : mReturn(f)
+        property mg : mReturn(g)
+        on |λ|(x)
+            mappend(mf's |λ|(x), mg's |λ|(x))
+        end |λ|
+    end script
+end mappendFn
 
 -- mappendMaybe (<>) :: Maybe a -> Maybe a -> Maybe a
 on mappendMaybe(a, b)
