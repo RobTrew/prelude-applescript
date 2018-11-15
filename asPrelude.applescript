@@ -324,6 +324,15 @@ on bindTuple(tpl, f)
     Tuple(mappend(|1| of tpl, |1| of t2), |2| of t2)
 end bindTuple
 
+-- bool :: a -> a -> Bool -> a
+on bool(f, t, p)
+    if p then
+        t
+    else
+        f
+    end if
+end bool
+
 -- break :: (a -> Bool) -> [a] -> ([a], [a])
 on break(p, xs)
     set bln to false
@@ -1096,13 +1105,15 @@ on enumFrom(x)
     end script
 end enumFrom
 
--- enumFromThenTo :: Enum a => a -> a -> a -> [a]
+-- enumFromThenTo :: Int -> Int -> Int -> [Int]
 on enumFromThenTo(x1, x2, y)
-    if class of x1 is integer then
-        enumFromThenToInt(x1, x2, y)
-    else
-        enumFromThenToChar(x1, x2, y)
-    end if
+    set xs to {}
+    set gap to x2 - x1
+    set d to max(1, abs(gap)) * (signum(gap))
+    repeat with i from x1 to y by d
+        set end of xs to i
+    end repeat
+    return xs
 end enumFromThenTo
 
 -- enumFromThenToChar :: Char -> Char -> Char -> [Char]
@@ -1114,17 +1125,6 @@ on enumFromThenToChar(x1, x2, y)
     end repeat
     return xs
 end enumFromThenToChar
-
--- enumFromThenToInt :: Int -> Int -> Int -> [Int]
-on enumFromThenToInt(x1, x2, y)
-    set xs to {}
-    set gap to x2 - x1
-    set d to max(1, abs(gap)) * (signum(gap))
-    repeat with i from x1 to y by d
-        set end of xs to i
-    end repeat
-    return xs
-end enumFromThenToInt
 
 -- enumFromTo :: Int -> Int -> [Int]
 on enumFromTo(m, n)
@@ -3696,7 +3696,7 @@ on regexMatches(strRegex, strHay)
                 end |λ|
             end script
             map(rangeMatched, ¬
-                enumFromToInt(0, ((numberOfRanges of m) as integer) - 1))
+                enumFromTo(0, ((numberOfRanges of m) as integer) - 1))
         end |λ|
     end script
     
@@ -4137,7 +4137,7 @@ on showTuple(tpl)
             end if
         end |λ|
     end script
-    "(" & intercalateS(", ", map(result, enumFromToInt(1, length of tpl))) & ")"
+    "(" & intercalateS(", ", map(result, enumFromTo(1, length of tpl))) & ")"
 end showTuple
 
 -- showUndefined :: () -> String

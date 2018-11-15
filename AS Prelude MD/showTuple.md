@@ -12,6 +12,6 @@ on showTuple(tpl)
             end if
         end |λ|
     end script
-    "(" & intercalateS(", ", map(result, enumFromToInt(1, length of tpl))) & ")"
+    "(" & intercalateS(", ", map(result, enumFromTo(1, length of tpl))) & ")"
 end showTuple
 ```
