@@ -4,7 +4,7 @@
 ```
 
 ```applescript
--- unfoldl :: (b -> Maybe (a, b)) -> b -> [a]
+-- unfoldl :: (b -> Maybe (b, a)) -> b -> [a]
 on unfoldl(f, v)
     set xr to Tuple(v, v) -- (value, remainder)
     set xs to {}

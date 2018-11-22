@@ -1194,7 +1194,7 @@ end evalJSMay
 
 -- even :: Int -> Bool
 on even(x)
-    x mod 2 = 0
+    0 = x mod 2
 end even
 
 -- exp :: Float -> Float
@@ -1512,23 +1512,6 @@ on foldl(f, startValue, xs)
       return v
       end tell
 end foldl
-
--- or
-
--- foldl :: (a -> b -> a) -> a -> [b] -> a
--- on foldl(f, startValue, xs)
---     script go
---         property mf : mReturn(f)'s |λ|
---         on |λ|(a, xs)
---             if {} ≠ xs then
---                 |λ|(mf(a, item 1 of xs), rest of xs)
---             else
---                 a
---             end if
---         end |λ|
---     end script
---     go's |λ|(startValue, xs)
--- end foldl
 
 -- foldl1 :: (a -> a -> a) -> [a] -> a
 on foldl1(f, xs)
@@ -5166,7 +5149,7 @@ on unfoldForest(f, xs)
     map(result, xs)
 end unfoldForest
 
--- unfoldl :: (b -> Maybe (a, b)) -> b -> [a]
+-- unfoldl :: (b -> Maybe (b, a)) -> b -> [a]
 on unfoldl(f, v)
     set xr to Tuple(v, v) -- (value, remainder)
     set xs to {}
@@ -5540,5 +5523,21 @@ on zipWith4(f, ws, xs, ys, zs)
         return lst
     end tell
 end zipWith4
+
+-- zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
+on zipWithN(f, rows)
+    script go
+        property mf : mReturn(f)
+        on |λ|(i)
+            script nth
+                on |λ|(row)
+                    item i of row
+                end |λ|
+            end script
+            mf's |λ|(map(nth, rows))
+        end |λ|
+    end script
+    map(go, enumFromTo(1, minimum(map(my |length|, rows))))
+end zipWithN
 
 return me
