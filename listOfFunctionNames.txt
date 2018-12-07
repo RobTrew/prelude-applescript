@@ -406,7 +406,7 @@ uncons :: [a] -> Maybe (a, [a])
 uncurry :: (a -> b -> c) -> ((a, b) -> c)
 unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
 unfoldTree :: (b -> (a, [b])) -> b -> Tree a
-unfoldl :: (b -> Maybe (a, b)) -> b -> [a]
+unfoldl :: (b -> Maybe (b, a)) -> b -> [a]
 unfoldr :: (b -> Maybe (a, b)) -> b -> [a]
 union :: [a] -> [a] -> [a]
 unionBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]
