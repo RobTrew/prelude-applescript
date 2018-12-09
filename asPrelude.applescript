@@ -713,6 +713,11 @@ on cycle(xs)
     end script
 end cycle
 
+-- degrees :: Float x => Radians x -> Degrees x
+on degrees(r)
+    (180 / pi) * r
+end degrees
+
 -- delete :: Eq a => a -> [a] -> [a]
 on |delete|(x, xs)
     set mbIndex to elemIndex(x, xs)
@@ -842,9 +847,9 @@ on doesDirectoryExist(strPath)
     set ca to current application
     set oPath to (ca's NSString's stringWithString:strPath)'s ¬
         stringByStandardizingPath
-    set {bln, int} to (ca's NSFileManager's defaultManager's ¬
+    set {bln, v} to (ca's NSFileManager's defaultManager's ¬
         fileExistsAtPath:oPath isDirectory:(reference))
-    bln and (int = 1)
+    bln and v
 end doesDirectoryExist
 
 -- doesFileExist :: FilePath -> IO Bool
@@ -3491,6 +3496,11 @@ on quotRem(m, n)
     Tuple(m div n, m mod n)
 end quotRem
 
+-- radians :: Float x => Degrees x -> Radians x
+on radians(x)
+    (pi / 180) * x
+end radians
+
 -- raise :: Num -> Int -> Num
 on raise(m, n)
     m ^ n
@@ -4285,15 +4295,15 @@ on splitBy(p, xs)
             on |λ|(a, blnXY)
                 set {bln, x, y} to blnXY
                 if bln then
-                    {fst(a) & {snd(a)}, {y}}
+                    {item 1 of a & {item 2 of a}, {y}}
                 else
-                    {fst(a), snd(a) & y}
+                    {item 1 of a, (item 2 of a) & y}
                 end if
             end |λ|
         end script
         set {a, r} to foldl(addOrSplit, ¬
             {{}, {item 1 of xs}}, ¬
-            zipWith(pairMatch, xs, tail(xs)))
+            zipWith(pairMatch, xs, rest of xs))
         
         if list is class of xs then
             a & {r}
