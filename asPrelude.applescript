@@ -163,6 +163,22 @@ on appendFileMay(strPath, txt)
     end if
 end appendFileMay
 
+-- appendGen (++) :: Gen [a] -> Gen [a] -> Gen [a]
+on appendGen(xs, ys)
+    script
+        property vs : xs
+        on |λ|()
+            set v to |λ|() of vs
+            if missing value is not v then
+                v
+            else
+                set vs to ys
+                |λ|() of ys
+            end if
+        end |λ|
+    end script
+end appendGen
+
 -- apply ($) :: (a -> b) -> a -> b
 on apply(f, x)
     mReturn(f)'s |λ|(x)
