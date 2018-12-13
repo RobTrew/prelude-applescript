@@ -608,7 +608,7 @@ on concatMap(f, xs)
     set acc to {}
     tell mReturn(f)
         repeat with i from 1 to lng
-            set acc to acc & |λ|(item i of xs, i, xs)
+            set end of acc to (|λ|(item i of xs, i, xs))
         end repeat
     end tell
     return acc
@@ -616,8 +616,21 @@ end concatMap
 
 -- cons :: a -> [a] -> [a]
 on cons(x, xs)
-    if list is class of xs then
+    set c to class of xs
+    if list is c then
         {x} & xs
+    else if script is c then
+        script
+            property pRead : false
+            on |λ|()
+                if pRead then
+                    |λ|() of xs
+                else
+                    set pRead to true
+                    return x
+                end if
+            end |λ|
+        end script
     else
         x & xs
     end if
@@ -1020,6 +1033,17 @@ on dropWhileEnd(p, xs)
     end tell
     take(i, xs)
 end dropWhileEnd
+
+-- dropWhileGen :: (a -> Bool) -> Gen [a] -> [a]
+on dropWhileGen(p, xs)
+    set v to |λ|() of xs
+    tell mReturn(p)
+        repeat while (|λ|(v))
+            set v to xs's |λ|()
+        end repeat
+    end tell
+    return cons(v, xs)
+end dropWhileGen
 
 -- either :: (a -> c) -> (b -> c) -> Either a b -> c
 on either(lf, rf, e)
