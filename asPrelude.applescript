@@ -628,7 +628,6 @@ on concatMap(f, xs)
         end repeat
     end tell
     return acc
-end concatMap
 
 -- cons :: a -> [a] -> [a]
 on cons(x, xs)
@@ -1125,9 +1124,14 @@ on elemIndices(x, xs)
 end elemIndices
 
 -- elems :: Dict -> [a]
-on elems(rec)
-    set ca to current application
-    (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list
+-- elems :: Set -> [a]
+on elems(x)
+    if record is class of x then -- Dict
+        set ca to current application
+        (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list
+    else -- Set
+        (x's allObjects()) as list
+    end if
 end elems
 
 -- enumFrom :: a -> [a]
@@ -2148,8 +2152,16 @@ on intersectBy(eq, xs, ys)
     end if
 end intersectBy
 
--- intersectionBy :: (a -> a -> Bool) -> [[a]] -> [a]
-on intersectionBy(fnEq, xs)
+-- intersection :: Ord a => Set a -> Set a -> Set a
+on intersection(a, b)
+    set s to current application's NSMutableSet's alloc's init()
+    s's setSet:(a)
+    s's intersectSet:(b)
+    return s
+end intersection
+
+-- intersectListsBy :: (a -> a -> Bool) -> [[a]] -> [a]
+on intersectListsBy(fnEq, xs)
     script
         property eq : mReturn(fnEq)
         on |λ|(a, x)
@@ -2191,7 +2203,7 @@ end intToDigit
 on isAlpha(c)
     set ca to current application
     set oRgx to ca's NSRegularExpression's ¬
-        regularExpressionWithPattern:("[A-Za-z0-9\\u00C0-\\u00FF]") ¬
+        regularExpressionWithPattern:("[A-Za-z\\u00C0-\\u00FF]") ¬
             options:(ca's NSRegularExpressionAnchorsMatchLines as integer) ¬
             |error|:(missing value)
     set oString to ca's NSString's stringWithString:c
@@ -4157,6 +4169,16 @@ on showRatio(r)
     end if
 end showRatio
 
+-- showSet :: Set -> String
+on showSet(s)
+    script str
+        on |λ|(x)
+            x as string
+        end |λ|
+    end script
+    "{" & intercalate(", ", map(str, sort(elems(s)))) & "}"
+end showSet
+
 -- showTuple :: Tuple -> String
 on showTuple(tpl)
     set ca to current application
@@ -5272,6 +5294,14 @@ on unionBy(fnEq, xs, ys)
     end script
     xs & foldl(flipDeleteByEq, nubBy(fnEq, ys), xs)
 end unionBy
+
+-- unionSet :: Ord a => Set a -> Set a -> Set a
+on unionSet(s, s1)
+    set sUnion to current application's NSMutableSet's alloc's init()
+    sUnion's setSet:(s)
+    sUnion's unionSet:(s1)
+    return sUnion
+end unionSet
 
 -- unlines :: [String] -> String
 on unlines(xs)
