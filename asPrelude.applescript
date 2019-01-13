@@ -782,34 +782,42 @@ end deleteAt
 
 -- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]
 on deleteBy(fnEq, x, xs)
-    if length of xs > 0 then
-        set mb to uncons(xs)
-        if Nothing of mb then
-            xs
-        else
-            set ht to Just of mb
-            set {h, t} to {|1| of ht, |2| of ht}
-            if |λ|(x, h) of mReturn(fnEq) then
-                t
+    script go
+        property eq : mReturn(fnEq)'s |λ|
+        on |λ|(xs)
+            if 0 < length of xs then
+                tell xs to set {h, t} to {item 1, rest}
+                if eq(x, h) then
+                    t
+                else
+                    {h} & |λ|(t)
+                end if
             else
-                {h} & deleteBy(fnEq, x, t)
+                {}
             end if
-        end if
-    else
-        {}
-    end if
+        end |λ|
+    end script
+    go's |λ|(xs)
 end deleteBy
 
 -- deleteFirst :: a -> [a] -> [a]
 on deleteFirst(x, xs)
-    script Eq
-        on |λ|(a, b)
-            a = b
+    script go
+        on |λ|(xs)
+            if 0 < length of xs then
+                tell xs to set {h, t} to {item 1, rest}
+                if x = h then
+                    t
+                else
+                    {h} & |λ|(t)
+                end if
+            else
+                {}
+            end if
         end |λ|
     end script
- 
-    deleteBy(Eq, x, xs)
-end |delete|
+    go's |λ|(xs)
+end deleteFirst
 
 -- deleteFirstsBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]
 on deleteFirstsBy(fnEq, xs, ys)
@@ -2751,7 +2759,7 @@ end lookup
 on lookupDict(k, dct)
     set ca to current application
     set v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k
-    if v ≠ missing value then
+    if missing value ≠ v then
         Just(item 1 of ((ca's NSArray's arrayWithObject:v) as list))
     else
         Nothing()
