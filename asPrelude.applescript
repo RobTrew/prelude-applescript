@@ -2231,7 +2231,7 @@ on isDigit(c)
     48 ≤ n and 57 ≥ n
 end isDigit
 
--- isInfixOf :: Eq a => [a] -> [a] -> Bool
+-- isInfixOf :: (Eq a) => [a] -> [a] -> Bool
 -- isInfixOf :: String -> String -> Bool
 on isInfixOf(needle, haystack)
     haystack contains needle
