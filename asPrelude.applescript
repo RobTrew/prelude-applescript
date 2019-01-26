@@ -2426,7 +2426,6 @@ on jsonParseLR(s)
         JSONObjectWithData:((ca's NSString's stringWithString:s)'s ¬
             dataUsingEncoding:(ca's NSUTF8StringEncoding)) ¬
             options:0 |error|:(reference)
-    
     if x is missing value then
         |Left|(e's localizedDescription() as string)
     else
@@ -3567,9 +3566,13 @@ on raise(m, n)
     m ^ n
 end raise
 
--- randomRInt :: Int -> Int -> Int
+-- randomRInt :: Int -> Int -> IO () -> Int
 on randomRInt(low, high)
-    (low + ((random number) * (1 + (high - low)))) div 1
+    script
+        on |λ|(_)
+            (low + ((random number) * (1 + (high - low)))) div 1
+        end |λ|
+    end script
 end randomRInt
 
 -- range :: Ix a => (a, a) -> [a]
