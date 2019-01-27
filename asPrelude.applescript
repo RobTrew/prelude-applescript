@@ -1132,8 +1132,8 @@ on elemIndices(x, xs)
     concatMap(result, xs)
 end elemIndices
 
--- elems :: Dict -> [a]
--- elems :: Set -> [a]
+-- elems :: Map k a -> [a]
+-- elems :: Set a -> [a]
 on elems(x)
     if record is class of x then -- Dict
         set ca to current application
@@ -1143,7 +1143,7 @@ on elems(x)
     end if
 end elems
 
--- enumFrom :: a -> [a]
+-- enumFrom :: Enum a => a -> [a]
 on enumFrom(x)
     script
         property v : missing value
@@ -1647,7 +1647,7 @@ on foldr(f, startValue, xs)
         set v to startValue
         set lng to length of xs
         repeat with i from lng to 1 by -1
-            set v to |λ|(v, item i of xs, i, xs)
+            set v to |λ|(item i of xs, v, i, xs)
         end repeat
         return v
     end tell
@@ -1752,7 +1752,7 @@ on fst(tpl)
     end if
 end fst
 
--- ft :: Int -> Int -> [Int]
+-- ft :: (Int, Int) -> [Int]
 on ft(m, n)
     if m ≤ n then
         set lst to {}
@@ -5253,19 +5253,19 @@ on unfoldl(f, v)
     return xs
 end unfoldl
 
--- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]
+-- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]
 on unfoldr(f, v)
-    set xr to Tuple(v, v) -- (value, remainder)
+    set xr to {v, v} -- (value, remainder)
     set xs to {}
     tell mReturn(f)
         repeat -- Function applied to remainder.
-            set mb to |λ|(|2| of xr)
+            set mb to |λ|(item 2 of xr)
             if Nothing of mb then
                 exit repeat
             else -- New (value, remainder) tuple,
                 set xr to Just of mb
                 -- and value appended to output list.
-                set end of xs to |1| of xr
+                set end of xs to item 1 of xr
             end if
         end repeat
     end tell

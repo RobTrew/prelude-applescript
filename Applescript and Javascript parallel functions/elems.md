@@ -1,6 +1,6 @@
 ```applescript
--- elems :: Dict -> [a]
--- elems :: Set -> [a]
+-- elems :: Map k a -> [a]
+-- elems :: Set a -> [a]
 on elems(x)
     if record is class of x then -- Dict
         set ca to current application
@@ -12,8 +12,8 @@ end elems
 ```
 
 ```js
-// elems :: Dict -> [a]
-// elems :: Set -> [a]
+// elems :: Map k a -> [a]
+// elems :: Set a -> [a]
 const elems = x =>
     'Set' !== x.constructor.name ? (
         Object.values(x)

@@ -1,5 +1,5 @@
 ```applescript
--- enumFrom :: a -> [a]
+-- enumFrom :: Enum a => a -> [a]
 on enumFrom(x)
     script
         property v : missing value
@@ -21,7 +21,7 @@ end enumFrom
 ```
 
 ```js
-// enumFrom :: a -> [a]
+// enumFrom :: Enum a => a -> [a]
 function* enumFrom(x) {
     let v = x;
     while (true) {
