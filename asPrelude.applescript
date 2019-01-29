@@ -3210,7 +3210,7 @@ end modificationTime
 
 -- mReturn :: First-class m => (a -> b) -> m (a -> b)
 on mReturn(f)
-    if class of f is script then
+    if script is class of f then
         f
     else
         script
@@ -5253,7 +5253,7 @@ on unfoldl(f, v)
     return xs
 end unfoldl
 
--- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]
+-- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]
 on unfoldr(f, v)
     set xr to {v, v} -- (value, remainder)
     set xs to {}
