@@ -312,6 +312,7 @@ reverse :: [a] -> [a]
 rights :: [Either a b] -> [b]
 rotate :: Int -> [a] -> [a]
 round :: a -> Int
+roundTo :: Float -> Int -> Float
 safeMay :: (a -> Bool) -> (a -> b) -> Maybe b
 scanl :: (b -> a -> b) -> b -> [a] -> [b]
 scanl1 :: (a -> a -> a) -> [a] -> [a]
