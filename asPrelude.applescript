@@ -3752,12 +3752,15 @@ on regexMatches(strRegex, strHay)
                     end tell
                 end |λ|
             end script
-            map(rangeMatched, ¬
-                enumFromTo(0, ((numberOfRanges of m) as integer) - 1))
         end |λ|
     end script
     
-    map(matchString, (oRgx's matchesInString:oString ¬
+    script asRange
+        on |λ|(x)
+            range() of x
+        end |λ|
+    end script
+    map(asRange, (oRgx's matchesInString:oString ¬
         options:0 range:{location:0, |length|:oString's |length|()}) as list)
 end regexMatches
 
@@ -3800,11 +3803,11 @@ end replace
 -- replicate :: Int -> a -> [a]
 on replicate(n, a)
     set out to {}
-    if n < 1 then return out
+    if 1 > n then return out
     set dbl to {a}
     
-    repeat while (n > 1)
-        if (n mod 2) > 0 then set out to out & dbl
+    repeat while (1 < n)
+        if 0 < (n mod 2) then set out to out & dbl
         set n to (n div 2)
         set dbl to (dbl & dbl)
     end repeat
@@ -3888,6 +3891,12 @@ end rotate
 on |round|(n)
     round n
 end |round|
+
+-- roundTo :: Float -> Int -> Float
+on roundTo(x, n)
+    set d to 10 ^ n
+    (round (x * d)) / d
+end roundTo
 
 -- safeMay :: (a -> Bool) -> (a -> b) -> Maybe b
 on safeMay(p, f, x)
