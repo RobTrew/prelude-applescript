@@ -6,6 +6,7 @@ Ordering :: Int -> Ordering
 Right :: b -> Either a b
 Tuple (,) :: a -> b -> (a, b)
 TupleN :: a -> b ...  -> (a, b ... )
+differenceGen :: Gen [a] -> Gen [a] -> Gen [a]
 abs :: Num -> Num
 all :: (a -> Bool) -> [a] -> Bool
 and :: [Bool] -> Bool
