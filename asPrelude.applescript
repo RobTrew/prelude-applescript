@@ -853,6 +853,32 @@ on difference(xs, ys)
     foldl(result, xs, ys)
 end difference
 
+-- differenceGen :: Gen [a] -> Gen [a] -> Gen [a]
+on differenceGen(ga, gb)
+    -- All values of ga except any
+    -- already seen in gb.
+    script
+        property g : zipGen(ga, gb)
+        property bs : {}
+        property xy : missing value
+        on |λ|()
+            set xy to g's |λ|()
+            if missing value is xy then
+                xy
+            else
+                set x to |1| of xy
+                set y to |2| of xy
+                set bs to {y} & bs
+                if bs contains x then
+                    |λ|() -- Next in series.
+                else
+                    x
+                end if
+            end if
+        end |λ|
+    end script
+end differenceGen
+
 -- digitToInt :: Char -> Int
 on digitToInt(c)
     set oc to id of c
@@ -1506,14 +1532,13 @@ end fmap
 -- fmapGen <$> :: (a -> b) -> Gen [a] -> Gen [b]
 on fmapGen(f, gen)
     script
-        property g : gen
-        property mf : mReturn(f)'s |λ|
+        property g : mReturn(f)
         on |λ|()
-            set v to g's |λ|()
+            set v to gen's |λ|()
             if v is missing value then
                 v
             else
-                mf(v)
+                g's |λ|(v)
             end if
         end |λ|
     end script
