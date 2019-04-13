@@ -93,7 +93,7 @@ elems :: Map k a -> [a]
 enumFrom :: Enum a => a -> [a]
 enumFromThenTo :: Int -> Int -> Int -> [Int]
 enumFromThenToChar :: Char -> Char -> Char -> [Char]
-enumFromTo :: Int -> Int -> [Int]
+enumFromTo :: Enum a => a -> a -> [a]
 enumFromToChar :: Char -> Char -> [Char]
 eq (==) :: Eq a => a -> a -> Bool
 evalJSLR :: String -> Either String a
@@ -154,7 +154,7 @@ headMay :: [a] -> Maybe a
 id :: a -> a
 if_ :: Bool -> a -> a -> a
 indented :: String -> String -> String
-index (!!) :: [a] -> Int -> a
+index (!!) :: [a] -> Int -> Maybe a
 indexOf :: Eq a => [a] -> [a] -> Maybe Int
 init :: [a] -> [a]
 initMay :: [a] -> Maybe [a]
@@ -237,6 +237,7 @@ mappendOrdering (<>) :: Ordering -> Ordering -> Ordering
 mappendTuple (<>) :: (a, b) -> (a, b) -> (a, b)
 matching :: [a] -> (a -> Int -> [a] -> Bool)
 max :: Ord a => a -> a -> a
+maxBound :: a -> a
 maximum :: Ord a => [a] -> a
 maximumBy :: (a -> a -> Ordering) -> [a] -> a
 maximumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a
@@ -246,6 +247,7 @@ maybeToList :: Maybe a -> [a]
 mean :: [Num] -> Num
 member :: Key -> Dict -> Bool
 min :: Ord a => a -> a -> a
+minBound :: a -> a
 minimum :: Ord a => [a] -> a
 minimumBy :: (a -> a -> Ordering) -> [a] -> a
 minimumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a
@@ -272,6 +274,7 @@ pi :: Float
 plus :: Num -> Num -> Num
 postorder :: Tree a -> [a]
 pred :: Enum a => a -> a
+predMay :: Enum a => a -> Maybe a
 print :: a -> IO ()
 product :: [Num] -> Num
 properFracRatio :: Ratio -> (Int, Ratio)
@@ -393,6 +396,7 @@ then (>>) :: Monad m => m a -> m b -> m b
 thenIO (>>) :: IO a -> IO b -> IO b
 thenList (>>) :: [a] -> [b] -> [b]
 thenMay (>>) :: Maybe a -> Maybe b -> Maybe b
+toEnum :: a -> Int -> a
 toListTree :: Tree a -> [a]
 toLower :: String -> String
 toRatio :: Real -> Ratio

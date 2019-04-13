@@ -1226,14 +1226,16 @@ on enumFromThenToChar(x1, x2, y)
     return xs
 end enumFromThenToChar
 
--- enumFromTo :: Int -> Int -> [Int]
+-- enumFromTo :: Enum a => a -> a -> [a]
 on enumFromTo(m, n)
     if m ≤ n then
-        set lst to {}
-        repeat with i from m to n
-            set end of lst to i
+        set x to fromEnum(m)
+        set y to fromEnum(n)
+        set xs to {}
+        repeat with i from x to y
+            set end of xs to i
         end repeat
-        return lst
+        map(toEnum(m), xs)
     else
         return {}
     end if
@@ -2019,10 +2021,19 @@ on indented(strIndent, s)
     unlines(map(result, |lines|(s)))
 end indented
 
--- index (!!) :: [a] -> Int -> a
--- index (!!) :: String -> Int -> Char
+-- index (!!) :: [a] -> Int -> Maybe a
+-- index (!!) :: String -> Int -> Maybe Char
 on |index|(xs, i)
-    item i of xs
+    if script is class of xs then
+      -- not yet defined for generators
+      -- missing value
+    else
+        if length of xs < i then
+            Nothing()
+        else
+            Just(item i of xs)
+        end if
+    end if
 end |index|
 
 -- indexOf :: Eq a => [a] -> [a] -> Maybe Int
@@ -3073,6 +3084,20 @@ on max(x, y)
     end if
 end max
 
+-- maxBound :: a -> a
+on maxBound(x)
+    set c to class of x
+    if text is c then
+        character id 65535
+    else if integer is c then
+        (2 ^ 29 - 1)
+    else if real is c then
+        1.797693E+308
+    else if boolean is c then
+        true
+    end if
+end maxBound
+
 -- maximum :: Ord a => [a] -> a
 on maximum(xs)
     script
@@ -3168,6 +3193,20 @@ on min(x, y)
         x
     end if
 end min
+
+-- minBound :: a -> a
+on minBound(x)
+    set c to class of x
+    if text is c then
+        character id 1
+    else if integer is c then
+        -(2 ^ 29 - 1)
+    else if real is c then
+        -1.797693E+308
+    else if boolean is c then
+        false
+    end if
+end minBound
 
 -- minimum :: Ord a => [a] -> a
 on minimum(xs)
@@ -4980,6 +5019,20 @@ on thenMay(ma, mb)
         mb
     end if
 end thenMay 
+
+-- toEnum :: a -> Int -> a
+on toEnum(e)
+    script
+        property c : class of e
+        on |λ|(x)
+            if integer is c or real is c then
+                x as number
+            else if text is c then
+                character id x
+            end if
+        end |λ|
+    end script
+end toEnum
 
 -- toListTree :: Tree a -> [a]
 on toListTree(tree)
