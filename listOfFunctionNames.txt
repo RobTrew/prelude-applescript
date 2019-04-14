@@ -100,6 +100,7 @@ evalJSLR :: String -> Either String a
 evalJSMay :: String -> Maybe a
 even :: Int -> Bool
 exp :: Float -> Float
+fTable :: String -> (a -> String) -> (b -> String) -> (a -> b) -> [a] -> String
 fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))
 filePath :: String -> FilePath
 filePathTree :: filePath -> [Tree String] -> Tree FilePath
@@ -366,6 +367,7 @@ splitRegex :: Regex -> String -> [String]
 sqrt :: Num -> Num
 sqrtLR :: Num -> Either String Num
 sqrtMay :: Num -> Maybe Num
+str :: a -> String
 strip :: String -> String
 stripEnd :: String -> String
 stripPrefix :: Eq a => [a] -> [a] -> Maybe [a]
@@ -374,6 +376,7 @@ subsequences :: [a] -> [[a]]
 subsets :: [a] -> [[a]]
 subtract :: Num -> Num -> Num
 succ :: Enum a => a -> a
+succMay :: Enum a => a -> Maybe a
 sum :: [Num] -> Num
 swap :: (a, b) -> (b, a)
 tail :: [a] -> [a]

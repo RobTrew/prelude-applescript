@@ -1808,6 +1808,19 @@ on ft(m, n)
     end if
 end ft
 
+-- fTable :: String -> (a -> String) -> (b -> String) -> (a -> b) -> [a] -> String
+on fTable(s, xShow, fxShow, f, xs)
+    set ys to map(xShow, xs)
+    set w to maximum(map(my |length|, ys))
+    script arrowed
+        on |λ|(a, b)
+            justifyRight(w, space, a) & " -> " & b
+        end |λ|
+    end script
+    s & linefeed & unlines(zipWith(arrowed, ¬
+        ys, map(compose(fxShow, f), xs)))
+end fTable
+
 -- gcd :: Int -> Int -> Int
 on gcd(a, b)
     set x to abs(a)
@@ -4595,6 +4608,11 @@ on sqrtMay(n)
     end if
 end sqrtMay
 
+-- str :: a -> String
+on str(x)
+    x as string
+end str
+
 -- strip :: String -> String
 on strip(s)
     script isSpace
@@ -4708,6 +4726,15 @@ on succ(x)
         1 + x
     end if
 end succ
+
+-- succMay :: Enum a => a -> Maybe a
+on succMay(x)
+    if x is maxBound(x) then
+        Nothing()
+    else
+        Just(toEnum(x)'s |λ|(fromEnum(x) + 1))
+    end if
+end succMay
 
 -- sum :: [Num] -> Num
 on sum(xs)
