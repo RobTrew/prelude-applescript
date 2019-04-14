@@ -3,5 +3,5 @@
 ```
 
 ```applescript
--- roundTo :: Float -> Int -> Floaton roundTo(x, n)	set d to 10 ^ n	(round (x * d)) / dend roundTo
+-- roundTo :: Int -> Float -> Floaton roundTo(n, x)	set d to 10 ^ n	(round (x * d)) / dend roundTo
 ```

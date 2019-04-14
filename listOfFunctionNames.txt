@@ -317,7 +317,7 @@ reverse :: [a] -> [a]
 rights :: [Either a b] -> [b]
 rotate :: Int -> [a] -> [a]
 round :: a -> Int
-roundTo :: Float -> Int -> Float
+roundTo :: Int -> Float -> Float
 safeMay :: (a -> Bool) -> (a -> b) -> Maybe b
 scanl :: (b -> a -> b) -> b -> [a] -> [b]
 scanl1 :: (a -> a -> a) -> [a] -> [a]
@@ -343,6 +343,7 @@ showList :: [a] -> String
 showLog :: a -> IO ()
 showMaybe :: Maybe a -> String
 showOrdering :: Ordering -> String
+showPrecision :: Int -> Float -> String
 showRatio :: Ratio -> String
 showSet :: Set -> String
 showTuple :: Tuple -> String

@@ -3522,6 +3522,15 @@ on pred(x)
     end if
 end pred
 
+-- predMay :: Enum a => a -> Maybe a
+on predMay(x)
+    if x is minBound(x) then
+        Nothing()
+    else
+        Just(toEnum(x)'s |λ|(fromEnum(x) - 1))
+    end if
+end predMay
+
 -- print :: a -> IO ()
 on print (x)
     log x
@@ -3972,8 +3981,8 @@ on |round|(n)
     round n
 end |round|
 
--- roundTo :: Float -> Int -> Float
-on roundTo(x, n)
+-- roundTo :: Int -> Float -> Float
+on roundTo(n, x)
     set d to 10 ^ n
     (round (x * d)) / d
 end roundTo
@@ -4252,6 +4261,12 @@ on showOrdering(e)
         "EQ"
     end if
 end showOrdering
+
+-- showPrecision :: Int -> Float -> String
+on showPrecision(n, x)
+    set d to 10 ^ n
+    ((round (x * d)) / d) as string
+end showPrecision
 
 -- showRatio :: Ratio -> String
 on showRatio(r)
@@ -5029,6 +5044,12 @@ on toEnum(e)
                 x as number
             else if text is c then
                 character id x
+            else if boolean is c then
+                if 0 ≠ x then
+                    true
+                else
+                    false
+                end if
             end if
         end |λ|
     end script
