@@ -2035,11 +2035,18 @@ on indented(strIndent, s)
 end indented
 
 -- index (!!) :: [a] -> Int -> Maybe a
+-- index (!!) :: Gen [a] -> Int -> Maybe a
 -- index (!!) :: String -> Int -> Maybe Char
 on |index|(xs, i)
     if script is class of xs then
-      -- not yet defined for generators
-      -- missing value
+        repeat with j from 1 to i
+            set v to |λ|() of xs
+        end repeat
+        if missing value is not v then
+            Just(v)
+        else
+            Nothing()
+        end if
     else
         if length of xs < i then
             Nothing()
@@ -4025,8 +4032,8 @@ end scanl
 
 -- scanl1 :: (a -> a -> a) -> [a] -> [a]
 on scanl1(f, xs)
-    if length of xs > 0 then
-        scanl(f, item 1 of xs, tail(xs))
+    if 0 < length of xs then
+        scanl(f, item 1 of xs, rest of xs)
     else
         {}
     end if
@@ -4821,7 +4828,7 @@ on take(n, xs)
     else if script is c then
         set ys to {}
         repeat with i from 1 to n
-            set v to xs's |λ|()
+            set v to |λ|() of xs
             if missing value is v then
                 return ys
             else
