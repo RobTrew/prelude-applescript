@@ -6,7 +6,7 @@ into your scripts, and use them directly, rather than referencing a
 global 'include' of the whole library.
 
 Nevertheless, for initial drafting and testing, it is certainly possible
-to make the whole library (over 350 functions) available to a script:
+to make the whole library (over 400 functions) available to a script:
 
 ## Example
 
