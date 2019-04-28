@@ -289,18 +289,13 @@ on bind(m, mf)
     end if
 end bind
 
--- bindFn :: (a -> b) -> (b -> c) -> a -> c
-on bindFn(m, mf)
+-- bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
+on bindFn(f, bop)
     script
-        property mnd : mReturn(m)
-        property f : mReturn(mf)'s |λ|
+        property mf : mReturn(f)
+        property mop : mReturn(bop)
         on |λ|(x)
-            script
-                on |λ|(y)
-                    mnd's |λ|(x, y)
-                end |λ|
-            end script
-            f(result)'s |λ|(x)
+            mop's |λ|(mf's |λ|(x), x)
         end |λ|
     end script
 end bindFn

@@ -25,7 +25,7 @@ approxRatio :: Real -> Real -> Ratio
 argvLength :: Function -> Int
 assocs :: Map k a -> [(k, a)]
 bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
-bindFn :: (a -> b) -> (b -> c) -> a -> c
+bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
 bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
 bindList (>>=) :: [a] -> (a -> [b]) -> [b]
 bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
