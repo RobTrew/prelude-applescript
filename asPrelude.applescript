@@ -291,11 +291,16 @@ end bind
 
 -- bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
 on bindFn(f, bop)
+    -- Where either bop or f is a  binary operator.
     script
         property mf : mReturn(f)
         property mop : mReturn(bop)
         on |λ|(x)
-            mop's |λ|(mf's |λ|(x), x)
+            try
+                curry(mop)'s |λ|(mf's |λ|(x))'s |λ|(x)
+            on error
+                mop's |λ|(curry(mf)'s |λ|(x))'s |λ|(x)
+            end try
         end |λ|
     end script
 end bindFn
@@ -2478,7 +2483,7 @@ end iterateUntil
 
 -- join :: Monad m => m (m a) -> m a
 on join(x)
-    bind(x, |id|)
+    bind(x, my |id|)
 end join
 
 -- jsonLog :: a -> IO ()
