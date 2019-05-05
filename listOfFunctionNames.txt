@@ -2,7 +2,6 @@ Just :: a -> Maybe a
 Left :: a -> Either a b
 Node :: a -> [Tree a] -> Tree a
 Nothing :: Maybe a
-Ordering :: Int -> Ordering
 Right :: b -> Either a b
 Tuple (,) :: a -> b -> (a, b)
 TupleN :: a -> b ...  -> (a, b ... )
@@ -267,6 +266,7 @@ on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
 op :: String -> (a -> a -> b)
 or :: [Bool] -> Bool
 ord :: Char -> Int
+ordering :: () -> Ordering
 outdented :: String -> String
 partition :: (a -> Bool) -> [a] -> ([a], [a])
 partitionEithers :: [Either a b] -> ([a],[b])
