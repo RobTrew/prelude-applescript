@@ -1205,6 +1205,21 @@ on enumFrom(x)
     end script
 end enumFrom
 
+-- enumFromPairs :: String -> [(String, Int)] -> Dict
+on enumFromPairs(strName, kvs)
+    set iMax to item 1 of item -1 of kvs
+    set iMin to item 1 of item 1 of kvs
+    script go
+        on |λ|(a, kv)
+            set {k, v} to kv
+            insertMap(insertMap(a, k, ¬
+                {type:"enum", |name|:¬
+                    strName, |key|:k, min:iMin, max:iMax, value:v}), v, k)
+        end |λ|
+    end script
+    foldl(go, {|name|:strName, min:iMin, max:iMax}, kvs)
+end enumFromPairs
+
 -- enumFromThenTo :: Int -> Int -> Int -> [Int]
 on enumFromThenTo(x1, x2, y)
     set xs to {}
@@ -3415,6 +3430,11 @@ end |or|
 on ord(c)
     id of c
 end ord
+
+-- ordering :: () -> Ordering
+on ordering()
+    enumFromPairs("Ordering", {{"LT", -1}, {"EQ", 0}, {"GT", 1}})
+end ordering
 
 -- Ordering :: Int -> Ordering
 on Ordering(e)
