@@ -184,6 +184,16 @@ on apply(f, x)
     mReturn(f)'s |λ|(x)
 end apply
 
+-- applyN :: Int -> (a -> a) -> a -> a
+on applyN(n, f, x)
+    script go
+        on |λ|(a, g)
+            |λ|(a) of mReturn(g)
+        end |λ|
+    end script
+    foldl(go, x, replicate(n, f))
+end applyN
+
 -- approxRatio :: Real -> Real -> Ratio
 on approxRatio(epsilon, n)
     if {real, integer} contains (class of epsilon) and 0 < epsilon then
@@ -640,7 +650,7 @@ on concatMap(f, xs)
     set acc to {}
     tell mReturn(f)
         repeat with i from 1 to lng
-            set end of acc to (|λ|(item i of xs, i, xs))
+            set acc to acc & (|λ|(item i of xs, i, xs))
         end repeat
     end tell
     return acc
@@ -5792,6 +5802,14 @@ on zipWith4(f, ws, xs, ys, zs)
         return lst
     end tell
 end zipWith4
+
+-- zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
+on zipWithM(fm, xs, ys)
+    -- A functor of the type to which fm lifts its result.
+    -- For example, Nothing/Left if any of the zip applications failed,
+    -- or Just/Right a list of the results, when all succeeded.
+    traverseList(my |id|, zipWith(fm, xs, ys))
+end zipWithM
 
 -- zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
 on zipWithN(f, rows)
