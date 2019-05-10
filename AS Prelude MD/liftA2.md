@@ -11,9 +11,11 @@ on liftA2(f, a, b)
     set c to class of a
     if c is list or c is text then
         liftA2List(f, a, b)
-    else if c is record and keys(a) contains "type" then
-        set t to type of a
-        if "Either" = t then
+    else
+        set t to typeName(a)
+        if "(a -> b)" = t then
+            liftA2Fn(f, a, b)
+        else if "Either" = t then
             liftA2LR(f, a, b)
         else if "Maybe" = t then
             liftA2May(f, a, b)
@@ -24,8 +26,6 @@ on liftA2(f, a, b)
         else
             missing value
         end if
-    else
-        liftA2List
     end if
 end liftA2
 ```

@@ -2678,9 +2678,11 @@ on liftA2(f, a, b)
     set c to class of a
     if c is list or c is text then
         liftA2List(f, a, b)
-    else if c is record and keys(a) contains "type" then
-        set t to type of a
-        if "Either" = t then
+    else
+        set t to typeName(a)
+        if "(a -> b)" = t then
+            liftA2Fn(f, a, b)
+        else if "Either" = t then
             liftA2LR(f, a, b)
         else if "Maybe" = t then
             liftA2May(f, a, b)
@@ -2691,10 +2693,23 @@ on liftA2(f, a, b)
         else
             missing value
         end if
-    else
-        liftA2List
     end if
 end liftA2
+
+-- liftA2Fn :: (a0 -> b -> c) -> (a -> a0) -> (a -> b) -> a -> c
+on liftA2Fn(op, f, g)
+    -- Lift a binary function to a composition
+    -- over two other functions.
+    -- liftA2 (*) (+ 2) (+ 3) 7 == 90
+    script go
+        property mop : mReturn(op)
+        property mf : mReturn(f)
+        property mg : mReturn(g)
+        on |λ|(x)
+            |λ|(|λ|(x) of mf, |λ|(x) of mg) of mop
+        end |λ|
+    end script
+end liftA2Fn
 
 -- liftA2List :: (a -> b -> c) -> [a] -> [b] -> [c]
 on liftA2List(f, xs, ys)
@@ -5343,7 +5358,7 @@ on typeName(x)
     set mb to lookup((class of x) as string, ¬
         {|list|:"List", |integer|:"Int", |real|:"Float", |text|:¬
             "String", |string|:"String", |record|:¬
-            "Record", |boolean|:"Bool", |handler|:"Function", |script|:"Function"})
+            "Record", |boolean|:"Bool", |handler|:"(a -> b)", |script|:"(a -> b"})
     if Nothing of mb then
         "Bottom"
     else
