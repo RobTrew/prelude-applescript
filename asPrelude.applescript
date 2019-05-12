@@ -62,7 +62,7 @@ on ap(mf, mx)
     end if
 end ap
 
--- apList (<*>) :: [(a -> b)] -> [a] -> [b]
+-- apList (<*>) :: [a -> b] -> [a] -> [b]
 on apList(fs, xs)
     set lst to {}
     repeat with f in fs
@@ -2800,11 +2800,6 @@ on liftA2Tuple(f, a, b)
     Tuple(mappend(|1| of a, b1), mReturn(f)'s |λ|(|2| of a, b2))
 end liftA2Tuple
 
--- liftM2 :: (a -> b -> c) -> [a] -> [b] -> [c]
-on liftM2(f, a, b)
-    liftA2(f, a, b)
-end liftM2
-
 -- liftMmay :: (a -> b) -> (Maybe a -> Maybe b)
 on liftMmay(f)
     script
@@ -3692,6 +3687,13 @@ end quickSortBy
 on quot(m, n)
     m div n
 end quot
+
+-- quoted :: Char -> String -> String
+on quoted(c, s)
+    -- string flanked on both sides
+    -- by a specified quote character.
+    c & s & c
+end quoted
 
 -- quotRem :: Int -> Int -> (Int, Int)
 on quotRem(m, n)
