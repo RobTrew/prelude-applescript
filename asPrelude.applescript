@@ -45,10 +45,11 @@ end |any|
 on ap(mf, mx)
     if class of mx is list then
         apList(mf, mx)
-    else if record is class of mf and ¬
-        keys(mf) contains "type" then
-        set t to type of mf
-        if "Either" = t then
+    else
+        set t to typeName(mf)
+        if "(a -> b)" = t then
+            apFn(mf, mx)
+        else if "Either" = t then
             apLR(mf, mx)
         else if "Maybe" = t then
             apMay(mf, mx)
@@ -5368,7 +5369,7 @@ end TupleN
 
 -- typeName :: a -> String
 on typeName(x)
-    set mb to lookup((class of x) as string, ¬
+    set mb to lookupDict((class of x) as string, ¬
         {|list|:"List", |integer|:"Int", |real|:"Float", |text|:¬
             "String", |string|:"String", |record|:¬
             "Record", |boolean|:"Bool", |handler|:"(a -> b)", |script|:"(a -> b"})
