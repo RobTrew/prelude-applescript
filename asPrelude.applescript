@@ -4368,6 +4368,16 @@ on showSet(s)
     "{" & intercalate(", ", map(str, sort(elems(s)))) & "}"
 end showSet
 
+-- showTree :: Tree a -> String
+on showTree(tree)
+    script str
+        on |λ|(x)
+            x as string
+        end |λ|
+    end script
+    drawTree(fmapTree(str, tree))
+end showTree
+
 -- showTuple :: Tuple -> String
 on showTuple(tpl)
     set ca to current application
