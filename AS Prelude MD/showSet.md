@@ -1,5 +1,5 @@
 ```applescript
--- showSet :: Set -> String
+-- showSet :: Set a -> String
 on showSet(s)
     script str
         on |λ|(x)

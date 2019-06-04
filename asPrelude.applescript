@@ -349,6 +349,11 @@ end bindLR
 
 -- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 on bindMay(mb, mf)
+    -- bindMay provides the mechanism for composing a
+    -- sequence of (a -> Maybe b) functions.
+    -- If m is Nothing, it is passed straight through.
+    -- If m is Just(x), the result is an application
+    -- of the (a -> Maybe b) function (mf) to x.
     if Nothing of mb then
         mb
     else
@@ -1263,8 +1268,21 @@ on enumFromThenToChar(x1, x2, y)
     return xs
 end enumFromThenToChar
 
--- enumFromTo :: Enum a => a -> a -> [a]
+-- enumFromTo :: Int -> Int -> [Int]
 on enumFromTo(m, n)
+    if m ≤ n then
+        set lst to {}
+        repeat with i from m to n
+            set end of lst to i
+        end repeat
+        return lst
+    else
+        return {}
+    end if
+end ft
+
+-- enumFromTo_ :: Enum a => a -> a -> [a]
+on enumFromTo_(m, n)
     if m ≤ n then
         set x to fromEnum(m)
         set y to fromEnum(n)
@@ -2045,6 +2063,7 @@ end headMay
 
 -- id :: a -> a
 on |id|(x)
+    -- The identity function. The argument unchanged.
     x
 end |id|
 
@@ -2213,14 +2232,14 @@ on insertBy(cmp, x, ys)
     end if
 end insertBy
 
--- insertMap :: Dict -> String -> a -> Dict
-on insertMap(rec, k, v)
+-- insertDict :: Dict -> String -> a -> Dict
+on insertDict(rec, k, v)
     tell (current application's NSMutableDictionary's ¬
         dictionaryWithDictionary:rec)
         its setValue:v forKey:(k as string)
         return it as record
     end tell
-end insertMap
+end insertDict
 
 -- intercalate :: [a] -> [[a]] -> [a]
 -- intercalate :: String -> [String] -> String
@@ -2229,11 +2248,16 @@ on intercalate(sep, xs)
 end intercalate
 
 -- intercalateS :: String -> [String] -> String
-on intercalateS(sep, xs)
-    set {dlm, my text item delimiters} to {my text item delimiters, sep}
-    set s to xs as text
-    set my text item delimiters to dlm
-    return s
+on intercalateS(delim)
+    script
+        on |λ|(xs)
+            set {dlm, my text item delimiters} to ¬
+                {my text item delimiters, delim}
+            set str to xs as text
+            set my text item delimiters to dlm
+            str
+        end |λ|
+    end script
 end intercalateS
 
 -- intersect :: (Eq a) => [a] -> [a] -> [a]
@@ -2548,7 +2572,9 @@ end jsonParseLR
 
 -- Just :: a -> Maybe a
 on Just(x)
-    {type: "Maybe", Nothing:false, Just:x}
+    -- Constructor for an inhabited Maybe (option type) value.
+    -- Wrapper containing the result of a computation.
+    {type:"Maybe", Nothing:false, Just:x}
 end Just
 
 -- justifyLeft :: Int -> Char -> String -> String
@@ -2876,6 +2902,8 @@ end lookup
 
 -- lookupDict :: a -> Dict -> Maybe b
 on lookupDict(k, dct)
+    -- Just the value of k in the dictionary,
+    -- or Nothing if k is not found.
     set ca to current application
     set v to (ca's NSDictionary's dictionaryWithDictionary:dct)'s objectForKey:k
     if missing value ≠ v then
@@ -2904,6 +2932,8 @@ end lookupTuples
 
 -- map :: (a -> b) -> [a] -> [b]
 on map(f, xs)
+    -- The list obtained by applying f
+    -- to each element of xs.
     tell mReturn(f)
         set lng to length of xs
         set lst to {}
@@ -3219,6 +3249,10 @@ end maximumMay
 
 -- maybe :: b -> (a -> b) -> Maybe a -> b
 on maybe(v, f, mb)
+    -- The 'maybe' function takes a default value, a function, and a 'Maybe'
+    -- value.  If the 'Maybe' value is 'Nothing', the function returns the
+    -- default value.  Otherwise, it applies the function to the value inside
+    -- the 'Just' and returns the result.
     if Nothing of mb then
         v
     else
@@ -3357,6 +3391,7 @@ end modificationTime
 
 -- mReturn :: First-class m => (a -> b) -> m (a -> b)
 on mReturn(f)
+    -- 2nd class handler function lifted into 1st class script wrapper. 
     if script is class of f then
         f
     else
@@ -3393,6 +3428,8 @@ end notElem
 
 -- Nothing :: Maybe a
 on Nothing()
+    -- Constructor for an empty Maybe (option type) value.
+    -- Empty wrapper returned where a computation is not possible.
     {type:"Maybe", Nothing:true}
 end Nothing
 
@@ -4344,11 +4381,11 @@ end showOrdering
 -- showOutline :: Tree String -> String
 on showOutline(x)
     script go
-        on |λ|(strIndent)
+        on |λ|(indent)
             script
                 on |λ|(tree)
-                    {strIndent & (root of tree)} & ¬
-                        concatMap(go's |λ|(tab & strIndent), ¬
+                    {indent & (root of tree)} & ¬
+                        concatMap(go's |λ|(tab & indent), ¬
                             nest of tree)
                 end |λ|
             end script
@@ -4374,7 +4411,7 @@ on showRatio(r)
     end if
 end showRatio
 
--- showSet :: Set -> String
+-- showSet :: Set a -> String
 on showSet(s)
     script str
         on |λ|(x)
@@ -5186,6 +5223,7 @@ end toListTree
 
 -- toLower :: String -> String
 on toLower(str)
+    -- String in lower case. 
     set ca to current application
     ((ca's NSString's stringWithString:(str))'s ¬
         lowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
@@ -5253,6 +5291,21 @@ on transpose(xxs)
     end script
     map(cols, item 1 of rows)
 end transpose
+
+-- transpose_ :: [[a]] -> [[a]]
+on transpose_(rows)
+    script cols
+        on |λ|(_, iCol)
+            script cell
+                on |λ|(row)
+                    item iCol of row
+                end |λ|
+            end script
+            concatMap(cell, rows)
+        end |λ|
+    end script
+    map(cols, item 1 of rows)
+end transpose_
 
 -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
 on traverse(f, tx)
@@ -5564,6 +5617,8 @@ end unionSet
 
 -- unlines :: [String] -> String
 on unlines(xs)
+    -- A single string formed by the intercalation
+    -- of a list of strings with the newline character.
     set {dlm, my text item delimiters} to ¬
         {my text item delimiters, linefeed}
     set str to xs as text
@@ -5878,20 +5933,21 @@ on zipWithM(fm, xs, ys)
     traverseList(my |id|, zipWith(fm, xs, ys))
 end zipWithM
 
+-- Where the `rows` tuple is a list of lists in the Applescript version
 -- zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
 on zipWithN(f, rows)
     script go
-        property mf: mReturn(f)'s |λ|
+        property mf : mReturn(f)
         on |λ|(i)
             script nth
                 on |λ|(row)
                     item i of row
                 end |λ|
             end script
-            mf(map(nth, rows))
+            mf's |λ|(map(nth, rows))
         end |λ|
     end script
     map(go, enumFromTo(1, minimum(map(my |length|, rows))))
-end
+end zipWithN
 
 return me

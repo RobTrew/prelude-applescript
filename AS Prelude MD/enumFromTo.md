@@ -1,16 +1,14 @@
 ```applescript
--- enumFromTo :: Enum a => a -> a -> [a]
+-- enumFromTo :: Int -> Int -> [Int]
 on enumFromTo(m, n)
     if m ≤ n then
-        set x to fromEnum(m)
-        set y to fromEnum(n)
-        set xs to {}
-        repeat with i from x to y
-            set end of xs to i
+        set lst to {}
+        repeat with i from m to n
+            set end of lst to i
         end repeat
-        map(toEnum(m), xs)
+        return lst
     else
         return {}
     end if
-end enumFromTo
+end ft
 ```

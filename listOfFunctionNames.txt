@@ -95,8 +95,9 @@ enumFrom :: Enum a => a -> [a]
 enumFromPairs :: String -> [(String, Int)] -> Dict
 enumFromThenTo :: Int -> Int -> Int -> [Int]
 enumFromThenToChar :: Char -> Char -> Char -> [Char]
-enumFromTo :: Enum a => a -> a -> [a]
+enumFromTo :: Int -> Int -> [Int]
 enumFromToChar :: Char -> Char -> [Char]
+enumFromTo_ :: Enum a => a -> a -> [a]
 eq (==) :: Eq a => a -> a -> Bool
 evalJSLR :: String -> Either String a
 evalJSMay :: String -> Maybe a
@@ -164,7 +165,7 @@ initMay :: [a] -> Maybe [a]
 inits :: [a] -> [[a]]
 insert :: Ord a => a -> [a] -> [a]
 insertBy :: (a -> a -> Ordering) -> a -> [a] -> [a]
-insertMap :: Dict -> String -> a -> Dict
+insertDict :: Dict -> String -> a -> Dict
 intToDigit :: Int -> Char
 intercalate :: [a] -> [[a]] -> [a]
 intercalateS :: String -> [String] -> String
@@ -352,7 +353,7 @@ showOrdering :: Ordering -> String
 showOutline :: Tree String -> String
 showPrecision :: Int -> Float -> String
 showRatio :: Ratio -> String
-showSet :: Set -> String
+showSet :: Set a -> String
 showTree :: Tree a -> String
 showTuple :: Tuple -> String
 showUndefined :: () -> String
@@ -415,6 +416,7 @@ toSentence :: String -> String
 toTitle :: String -> String
 toUpper :: String -> String
 transpose :: [[a]] -> [[a]]
+transpose_ :: [[a]] -> [[a]]
 traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
 traverseLR :: Applicative f => (t -> f b) -> Either a t -> f (Either a b)
 traverseList :: (Applicative f) => (a -> f b) -> [a] -> f [b]
@@ -460,4 +462,4 @@ zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]
 zipWith4 :: (a -> b -> c -> d -> e) -> [a] -> [b] -> [c] -> [d] -> [e]
 zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
+Where the `rows` tuple is a list of lists in the Applescript version
