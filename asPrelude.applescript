@@ -5933,9 +5933,10 @@ on zipWithM(fm, xs, ys)
     traverseList(my |id|, zipWith(fm, xs, ys))
 end zipWithM
 
--- Where the `rows` tuple is a list of lists in the Applescript version
 -- zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
 on zipWithN(f, rows)
+    -- f applied to each tuple formed by the
+    -- zipping together of each list in rows
     script go
         property mf : mReturn(f)
         on |λ|(i)

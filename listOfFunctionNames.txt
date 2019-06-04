@@ -462,4 +462,4 @@ zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
 zipWith3 :: (a -> b -> c -> d) -> [a] -> [b] -> [c] -> [d]
 zipWith4 :: (a -> b -> c -> d -> e) -> [a] -> [b] -> [c] -> [d] -> [e]
 zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-Where the `rows` tuple is a list of lists in the Applescript version
+zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
