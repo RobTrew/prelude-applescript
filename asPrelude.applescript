@@ -4556,6 +4556,10 @@ end sortOn
 
 -- span :: (a -> Bool) -> [a] -> ([a], [a])
 on span(f, xs)
+    -- The longest (possibly empty) prefix of xs
+    -- that contains only elements satisfying p,
+    -- tupled with the remainder of xs.
+    -- span(p, xs) eq (takeWhile(p, xs), dropWhile(p, xs)) 
     set lng to length of xs
     set i to 0
     tell mReturn(f)
@@ -5430,6 +5434,7 @@ end truncate
 
 -- Tuple (,) :: a -> b -> (a, b)
 on Tuple(a, b)
+    -- Constructor for a pair of values, possibly of two different types.
     {type:"Tuple", |1|:a, |2|:b, length:2}
 end Tuple
 
