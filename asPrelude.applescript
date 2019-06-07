@@ -3406,6 +3406,11 @@ on |negate|(n)
     -n
 end |negate|
 
+-- nest :: Tree a -> [a]
+on nest(oTree)
+    nest of oTree
+end nest
+
 -- newUUID :: () -> IO UUID String
 on newUUID()
     current application's NSUUID's UUID's UUIDString as string
@@ -3890,7 +3895,7 @@ on readFileLR(strPath)
     if e is missing value then
         |Right|(s as string)
     else
-        |Left|(message of e)
+        |Left|((localizedDescription of e) as string)
     end if
 end readFileLR
 
@@ -4081,6 +4086,11 @@ on rights(xs)
     end script
     filter(result, xs)
 end rights
+
+-- root :: Tree a -> a
+on root(oTree)
+    root of oTree
+end root
 
 -- rotate :: Int -> [a] -> [a]
 on rotate(n, xs)
