@@ -4861,6 +4861,35 @@ on subtract(x, y)
     y - x
 end subtract
 
+-- subTreeAtPath :: Tree String -> [String] -> Maybe Tree String
+on subTreeAtPath(tree, pathSegments)
+    script go
+        on |λ|(children, xs)
+            if {} ≠ children and {} ≠ xs then
+                set h to item 1 of xs
+                script parentMatch
+                    on |λ|(t)
+                        h = root of t
+                    end |λ|
+                end script
+                script childMatch
+                    on |λ|(t)
+                        if 1 < length of xs then
+                            |λ|(nest of t, rest of xs) of go
+                        else
+                            Just(t)
+                        end if
+                    end |λ|
+                end script
+                bindMay(find(parentMatch, children), childMatch)
+            else
+                Nothing()
+            end if
+        end |λ|
+    end script
+    |λ|({tree}, pathSegments) of go
+end subTreeAtPath
+
 -- succ :: Enum a => a -> a
 on succ(x)
     if isChar(x) then
@@ -5406,6 +5435,33 @@ on traverseTuple(f, tpl)
     fmap(curry(my Tuple)'s |λ|(|1| of tpl), ¬
         mReturn(f)'s |λ|(|2| of tpl))
 end traverseTuple
+
+-- treeFromDict :: String -> Dict -> Tree String
+on treeFromDict(treeTitle, recDict)
+    script go
+        on |λ|(x)
+            set c to class of x
+            if list is c then
+                script
+                    on |λ|(v)
+                        Node(v, {})
+                    end |λ|
+                end script
+                map(result, x)
+            else if record is c then
+                script
+                    on |λ|(k)
+                        Node(k, go's |λ|(|Just| of lookupDict(k, x)))
+                    end |λ|
+                end script
+                map(result, keys(x))
+            else
+                {}
+            end if
+        end |λ|
+    end script
+    Node(treeTitle, go's |λ|(recDict))
+end treeFromDict
 
 -- treeLeaves :: Tree -> [Tree]
 on treeLeaves(oNode)
