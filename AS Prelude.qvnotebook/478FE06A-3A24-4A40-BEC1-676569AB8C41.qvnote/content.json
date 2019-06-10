@@ -4,7 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- randomRInt :: Int -> Int -> Int\non randomRInt(low, high)\n    floor(low + ((random number) * (1 + (high - low))))\nend randomRInt"
+      "data": "-- e.g. map(randomRInt(1, 10), ft(1, 20))"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- randomRInt :: Int -> Int -> IO () -> Int\non randomRInt(low, high)\n    script\n        on |λ|(_)\n            (low + ((random number) * (1 + (high - low)))) div 1\n        end |λ|\n    end script\nend randomRInt"
     }
   ]
 }

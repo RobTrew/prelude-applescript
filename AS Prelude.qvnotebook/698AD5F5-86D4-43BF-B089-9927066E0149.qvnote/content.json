@@ -1,0 +1,10 @@
+{
+  "title": "fmapGen (<$>)",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fmapGen <$> :: (a -> b) -> Gen [a] -> Gen [b]\non fmapGen(f, gen)\n    script\n        property g : mReturn(f)\n        on |λ|()\n            set v to gen's |λ|()\n            if v is missing value then\n                v\n            else\n                g's |λ|(v)\n            end if\n        end |λ|\n    end script\nend fmapGen"
+    }
+  ]
+}

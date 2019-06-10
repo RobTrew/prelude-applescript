@@ -1,0 +1,10 @@
+{
+  "title": "rational",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- rational :: Num a => a -> Rational\ron rational(x)\r    set c to class of x\r    if integer is c then\r        ratio(x, 1)\r    else if real is c then\r        approxRatio(missing value, x)\r    else\r        x\r    end if\rend rational"
+    }
+  ]
+}

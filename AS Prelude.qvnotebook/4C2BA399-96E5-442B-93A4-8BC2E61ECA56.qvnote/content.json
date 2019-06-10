@@ -1,0 +1,10 @@
+{
+  "title": "str",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- str :: a -> String\non str(x)\n    x as string\nend str"
+    }
+  ]
+}

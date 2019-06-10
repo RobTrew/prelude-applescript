@@ -1,10 +1,10 @@
 {
-  "title": "const_",
+  "title": "const",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- const_ :: a -> b -> a\non const_(k, _)\n    k\nend const_"
+      "data": "-- const :: a -> b -> a\non const(k, _)\n    k\nend const"
     }
   ]
 }

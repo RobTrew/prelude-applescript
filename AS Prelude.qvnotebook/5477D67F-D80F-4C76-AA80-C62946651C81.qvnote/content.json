@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- rotate :: Int -> [a] -> [a]\non rotate(n, xs)\n    set lng to length of xs\n    if lng > 0 then\n        takeDropCycle(lng, n, xs)\n    else\n        {}\n    end if\nend rotate"
+      "data": "-- rotate :: Int -> [a] -> [a]\non rotate(n, xs)\n    set lng to |length|(xs)\n    if missing value is not lng then\n        take(lng, drop(lng - n, cycle(xs)))\n    else\n        lng\n    end if\nend rotate"
     }
   ]
 }

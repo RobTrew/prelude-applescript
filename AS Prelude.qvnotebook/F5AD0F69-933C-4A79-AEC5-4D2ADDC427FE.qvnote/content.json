@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- deleteFirst :: a -> [a] -> [a]\non deleteFirst(x, xs)\n    script Eq\n        on |λ|(a, b)\n            a = b\n        end |λ|\n    end script\n \n    deleteBy(Eq, x, xs)\nend |delete|"
+      "data": "-- deleteFirst :: a -> [a] -> [a]\non deleteFirst(x, xs)\n    script go\n        on |λ|(xs)\n            if 0 < length of xs then\n                tell xs to set {h, t} to {item 1, rest}\n                if x = h then\n                    t\n                else\n                    {h} & |λ|(t)\n                end if\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs)\nend deleteFirst"
     }
   ]
 }

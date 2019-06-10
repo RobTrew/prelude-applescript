@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]\non deleteBy(fnEq, x, xs)\n    if length of xs > 0 then\n        set mb to uncons(xs)\n        if Nothing of mb then\n            xs\n        else\n            set ht to Just of mb\n            set {h, t} to {|1| of ht, |2| of ht}\n            if |λ|(x, h) of mReturn(fnEq) then\n                t\n            else\n                {h} & deleteBy(fnEq, x, t)\n            end if\n        end if\n    else\n        {}\n    end if\nend deleteBy"
+      "data": "-- deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]\non deleteBy(fnEq, x, xs)\n    script go\n        property eq : mReturn(fnEq)'s |λ|\n        on |λ|(xs)\n            if 0 < length of xs then\n                tell xs to set {h, t} to {item 1, rest}\n                if eq(x, h) then\n                    t\n                else\n                    {h} & |λ|(t)\n                end if\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs)\nend deleteBy"
     }
   ]
 }

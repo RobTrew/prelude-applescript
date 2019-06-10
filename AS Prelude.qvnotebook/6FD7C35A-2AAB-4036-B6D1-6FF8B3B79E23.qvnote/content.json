@@ -1,0 +1,10 @@
+{
+  "title": "applyN",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- applyN :: Int -> (a -> a) -> a -> a\non applyN(n, f, x)\n    script go\n        on |λ|(a, g)\n            |λ|(a) of mReturn(g)\n        end |λ|\n    end script\n    foldl(go, x, replicate(n, f))\nend applyN"
+    }
+  ]
+}

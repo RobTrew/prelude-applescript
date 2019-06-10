@@ -1,0 +1,15 @@
+{
+  "title": "sj",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Abbreviation for quick testing"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- sj :: a -> String\non sj(x)\n    showJSON(x)\nend sj"
+    }
+  ]
+}

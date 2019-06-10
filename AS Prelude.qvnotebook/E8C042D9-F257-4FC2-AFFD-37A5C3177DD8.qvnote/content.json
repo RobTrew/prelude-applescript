@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unzip4 :: [(a,b,c,d)] -> ([a],[b],[c],[d])\non unzip4(wxyzs)\n    set ws to {}\n    set xs to {}\n    set ys to {}\n    set zs to {}\n    repeat with wxyz in wxyzs\n        set end of ws to |1| of wxyz\n        set end of xs to |2| of wxyz\n        set end of ys to |3| of wxyz\n        set end of zs to |4| of wxyz\n    end repeat\n    return Tuple4(ws, xs, ys, zs)\nend unzip4"
+      "data": "-- unzip4 :: [(a,b,c,d)] -> ([a],[b],[c],[d])\non unzip4(wxyzs)\n    set ws to {}\n    set xs to {}\n    set ys to {}\n    set zs to {}\n    repeat with wxyz in wxyzs\n        set end of ws to |1| of wxyz\n        set end of xs to |2| of wxyz\n        set end of ys to |3| of wxyz\n        set end of zs to |4| of wxyz\n    end repeat\n    return TupleN({ws, xs, ys, zs})\nend unzip4"
     }
   ]
 }

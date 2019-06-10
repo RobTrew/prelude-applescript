@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- takeExtension :: FilePath -> String\non takeExtension(strPath)\n    set xs to splitOn(\".\", strPath)\n    if length of xs > 1 then\n        \".\" & item -1 of xs\n    else\n        \"\"\n    end if\nend takeExtension"
+      "data": "-- takeExtension :: FilePath -> String\non takeExtension(strPath)\n    set xs to splitOn(\".\", strPath)\n    if 1 < length of xs then\n        \".\" & item -1 of xs\n    else\n        \"\"\n    end if\nend takeExtension"
     }
   ]
 }

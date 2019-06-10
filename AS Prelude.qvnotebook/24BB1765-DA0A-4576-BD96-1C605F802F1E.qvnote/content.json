@@ -1,0 +1,10 @@
+{
+  "title": "if_",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- if_ :: Bool -> a -> a -> a\non if_(bool, x, y)\n    if bool then\n        x\n    else\n        y\n    end if\nend if_"
+    }
+  ]
+}

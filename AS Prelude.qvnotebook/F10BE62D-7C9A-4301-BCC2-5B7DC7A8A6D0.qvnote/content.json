@@ -1,0 +1,10 @@
+{
+  "title": "join",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- join :: Monad m => m (m a) -> m a\non join(x)\n    bind(x, my |id|)\nend join"
+    }
+  ]
+}

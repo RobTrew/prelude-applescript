@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- elems :: Dict -> [a]\non elems(rec)\n    set ca to current application\n    (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list\nend elems"
+      "data": "-- elems :: Map k a -> [a]\n-- elems :: Set a -> [a]\non elems(x)\n    if record is class of x then -- Dict\n        set ca to current application\n        (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list\n    else -- Set\n        (x's allObjects()) as list\n    end if\nend elems"
     }
   ]
 }

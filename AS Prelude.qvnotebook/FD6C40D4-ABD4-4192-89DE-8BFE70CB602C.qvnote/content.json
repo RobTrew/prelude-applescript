@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b\non apLR(flr, lr)\n    if isRight(flr) then\n        if isRight(lr) then\n            |Right|(|λ|(|Right| of lr) of mReturn(|Right| of flr))\n        else\n            lr\n        end if\n    else\n        flr\n    end if\nend apLR"
+      "data": "-- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b\non apLR(flr, lr)\n    if missing value is |Left| of flr then\n        if missing value is |Left| of lr then\n            |Right|(|λ|(|Right| of lr) of mReturn(|Right| of flr))\n        else\n            lr\n        end if\n    else\n        flr\n    end if\nend apLR"
     }
   ]
 }

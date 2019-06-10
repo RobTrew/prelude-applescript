@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b\non bindMay(mb, mf)\n    if Nothing of mb then\n        mb\n    else\n        tell mReturn(mf) to |λ|(Just of mb)\n    end if\nend bindMay"
+      "data": "-- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b\non bindMay(mb, mf)\n    -- bindMay provides the mechanism for composing a\n    -- sequence of (a -> Maybe b) functions.\n    -- If m is Nothing, it is passed straight through.\n    -- If m is Just(x), the result is an application\n    -- of the (a -> Maybe b) function (mf) to x.\n    if Nothing of mb then\n        mb\n    else\n        tell mReturn(mf) to |λ|(Just of mb)\n    end if\nend bindMay"
     }
   ]
 }

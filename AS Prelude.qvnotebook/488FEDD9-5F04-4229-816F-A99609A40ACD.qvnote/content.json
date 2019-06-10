@@ -1,0 +1,15 @@
+{
+  "title": "ft",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Abbreviation for quick testing"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- ft :: (Int, Int) -> [Int]\non ft(m, n)\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        return lst\n    else\n        return {}\n    end if\nend ft"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- uncons :: [a] -> Maybe (a, [a])\non uncons(xs)\n    if xs = {} then\n        Nothing()\n    else\n        if class of xs is string then\n            set cs to text items of xs\n            Just(Tuple(item 1 of cs, rest of cs))\n        else\n            Just(Tuple(item 1 of xs, rest of xs))\n        end if\n    end if\nend uncons"
+      "data": "-- uncons :: [a] -> Maybe (a, [a])\non uncons(xs)\n    set lng to |length|(xs)\n    if 0 = lng then\n        Nothing()\n    else\n        if (2 ^ 29 - 1) as integer > lng then\n            if class of xs is string then\n                set cs to text items of xs\n                Just(Tuple(item 1 of cs, rest of cs))\n            else\n                Just(Tuple(item 1 of xs, rest of xs))\n            end if\n        else\n            set nxt to take(1, xs)\n            if {} is nxt then\n                Nothing()\n            else\n                Just(Tuple(item 1 of nxt, xs))\n            end if\n        end if\n    end if\nend uncons"
     }
   ]
 }

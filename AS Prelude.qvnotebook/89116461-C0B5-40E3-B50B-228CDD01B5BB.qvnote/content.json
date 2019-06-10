@@ -1,0 +1,10 @@
+{
+  "title": "enumFromPairs",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- enumFromPairs :: String -> [(String, Int)] -> Dict\non enumFromPairs(strName, kvs)\n    set iMax to item 1 of item -1 of kvs\n    set iMin to item 1 of item 1 of kvs\n    script go\n        on |λ|(a, kv)\n            set {k, v} to kv\n            insertMap(insertMap(a, k, ¬\n                {type:\"enum\", |name|:¬\n                    strName, |key|:k, min:iMin, max:iMax, value:v}), v, k)\n        end |λ|\n    end script\n    foldl(go, {|name|:strName, min:iMin, max:iMax}, kvs)\nend enumFromPairs"
+    }
+  ]
+}

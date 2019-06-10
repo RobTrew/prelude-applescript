@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- floor :: Num -> Int\non floor(x)\n    set nr to properFraction(x)\n    set n to |1| of nr\n    if (|2| of nr) < 0 then\n        n - 1\n    else\n        n\n    end if\nend floor"
+      "data": "-- floor :: Num -> Int\non floor(x)\n    if class of x is record then\n        set nr to properFracRatio(x)\n    else\n        set nr to properFraction(x)\n    end if\n    set n to fst(nr)\n    if 0 > snd(nr) then\n        n - 1\n    else\n        n\n    end if\nend floor"
     }
   ]
 }

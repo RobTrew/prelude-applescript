@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- length :: [a] -> Int\non |length|(xs)\n    length of xs\nend |length|"
+      "data": "-- length :: [a] -> Int\non |length|(xs)\n    set c to class of xs\n    if list is c or string is c then\n        length of xs\n    else\n        (2 ^ 29 - 1) -- (maxInt - simple proxy for non-finite)\n    end if\nend |length|"
     }
   ]
 }

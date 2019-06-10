@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isPrefixOf :: [a] -> [a] -> Bool\n-- isPrefixOf :: String -> String -> Bool\non isPrefixOf(xs, ys)\n  set intX to length of xs\n    if intX < 1 then\n        true\n    else if intX > length of ys then\n        false\n    else if class of xs is string then\n        (offset of xs in ys) = 1\n    else\n        set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\n        ((|1| of xxt) = (|1| of yyt)) and isPrefixOf(|2| of xxt, |2| of yyt)\n    end if\nend isPrefixOf"
+      "data": "-- isPrefixOf :: [a] -> [a] -> Bool\n-- isPrefixOf :: String -> String -> Bool\non isPrefixOf(xs, ys)\n    script go\n        on |λ|(xs, ys)\n            set intX to length of xs\n            if intX < 1 then\n                true\n            else if intX > length of ys then\n                false\n            else if class of xs is string then\n                (offset of xs in ys) = 1\n            else\n                set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\n                ((|1| of xxt) = (|1| of yyt)) and |λ|(|2| of xxt, |2| of yyt)\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs, ys)\nend isPrefixOf"
     }
   ]
 }

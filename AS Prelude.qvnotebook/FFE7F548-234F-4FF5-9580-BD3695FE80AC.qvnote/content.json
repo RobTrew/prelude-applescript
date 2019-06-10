@@ -1,0 +1,10 @@
+{
+  "title": "showSet",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showSet :: Set a -> String\non showSet(s)\n    script str\n        on |λ|(x)\n            x as string\n        end |λ|\n    end script\n    \"{\" & intercalate(\", \", map(str, sort(elems(s)))) & \"}\"\nend showSet"
+    }
+  ]
+}

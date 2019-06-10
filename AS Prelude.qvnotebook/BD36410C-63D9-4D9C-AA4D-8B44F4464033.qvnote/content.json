@@ -1,0 +1,10 @@
+{
+  "title": "subTreeAtPath",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- subTreeAtPath :: Tree String -> [String] -> Maybe Tree String\non subTreeAtPath(tree, pathSegments)\n    script go\n        on |λ|(children, xs)\n            if {} ≠ children and {} ≠ xs then\n                set h to item 1 of xs\n                script parentMatch\n                    on |λ|(t)\n                        h = root of t\n                    end |λ|\n                end script\n                script childMatch\n                    on |λ|(t)\n                        if 1 < length of xs then\n                            |λ|(nest of t, rest of xs) of go\n                        else\n                            Just(t)\n                        end if\n                    end |λ|\n                end script\n                bindMay(find(parentMatch, children), childMatch)\n            else\n                Nothing()\n            end if\n        end |λ|\n    end script\n    |λ|({tree}, pathSegments) of go\nend subTreeAtPath"
+    }
+  ]
+}

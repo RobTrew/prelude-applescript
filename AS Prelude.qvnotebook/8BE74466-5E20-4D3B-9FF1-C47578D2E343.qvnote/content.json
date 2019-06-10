@@ -1,0 +1,15 @@
+{
+  "title": "zipN",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- Arbitrary number of lists to zip\n-- all enclosed in an argument vector list"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- zipN :: [a] -> [b] -> ... -> [(a, b ...)]\non zipN(argv)\n    if 1 < length of argv then\n        script go\n            on |λ|(x, i)\n                script peers\n                    on |λ|(y)\n                        item i of y\n                    end |λ|\n                end script\n                tupleFromList(map(peers, argv))\n            end |λ|\n        end script\n        map(go, take(minimum(map(my |length|, argv)), ¬\n            item 1 of argv))\n    else\n        argv\n    end if\nend zipN"
+    }
+  ]
+}

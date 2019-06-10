@@ -1,0 +1,10 @@
+{
+  "title": "ratioMinus",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- ratioMinus :: Rational -> Rational -> Rational\non ratioMinus(n1, n2)\n    set r1 to rational(n1)\n    set r2 to rational(n2)\n    set d to lcm(d of r1, d of r2)\n    ratio((n of r1) * (d / (d of r1) - ¬\n        ((n of r2) * (d / (d of r2)))), d)\nend ratioMinus"
+    }
+  ]
+}

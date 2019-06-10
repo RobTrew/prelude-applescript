@@ -4,7 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- TupleN :: a -> b ...  -> (a, b ... )\non TupleN(xs)\n    tupleFromArray(xs)\nend Tuple"
+      "data": "-- Requires N arguments to be wrapped as one list in AS \n-- (the JS version accepts N separate arguments)"
+    },
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- TupleN :: a -> b ...  -> (a, b ... )\non TupleN(argv)\n    tupleFromList(argv)\nend TupleN"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isInfixOf :: Eq a => [a] -> [a] -> Bool\n-- isInfixOf :: String -> String -> Bool\non isInfixOf(needle, haystack)\n    haystack contains needle\nend isInfixOf"
+      "data": "-- isInfixOf :: (Eq a) => [a] -> [a] -> Bool\n-- isInfixOf :: String -> String -> Bool\non isInfixOf(needle, haystack)\n    haystack contains needle\nend isInfixOf"
     }
   ]
 }

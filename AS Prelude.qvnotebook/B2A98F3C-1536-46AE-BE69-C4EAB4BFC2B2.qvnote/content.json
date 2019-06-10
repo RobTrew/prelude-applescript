@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unwords :: [String] -> String\non unwords(xs)\n    intercalateS(space, xs)\nend unwords"
+      "data": "-- unwords :: [String] -> String\non unwords(xs)\n    set {dlm, my text item delimiters} to ¬\n        {my text item delimiters, space}\n    set s to xs as text\n    set my text item delimiters to dlm\n    return s\nend unwords"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "title": "chop",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- chop :: ([a] -> (b, [a])) -> [a] -> [b]\non chop(f, xs)\n    script go\n        property g : mReturn(f)\n        on |λ|(xs)\n            if 0 < length of xs then\n                set {b, ys} to g's |λ|(xs)\n                {b} & |λ|(ys)\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs)\nend chop"
+    }
+  ]
+}

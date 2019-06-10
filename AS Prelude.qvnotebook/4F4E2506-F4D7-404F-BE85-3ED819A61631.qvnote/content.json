@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isAlpha :: Char -> Bool\non isAlpha(c)\n    set ca to current application\n    set oRgx to ca's NSRegularExpression's ¬\n        regularExpressionWithPattern:(\"[A-Za-z0-9\\\\u00C0-\\\\u00FF]\") ¬\n            options:(ca's NSRegularExpressionAnchorsMatchLines as integer) ¬\n            |error|:(missing value)\n    set oString to ca's NSString's stringWithString:c\n    0 < (oRgx's numberOfMatchesInString:oString options:0 ¬\n        range:{location:0, |length|:1})\nend isAlpha"
+      "data": "-- isAlpha :: Char -> Bool\non isAlpha(c)\n    set ca to current application\n    set oRgx to ca's NSRegularExpression's ¬\n        regularExpressionWithPattern:(\"[A-Za-z\\\\u00C0-\\\\u00FF]\") ¬\n            options:(ca's NSRegularExpressionAnchorsMatchLines as integer) ¬\n            |error|:(missing value)\n    set oString to ca's NSString's stringWithString:c\n    0 < (oRgx's numberOfMatchesInString:oString options:0 ¬\n        range:{location:0, |length|:1})\nend isAlpha"
     }
   ]
 }

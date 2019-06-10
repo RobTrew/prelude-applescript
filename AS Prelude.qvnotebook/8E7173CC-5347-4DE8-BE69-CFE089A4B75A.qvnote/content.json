@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intercalateS :: String -> [String] -> String\non intercalateS(sep, xs)\n    set {dlm, my text item delimiters} to {my text item delimiters, sep}\n    set s to xs as text\n    set my text item delimiters to dlm\n    return s\nend intercalateS"
+      "data": "-- intercalateS :: String -> [String] -> String\ron intercalateS(delim)\r\tscript\r\t\ton |λ|(xs)\r\t\t\tset {dlm, my text item delimiters} to ¬\r\t\t\t\t{my text item delimiters, delim}\r\t\t\tset str to xs as text\r\t\t\tset my text item delimiters to dlm\r\t\t\tstr\r\t\tend |λ|\r\tend script\rend intercalateS"
     }
   ]
 }

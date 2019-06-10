@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- ceiling :: Num -> Int\non ceiling(x)\n    set nr to properFraction(x)\n    set n to |1| of nr\n    if (|2| of nr) > 0 then\n        n + 1\n    else\n        n\n    end if\nend ceiling"
+      "data": "-- ceiling :: Num -> Int\non ceiling(x)\n    set nr to properFraction(x)\n    set n to |1| of nr\n    if 0 < (|2| of nr) then\n        n + 1\n    else\n        n\n    end if\nend ceiling"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "title": "index (!!)",
+  "title": "index",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- index (!!) :: [a] -> Int -> a\non |index|(xs, i)\n    item i of xs\nend |index|"
+      "data": "-- index (!!) :: [a] -> Int -> Maybe a\n-- index (!!) :: Gen [a] -> Int -> Maybe a\n-- index (!!) :: String -> Int -> Maybe Char\non |index|(xs, i)\n    if script is class of xs then\n        repeat with j from 1 to i\n            set v to |λ|() of xs\n        end repeat\n        if missing value is not v then\n            Just(v)\n        else\n            Nothing()\n        end if\n    else\n        if length of xs < i then\n            Nothing()\n        else\n            Just(item i of xs)\n        end if\n    end if\nend |index|"
     }
   ]
 }

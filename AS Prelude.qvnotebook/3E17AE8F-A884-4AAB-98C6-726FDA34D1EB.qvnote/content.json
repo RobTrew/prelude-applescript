@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- typeName :: a -> String\non typeName(x)\n    set mb to lookup((class of x) as string, ¬\n        {|list|:\"List\", |integer|:\"Int\", |real|:\"Float\", |text|:¬\n            \"String\", |string|:\"String\", |record|:¬\n            \"Record\", |boolean|:\"Bool\", |handler|:\"Function\", |script|:\"Function\"})\n    if Nothing of mb then\n        \"Bottom\"\n    else\n        set k to Just of mb\n        if k = \"Record\" then\n            if keys(x) contains \"type\" then\n                type of x\n            else\n                \"Dict\"\n            end if\n        else\n            k\n        end if\n    end if\nend typeName"
+      "data": "-- typeName :: a -> String\non typeName(x)\n    set mb to lookupDict((class of x) as string, ¬\n        {|list|:\"List\", |integer|:\"Int\", |real|:\"Float\", |text|:¬\n            \"String\", |string|:\"String\", |record|:¬\n            \"Record\", |boolean|:\"Bool\", |handler|:\"(a -> b)\", |script|:\"(a -> b\"})\n    if Nothing of mb then\n        \"Bottom\"\n    else\n        set k to Just of mb\n        if k = \"Record\" then\n            if keys(x) contains \"type\" then\n                type of x\n            else\n                \"Dict\"\n            end if\n        else\n            k\n        end if\n    end if\nend typeName"
     }
   ]
 }

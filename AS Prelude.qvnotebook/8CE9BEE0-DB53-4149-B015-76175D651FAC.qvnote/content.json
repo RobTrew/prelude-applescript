@@ -1,10 +1,10 @@
 {
-  "title": "insertMap",
+  "title": "insertDict",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- insertMap :: Dict -> String -> a -> Dict\non insertMap(rec, k, v)\n    tell (current application's NSMutableDictionary's ¬\n        dictionaryWithDictionary:rec)\n        its setValue:v forKey:(k as string)\n        return it as record\n    end tell\nend insertMap"
+      "data": "-- insertDict :: Dict -> String -> a -> Dict\non insertDict(rec, k, v)\n    tell (current application's NSMutableDictionary's ¬\n        dictionaryWithDictionary:rec)\n        its setValue:v forKey:(k as string)\n        return it as record\n    end tell\nend insertDict"
     }
   ]
 }

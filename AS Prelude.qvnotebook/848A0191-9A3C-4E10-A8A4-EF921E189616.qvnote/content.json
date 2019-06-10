@@ -1,10 +1,10 @@
 {
-  "title": "enumFromToInt",
+  "title": "enumFromTo_",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- enumFromToInt :: Int -> Int -> [Int]\non enumFromToInt(m, n)\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        return lst\n    else\n        return {}\n    end if\nend enumFromToInt"
+      "data": "-- enumFromTo_ :: Enum a => a -> a -> [a]\non enumFromTo_(m, n)\n    if m ≤ n then\n        set x to fromEnum(m)\n        set y to fromEnum(n)\n        set xs to {}\n        repeat with i from x to y\n            set end of xs to i\n        end repeat\n        map(toEnum(m), xs)\n    else\n        return {}\n    end if\nend enumFromTo"
     }
   ]
 }

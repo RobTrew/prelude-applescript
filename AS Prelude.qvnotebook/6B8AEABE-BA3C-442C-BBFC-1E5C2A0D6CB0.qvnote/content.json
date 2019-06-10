@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unlines :: [String] -> String\non unlines(xs)\n    set {dlm, my text item delimiters} to ¬\n        {my text item delimiters, linefeed}\n    set str to xs as text\n    set my text item delimiters to dlm\n    str\nend unlines"
+      "data": "-- unlines :: [String] -> String\non unlines(xs)\n    -- A single string formed by the intercalation\n    -- of a list of strings with the newline character.\n    set {dlm, my text item delimiters} to ¬\n        {my text item delimiters, linefeed}\n    set str to xs as text\n    set my text item delimiters to dlm\n    str\nend unlines"
     }
   ]
 }

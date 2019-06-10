@@ -1,0 +1,10 @@
+{
+  "title": "showTree",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showTree :: Tree a -> String\non showTree(tree)\n    script str\n        on |λ|(x)\n            x as string\n        end |λ|\n    end script\n    drawTree(fmapTree(str, tree))\nend showTree"
+    }
+  ]
+}

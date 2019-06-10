@@ -1,0 +1,10 @@
+{
+  "title": "cycle",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- cycle :: [a] -> Generator [a]\non cycle(xs)\n    script\n        property lng : 1 + (length of xs)\n        property i : missing value\n        on |λ|()\n            if missing value is i then\n                set i to 1\n            else\n                set nxt to (1 + i) mod lng\n                if 0 = ((1 + i) mod lng) then\n                    set i to 1\n                else\n                    set i to nxt\n                end if\n            end if\n            return item i of xs\n        end |λ|\n    end script\nend cycle"
+    }
+  ]
+}

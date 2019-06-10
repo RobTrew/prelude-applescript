@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showList :: [a] -> String\non showList(xs)\n  showJSON(xs)\nend showList"
+      "data": "-- showList :: [a] -> String\non showList(xs)\n    \"[\" & intercalateS(\", \", map(my show, xs)) & \"]\"\nend showList"
     }
   ]
 }

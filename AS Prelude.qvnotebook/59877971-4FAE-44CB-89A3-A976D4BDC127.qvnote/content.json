@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- doesDirectoryExist :: FilePath -> IO Bool\non doesDirectoryExist(strPath)\n    set ca to current application\n    set oPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {bln, int} to (ca's NSFileManager's defaultManager's ¬\n        fileExistsAtPath:oPath isDirectory:(reference))\n    bln and (int = 1)\nend doesDirectoryExist"
+      "data": "-- doesDirectoryExist :: FilePath -> IO Bool\ron doesDirectoryExist(strPath)\r    set ca to current application\r    set oPath to (ca's NSString's stringWithString:strPath)'s ¬\r        stringByStandardizingPath\r    set {bln, v} to (ca's NSFileManager's defaultManager's ¬\r        fileExistsAtPath:oPath isDirectory:(reference))\r    bln and v\rend doesDirectoryExist"
     }
   ]
 }

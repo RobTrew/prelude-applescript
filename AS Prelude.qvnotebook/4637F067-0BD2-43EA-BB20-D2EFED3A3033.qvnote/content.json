@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\non ap(mf, mx)\n    if class of mx is list then\n        apList(mf, mx)\n    else if record is class of mf and ¬\n        keys(mf) contains \"type\" then\n        set t to type of mf\n        if \"Either\" = t then\n            apLR(mf, mx)\n        else if \"Maybe\" = t then\n            apMay(mf, mx)\n        else if \"Node\" = t then\n            apTree(mf, mx)\n        else if \"Tuple\" = t then\n            apTuple(mf, mx)\n        else\n            missing value\n        end if\n    end if\nend ap"
+      "data": "-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\non ap(mf, mx)\n    if class of mx is list then\n        apList(mf, mx)\n    else\n        set t to typeName(mf)\n        if \"(a -> b)\" = t then\n            apFn(mf, mx)\n        else if \"Either\" = t then\n            apLR(mf, mx)\n        else if \"Maybe\" = t then\n            apMay(mf, mx)\n        else if \"Node\" = t then\n            apTree(mf, mx)\n        else if \"Tuple\" = t then\n            apTuple(mf, mx)\n        else\n            missing value\n        end if\n    end if\nend ap"
     }
   ]
 }

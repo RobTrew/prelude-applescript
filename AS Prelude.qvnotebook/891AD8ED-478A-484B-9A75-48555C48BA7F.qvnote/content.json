@@ -1,10 +1,10 @@
 {
-  "title": "intersectionBy",
+  "title": "intersectListsBy",
   "cells": [
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- intersectionBy :: (a -> a -> Bool) -> [[a]] -> [a]\non intersectionBy(fnEq, xs)\n    script\n        property eq : mReturn(fnEq)\n        on |λ|(a, x)\n            intersectBy(eq, a, x)\n        end |λ|\n    end script\n    foldr1(result, xs)\nend intersectionBy"
+      "data": "-- intersectListsBy :: (a -> a -> Bool) -> [[a]] -> [a]\non intersectListsBy(fnEq, xs)\n    script\n        property eq : mReturn(fnEq)\n        on |λ|(a, x)\n            intersectBy(eq, a, x)\n        end |λ|\n    end script\n    foldr1(result, xs)\nend intersectionBy"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "title": "ordering",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- ordering :: () -> Ordering\non ordering()\n    enumFromPairs(\"Ordering\", {{\"LT\", -1}, {\"EQ\", 0}, {\"GT\", 1}})\nend ordering"
+    }
+  ]
+}

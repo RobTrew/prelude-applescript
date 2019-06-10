@@ -1,0 +1,10 @@
+{
+  "title": "predMay",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- predMay :: Enum a => a -> Maybe a\non predMay(x)\n    if x is minBound(x) then\n        Nothing()\n    else\n        Just(toEnum(x)'s |λ|(fromEnum(x) - 1))\n    end if\nend predMay"
+    }
+  ]
+}

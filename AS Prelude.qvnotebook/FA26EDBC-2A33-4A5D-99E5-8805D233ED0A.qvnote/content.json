@@ -1,0 +1,10 @@
+{
+  "title": "root",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- root :: Tree a -> a\non root(oTree)\n    root of oTree\nend root"
+    }
+  ]
+}

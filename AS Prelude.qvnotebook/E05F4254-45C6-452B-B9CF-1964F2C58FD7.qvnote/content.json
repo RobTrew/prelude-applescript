@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\non mapMaybe(mf, xs)\n    concatMap(compose(mf, my maybeToList), xs)\nend mapMaybe"
+      "data": "-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\non mapMaybe(mf, xs)\n    script\n        property g : mReturn(mf)\n        on |λ|(a, x)\n            set mb to g's |λ|(x)\n            if Nothing of mb then\n                a\n            else\n                a & (Just of mb)\n            end if\n        end |λ|\n    end script\n    foldl(result, {}, xs)\nend mapMaybe"
     }
   ]
 }

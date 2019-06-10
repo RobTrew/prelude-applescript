@@ -1,0 +1,10 @@
+{
+  "title": "appendGen",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- appendGen (++) :: Gen [a] -> Gen [a] -> Gen [a]\non appendGen(xs, ys)\n    script\n        property vs : xs\n        on |λ|()\n            set v to |λ|() of vs\n            if missing value is not v then\n                v\n            else\n                set vs to ys\n                |λ|() of ys\n            end if\n        end |λ|\n    end script\nend appendGen"
+    }
+  ]
+}

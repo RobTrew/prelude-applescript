@@ -1,0 +1,10 @@
+{
+  "title": "maxBound",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- maxBound :: a -> a\non maxBound(x)\n    set c to class of x\n    if text is c then\n        character id 65535\n    else if integer is c then\n        (2 ^ 29 - 1)\n    else if real is c then\n        1.797693E+308\n    else if boolean is c then\n        true\n    end if\nend maxBound"
+    }
+  ]
+}

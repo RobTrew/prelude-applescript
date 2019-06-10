@@ -1,0 +1,10 @@
+{
+  "title": "quoted",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- quoted :: Char -> String -> String\non quoted(c, s)\n    -- string flanked on both sides\n    -- by a specified quote character.\n    c & s & c\nend quoted"
+    }
+  ]
+}

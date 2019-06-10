@@ -4,12 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Lift 2nd class handler function into 1st class script wrapper "
-    },
-    {
-      "type": "code",
-      "language": "applescript",
-      "data": "-- mReturn :: First-class m => (a -> b) -> m (a -> b)\non mReturn(f)\n    if class of f is script then\n        f\n    else\n        script\n            property |λ| : f\n        end script\n    end if\nend mReturn"
+      "data": "-- mReturn :: First-class m => (a -> b) -> m (a -> b)\non mReturn(f)\n    -- 2nd class handler function lifted into 1st class script wrapper. \n    if script is class of f then\n        f\n    else\n        script\n            property |λ| : f\n        end script\n    end if\nend mReturn"
     }
   ]
 }

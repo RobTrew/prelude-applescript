@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- replicate :: Int -> a -> [a]\non replicate(n, a)\n    set out to {}\n    if n < 1 then return out\n    set dbl to {a}\n    \n    repeat while (n > 1)\n        if (n mod 2) > 0 then set out to out & dbl\n        set n to (n div 2)\n        set dbl to (dbl & dbl)\n    end repeat\n    return out & dbl\nend replicate"
+      "data": "-- replicate :: Int -> a -> [a]\non replicate(n, a)\n    set out to {}\n    if 1 > n then return out\n    set dbl to {a}\n    \n    repeat while (1 < n)\n        if 0 < (n mod 2) then set out to out & dbl\n        set n to (n div 2)\n        set dbl to (dbl & dbl)\n    end repeat\n    return out & dbl\nend replicate"
     }
   ]
 }

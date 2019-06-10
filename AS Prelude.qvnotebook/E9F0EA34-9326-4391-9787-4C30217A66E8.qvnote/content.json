@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Just :: a -> Just a\non Just(x)\n    {type: \"Maybe\", Nothing:false, Just:x}\nend Just"
+      "data": "-- Just :: a -> Maybe a\non Just(x)\n    -- Constructor for an inhabited Maybe (option type) value.\n    -- Wrapper containing the result of a computation.\n    {type:\"Maybe\", Nothing:false, Just:x}\nend Just"
     }
   ]
 }

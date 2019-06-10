@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- id :: a -> a\non |id|(x)\n    x\nend |id|"
+      "data": "-- id :: a -> a\non |id|(x)\n    -- The identity function. The argument unchanged.\n    x\nend |id|"
     }
   ]
 }

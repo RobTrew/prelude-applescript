@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- apList (<*>) :: [(a -> b)] -> [a] -> [b]\non apList(fs, xs)\n    set lst to {}\n    repeat with f in fs\n        tell mReturn(contents of f)\n            repeat with x in xs\n                set end of lst to |λ|(contents of x)\n            end repeat\n        end tell\n    end repeat\n    return lst\nend apList"
+      "data": "-- apList (<*>) :: [a -> b] -> [a] -> [b]\non apList(fs, xs)\n    set lst to {}\n    repeat with f in fs\n        tell mReturn(contents of f)\n            repeat with x in xs\n                set end of lst to |λ|(contents of x)\n            end repeat\n        end tell\n    end repeat\n    return lst\nend apList"
     }
   ]
 }

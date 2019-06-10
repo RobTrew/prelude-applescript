@@ -1,0 +1,10 @@
+{
+  "title": "renameFile",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- renameFile :: FilePath -> FilePath -> IO ()\non renameFile(fp, fp2)\n    set e to reference\n    set {bln, obj} to current application's NSFileManager's ¬\n        defaultManager's moveItemAtPath:(fp) toPath:(fp2) |error|:(e)\n    if bln then\n        |Right|(\"Renamed from: \" & fp & \" to \" & fp2)\n    else\n        |Left|(obj's localizedDescription as string)\n    end if\nend renameFile"
+    }
+  ]
+}

@@ -4,12 +4,12 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- splitOn(\"\\r\\n\", \"a\\r\\nb\\r\\nd\\r\\ne\") --> [\"a\",\"b\",\"d\",\"e\"]\n-- splitOn(\"aaa\", \"aaaXaaaXaaaXaaa\") --> {\"\", \"X\", \"X\", \"X\", \"\"}\n-- splitOn(\"x\", \"x\") --> {\"\", \"\"}\n-- splitOn(5, {1, 5, 9, 2, 6, 5, 3, 5}) --> {{1}, {9, 2, 6}, {3}, {}}"
+      "data": "-- splitOn(\"\\r\\n\", \"a\\r\\nb\\r\\nd\\r\\ne\") --> [\"a\",\"b\",\"d\",\"e\"]\n-- splitOn(\"aaa\", \"aaaXaaaXaaaXaaa\") --> {\"\", \"X\", \"X\", \"X\", \"\"}\n-- splitOn(\"x\", \"x\") --> {\"\", \"\"}\n-- splitOn([3, 1], [1, 2, 3, 1, 2, 3, 1, 2, 3])\n--> {{1, 2}, {2}, {2, 3}}"
     },
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- splitOn :: a -> [a] -> [[a]]\n-- splitOn :: String -> String -> [String]\non splitOn(needle, haystack)\n    if class of haystack is text then\n        set {dlm, my text item delimiters} to ¬\n            {my text item delimiters, needle}\n        set xs to text items of haystack\n        set my text item delimiters to dlm\n        return xs\n    else\n        script triage\n            on |λ|(a, x)\n                if needle = x then\n                    Tuple(|1| of a & {|2| of a}, {})\n                else\n                    Tuple(|1| of a, (|2| of a) & x)\n                end if\n            end |λ|\n        end script\n        \n        set tpl to foldl(triage, Tuple({}, {}), haystack)\n        return |1| of tpl & {|2| of tpl}\n    end if\nend splitOn"
+      "data": "-- splitOn :: [a] -> [a] -> [[a]]\n-- splitOn :: String -> String -> [String]\non splitOn(pat, src)\n    if class of src is text then\n        set {dlm, my text item delimiters} to ¬\n            {my text item delimiters, pat}\n        set xs to text items of src\n        set my text item delimiters to dlm\n        return xs\n    else\n        set lng to length of pat\n        script residue\n            on |λ|(a, i)\n                Tuple(fst(a) & ¬\n                    {init(items snd(a) thru (i) of src)}, lng + i)\n            end |λ|\n        end script\n        set tpl to foldl(residue, ¬\n            Tuple({}, 1), findIndices(matching(pat), src))\n        return fst(tpl) & {drop(snd(tpl) - 1, src)}\n    end if\nend splitOn"
     }
   ]
 }

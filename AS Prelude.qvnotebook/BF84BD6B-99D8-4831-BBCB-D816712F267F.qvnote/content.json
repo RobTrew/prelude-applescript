@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- take :: Int -> [a] -> [a]\non take(n, xs)\n    if class of xs is string then\n        if n > 0 then\n            text 1 thru min(n, length of xs) of xs\n        else\n            \"\"\n        end if\n    else\n        if n > 0 then\n            items 1 thru min(n, length of xs) of xs\n        else\n            {}\n        end if\n    end if\nend take"
+      "data": "-- take :: Int -> [a] -> [a]\n-- take :: Int -> String -> String\non take(n, xs)\n    set c to class of xs\n    if list is c then\n        if 0 < n then\n            items 1 thru min(n, length of xs) of xs\n        else\n            {}\n        end if\n    else if string is c then\n        if 0 < n then\n            text 1 thru min(n, length of xs) of xs\n        else\n            \"\"\n        end if\n    else if script is c then\n        set ys to {}\n        repeat with i from 1 to n\n            set v to |λ|() of xs\n            if missing value is v then\n                return ys\n            else\n                set end of ys to v\n            end if\n        end repeat\n        return ys\n    else\n        missing value\n    end if\nend take"
     }
   ]
 }

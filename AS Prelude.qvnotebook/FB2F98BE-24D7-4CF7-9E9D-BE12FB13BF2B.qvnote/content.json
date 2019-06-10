@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- permutations :: [a] -> [[a]]\non permutations(xs)\n    script firstElement\n        on |λ|(x)\n            script tailElements\n                on |λ|(ys)\n                    {{x} & ys}\n                end |λ|\n            end script\n            \n            concatMap(tailElements, permutations(|delete|(x, xs)))\n        end |λ|\n    end script\n    \n    if length of xs > 0 then\n        concatMap(firstElement, xs)\n    else\n        {{}}\n    end if\nend permutations"
+      "data": "-- permutations :: [a] -> [[a]]\non permutations(xs)\n    script go\n        on |λ|(x, a)\n            script\n                on |λ|(ys)\n                    script infix\n                        on |λ|(n)\n                            if ys ≠ {} then\n                                take(n, ys) & x & drop(n, ys)\n                            else\n                                {x}\n                            end if\n                        end |λ|\n                    end script\n                    map(infix, enumFromTo(0, (length of ys)))\n                end |λ|\n            end script\n            concatMap(result, a)\n        end |λ|\n    end script\n    foldr(go, {{}}, xs)\nend permutations"
     }
   ]
 }

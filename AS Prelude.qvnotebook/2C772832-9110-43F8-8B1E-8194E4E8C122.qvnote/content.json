@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- even :: Int -> Bool\non even(x)\n    x mod 2 = 0\nend even"
+      "data": "-- even :: Int -> Bool\non even(x)\n    0 = x mod 2\nend even"
     }
   ]
 }

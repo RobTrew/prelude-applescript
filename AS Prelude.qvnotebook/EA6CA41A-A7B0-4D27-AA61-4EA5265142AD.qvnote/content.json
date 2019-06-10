@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- showRatio :: Ratio -> String\non showRatio(r)\n    (n of r as string) & \"/\" & (d of r as string)\nend showRatio"
+      "data": "-- showRatio :: Ratio -> String\non showRatio(r)\n    set s to (n of r as string)\n    set d to d of r\n    if 1 ≠ d then\n        s & \"/\" & (d as string)\n    else\n        s\n    end if\nend showRatio"
     }
   ]
 }

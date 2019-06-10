@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- concatMap :: (a -> [b]) -> [a] -> [b]\non concatMap(f, xs)\n    set lng to length of xs\n    if 0 < lng and class of xs is string then\n        set acc to \"\"\n    else\n        set acc to {}\n    end if\n    tell mReturn(f)\n        repeat with i from 1 to lng\n            set acc to acc & |λ|(item i of xs, i, xs)\n        end repeat\n    end tell\n    return acc\nend concatMap"
+      "data": "-- concatMap :: (a -> [b]) -> [a] -> [b]\non concatMap(f, xs)\n    set lng to length of xs\n    set acc to {}\n    tell mReturn(f)\n        repeat with i from 1 to lng\n            set acc to acc & (|λ|(item i of xs, i, xs))\n        end repeat\n    end tell\n    return acc\nend concatMap"
     }
   ]
 }

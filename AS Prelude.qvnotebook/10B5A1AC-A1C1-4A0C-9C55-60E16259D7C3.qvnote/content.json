@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- Tuple (,) :: a -> b -> (a, b)\non Tuple(a, b)\n    {type:\"Tuple\", |1|:a, |2|:b, length:2}\nend Tuple"
+      "data": "-- Tuple (,) :: a -> b -> (a, b)\non Tuple(a, b)\n    -- Constructor for a pair of values, possibly of two different types.\n    {type:\"Tuple\", |1|:a, |2|:b, length:2}\nend Tuple"
     }
   ]
 }

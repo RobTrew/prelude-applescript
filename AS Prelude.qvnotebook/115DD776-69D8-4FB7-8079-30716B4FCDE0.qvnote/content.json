@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- takeWhile :: (a -> Bool) -> [a] -> [a]\n-- takeWhile :: (Char -> Bool) -> String -> String\non takeWhile(p, xs)\n    tell mReturn(p)\n        repeat with i from 1 to length of xs\n            if not |λ|(item i of xs) then ¬\n                return take(i - 1, xs)\n        end repeat\n    end tell\n    return xs\nend takeWhile"
+      "data": "-- takeWhile :: (a -> Bool) -> [a] -> [a]\n-- takeWhile :: (Char -> Bool) -> String -> String\non takeWhile(p, xs)\n    if script is class of xs then\n        takeWhileGen(p, xs)\n    else\n        tell mReturn(p)\n            repeat with i from 1 to length of xs\n                if not |λ|(item i of xs) then ¬\n                    return take(i - 1, xs)\n            end repeat\n        end tell\n        return xs\n    end if\nend takeWhile"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- mappend (<>) :: Monoid a => a -> a -> a\non mappend(a, b)\n    if class of a is record and class of b is record then\n        script instanceMay\n            on |λ|(strType)\n                set mb to lookup(strType, ¬\n                    {Maybe:mappendMaybe, Ordering:mappendOrdering, Tuple:mappendTuple})\n            end |λ|\n        end script\n        set mbi to bindMay(lookup(\"type\", a), instanceMay)\n        if Nothing of mbi then\n            a & b\n        else\n            mReturn(Just of mbi)'s |λ|(a, b)\n        end if\n    else\n        a & b\n    end if\nend mappend"
+      "data": "-- mappend (<>) :: Monoid a => a -> a -> a\non mappend(a, b)\n    set ca to class of a\n    if record is ca then\n        script instanceMay\n            on |λ|(strType)\n                set mb to lookup(strType, ¬\n                    {Maybe:mappendMaybe, Ordering:mappendOrdering, Tuple:mappendTuple})\n            end |λ|\n        end script\n        set mbi to bindMay(lookup(\"type\", a), instanceMay)\n        if Nothing of mbi then\n            a & b\n        else\n            mReturn(Just of mbi)'s |λ|(a, b)\n        end if\n    else if handler is ca then\n        mappendFn(a, b)\n    else\n        a & b\n    end if\nend mappend"
     }
   ]
 }

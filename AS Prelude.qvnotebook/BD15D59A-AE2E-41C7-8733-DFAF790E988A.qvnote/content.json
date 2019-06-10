@@ -1,0 +1,10 @@
+{
+  "title": "radians",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- radians :: Float x => Degrees x -> Radians x\non radians(x)\n    (pi / 180) * x\nend radians"
+    }
+  ]
+}

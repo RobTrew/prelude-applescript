@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isSuffixOf :: Eq a => [a] -> [a] -> Bool\n-- isSuffixOf :: String -> String -> Bool \non isSuffixOf(suffix, main)\n    if class of suffix is string then\n        (offset of suffix in main) = 1 + (length of main) - (length of suffix)\n    else\n        set lngSuffix to length of suffix\n        if lngSuffix = 0 then\n            true\n        else\n            set lngMain to length of main\n            set lngDelta to lngMain - lngSuffix\n            if lngDelta < 0 or lngMain = 0 then\n                false\n            else\n                repeat with i from 1 to lngSuffix\n                    if item i of suffix ≠ item (lngDelta + i) of main then return false\n                end repeat\n                true\n            end if\n        end if\n    end if\nend isSuffixOf"
+      "data": "-- isSuffixOf :: Eq a => [a] -> [a] -> Bool\n-- isSuffixOf :: String -> String -> Bool\non isSuffixOf(ns, hs)\n    script go\n        on |λ|(delta)\n            ns = dropLength(delta, hs)\n        end |λ|\n    end script\n    bindMay(dropLengthMaybe(ns, hs), go)\nend isSuffixOf"
     }
   ]
 }

@@ -4,7 +4,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- isSpace :: Char -> Bool\non isSpace(c)\n    set i to id of c\n    i = 32 or (i ≥ 9 and i ≤ 13)\nend isSpace"
+      "data": "-- isSpace :: Char -> Bool\non isSpace(c)\n    set i to id of c\n    32 = i or (9 ≤ i and 13 ≥ i)\nend isSpace"
     }
   ]
 }

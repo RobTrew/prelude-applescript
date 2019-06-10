@@ -1,0 +1,10 @@
+{
+  "title": "liftA2Fn",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- liftA2Fn :: (a0 -> b -> c) -> (a -> a0) -> (a -> b) -> a -> c\non liftA2Fn(op, f, g)\n    -- Lift a binary function to a composition\n    -- over two other functions.\n    -- liftA2 (*) (+ 2) (+ 3) 7 == 90\n    script go\n        property mop : mReturn(op)\n        property mf : mReturn(f)\n        property mg : mReturn(g)\n        on |λ|(x)\n            |λ|(|λ|(x) of mf, |λ|(x) of mg) of mop\n        end |λ|\n    end script\nend liftA2Fn"
+    }
+  ]
+}

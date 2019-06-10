@@ -9,7 +9,7 @@
     {
       "type": "code",
       "language": "applescript",
-      "data": "-- unfoldl :: (b -> Maybe (a, b)) -> b -> [a]\non unfoldl(f, v)\n    set xr to Tuple(v, v) -- (value, remainder)\n    set xs to {}\n    tell mReturn(f)\n        repeat -- Function applied to remainder.\n            set mb to |λ|(|2| of xr)\n            if Nothing of mb then\n                exit repeat\n            else -- New (value, remainder) tuple,\n                set xr to Just of mb\n                -- and value appended to output list.\n                set xs to ({|1| of xr} & xs)\n            end if\n        end repeat\n    end tell\n    return xs\nend unfoldl"
+      "data": "-- unfoldl :: (b -> Maybe (b, a)) -> b -> [a]\non unfoldl(f, v)\n    set xr to Tuple(v, v) -- (value, remainder)\n    set xs to {}\n    tell mReturn(f)\n        repeat -- Function applied to remainder.\n            set mb to |λ|(|2| of xr)\n            if Nothing of mb then\n                exit repeat\n            else -- New (value, remainder) tuple,\n                set xr to Just of mb\n                -- and value appended to output list.\n                set xs to ({|1| of xr} & xs)\n            end if\n        end repeat\n    end tell\n    return xs\nend unfoldl"
     }
   ]
 }

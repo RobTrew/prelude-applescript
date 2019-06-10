@@ -1,0 +1,10 @@
+{
+  "title": "showPrecision",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- showPrecision :: Int -> Float -> String\non showPrecision(n, x)\n    set d to 10 ^ n\n    ((round (x * d)) / d) as string\nend showPrecision"
+    }
+  ]
+}

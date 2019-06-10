@@ -1,0 +1,10 @@
+{
+  "title": "fTable",
+  "cells": [
+    {
+      "type": "code",
+      "language": "applescript",
+      "data": "-- fTable :: String -> (a -> String) -> (b -> String) -> (a -> b) -> [a] -> String\non fTable(s, xShow, fxShow, f, xs)\n    set ys to map(xShow, xs)\n    set w to maximum(map(my |length|, ys))\n    script arrowed\n        on |λ|(a, b)\n            justifyRight(w, space, a) & \" -> \" & b\n        end |λ|\n    end script\n    s & linefeed & unlines(zipWith(arrowed, ¬\n        ys, map(compose(fxShow, f), xs)))\nend fTable"
+    }
+  ]
+}
