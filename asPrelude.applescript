@@ -2056,11 +2056,11 @@ on headMay(xs)
     end if
 end headMay
 
--- id :: a -> a
-on |id|(x)
-    -- The identity function. The argument unchanged.
+-- identity :: a -> a
+on identity(x)
+    -- The argument unchanged.
     x
-end |id|
+end identity
 
 -- if_ :: Bool -> a -> a -> a
 on if_(bool, x, y)
@@ -2539,7 +2539,7 @@ end iterateUntil
 
 -- join :: Monad m => m (m a) -> m a
 on join(x)
-    bind(x, my |id|)
+    bind(x, my identity)
 end join
 
 -- jsonLog :: a -> IO ()
@@ -4174,12 +4174,12 @@ end |second|
 
 -- sequenceA :: (Applicative f, Traversable t) => t (f a) -> f (t a)
 on sequenceA(tfa)
-    script |id|
+    script identity
         on |λ|(x)
             x
         end |λ|
     end script
-    traverse(|id|, tfa)
+    traverse(identity, tfa)
 end sequenceA
 
 -- setCurrentDirectory :: String -> IO ()
@@ -6056,7 +6056,7 @@ on zipWithM(fm, xs, ys)
     -- A functor of the type to which fm lifts its result.
     -- For example, Nothing/Left if any of the zip applications failed,
     -- or Just/Right a list of the results, when all succeeded.
-    traverseList(my |id|, zipWith(fm, xs, ys))
+    traverseList(my identity, zipWith(fm, xs, ys))
 end zipWithM
 
 -- zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]

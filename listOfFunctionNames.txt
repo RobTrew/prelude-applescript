@@ -155,7 +155,7 @@ groupSortOn :: Ord b => (a -> b) -> [a] -> [a]
 gt :: Ord a => a -> a -> Bool
 head :: [a] -> a
 headMay :: [a] -> Maybe a
-id :: a -> a
+identity :: a -> a
 if_ :: Bool -> a -> a -> a
 indented :: String -> String -> String
 index (!!) :: [a] -> Int -> Maybe a
