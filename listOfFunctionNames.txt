@@ -136,6 +136,7 @@ foldlTree :: (b -> a -> b) -> b -> Tree a -> b
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr1 :: (a -> a -> a) -> [a] -> a
 foldr1May :: (a -> a -> a) -> [a] -> Maybe a
+foldrTree :: (a -> b -> b) -> b -> Tree a -> b
 fromEnum :: Enum a => a -> Int
 fromLeft :: a -> Either a b -> a
 fromMaybe :: a -> Maybe a -> a
