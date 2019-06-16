@@ -2872,12 +2872,7 @@ end listDirectory
 
 -- listFromTuple :: (a, a ...) -> [a]
 on listFromTuple(tpl)
-    script
-        on |λ|(k)
-            Just of lookupDict(k, tpl)
-        end |λ|
-    end script -- All keys except 'type' at end
-    map(result, items 1 thru -2 of sort(keys(tpl)))
+    items 2 thru -2 of (tpl as list)
 end listFromTuple
 
 -- listToMaybe :: [a] -> Maybe a
@@ -5569,6 +5564,11 @@ on Tuple(a, b)
     -- Constructor for a pair of values, possibly of two different types.
     {type:"Tuple", |1|:a, |2|:b, length:2}
 end Tuple
+
+-- Tuple3 (,,) :: a -> b -> c -> (a, b, c)
+on Tuple3(x, y, z)
+    {type:"Tuple3", |1|:x, |2|:y, |3|:z, length:3}
+end Tuple3
 
 -- tupleFromList :: [a] -> (a, a ...)
 on tupleFromList(xs)
