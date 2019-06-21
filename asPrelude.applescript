@@ -1014,7 +1014,10 @@ on drawTree(tree)
 end drawTree
 
 -- drawTree2 :: Bool -> Tree String -> String
-on drawTree2(blnCentered, tree)
+on drawTree2(blnCompressed, blnPruned, tree)
+    -- Adapted from the tree design and algorithm in 
+    -- Donnacha Oisin Kidney's Haskell snippet at:
+    -- https://doisinkidney.com/snippets/drawing-trees.html
     script measured
         on |λ|(t)
             script go
@@ -1083,6 +1086,7 @@ on drawTree2(blnCentered, tree)
             end script
         end conS
         
+        -- lmrBuild main
         on |λ|(w, f)
             script
                 property mf : mReturn(f)
@@ -1128,10 +1132,10 @@ on drawTree2(blnCentered, tree)
                         
                         set indented to leftPad(w)
                         set lmrs to map(f, xs)
-                        if blnCentered then
-                            set sep to {"│"}
-                        else
+                        if blnCompressed then
                             set sep to {}
+                        else
+                            set sep to {"│"}
                         end if
                         
                         tell lmrFromStrings
@@ -1148,8 +1152,25 @@ on drawTree2(blnCentered, tree)
         end |λ|
     end script
     
-    unlines(|λ|(|λ|(measuredTree) of foldr(lmrBuild, 0, levelWidths)) of stringsFromLMR)
+    set treeLines to |λ|(|λ|(measuredTree) of foldr(lmrBuild, 0, levelWidths)) of stringsFromLMR
+    if blnPruned then
+        script notEmpty
+            on |λ|(s)
+                script isData
+                    on |λ|(c)
+                        "│ " does not contain c
+                    end |λ|
+                end script
+                any(isData, characters of s)
+            end |λ|
+        end script
+        set xs to filter(notEmpty, treeLines)
+    else
+        set xs to treeLines
+    end if
+    unlines(xs)
 end drawTree2
+
 
 -- drop :: Int -> [a] -> [a]
 -- drop :: Int -> String -> String
