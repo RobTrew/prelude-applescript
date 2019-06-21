@@ -1,5 +1,5 @@
 ```applescript
--- drawTree2 :: Bool -> Tree String -> String
+-- drawTree2 :: Bool -> Bool -> Tree String -> String
 on drawTree2(blnCompressed, blnPruned, tree)
     -- Adapted from the tree design and algorithm in 
     -- Donnacha Oisin Kidney's Haskell snippet at:
