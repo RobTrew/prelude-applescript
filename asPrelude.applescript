@@ -4611,7 +4611,7 @@ on showTree(tree)
             x as string
         end |λ|
     end script
-    drawTree(fmapTree(str, tree))
+    drawTree2(false, true, fmapTree(str, tree))
 end showTree
 
 -- showTuple :: Tuple -> String
