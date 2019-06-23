@@ -13,6 +13,7 @@ end abs
 
 -- all :: (a -> Bool) -> [a] -> Bool
 on all(p, xs)
+    -- True if p holds for every value in xs
     tell mReturn(p)
         set lng to length of xs
         repeat with i from 1 to lng
@@ -21,6 +22,25 @@ on all(p, xs)
         true
     end tell
 end all
+
+-- allTree :: (a -> Bool) -> Tree a -> Bool
+on allTree(p, tree)
+    -- True if p holds for the value of every node in tree
+    script go
+        property mp : mReturn(p)'s |λ|
+        on |λ|(oNode)
+            if mp(root of oNode) then
+                repeat with v in nest of oNode
+                    if not (contents of |λ|(v)) then return false
+                end repeat
+                true
+            else
+                false
+            end if
+        end |λ|
+    end script
+    |λ|(tree) of go
+end allTree
 
 -- and :: [Bool] -> Bool
 on |and|(xs)
@@ -40,6 +60,25 @@ on |any|(f, xs)
         false
     end tell
 end |any|
+
+-- anyTree :: (a -> Bool) -> Tree a -> Bool
+on anyTree(p, tree)
+    -- True if p holds for the value of any node in the tree
+    script go
+        property mp : mReturn(p)'s |λ|
+        on |λ|(oNode)
+            if mp(root of oNode) then
+                true
+            else
+                repeat with v in nest of oNode
+                    if contents of |λ|(v) then return true
+                end repeat
+                false
+            end if
+        end |λ|
+    end script
+    |λ|(tree) of go
+end anyTree
 
 -- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b
 on ap(mf, mx)
@@ -1070,6 +1109,22 @@ on drawTree2(blnCompressed, blnPruned, tree)
         end |λ|
     end script
     
+    script treeFix
+        on cFix(x)
+            script
+                on |λ|(xs)
+                    x & xs
+                end |λ|
+            end script
+        end cFix
+        
+        on |λ|(l, m, r)
+            compose(stringsFromLMR, ¬
+                |λ|(cFix(l), cFix(m), cFix(r)) of ¬
+                fghOverLMR)
+        end |λ|
+    end script
+
     script lmrBuild
         on leftPad(n)
             script
@@ -1090,7 +1145,23 @@ on drawTree2(blnCompressed, blnPruned, tree)
                         ((root of wsTree) as list)
                     set _x to replicateString(w - nChars, "─") & x
                     
-                    -- LEAF NODE ------------------------------------
+                    script linked
+                        on |λ|(s)
+                            set c to text 1 of s
+                            set t to tail(s)
+                            if "┌" = c then
+                                _x & "┬" & t
+                            else if "│" = c then
+                                _x & "┤" & t
+                            else if "├" = c then
+                                _x & "┼" & t
+                            else
+                                _x & "┴" & t
+                            end if
+                        end |λ|
+                    end script
+                    
+                    -- LEAF NODE --------------------------------------
                     if 0 = lng then
                         Tuple3({}, _x, {})
                         
@@ -1107,38 +1178,6 @@ on drawTree2(blnCompressed, blnPruned, tree)
                                 fghOverLMR)
                     else
                         -- NODE WITH CHILDREN -------------------------
-                        script treeFix
-                            on cFix(x)
-                                script
-                                    on |λ|(xs)
-                                        x & xs
-                                    end |λ|
-                                end script
-                            end cFix
-                            
-                            on |λ|(l, m, r)
-                                compose(stringsFromLMR, ¬
-                                    |λ|(cFix(l), cFix(m), cFix(r)) of ¬
-                                    fghOverLMR)
-                            end |λ|
-                        end script
-                        
-                        script linked
-                            on |λ|(s)
-                                set c to text 1 of s
-                                set t to tail(s)
-                                if "┌" = c then
-                                    _x & "┬" & t
-                                else if "│" = c then
-                                    _x & "┤" & t
-                                else if "├" = c then
-                                    _x & "┼" & t
-                                else
-                                    _x & "┴" & t
-                                end if
-                            end |λ|
-                        end script
-                        
                         set indented to leftPad(w)
                         set lmrs to map(f, xs)
                         if blnCompressed then
@@ -5591,8 +5630,9 @@ on traverseMay(f, mb)
     end if
 end traverseMay
 
--- traverse f (Node x ts) = liftA2 Node (f x) (traverse (traverse f) ts)
+-- traverseTree :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)
 on traverseTree(f, tree)
+    -- traverse f (Node x ts) = liftA2 Node (f x) (traverse (traverse f) ts)
     script go
         on |λ|(x)
             liftA2(my Node, ¬
