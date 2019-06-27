@@ -602,7 +602,7 @@ on chunksOf(n, xs)
             end if
         end |λ|
     end script
-    foldl(go, {}, enumFromThenTo(1, n, lng))
+    foldl(go, {}, enumFromThenTo(1, 1 + n, lng))
 end chunksOf
 
 -- compare :: a -> a -> Ordering
@@ -3743,6 +3743,16 @@ on outdented(s)
     end if
 end outdented
 
+-- pairNestFromTree :: Tree a -> PairNest a
+on pairNestFromTree(tree)
+    script go
+        on |λ|(x)
+            {root of x, map(go, nest of x)}
+        end |λ|
+    end script
+    |λ|(tree) of go
+end pairNestFromTree
+
 -- partition :: (a -> Bool) -> [a] -> ([a], [a])
 on partition(f, xs)
     tell mReturn(f)
@@ -4088,7 +4098,7 @@ on readFile(strPath)
             stringWithString:strPath)'s ¬
             stringByStandardizingPath) ¬
             encoding:(ca's NSUTF8StringEncoding) |error|:(e))
-    if e is missing value then
+    if missing value is e then
         s as string
     else
         (localizedDescription of e) as string
@@ -4509,6 +4519,11 @@ end showDate
 on showDict(dct)
   showJSON(dct)
 end showDict
+
+-- showForest :: [Tree a] -> String
+on showForest(xs)
+    unlines(map(my showTree, xs))
+end showForest
 
 -- showHex :: Int -> String
 on showHex(n)
@@ -5675,6 +5690,16 @@ on treeFromDict(treeTitle, recDict)
     end script
     Node(treeTitle, go's |λ|(recDict))
 end treeFromDict
+
+-- treeFromPairNest :: PairNest a -> Tree a
+on treeFromPairNest(vxs)
+    script go
+        on |λ|(pair)
+            Node(item 1 of pair, map(go, item 2 of pair))
+        end |λ|
+    end script
+    |λ|(vxs) of go
+end treeFromPairNest
 
 -- treeLeaves :: Tree -> [Tree]
 on treeLeaves(oNode)
