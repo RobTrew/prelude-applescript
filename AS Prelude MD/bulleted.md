@@ -10,6 +10,6 @@ on bulleted(strIndent, s)
             end if
         end |λ|
     end script
-    unlines(map(go, paragraphs of xs))
+    unlines(map(go, paragraphs of s))
 end bulleted
 ```
