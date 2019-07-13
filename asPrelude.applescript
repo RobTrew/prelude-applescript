@@ -2463,8 +2463,8 @@ on insertBy(cmp, x, ys)
     end if
 end insertBy
 
--- insertDict :: Dict -> String -> a -> Dict
-on insertDict(rec, k, v)
+-- insertDict :: String -> a -> Dict -> Dict
+on insertDict(k, v, rec)
     tell (current application's NSMutableDictionary's ¬
         dictionaryWithDictionary:rec)
         its setValue:v forKey:(k as string)
