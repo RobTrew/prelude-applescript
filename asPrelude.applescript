@@ -838,6 +838,14 @@ on cycle(xs)
     end script
 end cycle
 
+-- decodedPath :: Percent Encoded String -> FilePath
+on decodedPath(fp)
+    tell current application
+        (its ((NSString's stringWithString:fp)'s ¬
+            stringByRemovingPercentEncoding)) as string
+    end tell
+end decodedPath
+
 -- degrees :: Float x => Radians x -> Degrees x
 on degrees(r)
     (180 / pi) * r
@@ -1431,6 +1439,15 @@ on elems(x)
         (x's allObjects()) as list
     end if
 end elems
+
+-- encodedPath :: FilePath -> Percent Encoded String
+on encodedPath(fp)
+    tell current application
+        (its ((NSString's stringWithString:fp)'s ¬
+            stringByAddingPercentEncodingWithAllowedCharacters:(its NSCharacterSet's ¬
+                URLPathAllowedCharacterSet))) as string
+    end tell
+end encodedPath
 
 -- enumFrom :: Enum a => a -> [a]
 on enumFrom(x)

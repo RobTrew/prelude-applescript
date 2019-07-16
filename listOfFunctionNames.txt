@@ -64,6 +64,7 @@ curry :: ((a, b) -> c) -> a -> b -> c
 curry2 :: ((a, b) -> c) -> a -> b -> c
 curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
 cycle :: [a] -> Generator [a]
+decodedPath :: Percent Encoded String -> FilePath
 degrees :: Float x => Radians x -> Degrees x
 delete :: Eq a => a -> [a] -> [a]
 deleteAt :: Int -> [a] -> [a]
@@ -96,6 +97,7 @@ elemAtMay :: Int -> Dict -> Maybe (String, a)
 elemIndex :: Eq a => a -> [a] -> Maybe Int
 elemIndices :: Eq a => a -> [a] -> [Int]
 elems :: Map k a -> [a]
+encodedPath :: FilePath -> Percent Encoded String
 enumFrom :: Enum a => a -> [a]
 enumFromPairs :: String -> [(String, Int)] -> Dict
 enumFromThenTo :: Int -> Int -> Int -> [Int]
