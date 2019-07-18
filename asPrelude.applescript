@@ -311,12 +311,11 @@ on assocs(m)
     if list is c then
         zip(enumFromTo(1, length of m), m)
     else if record is c then
-        set dict to (current application's ¬
-            NSDictionary's ¬
-            dictionaryWithDictionary:(m))
-        zip((dict's allKeys()'s ¬
-            sortedArrayUsingSelector:"compare:") as list, ¬
-            dict's allValues() as list)
+        tell current application to set dict to ¬
+            dictionaryWithDictionary_(m) of its NSDictionary
+        zip((sortedArrayUsingSelector_("compare:") of ¬
+            allKeys() of dict) as list, ¬
+            (allValues() of dict) as list)
     else
         {}
     end if
@@ -942,6 +941,20 @@ on deleteMap(k, rec)
     nsDct as record
 end deleteMap
 
+-- dictFromList :: [(k, v)] -> Dict
+on dictFromList(kvs)
+    set tpl to unzip(kvs)
+    script
+        on |λ|(x)
+            x as string
+        end |λ|
+    end script
+    tell current application
+        (its (NSDictionary's dictionaryWithObjects:(item 2 of tpl) ¬
+            forKeys:(my map(result, item 1 of tpl)))) as record
+    end tell
+end dictFromList
+
 -- difference :: Eq a => [a] -> [a] -> [a]
 on difference(xs, ys)
     script p
@@ -1433,10 +1446,11 @@ end elemIndices
 -- elems :: Set a -> [a]
 on elems(x)
     if record is class of x then -- Dict
-        set ca to current application
-        (ca's NSDictionary's dictionaryWithDictionary:rec)'s allValues() as list
+        tell current application to allValues() ¬
+            of dictionaryWithDictionary_(x) ¬
+            of its NSDictionary as list
     else -- Set
-        (x's allObjects()) as list
+        (allObjects() of x) as list
     end if
 end elems
 
