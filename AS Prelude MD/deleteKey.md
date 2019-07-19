@@ -1,5 +1,5 @@
 ```applescript
--- deleteKey :: k -> Dict -> Dict
+-- deleteKey :: String -> Dict -> Dict
 on deleteKey(k, rec)
     tell current application to set nsDct to ¬
         dictionaryWithDictionary_(rec) of its NSMutableDictionary

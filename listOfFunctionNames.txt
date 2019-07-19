@@ -71,7 +71,7 @@ deleteAt :: Int -> [a] -> [a]
 deleteBy :: (a -> a -> Bool) -> a -> [a] -> [a]
 deleteFirst :: a -> [a] -> [a]
 deleteFirstsBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]
-deleteKey :: k -> Dict -> Dict
+deleteKey :: String -> Dict -> Dict
 dictFromList :: [(k, v)] -> Dict
 difference :: Eq a => [a] -> [a] -> [a]
 differenceGen :: Gen [a] -> Gen [a] -> Gen [a]
