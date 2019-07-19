@@ -933,25 +933,25 @@ on deleteFirstsBy(fnEq, xs, ys)
     foldl(result, xs, ys)
 end deleteFirstsBy
 
--- deleteMap :: k -> Dict -> Dict
-on deleteMap(k, rec)
-    set nsDct to (current application's ¬
-        NSMutableDictionary's dictionaryWithDictionary:rec)
-    nsDct's removeObjectForKey:(k)
+-- deleteKey :: k -> Dict -> Dict
+on deleteKey(k, rec)
+    tell current application to set nsDct to ¬
+        dictionaryWithDictionary_(rec) of its NSMutableDictionary
+    removeObjectForKey_(k) of nsDct
     nsDct as record
-end deleteMap
+end deleteKey
 
 -- dictFromList :: [(k, v)] -> Dict
 on dictFromList(kvs)
     set tpl to unzip(kvs)
-    script
+    script go
         on |λ|(x)
             x as string
         end |λ|
     end script
     tell current application
         (its (NSDictionary's dictionaryWithObjects:(item 2 of tpl) ¬
-            forKeys:(my map(result, item 1 of tpl)))) as record
+            forKeys:(my map(go, item 1 of tpl)))) as record
     end tell
 end dictFromList
 
@@ -1526,11 +1526,11 @@ on enumFromTo(m, n)
         repeat with i from m to n
             set end of lst to i
         end repeat
-        return lst
+        lst
     else
-        return {}
+        {}
     end if
-end ft
+end enumFromTo
 
 -- enumFromTo_ :: Enum a => a -> a -> [a]
 on enumFromTo_(m, n)
@@ -2496,10 +2496,11 @@ end insertBy
 
 -- insertDict :: String -> a -> Dict -> Dict
 on insertDict(k, v, rec)
-    tell (current application's NSMutableDictionary's ¬
-        dictionaryWithDictionary:rec)
-        its setValue:v forKey:(k as string)
-        return it as record
+    tell current application
+        tell dictionaryWithDictionary_(rec) of its NSMutableDictionary
+            its setValue:v forKey:(k as string)
+            it as record
+        end tell
     end tell
 end insertDict
 

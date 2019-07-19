@@ -6,9 +6,9 @@ on enumFromTo(m, n)
         repeat with i from m to n
             set end of lst to i
         end repeat
-        return lst
+        lst
     else
-        return {}
+        {}
     end if
-end ft
+end enumFromTo
 ```
