@@ -28,6 +28,8 @@ applyN :: Int -> (a -> a) -> a -> a
 approxRatio :: Real -> Real -> Ratio
 argvLength :: Function -> Int
 assocs :: Map k a -> [(k, a)]
+base64decode :: String -> String
+base64encode :: String -> String
 bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
 bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
@@ -237,7 +239,6 @@ map :: (a -> b) -> [a] -> [b]
 mapAccumL :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)
 mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
-mapFromList :: [(k, v)] -> Dict
 mapKeys :: (Key -> Key) -> IntMap a -> IntMap a
 mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 mapMaybeGen :: (a -> Maybe b) -> Gen [a] -> Gen [b]
@@ -417,6 +418,7 @@ takeIterate :: Int -> (a -> a) -> a -> [a]
 takeWhile :: (a -> Bool) -> [a] -> [a]
 takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
 takeWhileR :: (a -> Bool) -> [a] -> [a]
+taskPaperDateString :: Date -> String
 tempFilePath :: String -> IO FilePath
 then (>>) :: Monad m => m a -> m b -> m b
 thenIO (>>) :: IO a -> IO b -> IO b

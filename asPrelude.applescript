@@ -321,6 +321,28 @@ on assocs(m)
     end if
 end assocs
 
+-- base64decode :: String -> String
+on base64decode(s)
+    tell current application
+        set encoding to its NSUTF8StringEncoding
+        set ignore to its NSDataBase64DecodingIgnoreUnknownCharacters
+        
+        (((alloc() of its NSString)'s initWithData:((its (NSData's alloc()'s ¬
+            initWithBase64EncodedString:s ¬
+                options:(ignore)))) encoding:ignore)) as text
+    end tell
+end base64decode
+
+-- base64encode :: String -> String
+on base64encode(s)
+    tell current application
+        set encodingOption to its NSUTF8StringEncoding
+        base64EncodedStringWithOptions_(0) of ¬
+            dataUsingEncoding_(encodingOption) of ¬
+            (stringWithString_(s) of its NSString) as string
+    end tell
+end base64encode
+
 -- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 on bind(m, mf)
     set c to class of m
@@ -839,10 +861,10 @@ end cycle
 
 -- decodedPath :: Percent Encoded String -> FilePath
 on decodedPath(fp)
-    tell current application
-        (its ((NSString's stringWithString:fp)'s ¬
-            stringByRemovingPercentEncoding)) as string
-    end tell
+    tell current application to ¬
+        (stringByRemovingPercentEncoding ¬
+            of stringWithString_(fp) ¬
+            of its NSString) as string
 end decodedPath
 
 -- degrees :: Float x => Radians x -> Degrees x
@@ -1457,9 +1479,9 @@ end elems
 -- encodedPath :: FilePath -> Percent Encoded String
 on encodedPath(fp)
     tell current application
-        (its ((NSString's stringWithString:fp)'s ¬
-            stringByAddingPercentEncodingWithAllowedCharacters:(its NSCharacterSet's ¬
-                URLPathAllowedCharacterSet))) as string
+        set charSet to URLPathAllowedCharacterSet of its NSCharacterSet
+        (stringByAddingPercentEncodingWithAllowedCharacters_(charSet) of ¬
+            stringWithString_(fp) of its NSString) as string
     end tell
 end encodedPath
 
@@ -3237,19 +3259,6 @@ on mapAccumR(f, acc, xs)
     end script
     foldr(result, Tuple(acc, []), xs)
 end mapAccumR
-
--- mapFromList :: [(k, v)] -> Dict
-on mapFromList(kvs)
-    set tpl to unzip(kvs)
-    script
-        on |λ|(x)
-            x as string
-        end |λ|
-    end script
-    (current application's NSDictionary's ¬
-        dictionaryWithObjects:(|2| of tpl) ¬
-            forKeys:map(result, |1| of tpl)) as record
-end mapFromList
 
 -- mapKeys :: (Key -> Key) -> IntMap a -> IntMap a
 on mapKeys(f, dct)
@@ -5457,6 +5466,12 @@ on takeWhileR(p, xs)
         xs
     end if
 end takeWhileR
+
+-- taskPaperDateString :: Date -> String
+on taskPaperDateString(dte)
+    set {d, t} to splitOn("T", dte as «class isot» as string)
+    d & space & text 1 thru 5 of t
+end taskPaperDateString
 
 -- tempFilePath :: String -> IO FilePath
 on tempFilePath(template)

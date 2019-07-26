@@ -11,3 +11,8 @@ on decodedPath(fp)
             of its NSString) as string
 end decodedPath
 ```
+
+```js
+// decodedPath :: Percent Encoded String -> FilePath
+const decodedPath = decodeURI;
+```
