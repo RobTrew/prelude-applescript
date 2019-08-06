@@ -11,6 +11,12 @@ on abs(x)
     end if
 end abs
 
+-- Action :: (a -> b) -> a -> Action b
+on Action(f, x)
+    -- Constructor for an action.
+    {type:"Action", act:f, arg:x}
+end Action
+
 -- all :: (a -> Bool) -> [a] -> Bool
 on all(p, xs)
     -- True if p holds for every value in xs
@@ -430,9 +436,15 @@ end bindTuple
 -- bool :: a -> a -> Bool -> a
 on bool(f, t, p)
     if p then
-        t
+        set v to t
     else
-        f
+        set v to f
+    end if
+    -- Delayed evaluation, if needed.
+    if handler is class of v then
+        |λ|() of mReturn(v)
+    else
+        v
     end if
 end bool
 
@@ -4389,6 +4401,12 @@ on roundTo(n, x)
     set d to 10 ^ n
     (round (x * d)) / d
 end roundTo
+
+-- runAction :: Action a -> a
+on runAction(act)
+    -- Evaluation of an action.
+    tell act to |λ|(its arg) of my mReturn(its act)
+end runAction
 
 -- safeMay :: (a -> Bool) -> (a -> b) -> Maybe b
 on safeMay(p, f, x)
