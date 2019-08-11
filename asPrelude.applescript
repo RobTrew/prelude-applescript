@@ -2871,7 +2871,11 @@ end jsonParseLR
 on Just(x)
     -- Constructor for an inhabited Maybe (option type) value.
     -- Wrapper containing the result of a computation.
-    {type:"Maybe", Nothing:false, Just:x}
+    script
+        property type : "Maybe"
+        property Nothing : false
+        property Just : x
+    end script
 end Just
 
 -- justifyLeft :: Int -> Char -> String -> String
@@ -2931,7 +2935,11 @@ end lcm
 
 -- Left :: a -> Either a b
 on |Left|(x)
-    {type:"Either", |Left|:x, |Right|:missing value}
+    script
+        property type : "Either"
+        property |Left| : x
+        property |Right| : missing value
+    end script
 end |Left|
 
 -- lefts :: [Either a b] -> [a]
@@ -3714,7 +3722,10 @@ end notElem
 on Nothing()
     -- Constructor for an empty Maybe (option type) value.
     -- Empty wrapper returned where a computation is not possible.
-    {type:"Maybe", Nothing:true}
+    script
+        property type : "Maybe"
+        property Nothing : true
+    end script
 end Nothing
 
 -- nub :: [a] -> [a]
@@ -4358,7 +4369,11 @@ end |reverse|
 
 -- Right :: b -> Either a b
 on |Right|(x)
-    {type:"Either", |Left|:missing value, |Right|:x}
+    script
+        property type : "Either"
+        property |Left| : missing value
+        property |Right| : x
+    end script
 end |Right|
 
 -- rights :: [Either a b] -> [b]
