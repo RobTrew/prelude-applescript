@@ -406,10 +406,10 @@ end bindList
 
 -- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
 on bindLR(m, mf)
-    if missing value is not |Right| of m then
-        mReturn(mf)'s |λ|(|Right| of m)
-    else
+    if missing value is not |Left| of m then
         m
+    else
+        mReturn(mf)'s |λ|(|Right| of m)
     end if
 end bindLR
 
@@ -1415,7 +1415,7 @@ end dropWhileGen
 
 -- either :: (a -> c) -> (b -> c) -> Either a b -> c
 on either(lf, rf, e)
-    if isRight(e) then
+    if missing value is |Left| of e then
         tell mReturn(rf) to |λ|(|Right| of e)
     else
         tell mReturn(lf) to |λ|(|Left| of e)
