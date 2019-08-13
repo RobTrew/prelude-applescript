@@ -1699,15 +1699,15 @@ on fileStatus(fp)
     end if
 end fileStatus
 
--- fileUTI :: FilePath -> String
+-- fileUTI :: FilePath -> Either String String
 on fileUTI(fp)
     set {uti, e} to (current application's ¬
         NSWorkspace's sharedWorkspace()'s ¬
         typeOfFile:fp |error|:(reference)) as list
     if uti is missing value then
-        e's localizedDescription() as text
+        |Left|(e's localizedDescription() as text)
     else
-        uti as text
+        |Right|(uti as text)
     end if
 end fileUTI
 
@@ -2209,6 +2209,20 @@ on getDirectoryContents(strPath)
             ca's NSString's stringWithString:(strPath))) ¬
             |error|:(missing value)) as list
 end getDirectoryContents
+
+-- getDirectoryContentsLR :: FilePath -> Either String IO [FilePath]
+on getDirectoryContentsLR(strPath)
+    set ca to current application
+    set {xs, e} to (ca's NSFileManager's defaultManager()'s ¬
+        contentsOfDirectoryAtPath:(stringByStandardizingPath of ¬
+            (ca's NSString's stringWithString:(strPath))) ¬
+            |error|:(reference))
+    if xs is missing value then
+        |Left|((localizedDescription of e) as string)
+    else
+        |Right|(xs as list)
+    end if
+end getDirectoryContentsLR
 
 -- getFinderDirectory :: IO FilePath
 on getFinderDirectory()
@@ -4183,7 +4197,7 @@ on readFile(strPath)
     end if
 end readFile
 
--- readFileLR :: FilePath -> Either String String
+-- readFileLR :: FilePath -> Either String IO String
 on readFileLR(strPath)
     set ca to current application
     set e to reference
@@ -4192,10 +4206,10 @@ on readFileLR(strPath)
             stringWithString:strPath)'s ¬
             stringByStandardizingPath) ¬
             encoding:(ca's NSUTF8StringEncoding) |error|:(e))
-    if e is missing value then
-        |Right|(s as string)
-    else
+    if s is missing value then
         |Left|((localizedDescription of e) as string)
+    else
+        |Right|(s as string)
     end if
 end readFileLR
 
