@@ -3436,14 +3436,14 @@ on mappendMaybe(a, b)
     end if
 end mappendMaybe
 
--- mappendOrdering (<>) :: Ordering -> Ordering -> Ordering
-on mappendOrdering(a, b)
-    if my |EQ| = a then
-        b
-    else
+-- mappendOrd (<>) :: Ordering -> Ordering -> Ordering
+on mappendOrd(a, b)
+    if 0 ≠ a then
         a
+    else
+        b
     end if
-end mappendOrdering
+end mappendOrd
 
 -- mappendTuple (<>) :: (a, b) -> (a, b) -> (a, b)
 on mappendTuple(a, b)
