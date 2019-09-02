@@ -6346,6 +6346,17 @@ on zipGen(ga, gb)
     end script
 end zipGen
 
+-- zipList :: [a] -> [b] -> [(a, b)]
+on zipList(xs, ys)
+    set lng to min(length of xs, length of ys)
+    script go
+        on |λ|(x, i)
+            Tuple(x, item i of ys)
+        end |λ|
+    end script
+    map(go, items 1 thru lng of xs)
+end zipList
+
 -- zipN :: [a] -> [b] -> ... -> [(a, b ...)]
 on zipN(argv)
     if 1 < length of argv then
