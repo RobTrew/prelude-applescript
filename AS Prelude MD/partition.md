@@ -1,8 +1,4 @@
 ```applescript
--- partition :: predicate -> List -> (Matches, nonMatches)
-```
-
-```applescript
 -- partition :: (a -> Bool) -> [a] -> ([a], [a])
 on partition(f, xs)
     tell mReturn(f)

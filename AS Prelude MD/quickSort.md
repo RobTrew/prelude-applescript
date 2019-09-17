@@ -1,5 +1,5 @@
 ```applescript
--- Adequate for small sorts, but sort :: Ord a => [a] -> [a], (which uses the ObjC
+-- Adequate for small sorts, but sort (Ord a => [a] -> [a]), (which uses the ObjC
 -- sortedArrayUsingSelector) is the one to use
 ```
 

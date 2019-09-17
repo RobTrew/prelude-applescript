@@ -12,7 +12,6 @@ on foldMapTree(f, tree)
             end if
         end |λ|
     end script
-    
     |λ|(tree) of go
 end foldMapTree
 ```
