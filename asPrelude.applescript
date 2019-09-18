@@ -119,7 +119,7 @@ on apFn(f, g)
     end script
 end apFn
 
--- apList (<*>) :: [a -> b] -> [a] -> [b]
+-- apList (<*>) :: [(a -> b)] -> [a] -> [b]
 on apList(fs, xs)
     set lst to {}
     repeat with f in fs
@@ -3368,51 +3368,6 @@ on mappend(a, b)
     end if
 end mappend
 
--- mappendComparing :: [(a -> b)] -> (a -> a -> Ordering)
-on mappendComparing(fs)
-    script
-        on |λ|(x, y)
-            script
-                on |λ|(ordr, f)
-                    if ordr ≠ 0 then
-                        ordr
-                    else
-                        tell mReturn(f)
-                            compare(|λ|(x), |λ|(y))
-                        end tell
-                    end if
-                end |λ|
-            end script
-            foldl(result, 0, fs)
-        end |λ|
-    end script
-end mappendComparing
-
--- mappendComparing2 :: [((a -> b), Bool)] -> (a -> a -> Ordering)
-on mappendComparing2(fBools)
-    script
-        on |λ|(x, y)
-            script
-                on |λ|(ord, fb)
-                    if ord ≠ |EQ| then
-                        ord
-                    else
-                        set f to |1| of fb
-                        tell mReturn(f)
-                            if |2| of fb then
-                                compare(|λ|(x), |λ|(y))
-                            else
-                                compare(|λ|(y), |λ|(x))
-                            end if
-                        end tell
-                    end if
-                end |λ|
-            end script
-            foldl(result, 0, fBools)
-        end |λ|
-    end script
-end mappendComparing
-
 -- mappendFn :: Monoid b => (a -> b) -> (a -> b) -> (a -> b)
 on mappendFn(f, g)
     script
@@ -6416,6 +6371,46 @@ on zipWith4(f, ws, xs, ys, zs)
         return lst
     end tell
 end zipWith4
+
+-- zipWithGen :: (a -> b -> c) -> Gen [a] -> Gen [b] -> Gen [c]
+on zipWithGen(f, ga, gb)
+    script
+        property ma : missing value
+        property mb : missing value
+        property mf : mReturn(f)
+        on |λ|()
+            if missing value is ma then
+                set ma to uncons(ga)
+                set mb to uncons(gb)
+            end if
+            if Nothing of ma or Nothing of mb then
+                missing value
+            else
+                set ta to Just of ma
+                set tb to Just of mb
+                set ma to uncons(|2| of ta)
+                set mb to uncons(|2| of tb)
+                |λ|(|1| of ta, |1| of tb) of mf
+            end if
+        end |λ|
+    end script
+end zipWithGen
+
+-- zipWithList :: (a -> b -> c) -> [a] -> [b] -> [c]
+on zipWithList(f, xs, ys)
+    set lng to min(length of xs, length of ys)
+    set lst to {}
+    if 1 > lng then
+        return {}
+    else
+        tell mReturn(f)
+            repeat with i from 1 to lng
+                set end of lst to |λ|(item i of xs, item i of ys)
+            end repeat
+            return lst
+        end tell
+    end if
+end zipWithList
 
 -- zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
 on zipWithM(fm, xs, ys)
