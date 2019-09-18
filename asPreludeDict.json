@@ -1,6 +1,7 @@
 {
   "abs": "-- Absolute value.\n-- abs :: Num -> Num\non abs(x)\n    if 0 > x then\n        -x\n    else\n        x\n    end if\nend abs",
   "Action": "-- Action :: (a -> b) -> a -> Action b\non Action(f, x)\n    -- Constructor for an action.\n    {type:\"Action\", act:f, arg:x}\nend Action",
+  "add": "-- add (+) :: Num a => a -> a -> a\non add(a)\n    -- Curried addition.\n    script\n        on |λ|(b)\n            a + b\n        end |λ|\n    end script\nend add",
   "all": "-- all :: (a -> Bool) -> [a] -> Bool\non all(p, xs)\n    -- True if p holds for every value in xs\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if not |λ|(item i of xs, i, xs) then return false\n        end repeat\n        true\n    end tell\nend all",
   "allTree": "-- allTree :: (a -> Bool) -> Tree a -> Bool\non allTree(p, tree)\n    -- True if p holds for the value of every node in tree\n    script go\n        property mp : mReturn(p)'s |λ|\n        on |λ|(oNode)\n            if mp(root of oNode) then\n                repeat with v in nest of oNode\n                    if not (contents of |λ|(v)) then return false\n                end repeat\n                true\n            else\n                false\n            end if\n        end |λ|\n    end script\n    |λ|(tree) of go\nend allTree",
   "and": "-- True if every value in the list is true.\n-- and :: [Bool] -> Bool\non |and|(xs)\n    repeat with x in xs\n        if not (contents of x) then return false\n    end repeat\n    return true\nend |and|",
@@ -263,6 +264,7 @@
   "mod": "-- Composable wrapper for built-in operator\n-- mod :: Int -> Int -> Int\non |mod|(n, d)\n    n mod d\nend |mod|",
   "modificationTime": "-- modificationTime :: FilePath -> Either String Date\non modificationTime(fp)\n    script fs\n        on |λ|(rec)\n            |Right|(NSFileModificationDate of rec)\n        end |λ|\n    end script\n    bindLR(my fileStatus(fp), fs)\nend modificationTime",
   "mReturn": "-- mReturn :: First-class m => (a -> b) -> m (a -> b)\non mReturn(f)\n    -- 2nd class handler function lifted into 1st class script wrapper. \n    if script is class of f then\n        f\n    else\n        script\n            property |λ| : f\n        end script\n    end if\nend mReturn",
+  "mul": "-- mul (*) :: Num a => a -> a -> a\non mul(a)\n    -- Curried multiplication.\n    script\n        on |λ|(b)\n            a * b\n        end |λ|\n    end script\nend mul",
   "negate": "-- negate :: Num -> Num\non |negate|(n)\n    -n\nend |negate|",
   "nest": "-- nest :: Tree a -> [a]\non nest(oTree)\n    nest of oTree\nend nest",
   "newUUID": "-- use framework \"Foundation\"\n-- use scripting additions\n-- newUUID :: () -> IO UUID String\non newUUID()\n    current application's NSUUID's UUID's UUIDString as string\nend newUUID",

@@ -17,6 +17,16 @@ on Action(f, x)
     {type:"Action", act:f, arg:x}
 end Action
 
+-- add (+) :: Num a => a -> a -> a
+on add(a)
+    -- Curried addition.
+    script
+        on |λ|(b)
+            a + b
+        end |λ|
+    end script
+end add
+
 -- all :: (a -> Bool) -> [a] -> Bool
 on all(p, xs)
     -- True if p holds for every value in xs
@@ -3655,6 +3665,16 @@ on mReturn(f)
         end script
     end if
 end mReturn
+
+-- mul (*) :: Num a => a -> a -> a
+on mul(a)
+    -- Curried multiplication.
+    script
+        on |λ|(b)
+            a * b
+        end |λ|
+    end script
+end mul
 
 -- negate :: Num -> Num
 on |negate|(n)
