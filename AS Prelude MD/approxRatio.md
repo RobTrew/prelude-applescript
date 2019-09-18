@@ -1,5 +1,5 @@
 ```applescript
--- approxRatio :: Real -> Real -> Ratio
+-- approxRatio :: Float -> Float -> Ratio
 on approxRatio(epsilon, n)
     if {real, integer} contains (class of epsilon) and 0 < epsilon then
         set e to epsilon
