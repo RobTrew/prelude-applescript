@@ -79,7 +79,7 @@ end |any|
 
 -- anyTree :: (a -> Bool) -> Tree a -> Bool
 on anyTree(p, tree)
-    -- True if p holds for the value of any node in the tree
+    -- True if p holds for the value of any node in the tree.
     script go
         property mp : mReturn(p)'s |λ|
         on |λ|(oNode)
