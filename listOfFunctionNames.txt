@@ -231,6 +231,8 @@ liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)
 liftMmay :: (a -> b) -> (Maybe a -> Maybe b)
 lines :: String -> [String]
 listDirectory :: FilePath -> [FilePath]
+listFromMaybe :: Maybe a -> [a]
+listFromTree :: Tree a -> [a]
 listFromTuple :: (a, a ...) -> [a]
 listToMaybe :: [a] -> Maybe a
 log :: Float -> Float
@@ -258,7 +260,6 @@ maximumBy :: (a -> a -> Ordering) -> [a] -> a
 maximumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a
 maximumMay :: Ord a => [a] -> Maybe a
 maybe :: b -> (a -> b) -> Maybe a -> b
-maybeToList :: Maybe a -> [a]
 mean :: [Num] -> Num
 member :: Key -> Dict -> Bool
 min :: Ord a => a -> a -> a
@@ -428,7 +429,6 @@ thenIO (>>) :: IO a -> IO b -> IO b
 thenList (>>) :: [a] -> [b] -> [b]
 thenMay (>>) :: Maybe a -> Maybe b -> Maybe b
 toEnum :: a -> Int -> a
-toListTree :: Tree a -> [a]
 toLower :: String -> String
 toRatio :: Real -> Ratio
 toSentence :: String -> String
