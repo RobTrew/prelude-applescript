@@ -105,6 +105,7 @@ elems :: Map k a -> [a]
 encodedPath :: FilePath -> Percent Encoded String
 enumFrom :: Enum a => a -> [a]
 enumFromPairs :: String -> [(String, Int)] -> Dict
+enumFromThen :: Int -> Int -> Gen [Int]
 enumFromThenTo :: Int -> Int -> Int -> [Int]
 enumFromThenToChar :: Char -> Char -> Char -> [Char]
 enumFromTo :: Int -> Int -> [Int]
