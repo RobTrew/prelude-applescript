@@ -707,16 +707,15 @@ end compose
 on composeList(fs)
     script
         on |λ|(x)
-            script
+            script go
                 on |λ|(f, a)
                     mReturn(f)'s |λ|(a)
                 end |λ|
             end script
-            
-            foldr(result, x, fs)
+            foldr(go, x, fs)
         end |λ|
     end script
-end composeListRL
+end composeList
 
 -- composeListR :: [(a -> a)] -> (a -> a)
 on composeListR(fs)
@@ -1541,6 +1540,22 @@ on enumFromPairs(strName, kvs)
     end script
     foldl(go, {|name|:strName, min:iMin, max:iMax}, kvs)
 end enumFromPairs
+
+-- enumFromThen :: Int -> Int -> Gen [Int]
+on enumFromThen(m, n)
+    -- A non-finite stream of integers,
+    -- starting with m and n, and continuing
+    -- with the same interval.
+    script
+        property d : n - m
+        property v : m
+        on |λ|()
+            set x to v
+            set v to d + v
+            return x
+        end |λ|
+    end script
+end enumFromThen
 
 -- enumFromThenTo :: Int -> Int -> Int -> [Int]
 on enumFromThenTo(x1, x2, y)
@@ -2867,6 +2882,21 @@ on join(x)
     bind(x, my identity)
 end join
 
+-- jsonFromTree :: Tree a -> String
+on jsonFromTree(tree)
+    script go
+        on |λ|(x)
+            {root of x, map(go, nest of x)}
+        end |λ|
+    end script
+    set ca to current application
+    ca's (NSString's alloc()'s ¬
+        initWithData:((ca's (NSJSONSerialization's ¬
+            dataWithJSONObject:(|λ|(tree) of go) ¬
+                options:0 |error|:(missing value)))) ¬
+            encoding:(ca's NSUTF8StringEncoding)) as string
+end jsonFromTree
+
 -- jsonLog :: a -> IO ()
 on jsonLog(e)
     log showJSON(e)
@@ -3191,6 +3221,27 @@ on listDirectory(strPath)
         contentsOfDirectoryAtPath:(unwrap(stringByStandardizingPath of ¬
             wrap(strPath))) |error|:(missing value))
 end listDirectory
+
+-- listFromMaybe :: Maybe a -> [a]
+on listFromMaybe(mb)
+    -- A singleton list derived from a Just value, 
+    -- or an empty list derived from Nothing.
+    if Nothing of mb then
+        {}
+    else
+        {Just of mb}
+    end if
+end maybeToList
+
+-- listFromTree :: Tree a -> [a]
+on listFromTree(tree)
+    script go
+        on |λ|(x)
+            {root of x} & concatMap(go, nest of x)
+        end |λ|
+    end script
+    |λ|(tree) of go
+end listFromTree
 
 -- listFromTuple :: (a, a ...) -> [a]
 on listFromTuple(tpl)
@@ -3525,15 +3576,6 @@ on maybe(v, f, mb)
     end if
 end maybe
 
--- maybeToList :: Maybe a -> [a]
-on maybeToList(mb)
-    if Nothing of mb then
-        {}
-    else
-        {Just of mb}
-    end if
-end maybeToList
-
 -- mean :: [Num] -> Num
 on mean(xs)
     script
@@ -3808,16 +3850,6 @@ on outdented(s)
         unlines(map(|λ|(n) of curry(drop), xs))
     end if
 end outdented
-
--- pairNestFromTree :: Tree a -> PairNest a
-on pairNestFromTree(tree)
-    script go
-        on |λ|(x)
-            {root of x, map(go, nest of x)}
-        end |λ|
-    end script
-    |λ|(tree) of go
-end pairNestFromTree
 
 -- partition :: (a -> Bool) -> [a] -> ([a], [a])
 on partition(f, xs)
@@ -4868,19 +4900,23 @@ on sortOn(f, xs)
 end sortOn
 
 -- span :: (a -> Bool) -> [a] -> ([a], [a])
-on span(f, xs)
+on span(f)
     -- The longest (possibly empty) prefix of xs
     -- that contains only elements satisfying p,
     -- tupled with the remainder of xs.
     -- span(p, xs) eq (takeWhile(p, xs), dropWhile(p, xs)) 
-    set lng to length of xs
-    set i to 0
-    tell mReturn(f)
-        repeat while i < lng and |λ|(item (i + 1) of xs)
-            set i to i + 1
-        end repeat
-    end tell
-    splitAt(i, xs)
+    script
+        on |λ|(xs)
+            set lng to length of xs
+            set i to 0
+            tell mReturn(f)
+                repeat while i < lng and |λ|(item (i + 1) of xs)
+                    set i to i + 1
+                end repeat
+            end tell
+            splitAt(i, xs)
+        end |λ|
+    end script
 end span
 
 -- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))
@@ -5562,16 +5598,6 @@ on toEnum(e)
         end |λ|
     end script
 end toEnum
-
--- toListTree :: Tree a -> [a]
-on toListTree(tree)
-    script go
-        on |λ|(x)
-            {root of x} & concatMap(go, nest of x)
-        end |λ|
-    end script
-    |λ|(tree) of go
-end toListTree
 
 -- toLower :: String -> String
 on toLower(str)

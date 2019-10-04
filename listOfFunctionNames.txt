@@ -209,6 +209,7 @@ iso8601Local :: Date -> String
 iterate :: (a -> a) -> a -> Gen [a]
 iterateUntil :: (a -> Bool) -> (a -> a) -> a -> [a]
 join :: Monad m => m (m a) -> m a
+jsonFromTree :: Tree a -> String
 jsonLog :: a -> IO ()
 jsonParseLR :: String -> Either String a
 justifyLeft :: Int -> Char -> String -> String
@@ -286,7 +287,6 @@ or :: [Bool] -> Bool
 ord :: Char -> Int
 ordering :: () -> Ordering
 outdented :: String -> String
-pairNestFromTree :: Tree a -> PairNest a
 partition :: (a -> Bool) -> [a] -> ([a], [a])
 partitionEithers :: [Either a b] -> ([a],[b])
 permutations :: [a] -> [[a]]

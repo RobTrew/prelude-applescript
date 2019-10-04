@@ -3,14 +3,13 @@
 on composeList(fs)
     script
         on |λ|(x)
-            script
+            script go
                 on |λ|(f, a)
                     mReturn(f)'s |λ|(a)
                 end |λ|
             end script
-            
-            foldr(result, x, fs)
+            foldr(go, x, fs)
         end |λ|
     end script
-end composeListRL
+end composeList
 ```
