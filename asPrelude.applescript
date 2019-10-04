@@ -721,13 +721,13 @@ end composeList
 on composeListR(fs)
     script
         on |λ|(x)
-            script
+            script go
                 on |λ|(a, f)
                     mReturn(f)'s |λ|(a)
                 end |λ|
             end script
             
-            foldl(result, x, fs)
+            foldl(go, x, fs)
         end |λ|
     end script
 end composeListLR
@@ -2924,11 +2924,7 @@ end jsonParseLR
 on Just(x)
     -- Constructor for an inhabited Maybe (option type) value.
     -- Wrapper containing the result of a computation.
-    script
-        property type : "Maybe"
-        property Nothing : false
-        property Just : x
-    end script
+    {type:"Maybe", Nothing:false, Just:x}
 end Just
 
 -- justifyLeft :: Int -> Char -> String -> String
@@ -2988,11 +2984,7 @@ end lcm
 
 -- Left :: a -> Either a b
 on |Left|(x)
-    script
-        property type : "Either"
-        property |Left| : x
-        property |Right| : missing value
-    end script
+    {type:"Either", |Left|:x, |Right|:missing value}
 end |Left|
 
 -- lefts :: [Either a b] -> [a]
@@ -3752,10 +3744,7 @@ end notElem
 on Nothing()
     -- Constructor for an empty Maybe (option type) value.
     -- Empty wrapper returned where a computation is not possible.
-    script
-        property type : "Maybe"
-        property Nothing : true
-    end script
+    {type: "Maybe", Nothing: true}
 end Nothing
 
 -- nub :: [a] -> [a]
@@ -4389,11 +4378,7 @@ end |reverse|
 
 -- Right :: b -> Either a b
 on |Right|(x)
-    script
-        property type : "Either"
-        property |Left| : missing value
-        property |Right| : x
-    end script
+    {type:"Either", |Left|:missing value, |Right|:x}
 end |Right|
 
 -- rights :: [Either a b] -> [b]
@@ -5799,8 +5784,8 @@ on treeFromDict(treeTitle, recDict)
     Node(treeTitle, go's |λ|(recDict))
 end treeFromDict
 
--- treeFromPairNest :: PairNest a -> Tree a
-on treeFromPairNest(vxs)
+-- treeFromNestedList :: NestedList a -> Tree a
+on treeFromNestedList(vxs)
     script go
         on |λ|(pair)
             Node(item 1 of pair, map(go, item 2 of pair))

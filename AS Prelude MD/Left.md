@@ -1,10 +1,6 @@
 ```applescript
 -- Left :: a -> Either a b
 on |Left|(x)
-    script
-        property type : "Either"
-        property |Left| : x
-        property |Right| : missing value
-    end script
+    {type:"Either", |Left|:x, |Right|:missing value}
 end |Left|
 ```
