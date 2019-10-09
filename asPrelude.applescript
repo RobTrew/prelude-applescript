@@ -993,8 +993,8 @@ on dictFromList(kvs)
         end |λ|
     end script
     tell current application
-        (its (NSDictionary's dictionaryWithObjects:(item 2 of tpl) ¬
-            forKeys:(my map(go, item 1 of tpl)))) as record
+        (its (NSDictionary's dictionaryWithObjects:(my snd(tpl)) ¬
+            forKeys:(my map(go, my fst(tpl))))) as record
     end tell
 end dictFromList
 
@@ -2114,6 +2114,17 @@ on foldTree(f, tree)
     |λ|(tree) of go
 end foldTree
 
+-- forestFromJSON :: String -> [Tree a]
+on forestFromJSON(strJSON)
+    set lr to jsonParseLR(strJSON)
+    if missing value is |Left| of lr then
+        map(my treeFromNestedList, |Right| of lr)
+    else
+        {}
+    end if
+end forestFromJSON
+
+
 -- fromEnum :: Enum a => a -> Int
 on fromEnum(x)
     set c to class of x
@@ -2144,9 +2155,9 @@ on fromLeft(def, lr)
 end fromLeft
 
 -- fromMaybe :: a -> Maybe a -> a
-on fromMaybe(d, mb)
+on fromMaybe(default, mb)
     if Nothing of mb then
-        def
+        default
     else
         Just of mb
     end if

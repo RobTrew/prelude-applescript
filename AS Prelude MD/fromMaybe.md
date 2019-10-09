@@ -1,8 +1,8 @@
 ```applescript
 -- fromMaybe :: a -> Maybe a -> a
-on fromMaybe(d, mb)
+on fromMaybe(default, mb)
     if Nothing of mb then
-        def
+        default
     else
         Just of mb
     end if

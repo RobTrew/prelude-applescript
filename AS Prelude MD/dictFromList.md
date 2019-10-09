@@ -8,8 +8,8 @@ on dictFromList(kvs)
         end |λ|
     end script
     tell current application
-        (its (NSDictionary's dictionaryWithObjects:(item 2 of tpl) ¬
-            forKeys:(my map(go, item 1 of tpl)))) as record
+        (its (NSDictionary's dictionaryWithObjects:(my snd(tpl)) ¬
+            forKeys:(my map(go, my fst(tpl))))) as record
     end tell
 end dictFromList
 ```
