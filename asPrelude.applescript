@@ -3307,6 +3307,15 @@ on lookupTuples(k, xs)
     bindMay(find(keyMatch, xs), harvestMay)
 end lookupTuples
 
+-- lt :: Ord a => a -> a -> Bool
+on lt(x)
+    script
+        on |λ|(y)
+            x < y
+        end |λ|
+    end script
+end lt
+
 -- map :: (a -> b) -> [a] -> [b]
 on map(f, xs)
     -- The list obtained by applying f
@@ -4906,8 +4915,8 @@ on span(f)
             set lng to length of xs
             set i to 0
             tell mReturn(f)
-                repeat while i < lng and |λ|(item (i + 1) of xs)
-                    set i to i + 1
+                repeat while lng > i and |λ|(item (1 + i) of xs)
+                    set i to 1 + i
                 end repeat
             end tell
             splitAt(i, xs)
@@ -4928,7 +4937,8 @@ end splitArrow
 on splitAt(n, xs)
     if n > 0 and n < length of xs then
         if class of xs is text then
-            Tuple(items 1 thru n of xs as text, items (n + 1) thru -1 of xs as text)
+            Tuple(items 1 thru n of xs as text, ¬
+                items (n + 1) thru -1 of xs as text)
         else
             Tuple(items 1 thru n of xs, items (n + 1) thru -1 of xs)
         end if
@@ -5982,6 +5992,8 @@ on uncons(xs)
     end if
 end uncons
 
+-- A function over a pair, derived from
+-- a function over two arguments.
 -- uncurry :: (a -> b -> c) -> ((a, b) -> c)
 on uncurry(f)
     if 1 < argvLength(f) then
@@ -6006,6 +6018,7 @@ on uncurry(f)
         end script
     end if
 end uncurry
+
 
 -- unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
 on unfoldForest(f, xs)
