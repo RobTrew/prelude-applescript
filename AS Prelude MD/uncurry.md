@@ -4,6 +4,8 @@
 ```
 
 ```applescript
+-- A function over a pair, derived from
+-- a function over two arguments.
 -- uncurry :: (a -> b -> c) -> ((a, b) -> c)
 on uncurry(f)
     if 1 < argvLength(f) then
@@ -28,4 +30,5 @@ on uncurry(f)
         end script
     end if
 end uncurry
+
 ```

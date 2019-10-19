@@ -10,8 +10,8 @@ on span(f)
             set lng to length of xs
             set i to 0
             tell mReturn(f)
-                repeat while i < lng and |λ|(item (i + 1) of xs)
-                    set i to i + 1
+                repeat while lng > i and |λ|(item (1 + i) of xs)
+                    set i to 1 + i
                 end repeat
             end tell
             splitAt(i, xs)
