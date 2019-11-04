@@ -790,10 +790,10 @@ on cons(x, xs)
     end if
 end cons
 
--- const :: a -> b -> a
-on const(k, _)
+-- constant :: a -> b -> a
+on |constant|(k, _)
     k
-end const
+end |constant|
 
 -- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 on createDirectoryIfMissingLR(blnParents, fp)
@@ -3729,6 +3729,15 @@ on mul(a)
         end |λ|
     end script
 end mul
+
+-- ne :: a -> a -> Bool
+on ne(a)
+    script
+        on |λ|(b)
+            a ≠ b
+        end |λ|
+    end script
+end ne
 
 -- negate :: Num -> Num
 on |negate|(n)

@@ -62,7 +62,7 @@ composeR (>>>) :: (a -> b) -> (b -> c) -> a -> c
 concat :: [[a]] -> [a]
 concatMap :: (a -> [b]) -> [a] -> [b]
 cons :: a -> [a] -> [a]
-const :: a -> b -> a
+constant :: a -> b -> a
 createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 curry :: ((a, b) -> c) -> a -> b -> c
 curry2 :: ((a, b) -> c) -> a -> b -> c
