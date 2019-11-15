@@ -3761,6 +3761,7 @@ end Node
 
 -- not :: Bool -> Bool
 on |not|(p)
+    -- `not` as a composable  and mappable function.
     not p
 end |not|
 
@@ -5372,13 +5373,13 @@ end takeAround
 
 -- takeBaseName :: FilePath -> String
 on takeBaseName(strPath)
-    if strPath ≠ "" then
-        if text -1 of strPath = "/" then
+    if "" ≠ strPath then
+        if "/" = text -1 of strPath then
             ""
         else
             set fn to item -1 of splitOn("/", strPath)
             if fn contains "." then
-                intercalateString(".", items 1 thru -2 of splitOn(".", fn))
+                intercalate(".", items 1 thru -2 of splitOn(".", fn))
             else
                 fn
             end if
@@ -5406,12 +5407,12 @@ end takeCycle
 
 -- takeDirectory :: FilePath -> FilePath
 on takeDirectory(strPath)
-    if strPath ≠ "" then
-        if character -1 of strPath = "/" then
+    if "" ≠ strPath then
+        if "/" = character -1 of strPath then
             text 1 thru -2 of strPath
         else
             set xs to init(splitOn("/", strPath))
-            if xs ≠ {} then
+            if {} ≠ xs then
                 intercalate("/", xs)
             else
                 "."
@@ -5420,7 +5421,7 @@ on takeDirectory(strPath)
     else
         "."
     end if
-end takeDirector
+end takeDirectory
 
 -- takeDropCycle :: Int -> [a] -> [a]
 on takeDropCycle(n, i, xs)
@@ -5448,7 +5449,7 @@ end takeExtension
 
 -- takeFileName :: FilePath -> FilePath
 on takeFileName(strPath)
-    if strPath ≠ "" and character -1 of strPath ≠ "/" then
+    if "" ≠ strPath and "/" ≠ character -1 of strPath then
         item -1 of splitOn("/", strPath)
     else
         ""
