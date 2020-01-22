@@ -1,17 +1,16 @@
 ```applescript
 -- assocs :: Map k a -> [(k, a)]
 on assocs(m)
-    set c to class of m
-    if list is c then
-        zip(enumFromTo(1, length of m), m)
-    else if record is c then
-        tell current application to set dict to ¬
-            dictionaryWithDictionary_(m) of its NSDictionary
-        zip((sortedArrayUsingSelector_("compare:") of ¬
-            allKeys() of dict) as list, ¬
-            (allValues() of dict) as list)
-    else
-        {}
-    end if
+    script go
+        on |λ|(k)
+            set mb to lookupDict(k, m)
+            if true = |Nothing| of mb then
+                {}
+            else
+                {{k, |Just| of mb}}
+            end if
+        end |λ|
+    end script
+    concatMap(go, keys(m))
 end assocs
 ```

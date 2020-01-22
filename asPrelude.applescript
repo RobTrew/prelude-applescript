@@ -323,18 +323,17 @@ end argvLength
 
 -- assocs :: Map k a -> [(k, a)]
 on assocs(m)
-    set c to class of m
-    if list is c then
-        zip(enumFromTo(1, length of m), m)
-    else if record is c then
-        tell current application to set dict to ¬
-            dictionaryWithDictionary_(m) of its NSDictionary
-        zip((sortedArrayUsingSelector_("compare:") of ¬
-            allKeys() of dict) as list, ¬
-            (allValues() of dict) as list)
-    else
-        {}
-    end if
+    script go
+        on |λ|(k)
+            set mb to lookupDict(k, m)
+            if true = |Nothing| of mb then
+                {}
+            else
+                {{k, |Just| of mb}}
+            end if
+        end |λ|
+    end script
+    concatMap(go, keys(m))
 end assocs
 
 -- base64decode :: String -> String
@@ -4995,16 +4994,6 @@ on splitBy(p, xs)
         end if
     end if
 end splitBy
-
--- splitEvery :: Int -> [a] -> [[a]]
-on splitEvery(n, xs)
-    if length of xs ≤ n then
-        {xs}
-    else
-        set grp_t to splitAt(n, xs)
-        {|1| of grp_t} & splitEvery(n, |2| of grp_t)
-    end if
-end splitEvery
 
 -- splitFileName :: FilePath -> (String, String)
 on splitFileName(strPath)
