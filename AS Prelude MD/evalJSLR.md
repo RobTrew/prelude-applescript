@@ -9,13 +9,7 @@
 ```applescript
 -- evalJSLR :: String -> Either String a
 on evalJSLR(strJS)
-    try -- NB if gJSC is global it must be released 
-        -- (e.g. set to null) at end of script
-        gJSC's evaluateScript
-    on error
-        set gJSC to current application's JSContext's new()
-        log ("new JSC")
-    end try
+    set gJSC to current application's JSContext's new()
     set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())
     if v is missing value then
         |Left|("JS evaluation error")

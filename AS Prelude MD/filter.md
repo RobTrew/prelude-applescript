@@ -1,7 +1,7 @@
 ```applescript
 -- filter :: (a -> Bool) -> [a] -> [a]
-on filter(f, xs)
-    tell mReturn(f)
+on filter(p, xs)
+    tell mReturn(p)
         set lst to {}
         set lng to length of xs
         repeat with i from 1 to lng

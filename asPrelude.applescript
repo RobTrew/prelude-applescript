@@ -1626,13 +1626,7 @@ end eq
 
 -- evalJSLR :: String -> Either String a
 on evalJSLR(strJS)
-    try -- NB if gJSC is global it must be released 
-        -- (e.g. set to null) at end of script
-        gJSC's evaluateScript
-    on error
-        set gJSC to current application's JSContext's new()
-        log ("new JSC")
-    end try
+    set gJSC to current application's JSContext's new()
     set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())
     if v is missing value then
         |Left|("JS evaluation error")
@@ -1736,8 +1730,8 @@ on fileUTI(fp)
 end fileUTI
 
 -- filter :: (a -> Bool) -> [a] -> [a]
-on filter(f, xs)
-    tell mReturn(f)
+on filter(p, xs)
+    tell mReturn(p)
         set lst to {}
         set lng to length of xs
         repeat with i from 1 to lng
