@@ -390,7 +390,6 @@ span :: (a -> Bool) -> [a] -> ([a], [a])
 splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))
 splitAt :: Int -> [a] -> ([a], [a])
 splitBy :: (a -> a -> Bool) -> [a] -> [[a]]
-splitEvery :: Int -> [a] -> [[a]]
 splitFileName :: FilePath -> (String, String)
 splitOn :: [a] -> [a] -> [[a]]
 splitRegex :: Regex -> String -> [String]
