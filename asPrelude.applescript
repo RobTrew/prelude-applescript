@@ -121,10 +121,10 @@ end ap
 -- apFn :: (a -> b -> c) -> (a -> b) -> a -> c
 on apFn(f, g)
     script go
-        property mf : mReturn(f)
-        property mg : mReturn(g)
+        property mf : |λ| of mReturn(f)
+        property mg : |λ| of mReturn(g)
         on |λ|(x)
-            mf's |λ|(x, mg's |λ|(x))
+            mf(x, mg(x))
         end |λ|
     end script
 end apFn
@@ -797,7 +797,7 @@ end |constant|
 -- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 on createDirectoryIfMissingLR(blnParents, fp)
     if doesPathExist(fp) then
-        |Right|("Found: '" & fp & "'")
+        |Right|(fp)
     else
         set e to reference
         set ca to current application
@@ -2580,6 +2580,12 @@ on insertDict(k, v, rec)
     end tell
 end insertDict
 
+-- insertSet :: Ord a => a -> Set a -> Set a
+on insertSet(x, oSet)
+    oSet's addObject:(x)
+    return oSet
+end insertSet
+
 -- intercalate :: [a] -> [[a]] -> [a]
 -- intercalate :: String -> [String] -> String
 on intercalate(sep, xs)
@@ -2993,17 +2999,21 @@ end |Left|
 
 -- lefts :: [Either a b] -> [a]
 on lefts(xs)
-    script
+    script go
         on |λ|(x)
             if class of x is record then
                 set ks to keys(x)
-                ks contains "type" and ks contains "Left"
+                if ks contains "type" and ks contains "Left" then
+                    {x}
+                else
+                    {}
+                end if
             else
-                false
+                {}
             end if
         end |λ|
     end script
-    filter(result, xs)
+    concatMap(go, xs)
 end lefts
 
 -- length :: [a] -> Int
@@ -3591,12 +3601,17 @@ on mean(xs)
     foldl(result, 0, xs) / (length of xs)
 end mean
 
--- member :: Key -> Dict -> Bool
-on member(k, dct)
+-- memberDict :: Key -> Dict -> Bool
+on memberDict(k, dct)
     ((current application's ¬
         NSDictionary's dictionaryWithDictionary:dct)'s ¬
         objectForKey:k) is not missing value
 end member
+
+-- memberSet :: a -> Set a -> Bool
+on memberSet(x, oSet)
+    oSet's containsObject:(x)
+end memberSet
 
 -- min :: Ord a => a -> a -> a
 on min(x, y)
@@ -4410,13 +4425,17 @@ on rights(xs)
         on |λ|(x)
             if class of x is record then
                 set ks to keys(x)
-                ks contains "type" and ks contains "Right"
+                if ks contains "type" and ks contains "Right" then
+                    {|Right| of x}
+                else
+                    {}
+                end if
             else
-                false
+                {}
             end if
         end |λ|
     end script
-    filter(result, xs)
+    concatMap(result, xs)
 end rights
 
 -- root :: Tree a -> a
@@ -4864,7 +4883,7 @@ end sortBy
 on sortOn(f, xs)
     script keyBool
         on |λ|(x, a)
-            if class of x is boolean then
+            if boolean is class of x then
                 {asc:x, fbs:fbs of a}
             else
                 {asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}

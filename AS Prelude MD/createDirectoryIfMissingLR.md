@@ -2,7 +2,7 @@
 -- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
 on createDirectoryIfMissingLR(blnParents, fp)
     if doesPathExist(fp) then
-        |Right|("Found: '" & fp & "'")
+        |Right|(fp)
     else
         set e to reference
         set ca to current application

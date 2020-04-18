@@ -2,10 +2,10 @@
 -- apFn :: (a -> b -> c) -> (a -> b) -> a -> c
 on apFn(f, g)
     script go
-        property mf : mReturn(f)
-        property mg : mReturn(g)
+        property mf : |λ| of mReturn(f)
+        property mg : |λ| of mReturn(g)
         on |λ|(x)
-            mf's |λ|(x, mg's |λ|(x))
+            mf(x, mg(x))
         end |λ|
     end script
 end apFn

@@ -34,7 +34,7 @@
 on sortOn(f, xs)
     script keyBool
         on |λ|(x, a)
-            if class of x is boolean then
+            if boolean is class of x then
                 {asc:x, fbs:fbs of a}
             else
                 {asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}
