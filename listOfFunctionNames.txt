@@ -182,6 +182,7 @@ inits :: [a] -> [[a]]
 insert :: Ord a => a -> [a] -> [a]
 insertBy :: (a -> a -> Ordering) -> a -> [a] -> [a]
 insertDict :: String -> a -> Dict -> Dict
+insertSet :: Ord a => a -> Set a -> Set a
 intToDigit :: Int -> Char
 intercalate :: [a] -> [[a]] -> [a]
 intercalateS :: String -> [String] -> String
@@ -265,7 +266,8 @@ maximumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a
 maximumMay :: Ord a => [a] -> Maybe a
 maybe :: b -> (a -> b) -> Maybe a -> b
 mean :: [Num] -> Num
-member :: Key -> Dict -> Bool
+memberDict :: Key -> Dict -> Bool
+memberSet :: a -> Set a -> Bool
 min :: Ord a => a -> a -> a
 minBound :: a -> a
 minimum :: Ord a => [a] -> a

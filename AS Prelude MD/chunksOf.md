@@ -1,3 +1,3 @@
 ```applescript
--- chunksOf :: Int -> [a] -> [[a]]on chunksOf(n, xs)    set lng to length of xs    script go        on |λ|(a, i)            set x to (i + n) - 1            if x ≥ lng then                a & {items i thru -1 of xs}            else                a & {items i thru x of xs}            end if        end |λ|    end script    foldl(go, {}, enumFromThenTo(1, 1 + n, lng))end chunksOf
+-- chunksOf :: Int -> [a] -> [[a]]on chunksOf(k, xs)	script		on go(ys)			set ab to splitAt(k, ys)			set a to |1| of ab			if {} ≠ a then				{a} & go(|2| of ab)			else				a			end if		end go	end script	result's go(xs)end chunksOf
 ```

@@ -646,19 +646,19 @@ on chr(n)
 end chr
 
 -- chunksOf :: Int -> [a] -> [[a]]
-on chunksOf(n, xs)
-    set lng to length of xs
-    script go
-        on |λ|(a, i)
-            set x to (i + n) - 1
-            if x ≥ lng then
-                a & {items i thru -1 of xs}
+on chunksOf(k, xs)
+    script
+        on go(ys)
+            set ab to splitAt(k, ys)
+            set a to |1| of ab
+            if {} ≠ a then
+                {a} & go(|2| of ab)
             else
-                a & {items i thru x of xs}
+                a
             end if
-        end |λ|
+        end go
     end script
-    foldl(go, {}, enumFromThenTo(1, 1 + n, lng))
+    result's go(xs)
 end chunksOf
 
 -- compare :: a -> a -> Ordering
@@ -6124,9 +6124,9 @@ on unlines(xs)
     -- of a list of strings with the newline character.
     set {dlm, my text item delimiters} to ¬
         {my text item delimiters, linefeed}
-    set str to xs as text
+    set s to xs as text
     set my text item delimiters to dlm
-    str
+    s
 end unlines
 
 -- unQuoted :: String -> String

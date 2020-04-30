@@ -5,8 +5,8 @@ on unlines(xs)
     -- of a list of strings with the newline character.
     set {dlm, my text item delimiters} to ¬
         {my text item delimiters, linefeed}
-    set str to xs as text
+    set s to xs as text
     set my text item delimiters to dlm
-    str
+    s
 end unlines
 ```
