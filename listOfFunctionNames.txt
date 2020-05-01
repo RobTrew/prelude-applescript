@@ -53,6 +53,7 @@ chars :: String -> [Char]
 chop :: ([a] -> (b, [a])) -> [a] -> [b]
 chr :: Int -> Char
 chunksOf :: Int -> [a] -> [[a]]
+combine (</>) :: FilePath -> FilePath -> FilePath
 compare :: a -> a -> Ordering
 comparing :: (a -> b) -> (a -> a -> Ordering)
 compose (<<<) :: (b -> c) -> (a -> b) -> a -> c
