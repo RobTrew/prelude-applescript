@@ -447,21 +447,24 @@ on bindTuple(tpl, f)
     Tuple(mappend(|1| of tpl, |1| of t2), |2| of t2)
 end bindTuple
 
--- bool :: a -> a -> Bool -> a
-on bool(ff, tf, bln)
-    -- The evaluation of either tf or ff, depending on p
-    if bln then
-        set e to tf
-    else
-        set e to ff
-    end if
-    
-    set c to class of e
-    if {script, handler} contains c then
-        |λ|() of mReturn(e)
-    else
-        e
-    end if
+on bool(ff, tf)
+    -- The evaluation of either tf or ff, 
+    -- depending on a boolean value.
+    script
+        on |λ|(bln)
+            if bln then
+                set e to tf
+            else
+                set e to ff
+            end if
+            set c to class of e
+            if {script, handler} contains c then
+                |λ|() of mReturn(e)
+            else
+                e
+            end if
+        end |λ|
+    end script
 end bool
 
 -- break :: (a -> Bool) -> [a] -> ([a], [a])
