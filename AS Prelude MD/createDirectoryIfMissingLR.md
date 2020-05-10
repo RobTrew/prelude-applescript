@@ -1,5 +1,5 @@
 ```applescript
--- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
+-- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String FilePath
 on createDirectoryIfMissingLR(blnParents, fp)
     if doesPathExist(fp) then
         |Right|(fp)

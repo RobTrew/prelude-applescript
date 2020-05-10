@@ -1,16 +1,18 @@
 ```applescript
 -- bool :: a -> a -> Bool -> a
-on bool(f, t, p)
-    if p then
-        set v to t
+on bool(ff, tf, bln)
+    -- The evaluation of either tf or ff, depending on p
+    if bln then
+        set e to tf
     else
-        set v to f
+        set e to ff
     end if
-    -- Delayed evaluation, if needed.
-    if handler is class of v then
-        |λ|() of mReturn(v)
+    
+    set c to class of e
+    if {script, handler} contains c then
+        |λ|() of mReturn(e)
     else
-        v
+        e
     end if
 end bool
 ```

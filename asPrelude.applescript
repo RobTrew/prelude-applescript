@@ -4,6 +4,7 @@ use scripting additions
 
 -- abs :: Num -> Num
 on abs(x)
+    -- Absolute value.
     if 0 > x then
         -x
     else
@@ -60,6 +61,7 @@ end allTree
 
 -- and :: [Bool] -> Bool
 on |and|(xs)
+    -- True if every value in the list is true.
     repeat with x in xs
         if not (contents of x) then return false
     end repeat
@@ -68,6 +70,9 @@ end |and|
 
 -- any :: (a -> Bool) -> [a] -> Bool
 on |any|(f, xs)
+    -- Applied to a predicate and a list, 
+    -- |any| returns true if at least one element of the 
+    -- list satisfies the predicate.
     tell mReturn(f)
         set lng to length of xs
         repeat with i from 1 to lng
@@ -443,17 +448,19 @@ on bindTuple(tpl, f)
 end bindTuple
 
 -- bool :: a -> a -> Bool -> a
-on bool(f, t, p)
-    if p then
-        set v to t
+on bool(ff, tf, bln)
+    -- The evaluation of either tf or ff, depending on p
+    if bln then
+        set e to tf
     else
-        set v to f
+        set e to ff
     end if
-    -- Delayed evaluation, if needed.
-    if handler is class of v then
-        |λ|() of mReturn(v)
+    
+    set c to class of e
+    if {script, handler} contains c then
+        |λ|() of mReturn(e)
     else
-        v
+        e
     end if
 end bool
 
@@ -661,6 +668,21 @@ on chunksOf(k, xs)
     result's go(xs)
 end chunksOf
 
+-- combine (</>) :: FilePath -> FilePath -> FilePath
+on combine(fp, fp1)
+    -- The concatenation of two filePath segments,
+    -- without omission or duplication of "/".
+    if "" = fp or "" = fp1 then
+        fp & fp1
+    else if "/" = item 1 of fp1 then
+        fp1
+    else if "/" = item -1 of fp then
+        fp & fp1
+    else
+        fp & "/" & fp1
+    end if
+end combine
+
 -- compare :: a -> a -> Ordering
 on compare(a, b)
     if a < b then
@@ -794,7 +816,7 @@ on |constant|(k, _)
     k
 end |constant|
 
--- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
+-- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String FilePath
 on createDirectoryIfMissingLR(blnParents, fp)
     if doesPathExist(fp) then
         |Right|(fp)
@@ -2598,9 +2620,9 @@ on intercalateS(delim)
         on |λ|(xs)
             set {dlm, my text item delimiters} to ¬
                 {my text item delimiters, delim}
-            set str to xs as text
+            set s to xs as text
             set my text item delimiters to dlm
-            str
+            s
         end |λ|
     end script
 end intercalateS

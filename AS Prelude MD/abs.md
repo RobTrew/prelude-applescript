@@ -1,10 +1,7 @@
 ```applescript
--- Absolute value.
-```
-
-```applescript
 -- abs :: Num -> Num
 on abs(x)
+    -- Absolute value.
     if 0 > x then
         -x
     else

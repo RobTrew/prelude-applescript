@@ -64,7 +64,7 @@ concat :: [[a]] -> [a]
 concatMap :: (a -> [b]) -> [a] -> [b]
 cons :: a -> [a] -> [a]
 constant :: a -> b -> a
-createDirectoryIfMissingLR :: Bool -> FilePath -> Either String String
+createDirectoryIfMissingLR :: Bool -> FilePath -> Either String FilePath
 curry :: ((a, b) -> c) -> a -> b -> c
 curry2 :: ((a, b) -> c) -> a -> b -> c
 curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
