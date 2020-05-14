@@ -1,4 +1,5 @@
 ```applescript
+-- bool :: a -> a -> Bool -> a
 on bool(ff, tf)
     -- The evaluation of either tf or ff, 
     -- depending on a boolean value.

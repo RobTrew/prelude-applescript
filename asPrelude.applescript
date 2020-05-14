@@ -447,6 +447,7 @@ on bindTuple(tpl, f)
     Tuple(mappend(|1| of tpl, |1| of t2), |2| of t2)
 end bindTuple
 
+-- bool :: a -> a -> Bool -> a
 on bool(ff, tf)
     -- The evaluation of either tf or ff, 
     -- depending on a boolean value.
