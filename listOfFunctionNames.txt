@@ -1,4 +1,3 @@
-
 Action :: (a -> b) -> a -> Action b
 Just :: a -> Maybe a
 Left :: a -> Either a b
@@ -39,6 +38,7 @@ bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
 bindList (>>=) :: [a] -> (a -> [b]) -> [b]
 bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 bindTuple (>>=) :: Monoid a => (a, a) -> (a -> (a, b)) -> (a, b)
+bool :: a -> a -> Bool -> a
 break :: (a -> Bool) -> [a] -> ([a], [a])
 breakOn :: String -> String -> (String, String)
 breakOnAll :: String -> String -> [(String, String)]
