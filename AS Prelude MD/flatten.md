@@ -1,6 +1,7 @@
 ```applescript
 -- flatten :: NestedList a -> [a]
 on flatten(t)
+    -- A flat list derived from a nested list.
     if list is class of t then
         concatMap(my flatten, t)
     else

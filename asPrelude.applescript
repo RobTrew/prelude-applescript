@@ -363,6 +363,19 @@ on base64encode(s)
     end tell
 end base64encode
 
+-- bimap :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)
+on bimap(f, g)
+    -- Tuple instance of bimap.
+    -- A tuple of the application of f and g to the
+    -- first and second values of tpl respectively.
+    script
+        on |λ|(x)
+            Tuple(|λ|(fst(x)) of mReturn(f), ¬
+                |λ|(snd(x)) of mReturn(g))
+        end |λ|
+    end script
+end bimap
+
 -- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 on bind(m, mf)
     set c to class of m
@@ -1852,8 +1865,10 @@ on findTree(p, tree)
     go's |λ|(tree)
 end findTree
 
--- firstArrow :: (a -> b) -> ((a, c) -> (b, c))
-on firstArrow(f)
+-- first :: (a -> b) -> ((a, c) -> (b, c))
+on |first|(f)
+   -- A simple function lifted to one which applies to a tuple, 
+   -- transforming only the first item of that tuple
     script
         on |λ|(xy)
             Tuple(mReturn(f)'s |λ|(|1| of xy), |2| of xy)
@@ -1863,6 +1878,7 @@ end |first|
 
 -- flatten :: NestedList a -> [a]
 on flatten(t)
+    -- A flat list derived from a nested list.
     if list is class of t then
         concatMap(my flatten, t)
     else
@@ -4551,8 +4567,10 @@ on scanr1(f, xs)
     end if
 end scanr1
 
--- secondArrow :: (a -> b) -> ((c, a) -> (c, b))
-on secondArrow(f)
+-- second :: (a -> b) -> ((c, a) -> (c, b))
+on |second|(f)
+-- Lift a simple function to one which applies to a tuple, 
+-- transforming only the second item of that tuple
     script
         on |λ|(xy)
             Tuple(|1| of xy, mReturn(f)'s |λ|(|2| of xy))

@@ -130,7 +130,7 @@ findIndex :: (a -> Bool) -> [a] -> Maybe Int
 findIndexR :: (a -> Bool) -> [a] -> Maybe Int
 findIndices :: (a -> Bool) -> [a] -> [Int]
 findTree :: (a -> Bool) -> Tree a -> Maybe Tree a
-firstArrow :: (a -> b) -> ((a, c) -> (b, c))
+first :: (a -> b) -> ((a, c) -> (b, c))
 flatten :: NestedList a -> [a]
 flattenTree :: Tree a -> [a]
 flip :: (a -> b -> c) -> b -> a -> c
@@ -354,7 +354,7 @@ scanl :: (b -> a -> b) -> b -> [a] -> [b]
 scanl1 :: (a -> a -> a) -> [a] -> [a]
 scanr :: (b -> a -> b) -> b -> [a] -> [b]
 scanr1 :: (a -> a -> a) -> [a] -> [a]
-secondArrow :: (a -> b) -> ((c, a) -> (c, b))
+second :: (a -> b) -> ((c, a) -> (c, b))
 sequenceA :: (Applicative f, Traversable t) => t (f a) -> f (t a)
 setCurrentDirectory :: String -> IO ()
 setFromList :: Ord a => [a] -> Set a
