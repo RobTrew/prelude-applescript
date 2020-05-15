@@ -1,0 +1,14 @@
+```applescript
+-- bimapLR :: (a -> b) -> (c -> d) -> ֵEither ֵֵa c -> Either b d
+on bimapLR(f, g)
+    script go
+        on |λ|(e)
+            if missing value is |Left| of e then
+                tell mReturn(g) to |Right|(|λ|(|Right| of e))
+            else
+                tell mReturn(f) to |Left|(|λ|(|Left| of e))
+            end if
+        end |λ|
+    end script
+end bimapLR
+```

@@ -32,6 +32,7 @@ argvLength :: Function -> Int
 assocs :: Map k a -> [(k, a)]
 base64decode :: String -> String
 base64encode :: String -> String
+bimap :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)
 bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
 bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
