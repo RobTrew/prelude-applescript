@@ -389,6 +389,16 @@ on bimapLR(f, g)
     end script
 end bimapLR
 
+-- bimapN :: (a -> b) -> (c -> d) -> TupleN -> TupleN
+on bimapN(f, g, tplN)
+    set z to length of tplN
+    set k1 to (z - 1) as string
+    set k2 to z as string
+    
+    insertDict(k2, mReturn(g)'s |λ|(Just of lookupDict(k2, tplN)), ¬
+        insertDict(k1, mReturn(f)'s |λ|(Just of lookupDict(k1, tplN)), tplN))
+end bimapN
+
 -- bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 on bind(m, mf)
     set c to class of m
@@ -592,13 +602,13 @@ on bulleted(strIndent, s)
     unlines(map(go, paragraphs of s))
 end bulleted
 
--- cartesianProduct :: [a] -> [b] -> [(a, b)]
+-- cartesianProduct :: [a] -> [b] -> [[a, b]]
 on cartesianProduct(xs, ys)
     script
         on |λ|(x)
             script
                 on |λ|(y)
-                    {Tuple(x, y)}
+                    {x, y}
                 end |λ|
             end script
             concatMap(result, ys)
@@ -879,36 +889,6 @@ on curry(f)
         end |λ|
     end script
 end curry
-
--- curry2 :: ((a, b) -> c) -> a -> b -> c
-on curry2(f)
-    script
-        on |λ|(a)
-            script
-                on |λ|(b)
-                    |λ|(a, b) of mReturn(f)
-                end |λ|
-            end script
-        end |λ|
-    end script
-end curry
-
--- curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
-on curry3(f)
-    script
-        on |λ|(a)
-            script
-                on |λ|(b)
-                    script
-                        on |λ|(c)
-                            |λ|(a, b, c) of mReturn(f)
-                        end |λ|
-                    end script
-                end |λ|
-            end script
-        end |λ|
-    end script
-end curry3
 
 -- cycle :: [a] -> Generator [a]
 on cycle(xs)
@@ -2365,8 +2345,8 @@ on groupBy(f, xs)
     end if
 end groupBy
 
--- groupSortOn :: Ord b => (a -> b) -> [a] -> [a]
--- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]
+-- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]
+-- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]
 on groupSortOn(f, xs)
     script keyBool
         on |λ|(a, x)
@@ -5140,7 +5120,7 @@ end splitRegex
 
 -- sqrt :: Num -> Num
 on sqrt(n)
-    if n ≥ 0 then
+    if 0 <= n then
         n ^ (1 / 2)
     else
         missing value
@@ -6001,7 +5981,7 @@ on tupleFromList(xs)
         end if
         script kv
             on |λ|(a, x, i)
-                insertMap(a, (i as string), x)
+                insertDict((i as string), x, a)
             end |λ|
         end script
         foldl(kv, {type:"Tuple" & strSuffix}, xs) & {length:lng}

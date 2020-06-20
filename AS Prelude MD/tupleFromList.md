@@ -10,7 +10,7 @@ on tupleFromList(xs)
         end if
         script kv
             on |λ|(a, x, i)
-                insertMap(a, (i as string), x)
+                insertDict((i as string), x, a)
             end |λ|
         end script
         foldl(kv, {type:"Tuple" & strSuffix}, xs) & {length:lng}

@@ -10,8 +10,8 @@
 ```
 
 ```applescript
--- groupSortOn :: Ord b => (a -> b) -> [a] -> [a]
--- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]
+-- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]
+-- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]
 on groupSortOn(f, xs)
     script keyBool
         on |λ|(a, x)

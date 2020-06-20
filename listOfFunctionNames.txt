@@ -33,6 +33,8 @@ assocs :: Map k a -> [(k, a)]
 base64decode :: String -> String
 base64encode :: String -> String
 bimap :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)
+bimapLR :: (a -> b) -> (c -> d) -> ֵEither ֵֵa c -> Either b d
+bimapN :: (a -> b) -> (c -> d) -> TupleN -> TupleN
 bind (>>=) :: Monad m => m a -> (a -> m b) -> m b
 bindFn (>>=) :: (a -> b) -> (b -> a -> c) -> a -> c
 bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
@@ -45,7 +47,7 @@ breakOn :: String -> String -> (String, String)
 breakOnAll :: String -> String -> [(String, String)]
 breakOnMay :: String -> String -> Maybe (String, String)
 bulleted :: String -> String -> String
-cartesianProduct :: [a] -> [b] -> [(a, b)]
+cartesianProduct :: [a] -> [b] -> [[a, b]]
 caseOf :: [(a -> Bool, b)] -> b -> a -> b
 catMaybes :: [Maybe a] -> [a]
 ceiling :: Num -> Int
@@ -67,8 +69,6 @@ cons :: a -> [a] -> [a]
 constant :: a -> b -> a
 createDirectoryIfMissingLR :: Bool -> FilePath -> Either String FilePath
 curry :: ((a, b) -> c) -> a -> b -> c
-curry2 :: ((a, b) -> c) -> a -> b -> c
-curry3 :: ((a, b, c) -> d) -> a -> b -> c -> d
 cycle :: [a] -> Generator [a]
 decodedPath :: Percent Encoded String -> FilePath
 degrees :: Float x => Radians x -> Degrees x
@@ -169,7 +169,7 @@ getHomeDirectory :: IO FilePath
 getTemporaryDirectory :: IO FilePath
 group :: Eq a => [a] -> [[a]]
 groupBy :: (a -> a -> Bool) -> [a] -> [[a]]
-groupSortOn :: Ord b => (a -> b) -> [a] -> [a]
+groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]
 gt :: Ord a => a -> a -> Bool
 head :: [a] -> a
 headMay :: [a] -> Maybe a

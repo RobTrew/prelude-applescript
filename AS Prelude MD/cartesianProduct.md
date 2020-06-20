@@ -1,11 +1,11 @@
 ```applescript
--- cartesianProduct :: [a] -> [b] -> [(a, b)]
+-- cartesianProduct :: [a] -> [b] -> [[a, b]]
 on cartesianProduct(xs, ys)
     script
         on |λ|(x)
             script
                 on |λ|(y)
-                    {Tuple(x, y)}
+                    {x, y}
                 end |λ|
             end script
             concatMap(result, ys)
