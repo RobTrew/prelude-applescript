@@ -1,13 +1,14 @@
 ```applescript
 -- takeDirectory :: FilePath -> FilePath
-on takeDirectory(strPath)
+on takeDirectory(fp)
+    set strPath to filePath(fp)
     if "" ≠ strPath then
         if "/" = character -1 of strPath then
             text 1 thru -2 of strPath
         else
             set xs to init(splitOn("/", strPath))
             if {} ≠ xs then
-                intercalate("/", xs)
+                intercalateS("/", xs)
             else
                 "."
             end if

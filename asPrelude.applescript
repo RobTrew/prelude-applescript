@@ -69,18 +69,18 @@ on |and|(xs)
 end |and|
 
 -- any :: (a -> Bool) -> [a] -> Bool
-on |any|(f, xs)
+on any(p, xs)
     -- Applied to a predicate and a list, 
     -- |any| returns true if at least one element of the 
     -- list satisfies the predicate.
-    tell mReturn(f)
+    tell mReturn(p)
         set lng to length of xs
         repeat with i from 1 to lng
             if |λ|(item i of xs) then return true
         end repeat
         false
     end tell
-end |any|
+end any
 
 -- anyTree :: (a -> Bool) -> Tree a -> Bool
 on anyTree(p, tree)
@@ -1495,9 +1495,11 @@ end elemAtMay
 
 -- elemIndex :: Eq a => a -> [a] -> Maybe Int
 on elemIndex(x, xs)
+    -- Just the zero-based index of x in xs,
+    -- or Nothing if x is not found in xs.
     set lng to length of xs
     repeat with i from 1 to lng
-        if x = (item i of xs) then return Just(i)
+        if x = (item i of xs) then return Just(i - 1)
     end repeat
     return Nothing()
 end elemIndex
@@ -2624,20 +2626,23 @@ end insertSet
 -- intercalate :: [a] -> [[a]] -> [a]
 -- intercalate :: String -> [String] -> String
 on intercalate(sep, xs)
-  concat(intersperse(sep, xs))
+    if class of xs is text then
+        set {dlm, my text item delimiters} to ¬
+            {my text item delimiters, delim}
+        set s to xs as text
+        set my text item delimiters to dlm
+    else
+        concat(intersperse(sep, xs))
+    end if
 end intercalate
 
 -- intercalateS :: String -> [String] -> String
-on intercalateS(delim)
-    script
-        on |λ|(xs)
-            set {dlm, my text item delimiters} to ¬
-                {my text item delimiters, delim}
-            set s to xs as text
-            set my text item delimiters to dlm
-            s
-        end |λ|
-    end script
+on intercalateS(delim, xs)
+    set {dlm, my text item delimiters} to ¬
+        {my text item delimiters, delim}
+    set s to xs as text
+    set my text item delimiters to dlm
+    s
 end intercalateS
 
 -- intersect :: (Eq a) => [a] -> [a] -> [a]
@@ -4281,6 +4286,20 @@ on readFileLR(strPath)
     end if
 end readFileLR
 
+-- readHex :: String -> Int
+on readHex(s)
+    -- The integer value of the given hexadecimal string.
+    set ds to "0123456789ABCDEF"
+    script go
+        on |λ|(c, a)
+            set {v, e} to a
+            set i to maybe(0, my identity, elemIndex(c, ds))
+            {v + (i * e), 16 * e}
+        end |λ|
+    end script
+    item 1 of foldr(go, {0, 1}, characters of s)
+end readHex
+
 -- readLR :: Read a => String -> Either String a
 on readLR(s)
     try
@@ -5445,14 +5464,15 @@ on takeCycle(n, xs)
 end takeCycle
 
 -- takeDirectory :: FilePath -> FilePath
-on takeDirectory(strPath)
+on takeDirectory(fp)
+    set strPath to filePath(fp)
     if "" ≠ strPath then
         if "/" = character -1 of strPath then
             text 1 thru -2 of strPath
         else
             set xs to init(splitOn("/", strPath))
             if {} ≠ xs then
-                intercalate("/", xs)
+                intercalateS("/", xs)
             else
                 "."
             end if
