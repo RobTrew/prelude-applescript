@@ -1,17 +1,13 @@
 ```applescript
--- findIndices(matching([2, 3]), [1, 2, 3, 1, 2, 3])
---> {2, 5}
-```
-
-```applescript
 -- findIndices :: (a -> Bool) -> [a] -> [Int]
--- findIndices :: (String -> Bool) -> String -> [Int]
 on findIndices(p, xs)
+    -- List of zero-based indices of 
+    -- any matches for p in xs.
     script
         property f : mReturn(p)
         on |λ|(x, i, xs)
             if f's |λ|(x, i, xs) then
-                {i}
+                {i - 1}
             else
                 {}
             end if

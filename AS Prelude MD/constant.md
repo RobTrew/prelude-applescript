@@ -1,6 +1,10 @@
 ```applescript
 -- constant :: a -> b -> a
-on |constant|(k, _)
-    k
+on |constant|(k)
+    script
+        on |λ|(_)
+            k
+        end |λ|
+    end script
 end |constant|
 ```

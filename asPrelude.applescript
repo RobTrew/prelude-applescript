@@ -852,8 +852,12 @@ on cons(x, xs)
 end cons
 
 -- constant :: a -> b -> a
-on |constant|(k, _)
-    k
+on |constant|(k)
+    script
+        on |λ|(_)
+            k
+        end |λ|
+    end script
 end |constant|
 
 -- createDirectoryIfMissingLR :: Bool -> FilePath -> Either String FilePath
@@ -1088,8 +1092,27 @@ end digitToInt
 
 -- div :: Int -> Int -> Int
 on |div|(a, b)
-    a div b
+    set v to (a / b)
+    set i to round (v)
+    if 0 < (i - v) then
+        i - 1
+    else
+        i
+    end if
 end |div|
+
+-- divMod :: Int -> Int -> (Int, Int)
+on divMod(n, d)
+    -- Integer division, truncated toward negative infinity,
+    -- and integer modulus such that:
+    -- (x `div` y)*y + (x `mod` y) == x
+    set {q, r} to {n div d, n mod d}
+    if signum(r) = signum(-d) then
+        {q - 1, r + d}
+    else
+        {q, r}
+    end if
+end divMod
 
 -- doesDirectoryExist :: FilePath -> IO Bool
 on doesDirectoryExist(strPath)
@@ -1789,34 +1812,41 @@ end find
 
 -- findIndex :: (a -> Bool) -> [a] -> Maybe Int
 on findIndex(p, xs)
+    -- Just the zero-based index of the first
+    -- (left-to-right match) for for the predicate p in xs, 
+    -- or Nothing if no match is found.
     tell mReturn(p)
         set lng to length of xs
         repeat with i from 1 to lng
-            if |λ|(item i of xs) then return Just(i)
+            if |λ|(item i of xs) then return Just(i - 1)
         end repeat
         return Nothing()
     end tell
 end findIndex
 
 -- findIndexR :: (a -> Bool) -> [a] -> Maybe Int
-on findIndexR(f, xs)
-    tell mReturn(f)
+on findIndexR(p, xs)
+    -- Just the zero-based index of the first
+    -- (right-to-left match) for for the predicate p in xs, 
+    -- or Nothing if no match is found.
+    tell mReturn(p)
         set lng to length of xs
         repeat with i from lng to 1 by -1
-            if |λ|(item i of xs) then return Just(i)
+            if |λ|(item i of xs) then return Just(i - 1)
         end repeat
         return Nothing()
     end tell
 end findIndexR
 
 -- findIndices :: (a -> Bool) -> [a] -> [Int]
--- findIndices :: (String -> Bool) -> String -> [Int]
 on findIndices(p, xs)
+    -- List of zero-based indices of 
+    -- any matches for p in xs.
     script
         property f : mReturn(p)
         on |λ|(x, i, xs)
             if f's |λ|(x, i, xs) then
-                {i}
+                {i - 1}
             else
                 {}
             end if
@@ -3742,6 +3772,15 @@ end minimumMay
 
 -- mod :: Int -> Int -> Int
 on |mod|(n, d)
+    if signum(n) = signum(-d) then
+        (n mod d) + d
+    else
+        (n mod d)
+    end if
+end |mod|
+
+-- mod :: Int -> Int -> Int
+on |mod|(n, d)
     n mod d
 end |mod|
 
@@ -4129,10 +4168,14 @@ on quot(m, n)
 end quot
 
 -- quoted :: Char -> String -> String
-on quoted(c, s)
-    -- string flanked on both sides
+on quoted(c)
+    -- A string flanked on both sides
     -- by a specified quote character.
-    c & s & c
+    script
+        on |λ|(s)
+            c & s & c
+        end |λ|
+    end script
 end quoted
 
 -- quotRem :: Int -> Int -> (Int, Int)
