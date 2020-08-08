@@ -40,6 +40,21 @@ on all(p, xs)
     end tell
 end all
 
+-- allSame :: [a] -> Bool
+on allSame(xs)
+    if 2 > length of xs then
+        true
+    else
+        script p
+            property h : item 1 of xs
+            on |λ|(x)
+                h = x
+            end |λ|
+        end script
+        all(p, rest of xs)
+    end if
+end allSame
+
 -- allTree :: (a -> Bool) -> Tree a -> Bool
 on allTree(p, tree)
     -- True if p holds for the value of every node in tree
@@ -4655,6 +4670,9 @@ end setCurrentDirectory
 
 -- setFromList :: Ord a => [a] -> Set a
 on setFromList(xs)
+    -- NB All names of NSMutableSets should be set to *missing value*
+    -- before the script exits.
+    -- ( scpt files can not be saved if they contain ObjC pointer values)
     set ca to current application
     ca's NSMutableSet's ¬
         setWithArray:(ca's NSArray's arrayWithArray:(xs))
