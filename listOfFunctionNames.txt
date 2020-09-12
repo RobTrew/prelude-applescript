@@ -10,6 +10,7 @@ TupleN :: a -> b ... -> (a, b ... )
 abs :: Num -> Num
 add (+) :: Num a => a -> a -> a
 all :: (a -> Bool) -> [a] -> Bool
+allSame :: [a] -> Bool
 allTree :: (a -> Bool) -> Tree a -> Bool
 and :: [Bool] -> Bool
 any :: (a -> Bool) -> [a] -> Bool
@@ -278,6 +279,7 @@ minimumBy :: (a -> a -> Ordering) -> [a] -> a
 minimumByMay :: (a -> a -> Ordering) -> [a] -> Maybe a
 minimumMay :: [a] -> Maybe a
 mod :: Int -> Int -> Int
+mod :: Int -> Int -> Int
 modificationTime :: FilePath -> Either String Date
 mul (*) :: Num a => a -> a -> a
 ne :: a -> a -> Bool
@@ -342,7 +344,7 @@ removeFile :: FilePath -> Either String String
 renameFile :: FilePath -> FilePath -> IO ()
 repeat :: a -> Generator [a]
 replace :: String -> String -> String -> String
-replicate :: Int -> a -> [a]
+replicate :: Int -> String -> String
 replicateM :: Int -> [a] -> [[a]]
 replicateString :: Int -> String -> String
 reverse :: [a] -> [a]
