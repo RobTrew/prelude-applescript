@@ -8,6 +8,10 @@ on concatMap(f, xs)
             set acc to acc & (|λ|(item i of xs, i, xs))
         end repeat
     end tell
-    return acc
+    if {text, string} contains class of xs then
+        acc as text
+    else
+        acc
+    end if
 end concatMap
 ```

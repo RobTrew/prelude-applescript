@@ -8,7 +8,11 @@ on filter(p, xs)
             set v to item i of xs
             if |λ|(v, i, xs) then set end of lst to v
         end repeat
-        return lst
+        if {text, string} contains class of xs then
+            lst as text
+        else
+            lst
+        end if
     end tell
 end filter
 ```

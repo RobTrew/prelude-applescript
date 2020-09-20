@@ -841,7 +841,11 @@ on concatMap(f, xs)
             set acc to acc & (|λ|(item i of xs, i, xs))
         end repeat
     end tell
-    return acc
+    if {text, string} contains class of xs then
+        acc as text
+    else
+        acc
+    end if
 end concatMap
 
 -- cons :: a -> [a] -> [a]
@@ -1810,9 +1814,29 @@ on filter(p, xs)
             set v to item i of xs
             if |λ|(v, i, xs) then set end of lst to v
         end repeat
-        return lst
+        if {text, string} contains class of xs then
+            lst as text
+        else
+            lst
+        end if
     end tell
 end filter
+
+-- filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
+on filterGen(p, gen)
+    -- Non-finite stream of values which are 
+    -- drawn from gen, and satisfy p
+    script
+        property mp : mReturn(p)'s |λ|
+        on |λ|()
+            set v to gen's |λ|()
+            repeat until mp(v)
+                set v to gen's |λ|()
+            end repeat
+            return v
+        end |λ|
+    end script
+end filterGen
 
 -- find :: (a -> Bool) -> [a] -> Maybe a
 on find(p, xs)
@@ -4468,18 +4492,27 @@ on replace(strNeedle, strNew, strHayStack)
     return strReplaced
 end replace
 
--- replicate :: Int -> a -> [a]
-on replicate(n, a)
-    set out to {}
-    if 1 > n then return out
-    set dbl to {a}
+-- replicate :: Int -> String -> String
+on replicate(n, s)
+    script p
+        on |λ|({n})
+            n ≤ 1
+        end |λ|
+    end script
     
-    repeat while (1 < n)
-        if 0 < (n mod 2) then set out to out & dbl
-        set n to (n div 2)
-        set dbl to (dbl & dbl)
-    end repeat
-    return out & dbl
+    script f
+        on |λ|({n, dbl, out})
+            if (n mod 2) > 0 then
+                set d to out & dbl
+            else
+                set d to out
+            end if
+            {n div 2, dbl & dbl, d}
+        end |λ|
+    end script
+    
+    set xs to |until|(p, f, {n, s, ""})
+    item 2 of xs & item 3 of xs
 end replicate
 
 -- replicateM :: Int -> [a] -> [[a]]
@@ -6293,6 +6326,7 @@ on |until|(p, f, x)
     repeat until mp's |λ|(v)
         set v to mf's |λ|(v)
     end repeat
+    v
 end |until|
 
 -- unwords :: [String] -> String
