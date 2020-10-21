@@ -1,6 +1,59 @@
+use AppleScript version "2.4"
 use framework "Foundation"
-use framework "AppKit"
 use scripting additions
+
+-- Action :: (a -> b) -> a -> Action b
+on Action(f, x)
+    -- Constructor for an action.
+    {type:"Action", act:f, arg:x}
+end Action
+
+-- Just :: a -> Maybe a
+on Just(x)
+    -- Constructor for an inhabited Maybe (option type) value.
+    -- Wrapper containing the result of a computation.
+    {type:"Maybe", Nothing:false, Just:x}
+end Just
+
+-- Left :: a -> Either a b
+on |Left|(x)
+    {type:"Either", |Left|:x, |Right|:missing value}
+end |Left|
+
+-- Node :: a -> [Tree a] -> Tree a
+on Node(v, xs)
+    {type:"Node", root:v, nest:xs}
+end Node
+
+-- Nothing :: Maybe a
+on Nothing()
+    -- Constructor for an empty Maybe (option type) value.
+    -- Empty wrapper returned where a computation is not possible.
+    {type: "Maybe", Nothing: true}
+end Nothing
+
+-- Right :: b -> Either a b
+on |Right|(x)
+    {type:"Either", |Left|:missing value, |Right|:x}
+end |Right|
+
+-- Tuple (,) :: a -> b -> (a, b)
+on Tuple(a, b)
+    -- Constructor for a pair of values, possibly of two different types.
+    {type:"Tuple", |1|:a, |2|:b, length:2}
+end Tuple
+
+-- Tuple3 (,,) :: a -> b -> c -> (a, b, c)
+on Tuple3(x, y, z)
+    {type:"Tuple3", |1|:x, |2|:y, |3|:z, length:3}
+end Tuple3
+
+-- Requires N arguments to be wrapped as one list in AS 
+-- (the JS version accepts N separate arguments)
+-- TupleN :: a -> b ...  -> (a, b ... )
+on TupleN(argv)
+    tupleFromList(argv)
+end TupleN
 
 -- abs :: Num -> Num
 on abs(x)
@@ -11,12 +64,6 @@ on abs(x)
         x
     end if
 end abs
-
--- Action :: (a -> b) -> a -> Action b
-on Action(f, x)
-    -- Constructor for an action.
-    {type:"Action", act:f, arg:x}
-end Action
 
 -- add (+) :: Num a => a -> a -> a
 on add(a)
@@ -116,6 +163,9 @@ on anyTree(p, tree)
     |λ|(tree) of go
 end anyTree
 
+-- Applies wrapped functions to wrapped values, 
+-- for example applying a list of functions to a list of values
+-- or applying Just(f) to Just(x), Right(f) to Right(x), etc
 -- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b
 on ap(mf, mx)
     if class of mx is list then
@@ -149,19 +199,6 @@ on apFn(f, g)
     end script
 end apFn
 
--- apList (<*>) :: [(a -> b)] -> [a] -> [b]
-on apList(fs, xs)
-    set lst to {}
-    repeat with f in fs
-        tell mReturn(contents of f)
-            repeat with x in xs
-                set end of lst to |λ|(contents of x)
-            end repeat
-        end tell
-    end repeat
-    return lst
-end apList
-
 -- apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b
 on apLR(flr, lr)
     if missing value is |Left| of flr then
@@ -175,6 +212,26 @@ on apLR(flr, lr)
     end if
 end apLR
 
+-- e.g. [(*2),(/2), sqrt] <*> [1,2,3]
+-- -->  ap([dbl, hlf, root], [1, 2, 3])
+-- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]
+
+-- Each member of a list of functions applied to
+-- each of a list of arguments, deriving a list of new values
+-- apList (<*>) :: [(a -> b)] -> [a] -> [b]
+on apList(fs, xs)
+    set lst to {}
+    repeat with f in fs
+        tell mReturn(contents of f)
+            repeat with x in xs
+                set end of lst to |λ|(contents of x)
+            end repeat
+        end tell
+    end repeat
+    return lst
+end apList
+
+-- Maybe f applied to Maybe x, deriving a Maybe y
 -- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
 on apMay(mf, mx)
     if Nothing of mf or Nothing of mx then
@@ -184,12 +241,37 @@ on apMay(mf, mx)
     end if
 end apMay
 
+-- apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b
+on apTree(tf, tx)
+    set fmap to curry(my fmapTree)
+    script go
+        on |λ|(t)
+            set f to root of t
+            Node(mReturn(f)'s |λ|(root of tx), ¬
+                map(fmap's |λ|(f), nest of tx) & ¬
+                map(go, nest of t))
+        end |λ|
+    end script
+    
+    return go's |λ|(tf)
+end apTree
+
+-- apTuple (<*>) :: Monoid m => (m, (a -> b)) -> (m, a) -> (m, b)
+on apTuple(tf, tx)
+    Tuple(mappend(|1| of tf, |1| of tx), |λ|(|2| of tx) of mReturn(|2| of tf))
+end apTuple
+
+-- Append two lists.
 -- append (++) :: [a] -> [a] -> [a]
 -- append (++) :: String -> String -> String
 on append(xs, ys)
     xs & ys
 end append
 
+-- Write a string to the end of a file. 
+-- Returns true if the path exists 
+-- and the write succeeded. 
+-- Otherwise returns false.
 -- appendFile :: FilePath -> String -> IO Bool
 on appendFile(strPath, txt)
     set ca to current application
@@ -220,6 +302,10 @@ on appendFile(strPath, txt)
     end if
 end appendFile
 
+-- Write a string to the end of a file. 
+-- Returns a Just FilePath value if the 
+-- path exists and the write succeeded. 
+-- Otherwise returns Nothing.
 -- appendFileMay :: FilePath -> String -> Maybe IO FilePath
 on appendFileMay(strPath, txt)
     set ca to current application
@@ -307,26 +393,6 @@ on approxRatio(epsilon, n)
     set c to |λ|(e, 1, n) of gcde
     Ratio((n div c), (1 div c))
 end approxRatio
-
--- apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b
-on apTree(tf, tx)
-    set fmap to curry(my fmapTree)
-    script go
-        on |λ|(t)
-            set f to root of t
-            Node(mReturn(f)'s |λ|(root of tx), ¬
-                map(fmap's |λ|(f), nest of tx) & ¬
-                map(go, nest of t))
-        end |λ|
-    end script
-    
-    return go's |λ|(tf)
-end apTree
-
--- apTuple (<*>) :: Monoid m => (m, (a -> b)) -> (m, a) -> (m, b)
-on apTuple(tf, tx)
-    Tuple(mappend(|1| of tf, |1| of tx), |λ|(|2| of tx) of mReturn(|2| of tf))
-end apTuple
 
 -- argvLength :: Function -> Int
 on argvLength(h)
@@ -458,6 +524,15 @@ on bindFn(f, bop)
     end script
 end bindFn
 
+-- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
+on bindLR(m, mf)
+    if missing value is not |Left| of m then
+        m
+    else
+        mReturn(mf)'s |λ|(|Right| of m)
+    end if
+end bindLR
+
 -- bindList (>>=) :: [a] -> (a -> [b]) -> [b]
 on bindList(xs, f)
     set acc to {}
@@ -468,15 +543,6 @@ on bindList(xs, f)
     end tell
     return acc
 end bindList
-
--- bindLR (>>=) :: Either a -> (a -> Either b) -> Either b
-on bindLR(m, mf)
-    if missing value is not |Left| of m then
-        m
-    else
-        mReturn(mf)'s |λ|(|Right| of m)
-    end if
-end bindLR
 
 -- bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 on bindMay(mb, mf)
@@ -542,6 +608,7 @@ on break(p, xs)
     end if
 end break
 
+-- non null needle -> haystack -> (prefix before match, match + rest)
 -- breakOn :: String -> String -> (String, String)
 on breakOn(pat, src)
     if pat ≠ "" then
@@ -564,6 +631,8 @@ on breakOn(pat, src)
     end if
 end breakOn
 
+-- breakOnAll "/" "a/b/c/"
+-- ==> [("a", "/b/c/"), ("a/b", "/c/"), ("a/b/c", "/")]
 -- breakOnAll :: String -> String -> [(String, String)]
 on breakOnAll(pat, src)
     if "" ≠ pat then
@@ -583,6 +652,7 @@ on breakOnAll(pat, src)
     end if
 end breakOnAll
 
+-- needle -> haystack -> maybe (prefix before match, match + rest)
 -- breakOnMay :: String -> String -> Maybe (String, String)
 on breakOnMay(pat, src)
     if pat ≠ "" then
@@ -632,6 +702,7 @@ on cartesianProduct(xs, ys)
     concatMap(result, xs)
 end cartesianProduct
 
+-- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value
 -- caseOf :: [(a -> Bool, b)] -> b -> a ->  b
 on caseOf (pvs, otherwise, x)
     repeat with tpl in pvs
@@ -707,21 +778,7 @@ on chr(n)
     character id n
 end chr
 
--- chunksOf :: Int -> [a] -> [[a]]
-on chunksOf(k, xs)
-    script
-        on go(ys)
-            set ab to splitAt(k, ys)
-            set a to |1| of ab
-            if {} ≠ a then
-                {a} & go(|2| of ab)
-            else
-                a
-            end if
-        end go
-    end script
-    result's go(xs)
-end chunksOf
+-- chunksOf :: Int -> [a] -> [[a]]on chunksOf(k, xs)	script		on go(ys)			set ab to splitAt(k, ys)			set a to |1| of ab			if {} ≠ a then				{a} & go(|2| of ab)			else				a			end if		end go	end script	result's go(xs)end chunksOf
 
 -- combine (</>) :: FilePath -> FilePath -> FilePath
 on combine(fp, fp1)
@@ -934,6 +991,7 @@ on cycle(xs)
     end script
 end cycle
 
+-- use framework "Foundation"
 -- decodedPath :: Percent Encoded String -> FilePath
 on decodedPath(fp)
     tell current application to ¬
@@ -1133,15 +1191,7 @@ on divMod(n, d)
     end if
 end divMod
 
--- doesDirectoryExist :: FilePath -> IO Bool
-on doesDirectoryExist(strPath)
-    set ca to current application
-    set oPath to (ca's NSString's stringWithString:strPath)'s ¬
-        stringByStandardizingPath
-    set {bln, v} to (ca's NSFileManager's defaultManager's ¬
-        fileExistsAtPath:oPath isDirectory:(reference))
-    bln and v
-end doesDirectoryExist
+-- doesDirectoryExist :: FilePath -> IO Boolon doesDirectoryExist(strPath)    set ca to current application    set oPath to (ca's NSString's stringWithString:strPath)'s ¬        stringByStandardizingPath    set {bln, v} to (ca's NSFileManager's defaultManager's ¬        fileExistsAtPath:oPath isDirectory:(reference))    bln and vend doesDirectoryExist
 
 -- doesFileExist :: FilePath -> IO Bool
 on doesFileExist(strPath)
@@ -1511,6 +1561,11 @@ on elem(x, xs)
     end considering
 end elem
 
+-- If x is a Dictionary then reads the Int as an index
+-- into the lexically sorted keys of the Dict, 
+-- returning a Maybe (Key, Value) pair.
+-- If x is a list, then return a Maybe a 
+-- (In either case, returns Nothing for an Int out of range)
 -- elemAtMay :: Int -> Dict -> Maybe (String, a)
 -- elemAtMay :: Int -> [a] -> Maybe a
 on elemAtMay(i, x)
@@ -1535,16 +1590,7 @@ on elemAtMay(i, x)
     end if
 end elemAtMay
 
--- elemIndex :: Eq a => a -> [a] -> Maybe Int
-on elemIndex(x, xs)
-    -- Just the zero-based index of x in xs,
-    -- or Nothing if x is not found in xs.
-    set lng to length of xs
-    repeat with i from 1 to lng
-        if x = (item i of xs) then return Just(i - 1)
-    end repeat
-    return Nothing()
-end elemIndex
+-- elemIndex :: Eq a => a -> [a] -> Maybe Inton elemIndex(x, xs)    -- Just the zero-based index of x in xs,    -- or Nothing if x is not found in xs.	set lng to length of xs	repeat with i from 1 to lng		if x = (item i of xs) then return Just(i - 1)	end repeat	return Nothing()end elemIndex
 
 -- elemIndices :: Eq a => a -> [a] -> [Int]
 on elemIndices(x, xs)
@@ -1666,6 +1712,20 @@ on enumFromTo(m, n)
     end if
 end enumFromTo
 
+-- enumFromToChar :: Char -> Char -> [Char]
+on enumFromToChar(m, n)
+    set {intM, intN} to {id of m, id of n}
+    if intM ≤ intN then
+        set xs to {}
+        repeat with i from intM to intN
+            set end of xs to character id i
+        end repeat
+        return xs
+    else
+        {}
+    end if
+end enumFromToChar
+
 -- enumFromTo_ :: Enum a => a -> a -> [a]
 on enumFromTo_(m, n)
     if m ≤ n then
@@ -1681,25 +1741,16 @@ on enumFromTo_(m, n)
     end if
 end enumFromTo
 
--- enumFromToChar :: Char -> Char -> [Char]
-on enumFromToChar(m, n)
-    set {intM, intN} to {id of m, id of n}
-    if intM ≤ intN then
-        set xs to {}
-        repeat with i from intM to intN
-            set end of xs to character id i
-        end repeat
-        return xs
-    else
-        {}
-    end if
-end enumFromToChar
-
 -- eq (==) :: Eq a => a -> a -> Bool
 on eq(a, b)
     a = b
 end eq
 
+-- gJSC can be declared in the global namespace,
+-- but unless the reference is released before the 
+-- end of the script (e.g. `set gJSC to null`)
+-- it will persist, and
+-- Script Editor will be unable to save a .scpt file
 -- evalJSLR :: String -> Either String a
 on evalJSLR(strJS)
     set gJSC to current application's JSContext's new()
@@ -1711,6 +1762,14 @@ on evalJSLR(strJS)
     end if
 end evalJSLR
 
+-- use framework "Foundation"
+-- use framework "JavaScriptCore"
+
+-- gJSC can be declared in the global namespace,
+-- but unless the reference is released before the 
+-- end of the script (e.g. `set gJSC to null`)
+-- it will persist, and
+-- Script Editor will be unable to save a .scpt file
 -- evalJSMay :: String -> Maybe a
 on evalJSMay(strJS)
     try -- NB if gJSC is global it must be released 
@@ -1738,6 +1797,21 @@ on exp(n)
     Just of evalJSMay(("Math.exp(" & n as string) & ")")
 end exp
 
+-- fTable :: String -> (a -> String) -> (b -> String) -> (a -> b) -> [a] -> String
+on fTable(s, xShow, fxShow, f, xs)
+    set ys to map(xShow, xs)
+    set w to maximum(map(my |length|, ys))
+    script arrowed
+        on |λ|(a, b)
+            justifyRight(w, space, a) & " -> " & b
+        end |λ|
+    end script
+    s & linefeed & unlines(zipWith(arrowed, ¬
+        ys, map(compose(fxShow, f), xs)))
+end fTable
+
+-- Compose a function from a simple value to a tuple of
+-- the separate outputs of two different functions
 -- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))
 on fanArrow(f, g)
     script
@@ -1894,6 +1968,8 @@ on findIndices(p, xs)
     concatMap(result, xs)
 end findIndices
 
+-- The first of any nodes in the tree which match the predicate p
+-- (For all matches, see treeMatches)
 -- findTree :: (a -> Bool) -> Tree a -> Maybe Tree a
 on findTree(p, tree)
     script go
@@ -1950,6 +2026,7 @@ on flatten(t)
     end if
 end flatten
 
+-- The root elements of a tree in pre-order.
 -- flattenTree :: Tree a -> [a]
 on flattenTree(node)
     script go
@@ -2066,6 +2143,33 @@ on fmapTuple(f, tpl)
     Tuple(|1| of tpl, |λ|(|2| of tpl) of mReturn(f))
 end fmapTuple
 
+-- foldMapTree :: Monoid m => (a -> m) -> Tree a -> m
+on foldMapTree(f, tree)
+    script go
+        property g : mReturn(f)'s |λ|
+        on |λ|(x)
+            if length of (nest of x) > 0 then
+                mappend(g(root of x), ¬
+                    foldl1(my mappend, (map(go, nest of x))))
+            else
+                g(root of x)
+            end if
+        end |λ|
+    end script
+    |λ|(tree) of go
+end foldMapTree
+
+-- foldTree :: (a -> [b] -> b) -> Tree a -> b
+on foldTree(f, tree)
+    script go
+        property g : mReturn(f)'s |λ|
+        on |λ|(oNode)
+            g(root of oNode, map(go, nest of oNode))
+        end |λ|
+    end script
+    |λ|(tree) of go
+end foldTree
+
 -- foldl :: (a -> b -> a) -> a -> [b] -> a
 on foldl(f, startValue, xs)
     tell mReturn(f)
@@ -2131,22 +2235,6 @@ on foldlTree(f, acc, tree)
     |λ|(acc, tree) of go
 end foldlTree
 
--- foldMapTree :: Monoid m => (a -> m) -> Tree a -> m
-on foldMapTree(f, tree)
-    script go
-        property g : mReturn(f)'s |λ|
-        on |λ|(x)
-            if length of (nest of x) > 0 then
-                mappend(g(root of x), ¬
-                    foldl1(my mappend, (map(go, nest of x))))
-            else
-                g(root of x)
-            end if
-        end |λ|
-    end script
-    |λ|(tree) of go
-end foldMapTree
-
 -- foldr :: (a -> b -> b) -> b -> [a] -> b
 on foldr(f, startValue, xs)
     tell mReturn(f)
@@ -2201,17 +2289,6 @@ on foldrTree(f, acc, tree)
     end script
     |λ|(tree, acc) of go
 end foldrTree
-
--- foldTree :: (a -> [b] -> b) -> Tree a -> b
-on foldTree(f, tree)
-    script go
-        property g : mReturn(f)'s |λ|
-        on |λ|(oNode)
-            g(root of oNode, map(go, nest of oNode))
-        end |λ|
-    end script
-    |λ|(tree) of go
-end foldTree
 
 -- forestFromJSON :: String -> [Tree a]
 on forestFromJSON(strJSON)
@@ -2280,6 +2357,7 @@ on fst(tpl)
     end if
 end fst
 
+-- Abbreviation for quick testing
 -- ft :: (Int, Int) -> [Int]
 on ft(m, n)
     if m ≤ n then
@@ -2292,19 +2370,6 @@ on ft(m, n)
         return {}
     end if
 end ft
-
--- fTable :: String -> (a -> String) -> (b -> String) -> (a -> b) -> [a] -> String
-on fTable(s, xShow, fxShow, f, xs)
-    set ys to map(xShow, xs)
-    set w to maximum(map(my |length|, ys))
-    script arrowed
-        on |λ|(a, b)
-            justifyRight(w, space, a) & " -> " & b
-        end |λ|
-    end script
-    s & linefeed & unlines(zipWith(arrowed, ¬
-        ys, map(compose(fxShow, f), xs)))
-end fTable
 
 -- gcd :: Int -> Int -> Int
 on gcd(a, b)
@@ -2384,6 +2449,7 @@ on group(xs)
     groupBy(eq, xs)
 end group
 
+-- Typical usage: groupBy(on(eq, f), xs)
 -- groupBy :: (a -> a -> Bool) -> [a] -> [[a]]
 on groupBy(f, xs)
     set mf to mReturn(f)
@@ -2416,6 +2482,14 @@ on groupBy(f, xs)
     end if
 end groupBy
 
+-- Sort and group a list by comparing the results of a key function
+-- applied to each element. groupSortOn f is equivalent to
+-- groupBy eq $ sortBy (comparing f),
+-- but has the performance advantage of only evaluating f once for each
+-- element in the input list.
+-- This is a decorate-(group.sort)-undecorate pattern, as in the
+-- so-called 'Schwartzian transform'.
+-- Groups are arranged from from lowest to highest.
 -- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]
 -- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]
 on groupSortOn(f, xs)
@@ -2676,21 +2750,22 @@ on insertBy(cmp, x, ys)
     end if
 end insertBy
 
--- insertDict :: String -> a -> Dict -> Dict
-on insertDict(k, v, rec)
-    tell current application
-        tell dictionaryWithDictionary_(rec) of its NSMutableDictionary
-            its setValue:v forKey:(k as string)
-            it as record
-        end tell
-    end tell
-end insertDict
+-- insertDict :: String -> a -> Dict -> Dicton insertDict(k, v, rec)    tell current application        tell dictionaryWithDictionary_(rec) of its NSMutableDictionary            its setValue:v forKey:(k as string)            it as record        end tell    end tellend insertDict
 
 -- insertSet :: Ord a => a -> Set a -> Set a
 on insertSet(x, oSet)
     oSet's addObject:(x)
     return oSet
 end insertSet
+
+-- intToDigit :: Int -> Char
+on intToDigit(n)
+    if n ≥ 0 and n < 16 then
+        character (n + 1) of "0123456789ABCDEF"
+    else
+        "?"
+    end if
+end intToDigit
 
 -- intercalate :: [a] -> [[a]] -> [a]
 -- intercalate :: String -> [String] -> String
@@ -2748,14 +2823,6 @@ on intersectBy(eq, xs, ys)
     end if
 end intersectBy
 
--- intersection :: Ord a => Set a -> Set a -> Set a
-on intersection(a, b)
-    set s to current application's NSMutableSet's alloc's init()
-    s's setSet:(a)
-    s's intersectSet:(b)
-    return s
-end intersection
-
 -- intersectListsBy :: (a -> a -> Bool) -> [[a]] -> [a]
 on intersectListsBy(fnEq, xs)
     script
@@ -2767,6 +2834,15 @@ on intersectListsBy(fnEq, xs)
     foldr1(result, xs)
 end intersectionBy
 
+-- intersection :: Ord a => Set a -> Set a -> Set a
+on intersection(a, b)
+    set s to current application's NSMutableSet's alloc's init()
+    s's setSet:(a)
+    s's intersectSet:(b)
+    return s
+end intersection
+
+-- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]
 -- intersperse :: a -> [a] -> [a]
 -- intersperse :: Char -> String -> String
 on intersperse(sep, xs)
@@ -2785,15 +2861,6 @@ on intersperse(sep, xs)
         xs
     end if
 end intersperse
-
--- intToDigit :: Int -> Char
-on intToDigit(n)
-    if n ≥ 0 and n < 16 then
-        character (n + 1) of "0123456789ABCDEF"
-    else
-        "?"
-    end if
-end intToDigit
 
 -- isAlpha :: Char -> Bool
 on isAlpha(c)
@@ -2838,6 +2905,8 @@ on isLower(c)
     d ≥ 0 and d < 26
 end isLower
 
+use framework "Foundation"
+use scripting additions
 -- isMaybe :: a -> Bool
 on isMaybe(x)
     if class of x is record then
@@ -2863,11 +2932,8 @@ on isNull(xs)
     end if
 end isNull
 
--- iso8601Local :: Date -> String
-on iso8601Local(dte)
-    (dte as «class isot» as string)
-end iso8601Local
-
+-- isPrefixOf takes two lists or strings and returns 
+--  true if and only if the first is a prefix of the second.
 -- isPrefixOf :: [a] -> [a] -> Bool
 -- isPrefixOf :: String -> String -> Bool
 on isPrefixOf(xs, ys)
@@ -2897,6 +2963,8 @@ on isRight(x)
         (dct's objectForKey:"Left") as list = {missing value}
 end isRight
 
+-- The 'isSortedBy' function returns true iff the predicate returns true
+-- for all adjacent pairs of elements in the list.
 -- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool
 on isSortedBy(cmp, xs)
     script LE
@@ -2962,6 +3030,11 @@ on isUpper(c)
     set d to (id of c) - 65 -- id of "A"
     d ≥ 0 and d < 26
 end isUpper
+
+-- iso8601Local :: Date -> String
+on iso8601Local(dte)
+    (dte as «class isot» as string)
+end iso8601Local
 
 -- iterate :: (a -> a) -> a -> Gen [a]
 on iterate(f, x)
@@ -3039,13 +3112,6 @@ on jsonParseLR(s)
     end if
 end jsonParseLR
 
--- Just :: a -> Maybe a
-on Just(x)
-    -- Constructor for an inhabited Maybe (option type) value.
-    -- Wrapper containing the result of a computation.
-    {type:"Maybe", Nothing:false, Just:x}
-end Just
-
 -- justifyLeft :: Int -> Char -> String -> String
 on justifyLeft(n, cFiller, strText)
     if n > length of strText then
@@ -3069,6 +3135,7 @@ on keys(rec)
     (current application's NSDictionary's dictionaryWithDictionary:rec)'s allKeys() as list
 end keys
 
+-- Kleisli composition LR
 -- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)
 on kleisliCompose(f, g)
     script
@@ -3100,11 +3167,6 @@ on lcm(x, y)
         abs(floor(x / (gcd(x, y))) * y)
     end if
 end lcm
-
--- Left :: a -> Either a b
-on |Left|(x)
-    {type:"Either", |Left|:x, |Right|:missing value}
-end |Left|
 
 -- lefts :: [Either a b] -> [a]
 on lefts(xs)
@@ -3184,6 +3246,10 @@ on levels(tree)
     map(roots, iterateUntil(my isNull, nextLayer, {tree}))
 end levels
 
+-- Lift a binary function to actions.
+-- e.g.
+-- liftA2(mult, {1, 2, 3}, {4, 5, 6}) 
+--> {4, 5, 6, 8, 10, 12, 12, 15, 18}
 -- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 on liftA2(f, a, b)
     set c to class of a
@@ -3222,22 +3288,6 @@ on liftA2Fn(op, f, g)
     end script
 end liftA2Fn
 
--- liftA2List :: (a -> b -> c) -> [a] -> [b] -> [c]
-on liftA2List(f, xs, ys)
-    script
-        property g : mReturn(f)'s |λ|
-        on |λ|(x)
-            script
-                on |λ|(y)
-                    {g(x, y)}
-                end |λ|
-            end script
-            concatMap(result, ys)
-        end |λ|
-    end script
-    concatMap(result, xs)
-end liftA2List
-
 -- liftA2LR :: (a -> b -> c) -> Either d a -> Either d b -> Either d c
 on liftA2LR(f, a, b)
     set x to |Right| of a
@@ -3255,6 +3305,22 @@ on liftA2LR(f, a, b)
         |Right|(|λ|(x, y) of mReturn(f))
     end if
 end liftA2LR
+
+-- liftA2List :: (a -> b -> c) -> [a] -> [b] -> [c]
+on liftA2List(f, xs, ys)
+    script
+        property g : mReturn(f)'s |λ|
+        on |λ|(x)
+            script
+                on |λ|(y)
+                    {g(x, y)}
+                end |λ|
+            end script
+            concatMap(result, ys)
+        end |λ|
+    end script
+    concatMap(result, xs)
+end liftA2List
 
 -- liftA2May :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
 on liftA2May(f, a, b)
@@ -3337,6 +3403,8 @@ on listDirectory(strPath)
             wrap(strPath))) |error|:(missing value))
 end listDirectory
 
+-- The listFromMaybe function returns an empty list when given
+-- Nothing or a singleton list when not given Nothing.
 -- listFromMaybe :: Maybe a -> [a]
 on listFromMaybe(mb)
     -- A singleton list derived from a Just value, 
@@ -3363,6 +3431,8 @@ on listFromTuple(tpl)
     items 2 thru -2 of (tpl as list)
 end listFromTuple
 
+-- The listToMaybe function returns Nothing on 
+-- an empty list or Just the head of the list.
 -- listToMaybe :: [a] -> Maybe a
 on listToMaybe(xs)
     if xs ≠ {} then
@@ -3377,6 +3447,8 @@ on |log|(n)
     Just of evalJSMay(("Math.log(" & n as string) & ")")
 end |log|
 
+-- use framework "Foundation"
+-- use scripting additions
 -- lookup :: Eq a => a -> Container -> Maybe b
 on lookup(k, m)
     set c to class of m
@@ -3419,14 +3491,19 @@ on lookupTuples(k, xs)
     bindMay(find(keyMatch, xs), harvestMay)
 end lookupTuples
 
--- lt (<) :: Ord a => a -> a -> Bool
-on lt(x)
-    script
-        on |λ|(y)
-            x < y
-        end |λ|
-    end script
-end lt
+-- lt (<) :: Ord a => a -> a -> Boolon lt(x)	script		on |λ|(y)			x < y		end |λ|	end scriptend lt
+
+-- mReturn :: First-class m => (a -> b) -> m (a -> b)
+on mReturn(f)
+    -- 2nd class handler function lifted into 1st class script wrapper. 
+    if script is class of f then
+        f
+    else
+        script
+            property |λ| : f
+        end script
+    end if
+end mReturn
 
 -- map :: (a -> b) -> [a] -> [b]
 on map(f, xs)
@@ -3442,6 +3519,10 @@ on map(f, xs)
     end tell
 end map
 
+-- 'The mapAccumL function behaves like a combination of map and foldl; 
+-- it applies a function to each element of a list, passing an 
+-- accumulating parameter from |Left| to |Right|, and returning a final 
+-- value of this accumulator together with the new list.' (see Hoogle)
 -- mapAccumL :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumL(f, acc, xs)
     script
@@ -3467,6 +3548,10 @@ on mapAccumL_Tree(f, acc, tree)
     |λ|(acc, tree) of go
 end mapAccumL_Tree
 
+-- 'The mapAccumR function behaves like a combination of map and foldr; 
+--  it applies a function to each element of a list, passing an accumulating 
+--  parameter from |Right| to |Left|, and returning a final value of this 
+--  accumulator together with the new list.' (see Hoogle)
 -- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumR(f, acc, xs)
     script
@@ -3490,6 +3575,11 @@ on mapKeys(f, dct)
     map(result, zip(keys(dct), elems(dct)))
 end mapKeys
 
+-- The mapMaybe function is a version of map which can throw out
+-- elements. In particular, the functional argument returns
+-- something of type Maybe b. If this is Nothing, no element is
+-- added on to the result list. If it just Just b, then b is
+-- included in the result list.
 -- mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 on mapMaybe(mf, xs)
     script
@@ -3589,6 +3679,7 @@ on mappendTuple(a, b)
     Tuple(mappend(|1| of a, |1| of b), mappend(|2| of a, |2| of b))
 end mappendTuple
 
+-- Returns a sequence-matching function for findIndices etc
 -- matching :: [a] -> (a -> Int -> [a] -> Bool)
 -- matching :: String -> (Char -> Int -> String -> Bool)
 on matching(pat)
@@ -3818,11 +3909,6 @@ on |mod|(n, d)
     end if
 end |mod|
 
--- mod :: Int -> Int -> Int
-on |mod|(n, d)
-    n mod d
-end |mod|
-
 -- modificationTime :: FilePath -> Either String Date
 on modificationTime(fp)
     script fs
@@ -3832,18 +3918,6 @@ on modificationTime(fp)
     end script
     bindLR(my fileStatus(fp), fs)
 end modificationTime
-
--- mReturn :: First-class m => (a -> b) -> m (a -> b)
-on mReturn(f)
-    -- 2nd class handler function lifted into 1st class script wrapper. 
-    if script is class of f then
-        f
-    else
-        script
-            property |λ| : f
-        end script
-    end if
-end mReturn
 
 -- mul (*) :: Num a => a -> a -> a
 on mul(a)
@@ -3874,15 +3948,12 @@ on nest(oTree)
     nest of oTree
 end nest
 
+-- use framework "Foundation"
+-- use scripting additions
 -- newUUID :: () -> IO UUID String
 on newUUID()
     current application's NSUUID's UUID's UUIDString as string
 end newUUID
-
--- Node :: a -> [Tree a] -> Tree a
-on Node(v, xs)
-    {type:"Node", root:v, nest:xs}
-end Node
 
 -- not :: Bool -> Bool
 on |not|(p)
@@ -3894,13 +3965,6 @@ end |not|
 on notElem(x, xs)
     xs does not contain x
 end notElem
-
--- Nothing :: Maybe a
-on Nothing()
-    -- Constructor for an empty Maybe (option type) value.
-    -- Empty wrapper returned where a computation is not possible.
-    {type: "Maybe", Nothing: true}
-end Nothing
 
 -- nub :: [a] -> [a]
 on nub(xs)
@@ -3941,6 +4005,7 @@ on odd(x)
     not even(x)
 end odd
 
+-- e.g. sortBy(|on|(compare, |length|), ["epsilon", "mu", "gamma", "beta"])
 -- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
 on |on|(f, g)
     script
@@ -3951,6 +4016,7 @@ on |on|(f, g)
     end script
 end |on|
 
+-- Derive a script with |λ| handler from the name of an infix operator
 -- op :: String -> (a -> a -> b)
 on op(strOp)
     run script "script\non |λ|(a, b)\na " & strOp & " b\nend |λ|\nend script"
@@ -3974,6 +4040,10 @@ on ordering()
     enumFromPairs("Ordering", {{"LT", -1}, {"EQ", 0}, {"GT", 1}})
 end ordering
 
+-- All lines in the string outdented by the same amount
+-- (just enough to ensure that the least indented lines 
+--  have no remaining indent)
+-- All relative indents are left unchanged
 -- outdented :: String -> String
 on outdented(s)
     set xs to |lines|(s)
@@ -4069,6 +4139,8 @@ on plus(a, b)
     a + b
 end plus
 
+-- Root elements of tree flattened bottom-up
+-- into a postorder list.
 -- postorder :: Tree a -> [a]
 on postorder(node)
     script go
@@ -4127,21 +4199,24 @@ on properFraction(n)
     Tuple(i, n - i)
 end properFraction
 
--- pureList :: a -> [a]
-on pureList(x)
-        {x}
-end pure
-
 -- pureLR :: a -> Either e a
 on pureLR(x)
     |Right|(x)
 end pureLR
+
+-- pureList :: a -> [a]
+on pureList(x)
+        {x}
+end pure
 
 -- pureMay :: a -> Maybe a
 on pureMay(x)
     Just(x)
 end pureMay
 
+-- Given a type name string, returns a 
+-- specialised 'pure', where
+-- 'pure' lifts a value into a particular functor.
 -- pureT :: String -> f a -> (a -> f a)
 on pureT(t, x)
     if "List" = t then
@@ -4169,6 +4244,8 @@ on pureTuple(x)
     Tuple("", x)
 end pureTuple
 
+-- Adequate for small sorts, but sort (Ord a => [a] -> [a]), (which uses the ObjC
+-- sortedArrayUsingSelector) is the one to use
 -- quickSort :: (Ord a) => [a] -> [a]
 on quickSort(xs)
     if length of xs > 1 then
@@ -4185,6 +4262,7 @@ on quickSort(xs)
     end if
 end quickSort
 
+-- quickSortBy(comparing(my |length|), {"alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa", "lambda", "mu"})
 -- quickSortBy :: (a -> a -> Ordering) -> [a] -> [a]
 on quickSortBy(cmp, xs)
     if length of xs > 1 then
@@ -4206,6 +4284,11 @@ on quot(m, n)
     m div n
 end quot
 
+-- quotRem :: Int -> Int -> (Int, Int)
+on quotRem(m, n)
+    Tuple(m div n, m mod n)
+end quotRem
+
 -- quoted :: Char -> String -> String
 on quoted(c)
     -- A string flanked on both sides
@@ -4217,11 +4300,6 @@ on quoted(c)
     end script
 end quoted
 
--- quotRem :: Int -> Int -> (Int, Int)
-on quotRem(m, n)
-    Tuple(m div n, m mod n)
-end quotRem
-
 -- radians :: Float x => Degrees x -> Radians x
 on radians(x)
     (pi / 180) * x
@@ -4232,6 +4310,7 @@ on raise(m, n)
     m ^ n
 end raise
 
+-- e.g. map(randomRInt(1, 10), ft(1, 20))
 -- randomRInt :: Int -> Int -> IO () -> Int
 on randomRInt(low, high)
     script
@@ -4309,18 +4388,6 @@ on ratioMult(n1, n2)
     ratio((n of r1) * (n of r2), (d of r1) * (d of r2))
 end ratioMult
 
--- rational :: Num a => a -> Rational
-on rational(x)
-    set c to class of x
-    if integer is c then
-        ratio(x, 1)
-    else if real is c then
-        approxRatio(missing value, x)
-    else
-        x
-    end if
-end rational
-
 -- ratioPlus :: Rational -> Rational -> Rational
 on ratioPlus(n1, n2)
     set r1 to rational(n1)
@@ -4329,6 +4396,8 @@ on ratioPlus(n1, n2)
     ratio((n of r1) * (d / (d of r1) + ¬
         ((n of r2) * (d / (d of r2)))), d)
 end ratioPlus
+
+-- rational :: Num a => a -> Rationalon rational(x)    set c to class of x    if integer is c then        ratio(x, 1)    else if real is c then        approxRatio(missing value, x)    else        x    end ifend rational
 
 -- read :: Read a => String -> a
 on read (s)
@@ -4408,41 +4477,7 @@ on recipMay(n)
     end if
 end recipMay
 
--- regexMatches :: String -> String -> [[String]]
-on regexMatches(strRegex, strHay)
-    set ca to current application
-    -- NSNotFound handling and and High Sierra workaround due to @sl1974
-    set NSNotFound to a reference to 9.22337203685477E+18 + 5807
-    set oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬
-        options:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬
-        |error|:(missing value)
-    set oString to ca's NSString's stringWithString:strHay
-    
-    script matchString
-        on |λ|(m)
-            script rangeMatched
-                on |λ|(i)
-                    tell (m's rangeAtIndex:i)
-                        set intFrom to its location
-                        if NSNotFound ≠ intFrom then
-                            text (intFrom + 1) thru (intFrom + (its |length|)) of strHay
-                        else
-                            missing value
-                        end if
-                    end tell
-                end |λ|
-            end script
-        end |λ|
-    end script
-    
-    script asRange
-        on |λ|(x)
-            range() of x
-        end |λ|
-    end script
-    map(asRange, (oRgx's matchesInString:oString ¬
-        options:0 range:{location:0, |length|:oString's |length|()}) as list)
-end regexMatches
+-- regexMatches :: String -> String -> [[String]]on regexMatches(strRegex, strHay)	set ca to current application	-- NSNotFound handling and and High Sierra workaround due to @sl1974	set NSNotFound to a reference to 9.22337203685477E+18 + 5807	set oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬		options:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬		|error|:(missing value)	set oString to ca's NSString's stringWithString:strHay		script matchString		on |λ|(m)			script rangeMatched				on |λ|(i)					tell (m's rangeAtIndex:i)						set intFrom to its location						if NSNotFound ≠ intFrom then							text (intFrom + 1) thru (intFrom + (its |length|)) of strHay						else							missing value						end if					end tell				end |λ|			end script		end |λ|	end script		script asRange		on |λ|(x)			range() of x		end |λ|	end script	map(asRange, (oRgx's matchesInString:oString ¬		options:0 range:{location:0, |length|:oString's |length|()}) as list)end regexMatches
 
 -- rem :: Int -> Int -> Int
 on rem(m, n)
@@ -4492,6 +4527,9 @@ on replace(strNeedle, strNew, strHayStack)
     return strReplaced
 end replace
 
+-- Egyptian multiplication - progressively doubling a list, appending
+-- stages of doubling to an accumulator where needed for binary 
+-- assembly of a target length
 -- replicate :: Int -> String -> String
 on replicate(n, s)
     script p
@@ -4515,6 +4553,11 @@ on replicate(n, s)
     item 2 of xs & item 3 of xs
 end replicate
 
+-- Instance for lists only here
+
+-- e.g. replicateM(3, {1, 2})) -> 
+-- {{1, 1, 1}, {1, 1, 2}, {1, 2, 1}, {1, 2, 2}, {2, 1, 1}, 
+--  {2, 1, 2}, {2, 2, 1}, {2, 2, 2}}
 -- replicateM :: Int -> [a] -> [[a]]
 on replicateM(n, xs)
     script go
@@ -4558,11 +4601,6 @@ on |reverse|(xs)
     end if
 end |reverse|
 
--- Right :: b -> Either a b
-on |Right|(x)
-    {type:"Either", |Left|:missing value, |Right|:x}
-end |Right|
-
 -- rights :: [Either a b] -> [b]
 on rights(xs)
     script
@@ -4602,11 +4640,8 @@ on |round|(n)
     round n
 end |round|
 
--- roundTo :: Int -> Float -> Float
-on roundTo(n, x)
-    set d to 10 ^ n
-    (round (x * d)) / d
-end roundTo
+-- Float x rounded to n decimals
+-- roundTo :: Int -> Float -> Floaton roundTo(n, x)	set d to 10 ^ n	(round (x * d)) / dend roundTo
 
 -- runAction :: Action a -> a
 on runAction(act)
@@ -4794,6 +4829,7 @@ on showBinary(n)
     showIntAtBase(2, binaryChar, n, "")
 end showBin
 
+-- ISO 8601 UTC 
 -- showDate :: Date -> String
 on showDate(dte)
     ((dte - (time to GMT)) as «class isot» as string) & ".000Z"
@@ -4859,6 +4895,15 @@ on showJSON(x)
     end if
 end showJSON
 
+-- showLR :: Either a b -> String
+on showLR(lr)
+    if isRight(lr) then
+        "Right(" & unQuoted(show(|Right| of lr)) & ")"
+    else
+        "Left(" & unQuoted(show(|Left| of lr)) & ")"
+    end if
+end showLR
+
 -- showList :: [a] -> String
 on showList(xs)
     "[" & intercalateS(", ", map(my show, xs)) & "]"
@@ -4868,15 +4913,6 @@ end showList
 on showLog(e)
     log show(e)
 end showLog
-
--- showLR :: Either a b -> String
-on showLR(lr)
-    if isRight(lr) then
-        "Right(" & unQuoted(show(|Right| of lr)) & ")"
-    else
-        "Left(" & unQuoted(show(|Left| of lr)) & ")"
-    end if
-end showLR
 
 -- showMaybe :: Maybe a -> String
 on showMaybe(mb)
@@ -4984,6 +5020,7 @@ on signum(x)
     end if
 end signum
 
+-- Abbreviation for quick testing
 -- sj :: a -> String
 on sj(x)
     showJSON(x)
@@ -4998,6 +5035,8 @@ on snd(tpl)
     end if
 end snd
 
+-- Mirror image of cons
+-- New copy of the list, with an atom added at the end
 -- snoc :: [a] -> a -> [a]
 on snoc(xs, x)
     xs & {x}
@@ -5009,6 +5048,10 @@ on sort(xs)
         sortedArrayUsingSelector:"compare:") as list
 end sort
 
+-- Enough for small scale sorts.
+-- Use instead sortOn (Ord b => (a -> b) -> [a] -> [a])
+-- which is equivalent to the more flexible sortBy(comparing(f), xs)
+-- and uses a much faster ObjC NSArray sort method
 -- sortBy :: (a -> a -> Ordering) -> [a] -> [a]
 on sortBy(f, xs)
     if length of xs > 1 then
@@ -5027,6 +5070,33 @@ on sortBy(f, xs)
     end if
 end sortBy
 
+-- Sort a list by comparing the results of a key function applied to each
+-- element. sortOn f is equivalent to sortBy(comparing(f), xs), but has the
+-- performance advantage of only evaluating f once for each element in
+-- the input list. This is called the decorate-sort-undecorate paradigm,
+-- or Schwartzian transform.
+-- Elements are arranged from from lowest to highest.
+
+-- In this Applescript implementation, f can optionally be [(a -> b)]
+-- or [((a -> b), Bool)]) to specify a compound sort order
+
+--    xs:  List of items to be sorted. 
+--          (The items can be records, lists, or simple values).
+--
+--    f:    A single (a -> b) function (Applescript handler),
+--          or a list of such functions.
+--          if the argument is a list, any function can 
+--          optionally be followed by a bool. 
+--          (False -> descending sort)
+--
+--          (Subgrouping in the list is optional and ignored)
+--          Each function (Item -> Value) in the list should 
+--          take an item (of the type contained by xs) 
+--          as its input and return a simple orderable value 
+--          (Number, String, or Date).
+--
+--          The sequence of key functions and optional 
+--          direction bools defines primary to N-ary sort keys.
 -- sortOn :: Ord b => (a -> b) -> [a] -> [a]
 -- sortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]
 on sortOn(f, xs)
@@ -5095,6 +5165,8 @@ on span(f)
     end script
 end span
 
+-- Compose a function (from a tuple to a tuple), 
+-- (with separate transformations for fst and snd)
 -- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))
 on splitArrow(f, g)
     script
@@ -5157,6 +5229,7 @@ on splitBy(p, xs)
     end if
 end splitBy
 
+-- Split a filename into directory and file. combine is the inverse.
 -- splitFileName :: FilePath -> (String, String)
 on splitFileName(strPath)
     if strPath ≠ "" then
@@ -5176,6 +5249,11 @@ on splitFileName(strPath)
     end if
 end splitFileName
 
+-- splitOn("\r\n", "a\r\nb\r\nd\r\ne") --> ["a","b","d","e"]
+-- splitOn("aaa", "aaaXaaaXaaaXaaa") --> {"", "X", "X", "X", ""}
+-- splitOn("x", "x") --> {"", ""}
+-- splitOn([3, 1], [1, 2, 3, 1, 2, 3, 1, 2, 3])
+--> {{1, 2}, {2}, {2, 3}}
 -- splitOn :: [a] -> [a] -> [[a]]
 -- splitOn :: String -> String -> [String]
 on splitOn(pat, src)
@@ -5314,6 +5392,37 @@ on stripStart(s)
     dropWhile(my isSpace, s)
 end stripStart
 
+-- subTreeAtPath :: Tree String -> [String] -> Maybe Tree String
+on subTreeAtPath(tree, pathSegments)
+    script go
+        on |λ|(children, xs)
+            if {} ≠ children and {} ≠ xs then
+                set h to item 1 of xs
+                script parentMatch
+                    on |λ|(t)
+                        h = root of t
+                    end |λ|
+                end script
+                script childMatch
+                    on |λ|(t)
+                        if 1 < length of xs then
+                            |λ|(nest of t, rest of xs) of go
+                        else
+                            Just(t)
+                        end if
+                    end |λ|
+                end script
+                bindMay(find(parentMatch, children), childMatch)
+            else
+                Nothing()
+            end if
+        end |λ|
+    end script
+    |λ|({tree}, pathSegments) of go
+end subTreeAtPath
+
+-- subsequences([1,2,3]) -> [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+-- subsequences("abc") -> ["","a","b","ab","c","ac","bc","abc"]
 -- subsequences :: [a] -> [[a]]
 -- subsequences :: String -> [String]
 on subsequences(xs)
@@ -5366,35 +5475,6 @@ end subsets
 on subtract(x, y)
     y - x
 end subtract
-
--- subTreeAtPath :: Tree String -> [String] -> Maybe Tree String
-on subTreeAtPath(tree, pathSegments)
-    script go
-        on |λ|(children, xs)
-            if {} ≠ children and {} ≠ xs then
-                set h to item 1 of xs
-                script parentMatch
-                    on |λ|(t)
-                        h = root of t
-                    end |λ|
-                end script
-                script childMatch
-                    on |λ|(t)
-                        if 1 < length of xs then
-                            |λ|(nest of t, rest of xs) of go
-                        else
-                            Just(t)
-                        end if
-                    end |λ|
-                end script
-                bindMay(find(parentMatch, children), childMatch)
-            else
-                Nothing()
-            end if
-        end |λ|
-    end script
-    |λ|({tree}, pathSegments) of go
-end subTreeAtPath
 
 -- succ :: Enum a => a -> a
 on succ(x)
@@ -5575,6 +5655,7 @@ on takeDirectory(fp)
     end if
 end takeDirectory
 
+-- take N Members of an infinite cycle of xs, starting from index I
 -- takeDropCycle :: Int -> [a] -> [a]
 on takeDropCycle(n, i, xs)
     set lng to length of xs
@@ -5618,6 +5699,7 @@ on takeFromThenTo(a, b, z, xs)
     map(go, enumFromThenTo(a, b, z))
 end takeFromThenTo
 
+-- takeIterate n f x == [x, f x, f (f x), ...]
 -- takeIterate :: Int -> (a -> a) -> a -> [a]
 on takeIterate(n, f, x)
     set v to x
@@ -5780,6 +5862,7 @@ on toRatio(n)
     approxRatio(1.0E-12, n)
 end toRatio
 
+-- Sentence case - initial string capitalized and rest lowercase
 -- toSentence :: String -> String
 on toSentence(str)
     set ca to current application
@@ -5795,6 +5878,8 @@ on toSentence(str)
     end if
 end toSentence
 
+-- NB this does not model any regional or cultural conventions.
+-- It simply simply capitalizes the first character of each word.
 -- toTitle :: String -> String
 on toTitle(str)
     set ca to current application
@@ -5809,6 +5894,9 @@ on toUpper(str)
         uppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
 end toUpper
 
+-- If some of the rows are shorter than the following rows, 
+-- their elements are skipped:
+-- transpose({{10,11},{20},{},{30,31,32}}) -> {{10, 20, 30}, {11, 31}, {32}}
 -- transpose :: [[a]] -> [[a]]
 on transpose(xxs)
     set intMax to |length|(maximumBy(comparing(my |length|), xxs))
@@ -5838,20 +5926,8 @@ on transpose(xxs)
     map(cols, item 1 of rows)
 end transpose
 
--- transpose_ :: [[a]] -> [[a]]
-on transpose_(rows)
-    script cols
-        on |λ|(_, iCol)
-            script cell
-                on |λ|(row)
-                    item iCol of row
-                end |λ|
-            end script
-            concatMap(cell, rows)
-        end |λ|
-    end script
-    map(cols, item 1 of rows)
-end transpose_
+-- Simplified version - assuming rows of unvarying length.
+-- transpose_ :: [[a]] -> [[a]]on transpose_(rows)	script cols		on |λ|(_, iCol)			script cell				on |λ|(row)					item iCol of row				end |λ|			end script			concatMap(cell, rows)		end |λ|	end script	map(cols, item 1 of rows)end transpose_
 
 -- traverse :: (Applicative f, Traversable t) => (a -> f b) -> t a -> f (t b)
 on traverse(f, tx)
@@ -5875,6 +5951,21 @@ on traverse(f, tx)
     end if
 end traverse
 
+-- traverseLR :: Applicative f => (t -> f b) -> Either a t -> f (Either a b)
+on traverseLR(f, lr)
+    if |Left| of lr is not missing value then
+        {lr}
+    else
+        fmap(my |Right|, mReturn(f)'s |λ|(|Right| of lr))
+    end if
+end traverseLR
+
+--    1. Map each element of a structure to an action,
+--    2. evaluate these actions from left to right, and
+--    3. collect the results.
+-- 
+--    traverse f = List.foldr cons_f (pure [])
+--      where cons_f x ys = liftA2 (:) (f x) ys
 -- traverseList :: (Applicative f) => (a -> f b) -> [a] -> f [b]
 on traverseList(f, xs)
     set lng to length of xs
@@ -5902,15 +5993,6 @@ on traverseList(f, xs)
         {{}}
     end if
 end traverseList
-
--- traverseLR :: Applicative f => (t -> f b) -> Either a t -> f (Either a b)
-on traverseLR(f, lr)
-    if |Left| of lr is not missing value then
-        {lr}
-    else
-        fmap(my |Right|, mReturn(f)'s |λ|(|Right| of lr))
-    end if
-end traverseLR
 
 -- traverseMay :: Applicative f => (t -> f a) -> Maybe t -> f (Maybe a)
 on traverseMay(f, mb)
@@ -5992,6 +6074,9 @@ on treeLeaves(oNode)
     |λ|(oNode) of go
 end treeLeaves
 
+-- A list of all nodes in the tree which match 
+-- a predicate p.
+-- For the first match only, see findTree.
 -- treeMatches :: (a -> Bool) -> Tree a -> [Tree a]
 on treeMatches(p, tree)
     script go
@@ -6072,17 +6157,6 @@ on truncate(x)
     item 1 of properFraction(x)
 end truncate
 
--- Tuple (,) :: a -> b -> (a, b)
-on Tuple(a, b)
-    -- Constructor for a pair of values, possibly of two different types.
-    {type:"Tuple", |1|:a, |2|:b, length:2}
-end Tuple
-
--- Tuple3 (,,) :: a -> b -> c -> (a, b, c)
-on Tuple3(x, y, z)
-    {type:"Tuple3", |1|:x, |2|:y, |3|:z, length:3}
-end Tuple3
-
 -- tupleFromList :: [a] -> (a, a ...)
 on tupleFromList(xs)
     set lng to length of xs
@@ -6102,11 +6176,6 @@ on tupleFromList(xs)
         missing value
     end if
 end tupleFromList
-
--- TupleN :: a -> b ...  -> (a, b ... )
-on TupleN(argv)
-    tupleFromList(argv)
-end TupleN
 
 -- typeName :: a -> String
 on typeName(x)
@@ -6129,6 +6198,17 @@ on typeName(x)
         end if
     end if
 end typeName
+
+-- unQuoted :: String -> String
+on unQuoted(s)
+    script p
+        on |λ|(x)
+            --{34, 39} contains id of x
+            34 = id of x
+        end |λ|
+    end script
+    dropAround(p, s)
+end unQuoted
 
 -- uncons :: [a] -> Maybe (a, [a])
 on uncons(xs)
@@ -6154,6 +6234,8 @@ on uncons(xs)
     end if
 end uncons
 
+-- Given a curried/default function, returns an
+-- equivalent function on a tuple or list pair.
 -- A function over a pair, derived from
 -- a function over two arguments.
 -- uncurry :: (a -> b -> c) -> ((a, b) -> c)
@@ -6182,6 +6264,7 @@ on uncurry(f)
 end uncurry
 
 
+-- | Build a forest from a list of seed values
 -- unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
 on unfoldForest(f, xs)
     set g to mReturn(f)
@@ -6193,6 +6276,16 @@ on unfoldForest(f, xs)
     map(result, xs)
 end unfoldForest
 
+-- | Build a tree from a seed value
+-- unfoldTree :: (b -> (a, [b])) -> b -> Tree a
+on unfoldTree(f, b)
+    set g to mReturn(f)
+    set tpl to g's |λ|(b)
+    Node(|1| of tpl, unfoldForest(g, |2| of tpl))
+end unfoldTree
+
+-- > unfoldl (\b -> if b == 0 then Nothing else Just (b, b-1)) 10
+-- > [1,2,3,4,5,6,7,8,9,10]
 -- unfoldl :: (b -> Maybe (b, a)) -> b -> [a]
 on unfoldl(f, v)
     set xr to Tuple(v, v) -- (value, remainder)
@@ -6235,13 +6328,6 @@ on unfoldr(f, v)
     return xs
 end unfoldr
 
--- unfoldTree :: (b -> (a, [b])) -> b -> Tree a
-on unfoldTree(f, b)
-    set g to mReturn(f)
-    set tpl to g's |λ|(b)
-    Node(|1| of tpl, unfoldForest(g, |2| of tpl))
-end unfoldTree
-
 -- union :: [a] -> [a] -> [a]
 on union(xs, ys)
     script flipDelete
@@ -6283,17 +6369,8 @@ on unlines(xs)
     s
 end unlines
 
--- unQuoted :: String -> String
-on unQuoted(s)
-    script p
-        on |λ|(x)
-            --{34, 39} contains id of x
-            34 = id of x
-        end |λ|
-    end script
-    dropAround(p, s)
-end unQuoted
-
+-- If the list is empty returns Nothing, otherwise returns 
+-- Just the init and the last.
 -- unsnoc :: [a] -> Maybe ([a], a)
 on unsnoc(xs)
     set blnString to class of xs is string
@@ -6318,16 +6395,7 @@ on unsnoc(xs)
     end if
 end unsnoc
 
--- until :: (a -> Bool) -> (a -> a) -> a -> a
-on |until|(p, f, x)
-    set v to x
-    set mp to mReturn(p)
-    set mf to mReturn(f)
-    repeat until mp's |λ|(v)
-        set v to mf's |λ|(v)
-    end repeat
-    v
-end |until|
+-- until :: (a -> Bool) -> (a -> a) -> a -> aon |until|(p, f, x)	set v to x	set mp to mReturn(p)	set mf to mReturn(f)	repeat until mp's |λ|(v)		set v to mf's |λ|(v)	end repeat	vend |until|
 
 -- unwords :: [String] -> String
 on unwords(xs)
@@ -6434,6 +6502,7 @@ on wrap(v)
     ca's (NSArray's arrayWithObject:v)'s objectAtIndex:0
 end wrap
 
+-- use framework "Foundation"
 -- writeFile :: FilePath -> String -> IO ()
 on writeFile(strPath, strText)
     set ca to current application
@@ -6458,6 +6527,9 @@ on writeFileLR(strPath, strText)
     end if
 end writeFileLR
 
+use framework "Foundation"
+-- File name template -> string data -> temporary path
+-- (Random digit sequence inserted between template base and extension)
 -- writeTempFile :: String -> String -> IO FilePath
 on writeTempFile(template, txt)
     set strPath to (current application's ¬
@@ -6533,6 +6605,8 @@ on zipList(xs, ys)
     map(go, items 1 thru lng of xs)
 end zipList
 
+-- Arbitrary number of lists to zip
+-- all enclosed in an argument vector list
 -- zipN :: [a] -> [b] -> ... -> [(a, b ...)]
 on zipN(argv)
     if 1 < length of argv then
@@ -6659,5 +6733,3 @@ on zipWithN(f, rows)
     end script
     map(go, enumFromTo(1, minimum(map(my |length|, rows))))
 end zipWithN
-
-return me
