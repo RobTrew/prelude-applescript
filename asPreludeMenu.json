@@ -1,5 +1,4 @@
 {
-  "Action": "-- Action :: (a -> b) -> a -> Action b\non Action(f, x)\n    -- Constructor for an action.\n    {type:\"Action\", act:f, arg:x}\nend Action",
   "Just": "-- Just :: a -> Maybe a\non Just(x)\n    -- Constructor for an inhabited Maybe (option type) value.\n    -- Wrapper containing the result of a computation.\n    {type:\"Maybe\", Nothing:false, Just:x}\nend Just",
   "Left": "-- Left :: a -> Either a b\non |Left|(x)\n    {type:\"Either\", |Left|:x, |Right|:missing value}\nend |Left|",
   "Node": "-- Node :: a -> [Tree a] -> Tree a\non Node(v, xs)\n    {type:\"Node\", root:v, nest:xs}\nend Node",

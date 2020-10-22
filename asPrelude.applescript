@@ -2,12 +2,6 @@ use AppleScript version "2.4"
 use framework "Foundation"
 use scripting additions
 
--- Action :: (a -> b) -> a -> Action b
-on Action(f, x)
-    -- Constructor for an action.
-    {type:"Action", act:f, arg:x}
-end Action
-
 -- Just :: a -> Maybe a
 on Just(x)
     -- Constructor for an inhabited Maybe (option type) value.
