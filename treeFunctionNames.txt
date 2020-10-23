@@ -1,0 +1,28 @@
+allTree :: (a -> Bool) -> Tree a -> Bool
+anyTree :: (a -> Bool) -> Tree a -> Bool
+apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b
+drawForest :: [Tree String] -> String
+drawTree :: Tree String -> String
+drawTree2 :: Bool -> Bool -> Tree String -> String
+findTree :: (a -> Bool) -> Tree a -> Maybe Tree a
+flattenTree :: Tree a -> [a]
+fmapTree :: (a -> b) -> Tree a -> Tree b
+foldMapTree :: Monoid m => (a -> m) -> Tree a -> m
+foldTree :: (a -> [b] -> b) -> Tree a -> b
+foldlTree :: (b -> a -> b) -> b -> Tree a -> b
+foldrTree :: (a -> b -> b) -> b -> Tree a -> b
+liftA2Tree :: (a -> b -> c) -> Tree a -> Tree b -> Tree c
+listFromTree :: Tree a -> [a]
+mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)
+nest :: Tree a -> [a]
+pureTree :: a -> Tree a
+showForest :: [Tree a] -> String
+showTree :: Tree a -> String
+traverseTree :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)
+treeFromDict :: String -> Dict -> Tree String
+treeFromNestedList :: NestedList a -> Tree a
+treeLeaves :: Tree -> [Tree]
+treeMatches :: (a -> Bool) -> Tree a -> [Tree a]
+treeMenu :: Tree String -> IO [String]
+unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
+unfoldTree :: (b -> (a, [b])) -> b -> Tree a
