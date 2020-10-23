@@ -1,0 +1,10 @@
+```applescript
+-- and :: [Bool] -> Bool
+on |and|(xs)
+    -- True if every value in the list is true.
+    repeat with x in xs
+        if not (contents of x) then return false
+    end repeat
+    return true
+end |and|
+```
