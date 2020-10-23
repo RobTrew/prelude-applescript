@@ -98,7 +98,7 @@
     ]
   },
   "ap (<*>)": {
-    "code": "-- Applies wrapped functions to wrapped values, \n-- for example applying a list of functions to a list of values\n-- or applying Just(f) to Just(x), Right(f) to Right(x), etc\n-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\non ap(mf, mx)\n    if class of mx is list then\n        apList(mf, mx)\n    else\n        set t to typeName(mf)\n        if \"(a -> b)\" = t then\n            apFn(mf, mx)\n        else if \"Either\" = t then\n            apLR(mf, mx)\n        else if \"Maybe\" = t then\n            apMay(mf, mx)\n        else if \"Node\" = t then\n            apTree(mf, mx)\n        else if \"Tuple\" = t then\n            apTuple(mf, mx)\n        else\n            missing value\n        end if\n    end if\nend ap",
+    "code": "-- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b\non ap(mf, mx)\n    -- Applies wrapped functions to wrapped values, \n    -- for example applying a list of functions to a list of values\n    -- or applying Just(f) to Just(x), Right(f) to Right(x), etc\n    if class of mx is list then\n        apList(mf, mx)\n    else\n        set t to typeName(mf)\n        if \"(a -> b)\" = t then\n            apFn(mf, mx)\n        else if \"Either\" = t then\n            apLR(mf, mx)\n        else if \"Maybe\" = t then\n            apMay(mf, mx)\n        else if \"Node\" = t then\n            apTree(mf, mx)\n        else if \"Tuple\" = t then\n            apTuple(mf, mx)\n        else\n            missing value\n        end if\n    end if\nend ap",
     "tags": [
       "AS Prelude"
     ]
@@ -273,7 +273,7 @@
     ]
   },
   "breakOn": {
-    "code": "-- non null needle -> haystack -> (prefix before match, match + rest)\n-- breakOn :: String -> String -> (String, String)\non breakOn(pat, src)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        set lngParts to length of lstParts\n        \n        if 1 < lngParts then\n            set tpl to Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text))\n        else\n            set tpl to Tuple(src, \"\")\n        end if\n        \n        set my text item delimiters to dlm\n        return tpl\n    else\n        missing value\n    end if\nend breakOn",
+    "code": "-- breakOn :: String -> String -> (String, String)\non breakOn(pat, src)\n    -- non null needle -> haystack -> (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        set lngParts to length of lstParts\n        \n        if 1 < lngParts then\n            set tpl to Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text))\n        else\n            set tpl to Tuple(src, \"\")\n        end if\n        \n        set my text item delimiters to dlm\n        return tpl\n    else\n        missing value\n    end if\nend breakOn",
     "tags": [
       "AS Prelude"
     ]
@@ -303,7 +303,7 @@
     ]
   },
   "caseOf": {
-    "code": "-- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value\n-- caseOf :: [(a -> Bool, b)] -> b -> a ->  b\non caseOf (pvs, otherwise, x)\n    repeat with tpl in pvs\n        if mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl\n    end repeat\n    return otherwise\nend caseOf",
+    "code": "-- caseOf :: [(a -> Bool, b)] -> b -> a ->  b\non caseOf (pvs, otherwise, x)\n    -- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value\n    repeat with tpl in pvs\n        if mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl\n    end repeat\n    return otherwise\nend caseOf",
     "tags": [
       "AS Prelude"
     ]
@@ -1190,7 +1190,7 @@
     ]
   },
   "intersperse": {
-    "code": "-- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]\n-- intersperse :: a -> [a] -> [a]\n-- intersperse :: Char -> String -> String\non intersperse(sep, xs)\n    set lng to length of xs\n    if lng > 1 then\n        set acc to {item 1 of xs}\n        repeat with i from 2 to lng\n            set acc to acc & {sep, item i of xs}\n        end repeat\n        if class of xs is string then\n            concat(acc)\n        else\n            acc\n        end if\n    else\n        xs\n    end if\nend intersperse",
+    "code": "-- intersperse :: a -> [a] -> [a]\n-- intersperse :: Char -> String -> String\non intersperse(sep, xs)\n    -- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]\n    set lng to length of xs\n    if lng > 1 then\n        set acc to {item 1 of xs}\n        repeat with i from 2 to lng\n            set acc to acc & {sep, item i of xs}\n        end repeat\n        if class of xs is string then\n            concat(acc)\n        else\n            acc\n        end if\n    else\n        xs\n    end if\nend intersperse",
     "tags": [
       "AS Prelude"
     ]
@@ -2121,7 +2121,8 @@
   "root": {
     "code": "-- root :: Tree a -> a\non root(oTree)\n    root of oTree\nend root",
     "tags": [
-      "AS Prelude"
+      "AS Prelude",
+      "tree"
     ]
   },
   "rotate": {

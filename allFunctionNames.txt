@@ -43,12 +43,12 @@ bindMay (>>=) :: Maybe a -> (a -> Maybe b) -> Maybe b
 bindTuple (>>=) :: Monoid a => (a, a) -> (a -> (a, b)) -> (a, b)
 bool :: a -> a -> Bool -> a
 break :: (a -> Bool) -> [a] -> ([a], [a])
-non null needle -> haystack -> (prefix before match, match + rest)
+breakOn :: String -> String -> (String, String)
 breakOnAll :: String -> String -> [(String, String)]
 needle -> haystack -> maybe (prefix before match, match + rest)
 bulleted :: String -> String -> String
 cartesianProduct :: [a] -> [b] -> [[a, b]]
-List of (Predicate, value) tuples -> Default value -> Value to test -> Output value
+caseOf :: [(a -> Bool, b)] -> b -> a ->  b
 catMaybes :: [Maybe a] -> [a]
 ceiling :: Num -> Int
 center :: Int -> Char -> String -> String
@@ -194,7 +194,7 @@ intersect :: (Eq a) => [a] -> [a] -> [a]
 intersectBy :: (a -> a -> Bool) -> [a] -> [a] -> [a]
 intersectListsBy :: (a -> a -> Bool) -> [[a]] -> [a]
 intersection :: Ord a => Set a -> Set a -> Set a
-intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]
+intersperse :: a -> [a] -> [a]
 isAlpha :: Char -> Bool
 isChar :: a -> Bool
 isDigit :: Char -> Bool

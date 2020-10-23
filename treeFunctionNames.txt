@@ -16,6 +16,7 @@ listFromTree :: Tree a -> [a]
 mapAccumL_Tree :: (acc -> x -> (acc, y)) -> acc -> Tree -> (acc, Tree)
 nest :: Tree a -> [a]
 pureTree :: a -> Tree a
+root :: Tree a -> a
 showForest :: [Tree a] -> String
 showTree :: Tree a -> String
 traverseTree :: Applicative f => (a -> f b) -> Tree a -> f (Tree b)

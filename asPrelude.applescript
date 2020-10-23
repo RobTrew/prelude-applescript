@@ -157,11 +157,11 @@ on anyTree(p, tree)
     |λ|(tree) of go
 end anyTree
 
--- Applies wrapped functions to wrapped values, 
--- for example applying a list of functions to a list of values
--- or applying Just(f) to Just(x), Right(f) to Right(x), etc
 -- ap (<*>) :: Monad m => m (a -> b) -> m a -> m b
 on ap(mf, mx)
+    -- Applies wrapped functions to wrapped values, 
+    -- for example applying a list of functions to a list of values
+    -- or applying Just(f) to Just(x), Right(f) to Right(x), etc
     if class of mx is list then
         apList(mf, mx)
     else
@@ -602,9 +602,9 @@ on break(p, xs)
     end if
 end break
 
--- non null needle -> haystack -> (prefix before match, match + rest)
 -- breakOn :: String -> String -> (String, String)
 on breakOn(pat, src)
+    -- non null needle -> haystack -> (prefix before match, match + rest)
     if pat ≠ "" then
         set {dlm, my text item delimiters} to {my text item delimiters, pat}
         
@@ -696,9 +696,9 @@ on cartesianProduct(xs, ys)
     concatMap(result, xs)
 end cartesianProduct
 
--- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value
 -- caseOf :: [(a -> Bool, b)] -> b -> a ->  b
 on caseOf (pvs, otherwise, x)
+    -- List of (Predicate, value) tuples -> Default value -> Value to test -> Output value
     repeat with tpl in pvs
         if mReturn(|1| of tpl)'s |λ|(x) then return |2| of tpl
     end repeat
@@ -2836,10 +2836,10 @@ on intersection(a, b)
     return s
 end intersection
 
--- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]
 -- intersperse :: a -> [a] -> [a]
 -- intersperse :: Char -> String -> String
 on intersperse(sep, xs)
+    -- intersperse(0, [1,2,3]) -> [1, 0, 2, 0, 3]
     set lng to length of xs
     if lng > 1 then
         set acc to {item 1 of xs}
