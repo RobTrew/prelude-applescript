@@ -2798,6 +2798,12 @@
       "AS Prelude"
     ]
   },
+  "unDigits": {
+    "code": "-- unDigits :: [Int] -> Int\non unDigits(ds)\n    -- The integer with the given digits.\n    script go\n        on |λ|(a, x)\n            10 * a + x\n        end |λ|\n    end script\n    foldl(go, 0, ds)\nend unDigits",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
   "unQuoted": {
     "code": "-- unQuoted :: String -> String\non unQuoted(s)\n    script p\n        on |λ|(x)\n            --{34, 39} contains id of x\n            34 = id of x\n        end |λ|\n    end script\n    dropAround(p, s)\nend unQuoted",
     "tags": [

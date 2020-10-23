@@ -460,6 +460,7 @@ treeMenu :: Tree String -> IO [String]
 truncate :: Num -> Int
 tupleFromList :: [a] -> (a, a ...)
 typeName :: a -> String
+unDigits :: [Int] -> Int
 unQuoted :: String -> String
 uncons :: [a] -> Maybe (a, [a])
 uncurry :: (a -> b -> c) -> ((a, b) -> c)

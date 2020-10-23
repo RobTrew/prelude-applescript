@@ -1,17 +1,3 @@
-```javascript
-// jsonParseLR :: String -> Either String a
-const jsonParseLR = s => {
-    try {
-        return Right(JSON.parse(s));
-    } catch (e) {
-        return Left(
-            `${e.message} (line:${e.line} col:${e.column})`
-        );
-    }
-};
-```
-
-
 ```applescript
 -- jsonParseLR :: String -> Either String a
 on jsonParseLR(s)
@@ -30,4 +16,18 @@ on jsonParseLR(s)
         end if
     end if
 end jsonParseLR
+```
+
+
+```javascript
+// jsonParseLR :: String -> Either String a
+const jsonParseLR = s => {
+    try {
+        return Right(JSON.parse(s));
+    } catch (e) {
+        return Left(
+            `${e.message} (line:${e.line} col:${e.column})`
+        );
+    }
+};
 ```
