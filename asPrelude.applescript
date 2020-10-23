@@ -4229,10 +4229,10 @@ on pureTuple(x)
     Tuple("", x)
 end pureTuple
 
--- Adequate for small sorts, but sort (Ord a => [a] -> [a]), (which uses the ObjC
--- sortedArrayUsingSelector) is the one to use
 -- quickSort :: (Ord a) => [a] -> [a]
 on quickSort(xs)
+    -- Adequate for small sorts, but sort (Ord a => [a] -> [a]), (which uses the ObjC
+    -- sortedArrayUsingSelector) is the one to use
     if length of xs > 1 then
         set h to item 1 of xs
         script
@@ -4247,9 +4247,11 @@ on quickSort(xs)
     end if
 end quickSort
 
--- quickSortBy(comparing(my |length|), {"alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta", "iota", "kappa", "lambda", "mu"})
 -- quickSortBy :: (a -> a -> Ordering) -> [a] -> [a]
 on quickSortBy(cmp, xs)
+    -- quickSortBy(comparing(my |length|), 
+    -- {"alpha", "beta", "gamma", "delta", "epsilon", "zeta", 
+    --  "eta", "theta", "iota", "kappa", "lambda", "mu"})
     if length of xs > 1 then
         set h to item 1 of xs
         script
@@ -5033,12 +5035,12 @@ on sort(xs)
         sortedArrayUsingSelector:"compare:") as list
 end sort
 
--- Enough for small scale sorts.
--- Use instead sortOn (Ord b => (a -> b) -> [a] -> [a])
--- which is equivalent to the more flexible sortBy(comparing(f), xs)
--- and uses a much faster ObjC NSArray sort method
 -- sortBy :: (a -> a -> Ordering) -> [a] -> [a]
 on sortBy(f, xs)
+    -- Enough for small scale sorts.
+    -- Use instead sortOn (Ord b => (a -> b) -> [a] -> [a])
+    -- which is equivalent to the more flexible sortBy(comparing(f), xs)
+    -- and uses a much faster ObjC NSArray sort method
     if length of xs > 1 then
         set h to item 1 of xs
         set f to mReturn(f)
@@ -5055,80 +5057,7 @@ on sortBy(f, xs)
     end if
 end sortBy
 
--- Sort a list by comparing the results of a key function applied to each
--- element. sortOn f is equivalent to sortBy(comparing(f), xs), but has the
--- performance advantage of only evaluating f once for each element in
--- the input list. This is called the decorate-sort-undecorate paradigm,
--- or Schwartzian transform.
--- Elements are arranged from from lowest to highest.
-
--- In this Applescript implementation, f can optionally be [(a -> b)]
--- or [((a -> b), Bool)]) to specify a compound sort order
-
---    xs:  List of items to be sorted. 
---          (The items can be records, lists, or simple values).
---
---    f:    A single (a -> b) function (Applescript handler),
---          or a list of such functions.
---          if the argument is a list, any function can 
---          optionally be followed by a bool. 
---          (False -> descending sort)
---
---          (Subgrouping in the list is optional and ignored)
---          Each function (Item -> Value) in the list should 
---          take an item (of the type contained by xs) 
---          as its input and return a simple orderable value 
---          (Number, String, or Date).
---
---          The sequence of key functions and optional 
---          direction bools defines primary to N-ary sort keys.
--- sortOn :: Ord b => (a -> b) -> [a] -> [a]
--- sortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]
-on sortOn(f, xs)
-    script keyBool
-        on |λ|(x, a)
-            if boolean is class of x then
-                {asc:x, fbs:fbs of a}
-            else
-                {asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}
-            end if
-        end |λ|
-    end script
-    set {fs, bs} to {|1|, |2|} of unzip(fbs of foldr(keyBool, ¬
-        {asc:true, fbs:{}}, flatten({f})))
-    
-    set intKeys to length of fs
-    set ca to current application
-    script dec
-        property gs : map(my mReturn, fs)
-        on |λ|(x)
-            set nsDct to (ca's NSMutableDictionary's ¬
-                dictionaryWithDictionary:{val:x})
-            repeat with i from 1 to intKeys
-                (nsDct's setValue:((item i of gs)'s |λ|(x)) ¬
-                    forKey:(character id (96 + i)))
-            end repeat
-            nsDct as record
-        end |λ|
-    end script
-    
-    script descrip
-        on |λ|(bool, i)
-            ca's NSSortDescriptor's ¬
-                sortDescriptorWithKey:(character id (96 + i)) ¬
-                    ascending:bool
-        end |λ|
-    end script
-    
-    script undec
-        on |λ|(x)
-            val of x
-        end |λ|
-    end script
-    
-    map(undec, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬
-        sortedArrayUsingDescriptors:map(descrip, bs)) as list)
-end sortOn
+-- sortOn :: Ord b => (a -> b) -> [a] -> [a]-- sortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]on sortOn(f, xs)	-- Sort a list by comparing the results of a key function applied to each	-- element. sortOn f is equivalent to sortBy(comparing(f), xs), but has the	-- performance advantage of only evaluating f once for each element in	-- the input list. This is called the decorate-sort-undecorate paradigm,	-- or Schwartzian transform.	-- Elements are arranged from from lowest to highest.		-- In this Applescript implementation, f can optionally be [(a -> b)]	-- or [((a -> b), Bool)]) to specify a compound sort order		--    xs:  List of items to be sorted. 	--          (The items can be records, lists, or simple values).	--	--    f:    A single (a -> b) function (Applescript handler),	--          or a list of such functions.	--          if the argument is a list, any function can 	--          optionally be followed by a bool. 	--          (False -> descending sort)	--	--          (Subgrouping in the list is optional and ignored)	--          Each function (Item -> Value) in the list should 	--          take an item (of the type contained by xs) 	--          as its input and return a simple orderable value 	--          (Number, String, or Date).	--	--          The sequence of key functions and optional 	--          direction bools defines primary to N-ary sort keys.	script keyBool		on |λ|(x, a)			if boolean is class of x then				{asc:x, fbs:fbs of a}			else				{asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}			end if		end |λ|	end script	set {fs, bs} to {|1|, |2|} of unzip(fbs of foldr(keyBool, ¬		{asc:true, fbs:{}}, flatten({f})))		set intKeys to length of fs	set ca to current application	script dec		property gs : map(my mReturn, fs)		on |λ|(x)			set nsDct to (ca's NSMutableDictionary's ¬				dictionaryWithDictionary:{val:x})			repeat with i from 1 to intKeys				(nsDct's setValue:((item i of gs)'s |λ|(x)) ¬					forKey:(character id (96 + i)))			end repeat			nsDct as record		end |λ|	end script		script descrip		on |λ|(bool, i)			ca's NSSortDescriptor's ¬				sortDescriptorWithKey:(character id (96 + i)) ¬					ascending:bool		end |λ|	end script		script undec		on |λ|(x)			val of x		end |λ|	end script		map(undec, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬		sortedArrayUsingDescriptors:map(descrip, bs)) as list)end sortOn
 
 -- span :: (a -> Bool) -> [a] -> ([a], [a])
 on span(f)
@@ -5150,10 +5079,10 @@ on span(f)
     end script
 end span
 
--- Compose a function (from a tuple to a tuple), 
--- (with separate transformations for fst and snd)
 -- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))
 on splitArrow(f, g)
+    -- Compose a function (from a tuple to a tuple), 
+    -- (with separate transformations for fst and snd)
     script
         on |λ|(xy)
             Tuple(mReturn(f)'s |λ|(|1| of xy), mReturn(g)'s |λ|(|2| of xy))
@@ -5214,9 +5143,9 @@ on splitBy(p, xs)
     end if
 end splitBy
 
--- Split a filename into directory and file. combine is the inverse.
 -- splitFileName :: FilePath -> (String, String)
 on splitFileName(strPath)
+    -- Split a filename into directory and file. combine is the inverse.
     if strPath ≠ "" then
         if last character of strPath ≠ "/" then
             set xs to splitOn("/", strPath)
@@ -5234,14 +5163,14 @@ on splitFileName(strPath)
     end if
 end splitFileName
 
--- splitOn("\r\n", "a\r\nb\r\nd\r\ne") --> ["a","b","d","e"]
--- splitOn("aaa", "aaaXaaaXaaaXaaa") --> {"", "X", "X", "X", ""}
--- splitOn("x", "x") --> {"", ""}
--- splitOn([3, 1], [1, 2, 3, 1, 2, 3, 1, 2, 3])
---> {{1, 2}, {2}, {2, 3}}
 -- splitOn :: [a] -> [a] -> [[a]]
 -- splitOn :: String -> String -> [String]
 on splitOn(pat, src)
+    -- splitOn("\r\n", "a\r\nb\r\nd\r\ne") --> ["a","b","d","e"]
+    -- splitOn("aaa", "aaaXaaaXaaaXaaa") --> {"", "X", "X", "X", ""}
+    -- splitOn("x", "x") --> {"", ""}
+    -- splitOn([3, 1], [1, 2, 3, 1, 2, 3, 1, 2, 3])
+    --> {{1, 2}, {2}, {2, 3}}
     if class of src is text then
         set {dlm, my text item delimiters} to ¬
             {my text item delimiters, pat}
@@ -5406,11 +5335,11 @@ on subTreeAtPath(tree, pathSegments)
     |λ|({tree}, pathSegments) of go
 end subTreeAtPath
 
--- subsequences([1,2,3]) -> [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
--- subsequences("abc") -> ["","a","b","ab","c","ac","bc","abc"]
 -- subsequences :: [a] -> [[a]]
 -- subsequences :: String -> [String]
 on subsequences(xs)
+    -- subsequences([1,2,3]) -> [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
+    -- subsequences("abc") -> ["","a","b","ab","c","ac","bc","abc"]
     script nonEmptySubsequences
         on |λ|(xxs)
             if length of xxs < 1 then
@@ -5879,11 +5808,11 @@ on toUpper(str)
         uppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
 end toUpper
 
--- If some of the rows are shorter than the following rows, 
--- their elements are skipped:
--- transpose({{10,11},{20},{},{30,31,32}}) -> {{10, 20, 30}, {11, 31}, {32}}
 -- transpose :: [[a]] -> [[a]]
 on transpose(xxs)
+    -- If some of the rows are shorter than the following rows, 
+    -- their elements are skipped:
+    -- transpose({{10,11},{20},{},{30,31,32}}) -> {{10, 20, 30}, {11, 31}, {32}}
     set intMax to |length|(maximumBy(comparing(my |length|), xxs))
     set gaps to replicate(intMax, {})
     script padded
@@ -6260,9 +6189,9 @@ on uncurry(f)
 end uncurry
 
 
--- | Build a forest from a list of seed values
 -- unfoldForest :: (b -> (a, [b])) -> [b] -> [Tree]
 on unfoldForest(f, xs)
+    -- | Build a forest from a list of seed values
     set g to mReturn(f)
     script
         on |λ|(x)
@@ -6280,10 +6209,10 @@ on unfoldTree(f, b)
     Node(|1| of tpl, unfoldForest(g, |2| of tpl))
 end unfoldTree
 
--- > unfoldl (\b -> if b == 0 then Nothing else Just (b, b-1)) 10
--- > [1,2,3,4,5,6,7,8,9,10]
 -- unfoldl :: (b -> Maybe (b, a)) -> b -> [a]
 on unfoldl(f, v)
+    -- > unfoldl (\b -> if b == 0 then Nothing else Just (b, b-1)) 10
+    -- > [1,2,3,4,5,6,7,8,9,10]
     set xr to Tuple(v, v) -- (value, remainder)
     set xs to {}
     tell mReturn(f)
