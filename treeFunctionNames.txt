@@ -1,3 +1,4 @@
+Node :: a -> [Tree a] -> Tree a
 allTree :: (a -> Bool) -> Tree a -> Bool
 anyTree :: (a -> Bool) -> Tree a -> Bool
 apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b

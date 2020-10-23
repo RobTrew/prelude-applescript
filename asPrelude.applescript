@@ -206,14 +206,13 @@ on apLR(flr, lr)
     end if
 end apLR
 
--- e.g. [(*2),(/2), sqrt] <*> [1,2,3]
--- -->  ap([dbl, hlf, root], [1, 2, 3])
--- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]
-
--- Each member of a list of functions applied to
--- each of a list of arguments, deriving a list of new values
 -- apList (<*>) :: [(a -> b)] -> [a] -> [b]
 on apList(fs, xs)
+    -- e.g. [(*2),(/2), sqrt] <*> [1,2,3]
+    -- -->  ap([dbl, hlf, root], [1, 2, 3])
+    -- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]
+    -- Each member of a list of functions applied to
+    -- each of a list of arguments, deriving a list of new values
     set lst to {}
     repeat with f in fs
         tell mReturn(contents of f)
@@ -225,9 +224,9 @@ on apList(fs, xs)
     return lst
 end apList
 
--- Maybe f applied to Maybe x, deriving a Maybe y
 -- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
 on apMay(mf, mx)
+    -- Maybe f applied to Maybe x, deriving a Maybe y
     if Nothing of mf or Nothing of mx then
         Nothing()
     else
@@ -255,19 +254,19 @@ on apTuple(tf, tx)
     Tuple(mappend(|1| of tf, |1| of tx), |λ|(|2| of tx) of mReturn(|2| of tf))
 end apTuple
 
--- Append two lists.
--- append (++) :: [a] -> [a] -> [a]
--- append (++) :: String -> String -> String
+-- append (<>) :: [a] -> [a] -> [a]
+-- append (<>) :: String -> String -> String
 on append(xs, ys)
+    -- Append two lists.
     xs & ys
 end append
 
--- Write a string to the end of a file. 
--- Returns true if the path exists 
--- and the write succeeded. 
--- Otherwise returns false.
 -- appendFile :: FilePath -> String -> IO Bool
 on appendFile(strPath, txt)
+    -- Write a string to the end of a file. 
+    -- Returns true if the path exists 
+    -- and the write succeeded. 
+    -- Otherwise returns false.
     set ca to current application
     set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬
         stringByStandardizingPath
@@ -296,12 +295,12 @@ on appendFile(strPath, txt)
     end if
 end appendFile
 
--- Write a string to the end of a file. 
--- Returns a Just FilePath value if the 
--- path exists and the write succeeded. 
--- Otherwise returns Nothing.
 -- appendFileMay :: FilePath -> String -> Maybe IO FilePath
 on appendFileMay(strPath, txt)
+    -- Write a string to the end of a file. 
+    -- Returns a Just FilePath value if the 
+    -- path exists and the write succeeded. 
+    -- Otherwise returns Nothing.
     set ca to current application
     set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬
         stringByStandardizingPath
@@ -625,10 +624,10 @@ on breakOn(pat, src)
     end if
 end breakOn
 
--- breakOnAll "/" "a/b/c/"
--- ==> [("a", "/b/c/"), ("a/b", "/c/"), ("a/b/c", "/")]
 -- breakOnAll :: String -> String -> [(String, String)]
 on breakOnAll(pat, src)
+    -- breakOnAll "/" "a/b/c/"
+    -- ==> [("a", "/b/c/"), ("a/b", "/c/"), ("a/b/c", "/")]
     if "" ≠ pat then
         script
             on |λ|(a, _, i, xs)
@@ -646,9 +645,9 @@ on breakOnAll(pat, src)
     end if
 end breakOnAll
 
--- needle -> haystack -> maybe (prefix before match, match + rest)
 -- breakOnMay :: String -> String -> Maybe (String, String)
 on breakOnMay(pat, src)
+    -- needle -> haystack -> maybe (prefix before match, match + rest)
     if pat ≠ "" then
         set {dlm, my text item delimiters} to {my text item delimiters, pat}
         
@@ -985,9 +984,9 @@ on cycle(xs)
     end script
 end cycle
 
--- use framework "Foundation"
 -- decodedPath :: Percent Encoded String -> FilePath
 on decodedPath(fp)
+    -- use framework "Foundation"
     tell current application to ¬
         (stringByRemovingPercentEncoding ¬
             of stringWithString_(fp) ¬
@@ -1555,14 +1554,14 @@ on elem(x, xs)
     end considering
 end elem
 
--- If x is a Dictionary then reads the Int as an index
--- into the lexically sorted keys of the Dict, 
--- returning a Maybe (Key, Value) pair.
--- If x is a list, then return a Maybe a 
--- (In either case, returns Nothing for an Int out of range)
 -- elemAtMay :: Int -> Dict -> Maybe (String, a)
 -- elemAtMay :: Int -> [a] -> Maybe a
 on elemAtMay(i, x)
+    -- If x is a Dictionary then reads the Int as an index
+    -- into the lexically sorted keys of the Dict, 
+    -- returning a Maybe (Key, Value) pair.
+    -- If x is a list, then return a Maybe a 
+    -- (In either case, returns Nothing for an Int out of range)
     set bln to class of x is record
     if bln then
         set ks to keys(x)
@@ -1740,13 +1739,13 @@ on eq(a, b)
     a = b
 end eq
 
--- gJSC can be declared in the global namespace,
--- but unless the reference is released before the 
--- end of the script (e.g. `set gJSC to null`)
--- it will persist, and
--- Script Editor will be unable to save a .scpt file
 -- evalJSLR :: String -> Either String a
 on evalJSLR(strJS)
+    -- gJSC can be declared in the global namespace,
+    -- but unless the reference is released before the 
+    -- end of the script (e.g. `set gJSC to null`)
+    -- it will persist, and
+    -- Script Editor will be unable to save a .scpt file
     set gJSC to current application's JSContext's new()
     set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())
     if v is missing value then
@@ -1756,16 +1755,15 @@ on evalJSLR(strJS)
     end if
 end evalJSLR
 
--- use framework "Foundation"
--- use framework "JavaScriptCore"
-
--- gJSC can be declared in the global namespace,
--- but unless the reference is released before the 
--- end of the script (e.g. `set gJSC to null`)
--- it will persist, and
--- Script Editor will be unable to save a .scpt file
 -- evalJSMay :: String -> Maybe a
 on evalJSMay(strJS)
+    -- use framework "Foundation"
+    -- use framework "JavaScriptCore"
+    -- gJSC can be declared in the global namespace,
+    -- but unless the reference is released before the 
+    -- end of the script (e.g. `set gJSC to null`)
+    -- it will persist, and
+    -- Script Editor will be unable to save a .scpt file
     try -- NB if gJSC is global it must be released 
         -- (e.g. set to null) at end of script
         gJSC's evaluateScript
@@ -1804,10 +1802,10 @@ on fTable(s, xShow, fxShow, f, xs)
         ys, map(compose(fxShow, f), xs)))
 end fTable
 
--- Compose a function from a simple value to a tuple of
--- the separate outputs of two different functions
 -- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))
 on fanArrow(f, g)
+    -- Compose a function from a simple value to a tuple of
+    -- the separate outputs of two different functions
     script
         on |λ|(x)
             Tuple(mReturn(f)'s |λ|(x), mReturn(g)'s |λ|(x))
@@ -1962,10 +1960,10 @@ on findIndices(p, xs)
     concatMap(result, xs)
 end findIndices
 
--- The first of any nodes in the tree which match the predicate p
--- (For all matches, see treeMatches)
 -- findTree :: (a -> Bool) -> Tree a -> Maybe Tree a
 on findTree(p, tree)
+    -- The first of any nodes in the tree which match the predicate p
+    -- (For all matches, see treeMatches)
     script go
         property pf : mReturn(p)'s |λ|
         on |λ|(oNode)
@@ -2020,9 +2018,9 @@ on flatten(t)
     end if
 end flatten
 
--- The root elements of a tree in pre-order.
 -- flattenTree :: Tree a -> [a]
 on flattenTree(node)
+    -- The root elements of a tree in pre-order.
     script go
         on |λ|(x, xs)
             {root of x} & foldr(go, xs, nest of x)
@@ -2351,9 +2349,9 @@ on fst(tpl)
     end if
 end fst
 
--- Abbreviation for quick testing
 -- ft :: (Int, Int) -> [Int]
 on ft(m, n)
+    -- Abbreviation for quick testing
     if m ≤ n then
         set lst to {}
         repeat with i from m to n
@@ -2443,9 +2441,9 @@ on group(xs)
     groupBy(eq, xs)
 end group
 
--- Typical usage: groupBy(on(eq, f), xs)
 -- groupBy :: (a -> a -> Bool) -> [a] -> [[a]]
 on groupBy(f, xs)
+    -- Typical usage: groupBy(on(eq, f), xs)
     set mf to mReturn(f)
     
     script enGroup
@@ -2476,17 +2474,17 @@ on groupBy(f, xs)
     end if
 end groupBy
 
--- Sort and group a list by comparing the results of a key function
--- applied to each element. groupSortOn f is equivalent to
--- groupBy eq $ sortBy (comparing f),
--- but has the performance advantage of only evaluating f once for each
--- element in the input list.
--- This is a decorate-(group.sort)-undecorate pattern, as in the
--- so-called 'Schwartzian transform'.
--- Groups are arranged from from lowest to highest.
 -- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]
 -- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]
 on groupSortOn(f, xs)
+    -- Sort and group a list by comparing the results of a key function
+    -- applied to each element. groupSortOn f is equivalent to
+    -- groupBy eq $ sortBy (comparing f),
+    -- but has the performance advantage of only evaluating f once for each
+    -- element in the input list.
+    -- This is a decorate-(group.sort)-undecorate pattern, as in the
+    -- so-called 'Schwartzian transform'.
+    -- Groups are arranged from from lowest to highest.
     script keyBool
         on |λ|(a, x)
             if class of x is boolean then
@@ -2899,10 +2897,10 @@ on isLower(c)
     d ≥ 0 and d < 26
 end isLower
 
-use framework "Foundation"
-use scripting additions
 -- isMaybe :: a -> Bool
 on isMaybe(x)
+    -- use framework "Foundation"
+    -- use scripting additions
     if class of x is record then
         set ca to current application
         set v to ((ca's NSDictionary's ¬
@@ -2926,11 +2924,11 @@ on isNull(xs)
     end if
 end isNull
 
--- isPrefixOf takes two lists or strings and returns 
---  true if and only if the first is a prefix of the second.
 -- isPrefixOf :: [a] -> [a] -> Bool
 -- isPrefixOf :: String -> String -> Bool
 on isPrefixOf(xs, ys)
+    -- isPrefixOf takes two lists or strings and returns 
+    --  true if and only if the first is a prefix of the second.
     script go
         on |λ|(xs, ys)
             set intX to length of xs
@@ -2957,10 +2955,10 @@ on isRight(x)
         (dct's objectForKey:"Left") as list = {missing value}
 end isRight
 
--- The 'isSortedBy' function returns true iff the predicate returns true
--- for all adjacent pairs of elements in the list.
 -- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool
 on isSortedBy(cmp, xs)
+    -- The 'isSortedBy' function returns true iff the predicate returns true
+    -- for all adjacent pairs of elements in the list.
     script LE
         on |λ|(x)
             x < 1
@@ -3129,7 +3127,6 @@ on keys(rec)
     (current application's NSDictionary's dictionaryWithDictionary:rec)'s allKeys() as list
 end keys
 
--- Kleisli composition LR
 -- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)
 on kleisliCompose(f, g)
     script
@@ -3240,12 +3237,12 @@ on levels(tree)
     map(roots, iterateUntil(my isNull, nextLayer, {tree}))
 end levels
 
--- Lift a binary function to actions.
--- e.g.
--- liftA2(mult, {1, 2, 3}, {4, 5, 6}) 
---> {4, 5, 6, 8, 10, 12, 12, 15, 18}
 -- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 on liftA2(f, a, b)
+    -- Lift a binary function to actions.
+    -- e.g.
+    -- liftA2(mult, {1, 2, 3}, {4, 5, 6}) 
+    --> {4, 5, 6, 8, 10, 12, 12, 15, 18}
     set c to class of a
     if c is list or c is text then
         liftA2List(f, a, b)
@@ -3397,8 +3394,6 @@ on listDirectory(strPath)
             wrap(strPath))) |error|:(missing value))
 end listDirectory
 
--- The listFromMaybe function returns an empty list when given
--- Nothing or a singleton list when not given Nothing.
 -- listFromMaybe :: Maybe a -> [a]
 on listFromMaybe(mb)
     -- A singleton list derived from a Just value, 
@@ -3425,10 +3420,10 @@ on listFromTuple(tpl)
     items 2 thru -2 of (tpl as list)
 end listFromTuple
 
--- The listToMaybe function returns Nothing on 
--- an empty list or Just the head of the list.
 -- listToMaybe :: [a] -> Maybe a
 on listToMaybe(xs)
+    -- The listToMaybe function returns Nothing on 
+    -- an empty list or Just the head of the list.
     if xs ≠ {} then
         Just(item 1 of xs)
     else
@@ -3441,8 +3436,6 @@ on |log|(n)
     Just of evalJSMay(("Math.log(" & n as string) & ")")
 end |log|
 
--- use framework "Foundation"
--- use scripting additions
 -- lookup :: Eq a => a -> Container -> Maybe b
 on lookup(k, m)
     set c to class of m
@@ -3513,12 +3506,12 @@ on map(f, xs)
     end tell
 end map
 
--- 'The mapAccumL function behaves like a combination of map and foldl; 
--- it applies a function to each element of a list, passing an 
--- accumulating parameter from |Left| to |Right|, and returning a final 
--- value of this accumulator together with the new list.' (see Hoogle)
 -- mapAccumL :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumL(f, acc, xs)
+    -- 'The mapAccumL function behaves like a combination of map and foldl; 
+    -- it applies a function to each element of a list, passing an 
+    -- accumulating parameter from |Left| to |Right|, and returning a final 
+    -- value of this accumulator together with the new list.' (see Hoogle)
     script
         on |λ|(a, x, i)
             tell mReturn(f) to set pair to |λ|(|1| of a, x, i)
@@ -3542,12 +3535,12 @@ on mapAccumL_Tree(f, acc, tree)
     |λ|(acc, tree) of go
 end mapAccumL_Tree
 
--- 'The mapAccumR function behaves like a combination of map and foldr; 
---  it applies a function to each element of a list, passing an accumulating 
---  parameter from |Right| to |Left|, and returning a final value of this 
---  accumulator together with the new list.' (see Hoogle)
 -- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])
 on mapAccumR(f, acc, xs)
+    -- 'The mapAccumR function behaves like a combination of map and foldr; 
+    --  it applies a function to each element of a list, passing an accumulating 
+    --  parameter from |Right| to |Left|, and returning a final value of this 
+    --  accumulator together with the new list.' (see Hoogle)
     script
         on |λ|(x, a, i)
             tell mReturn(f) to set pair to |λ|(|1| of a, x, i)
@@ -3569,13 +3562,13 @@ on mapKeys(f, dct)
     map(result, zip(keys(dct), elems(dct)))
 end mapKeys
 
--- The mapMaybe function is a version of map which can throw out
--- elements. In particular, the functional argument returns
--- something of type Maybe b. If this is Nothing, no element is
--- added on to the result list. If it just Just b, then b is
--- included in the result list.
 -- mapMaybe :: (a -> Maybe b) -> [a] -> [b]
 on mapMaybe(mf, xs)
+    -- The mapMaybe function is a version of map which can throw out
+    -- elements. In particular, the functional argument returns
+    -- something of type Maybe b. If this is Nothing, no element is
+    -- added on to the result list. If it just Just b, then b is
+    -- included in the result list.
     script
         property g : mReturn(mf)
         on |λ|(a, x)
@@ -3673,10 +3666,10 @@ on mappendTuple(a, b)
     Tuple(mappend(|1| of a, |1| of b), mappend(|2| of a, |2| of b))
 end mappendTuple
 
--- Returns a sequence-matching function for findIndices etc
 -- matching :: [a] -> (a -> Int -> [a] -> Bool)
 -- matching :: String -> (Char -> Int -> String -> Bool)
 on matching(pat)
+    -- Returns a sequence-matching function for findIndices etc
     if class of pat is text then
         set xs to characters of pat
     else
@@ -3942,8 +3935,6 @@ on nest(oTree)
     nest of oTree
 end nest
 
--- use framework "Foundation"
--- use scripting additions
 -- newUUID :: () -> IO UUID String
 on newUUID()
     current application's NSUUID's UUID's UUIDString as string
@@ -3999,9 +3990,9 @@ on odd(x)
     not even(x)
 end odd
 
--- e.g. sortBy(|on|(compare, |length|), ["epsilon", "mu", "gamma", "beta"])
 -- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
 on |on|(f, g)
+    -- e.g. sortBy(|on|(compare, |length|), ["epsilon", "mu", "gamma", "beta"])
     script
         on |λ|(a, b)
             tell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}
@@ -4010,9 +4001,9 @@ on |on|(f, g)
     end script
 end |on|
 
--- Derive a script with |λ| handler from the name of an infix operator
 -- op :: String -> (a -> a -> b)
 on op(strOp)
+    -- Derive a script with |λ| handler from the name of an infix operator
     run script "script\non |λ|(a, b)\na " & strOp & " b\nend |λ|\nend script"
 end op
 

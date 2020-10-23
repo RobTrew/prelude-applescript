@@ -14,7 +14,8 @@
   "Node": {
     "code": "-- Node :: a -> [Tree a] -> Tree a\non Node(v, xs)\n    {type:\"Node\", root:v, nest:xs}\nend Node",
     "tags": [
-      "AS Prelude"
+      "AS Prelude",
+      "tree"
     ]
   },
   "Nothing": {
@@ -116,13 +117,13 @@
     ]
   },
   "apList (<*>)": {
-    "code": "-- e.g. [(*2),(/2), sqrt] <*> [1,2,3]\n-- -->  ap([dbl, hlf, root], [1, 2, 3])\n-- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]\n\n-- Each member of a list of functions applied to\n-- each of a list of arguments, deriving a list of new values\n-- apList (<*>) :: [(a -> b)] -> [a] -> [b]\non apList(fs, xs)\n    set lst to {}\n    repeat with f in fs\n        tell mReturn(contents of f)\n            repeat with x in xs\n                set end of lst to |λ|(contents of x)\n            end repeat\n        end tell\n    end repeat\n    return lst\nend apList",
+    "code": "-- apList (<*>) :: [(a -> b)] -> [a] -> [b]\non apList(fs, xs)\n    -- e.g. [(*2),(/2), sqrt] <*> [1,2,3]\n    -- -->  ap([dbl, hlf, root], [1, 2, 3])\n    -- -->  [2,4,6,0.5,1,1.5,1,1.4142135623730951,1.7320508075688772]\n    -- Each member of a list of functions applied to\n    -- each of a list of arguments, deriving a list of new values\n    set lst to {}\n    repeat with f in fs\n        tell mReturn(contents of f)\n            repeat with x in xs\n                set end of lst to |λ|(contents of x)\n            end repeat\n        end tell\n    end repeat\n    return lst\nend apList",
     "tags": [
       "AS Prelude"
     ]
   },
   "apMay (<*>)": {
-    "code": "-- Maybe f applied to Maybe x, deriving a Maybe y\n-- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\non apMay(mf, mx)\n    if Nothing of mf or Nothing of mx then\n        Nothing()\n    else\n        Just(|λ|(Just of mx) of mReturn(Just of mf))\n    end if\nend apMay",
+    "code": "-- apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b\non apMay(mf, mx)\n    -- Maybe f applied to Maybe x, deriving a Maybe y\n    if Nothing of mf or Nothing of mx then\n        Nothing()\n    else\n        Just(|λ|(Just of mx) of mReturn(Just of mf))\n    end if\nend apMay",
     "tags": [
       "AS Prelude"
     ]
@@ -140,20 +141,20 @@
       "AS Prelude"
     ]
   },
-  "append (++)": {
-    "code": "-- Append two lists.\n-- append (++) :: [a] -> [a] -> [a]\n-- append (++) :: String -> String -> String\non append(xs, ys)\n    xs & ys\nend append",
+  "append (<>)": {
+    "code": "-- append (<>) :: [a] -> [a] -> [a]\n-- append (<>) :: String -> String -> String\non append(xs, ys)\n    -- Append two lists.\n    xs & ys\nend append",
     "tags": [
       "AS Prelude"
     ]
   },
   "appendFile": {
-    "code": "-- Write a string to the end of a file. \n-- Returns true if the path exists \n-- and the write succeeded. \n-- Otherwise returns false.\n-- appendFile :: FilePath -> String -> IO Bool\non appendFile(strPath, txt)\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n    if blnExists then\n        if 0 = intFolder then\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            true\n        else\n            -- text appended to folder is undefined\n            false\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(oFullPath as string)) then\n            writeFile(oFullPath, txt)\n            true\n        else\n            false\n        end if\n    end if\nend appendFile",
+    "code": "-- appendFile :: FilePath -> String -> IO Bool\non appendFile(strPath, txt)\n    -- Write a string to the end of a file. \n    -- Returns true if the path exists \n    -- and the write succeeded. \n    -- Otherwise returns false.\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n    if blnExists then\n        if 0 = intFolder then\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            true\n        else\n            -- text appended to folder is undefined\n            false\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(oFullPath as string)) then\n            writeFile(oFullPath, txt)\n            true\n        else\n            false\n        end if\n    end if\nend appendFile",
     "tags": [
       "AS Prelude"
     ]
   },
   "appendFileMay": {
-    "code": "-- Write a string to the end of a file. \n-- Returns a Just FilePath value if the \n-- path exists and the write succeeded. \n-- Otherwise returns Nothing.\n-- appendFileMay :: FilePath -> String -> Maybe IO FilePath\non appendFileMay(strPath, txt)\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set strFullPath to oFullPath as string\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n    if blnExists then\n        if 0 = intFolder then -- Not a directory\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            Just(strFullPath)\n        else\n            Nothing()\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(strFullPath)) then\n            writeFile(oFullPath, txt)\n            Just(strFullPath)\n        else\n            Nothing()\n        end if\n    end if\nend appendFileMay",
+    "code": "-- appendFileMay :: FilePath -> String -> Maybe IO FilePath\non appendFileMay(strPath, txt)\n    -- Write a string to the end of a file. \n    -- Returns a Just FilePath value if the \n    -- path exists and the write succeeded. \n    -- Otherwise returns Nothing.\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set strFullPath to oFullPath as string\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n    if blnExists then\n        if 0 = intFolder then -- Not a directory\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            Just(strFullPath)\n        else\n            Nothing()\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(strFullPath)) then\n            writeFile(oFullPath, txt)\n            Just(strFullPath)\n        else\n            Nothing()\n        end if\n    end if\nend appendFileMay",
     "tags": [
       "AS Prelude"
     ]
@@ -279,13 +280,13 @@
     ]
   },
   "breakOnAll": {
-    "code": "-- breakOnAll \"/\" \"a/b/c/\"\n-- ==> [(\"a\", \"/b/c/\"), (\"a/b\", \"/c/\"), (\"a/b/c\", \"/\")]\n-- breakOnAll :: String -> String -> [(String, String)]\non breakOnAll(pat, src)\n    if \"\" ≠ pat then\n        script\n            on |λ|(a, _, i, xs)\n                if 1 < i then\n                    a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\n                        pat & intercalate(pat, drop(i - 1, xs)))}\n                else\n                    a\n                end if\n            end |λ|\n        end script\n        foldl(result, {}, splitOn(pat, src))\n    else\n        missing value\n    end if\nend breakOnAll",
+    "code": "-- breakOnAll :: String -> String -> [(String, String)]\non breakOnAll(pat, src)\n    -- breakOnAll \"/\" \"a/b/c/\"\n    -- ==> [(\"a\", \"/b/c/\"), (\"a/b\", \"/c/\"), (\"a/b/c\", \"/\")]\n    if \"\" ≠ pat then\n        script\n            on |λ|(a, _, i, xs)\n                if 1 < i then\n                    a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\n                        pat & intercalate(pat, drop(i - 1, xs)))}\n                else\n                    a\n                end if\n            end |λ|\n        end script\n        foldl(result, {}, splitOn(pat, src))\n    else\n        missing value\n    end if\nend breakOnAll",
     "tags": [
       "AS Prelude"
     ]
   },
   "breakOnMay": {
-    "code": "-- needle -> haystack -> maybe (prefix before match, match + rest)\n-- breakOnMay :: String -> String -> Maybe (String, String)\non breakOnMay(pat, src)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        if length of lstParts > 1 then\n            set mbTuple to Just(Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text)))\n        else\n            set mbTuple to Just(Tuple(src, \"\"))\n        end if\n        \n        set my text item delimiters to dlm\n        return mbTuple\n    else\n        Nothing()\n    end if\nend breakOnMay",
+    "code": "-- breakOnMay :: String -> String -> Maybe (String, String)\non breakOnMay(pat, src)\n    -- needle -> haystack -> maybe (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        if length of lstParts > 1 then\n            set mbTuple to Just(Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text)))\n        else\n            set mbTuple to Just(Tuple(src, \"\"))\n        end if\n        \n        set my text item delimiters to dlm\n        return mbTuple\n    else\n        Nothing()\n    end if\nend breakOnMay",
     "tags": [
       "AS Prelude"
     ]
@@ -435,7 +436,7 @@
     ]
   },
   "decodedPath": {
-    "code": "-- use framework \"Foundation\"\n-- decodedPath :: Percent Encoded String -> FilePath\non decodedPath(fp)\n    tell current application to ¬\n        (stringByRemovingPercentEncoding ¬\n            of stringWithString_(fp) ¬\n            of its NSString) as string\nend decodedPath",
+    "code": "-- decodedPath :: Percent Encoded String -> FilePath\non decodedPath(fp)\n    -- use framework \"Foundation\"\n    tell current application to ¬\n        (stringByRemovingPercentEncoding ¬\n            of stringWithString_(fp) ¬\n            of its NSString) as string\nend decodedPath",
     "tags": [
       "AS Prelude"
     ]
@@ -624,7 +625,7 @@
     ]
   },
   "elemAtMay": {
-    "code": "-- If x is a Dictionary then reads the Int as an index\n-- into the lexically sorted keys of the Dict, \n-- returning a Maybe (Key, Value) pair.\n-- If x is a list, then return a Maybe a \n-- (In either case, returns Nothing for an Int out of range)\n-- elemAtMay :: Int -> Dict -> Maybe (String, a)\n-- elemAtMay :: Int -> [a] -> Maybe a\non elemAtMay(i, x)\n    set bln to class of x is record\n    if bln then\n        set ks to keys(x)\n        if i ≤ |length|(ks) then\n            set k to item i of sort(ks)\n            script pair\n                on |λ|(v)\n                    Just(Tuple(k, v))\n                end |λ|\n            end script\n            bindMay(lookup(k, x), pair)\n        end if\n    else\n        if i ≤ |length|(x) then\n            Just(item i of x)\n        else\n            Nothing()\n        end if\n    end if\nend elemAtMay",
+    "code": "-- elemAtMay :: Int -> Dict -> Maybe (String, a)\n-- elemAtMay :: Int -> [a] -> Maybe a\non elemAtMay(i, x)\n    -- If x is a Dictionary then reads the Int as an index\n    -- into the lexically sorted keys of the Dict, \n    -- returning a Maybe (Key, Value) pair.\n    -- If x is a list, then return a Maybe a \n    -- (In either case, returns Nothing for an Int out of range)\n    set bln to class of x is record\n    if bln then\n        set ks to keys(x)\n        if i ≤ |length|(ks) then\n            set k to item i of sort(ks)\n            script pair\n                on |λ|(v)\n                    Just(Tuple(k, v))\n                end |λ|\n            end script\n            bindMay(lookup(k, x), pair)\n        end if\n    else\n        if i ≤ |length|(x) then\n            Just(item i of x)\n        else\n            Nothing()\n        end if\n    end if\nend elemAtMay",
     "tags": [
       "AS Prelude"
     ]
@@ -708,13 +709,13 @@
     ]
   },
   "evalJSLR": {
-    "code": "-- gJSC can be declared in the global namespace,\n-- but unless the reference is released before the \n-- end of the script (e.g. `set gJSC to null`)\n-- it will persist, and\n-- Script Editor will be unable to save a .scpt file\n-- evalJSLR :: String -> Either String a\non evalJSLR(strJS)\n    set gJSC to current application's JSContext's new()\n    set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())\n    if v is missing value then\n        |Left|(\"JS evaluation error\")\n    else\n        |Right|(v)\n    end if\nend evalJSLR",
+    "code": "-- evalJSLR :: String -> Either String a\non evalJSLR(strJS)\n    -- gJSC can be declared in the global namespace,\n    -- but unless the reference is released before the \n    -- end of the script (e.g. `set gJSC to null`)\n    -- it will persist, and\n    -- Script Editor will be unable to save a .scpt file\n    set gJSC to current application's JSContext's new()\n    set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())\n    if v is missing value then\n        |Left|(\"JS evaluation error\")\n    else\n        |Right|(v)\n    end if\nend evalJSLR",
     "tags": [
       "AS Prelude"
     ]
   },
   "evalJSMay": {
-    "code": "-- use framework \"Foundation\"\n-- use framework \"JavaScriptCore\"\n\n-- gJSC can be declared in the global namespace,\n-- but unless the reference is released before the \n-- end of the script (e.g. `set gJSC to null`)\n-- it will persist, and\n-- Script Editor will be unable to save a .scpt file\n-- evalJSMay :: String -> Maybe a\non evalJSMay(strJS)\n    try -- NB if gJSC is global it must be released \n        -- (e.g. set to null) at end of script\n        gJSC's evaluateScript\n    on error\n        set gJSC to current application's JSContext's new()\n        log (\"new JSC\")\n    end try\n    set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())\n    if v is missing value then\n        Nothing()\n    else\n        Just(v)\n    end if\nend evalJSMay",
+    "code": "-- evalJSMay :: String -> Maybe a\non evalJSMay(strJS)\n    -- use framework \"Foundation\"\n    -- use framework \"JavaScriptCore\"\n    -- gJSC can be declared in the global namespace,\n    -- but unless the reference is released before the \n    -- end of the script (e.g. `set gJSC to null`)\n    -- it will persist, and\n    -- Script Editor will be unable to save a .scpt file\n    try -- NB if gJSC is global it must be released \n        -- (e.g. set to null) at end of script\n        gJSC's evaluateScript\n    on error\n        set gJSC to current application's JSContext's new()\n        log (\"new JSC\")\n    end try\n    set v to unwrap((gJSC's evaluateScript:(strJS))'s toObject())\n    if v is missing value then\n        Nothing()\n    else\n        Just(v)\n    end if\nend evalJSMay",
     "tags": [
       "AS Prelude"
     ]
@@ -738,7 +739,7 @@
     ]
   },
   "fanArrow (&&&)": {
-    "code": "-- Compose a function from a simple value to a tuple of\n-- the separate outputs of two different functions\n-- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))\non fanArrow(f, g)\n    script\n        on |λ|(x)\n            Tuple(mReturn(f)'s |λ|(x), mReturn(g)'s |λ|(x))\n        end |λ|\n    end script\nend fanArrow",
+    "code": "-- fanArrow (&&&) :: (a -> b) -> (a -> c) -> (a -> (b, c))\non fanArrow(f, g)\n    -- Compose a function from a simple value to a tuple of\n    -- the separate outputs of two different functions\n    script\n        on |λ|(x)\n            Tuple(mReturn(f)'s |λ|(x), mReturn(g)'s |λ|(x))\n        end |λ|\n    end script\nend fanArrow",
     "tags": [
       "AS Prelude"
     ]
@@ -811,7 +812,7 @@
     ]
   },
   "findTree": {
-    "code": "-- The first of any nodes in the tree which match the predicate p\n-- (For all matches, see treeMatches)\n-- findTree :: (a -> Bool) -> Tree a -> Maybe Tree a\non findTree(p, tree)\n    script go\n        property pf : mReturn(p)'s |λ|\n        on |λ|(oNode)\n            if pf(root of oNode) then\n                Just(oNode)\n            else\n                set xs to nest of oNode\n                set lng to length of xs\n                \n                script inNest\n                    on |λ|(tpl)\n                        lng < fst(tpl) or (not (Nothing of snd(tpl)))\n                    end |λ|\n                end script\n                \n                script nextPeer\n                    on |λ|(tpl)\n                        Tuple(1 + fst(tpl), go's |λ|(item (fst(tpl)) of xs))\n                    end |λ|\n                end script\n                \n                if 0 < lng then\n                    snd(|until|(inNest, nextPeer, Tuple(1, Nothing())))\n                else\n                    Nothing()\n                end if\n            end if\n        end |λ|\n    end script\n    \n    go's |λ|(tree)\nend findTree",
+    "code": "-- findTree :: (a -> Bool) -> Tree a -> Maybe Tree a\non findTree(p, tree)\n    -- The first of any nodes in the tree which match the predicate p\n    -- (For all matches, see treeMatches)\n    script go\n        property pf : mReturn(p)'s |λ|\n        on |λ|(oNode)\n            if pf(root of oNode) then\n                Just(oNode)\n            else\n                set xs to nest of oNode\n                set lng to length of xs\n                \n                script inNest\n                    on |λ|(tpl)\n                        lng < fst(tpl) or (not (Nothing of snd(tpl)))\n                    end |λ|\n                end script\n                \n                script nextPeer\n                    on |λ|(tpl)\n                        Tuple(1 + fst(tpl), go's |λ|(item (fst(tpl)) of xs))\n                    end |λ|\n                end script\n                \n                if 0 < lng then\n                    snd(|until|(inNest, nextPeer, Tuple(1, Nothing())))\n                else\n                    Nothing()\n                end if\n            end if\n        end |λ|\n    end script\n    \n    go's |λ|(tree)\nend findTree",
     "tags": [
       "AS Prelude",
       "tree"
@@ -830,7 +831,7 @@
     ]
   },
   "flattenTree": {
-    "code": "-- The root elements of a tree in pre-order.\n-- flattenTree :: Tree a -> [a]\non flattenTree(node)\n    script go\n        on |λ|(x, xs)\n            {root of x} & foldr(go, xs, nest of x)\n        end |λ|\n    end script\n    go's |λ|(node, {})\nend flattenTree",
+    "code": "-- flattenTree :: Tree a -> [a]\non flattenTree(node)\n    -- The root elements of a tree in pre-order.\n    script go\n        on |λ|(x, xs)\n            {root of x} & foldr(go, xs, nest of x)\n        end |λ|\n    end script\n    go's |λ|(node, {})\nend flattenTree",
     "tags": [
       "AS Prelude",
       "tree"
@@ -986,7 +987,7 @@
     ]
   },
   "ft": {
-    "code": "-- Abbreviation for quick testing\n-- ft :: (Int, Int) -> [Int]\non ft(m, n)\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        return lst\n    else\n        return {}\n    end if\nend ft",
+    "code": "-- ft :: (Int, Int) -> [Int]\non ft(m, n)\n    -- Abbreviation for quick testing\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        return lst\n    else\n        return {}\n    end if\nend ft",
     "tags": [
       "AS Prelude"
     ]
@@ -1046,13 +1047,13 @@
     ]
   },
   "groupBy": {
-    "code": "-- Typical usage: groupBy(on(eq, f), xs)\n-- groupBy :: (a -> a -> Bool) -> [a] -> [[a]]\non groupBy(f, xs)\n    set mf to mReturn(f)\n    \n    script enGroup\n        on |λ|(a, x)\n            if length of (active of a) > 0 then\n                set h to item 1 of active of a\n            else\n                set h to missing value\n            end if\n            \n            if h is not missing value and mf's |λ|(h, x) then\n                {active:(active of a) & {x}, sofar:sofar of a}\n            else\n                {active:{x}, sofar:(sofar of a) & {active of a}}\n            end if\n        end |λ|\n    end script\n    \n    if length of xs > 0 then\n        set dct to foldl(enGroup, {active:{item 1 of xs}, sofar:{}}, rest of xs)\n        if length of (active of dct) > 0 then\n            sofar of dct & {active of dct}\n        else\n            sofar of dct\n        end if\n    else\n        {}\n    end if\nend groupBy",
+    "code": "-- groupBy :: (a -> a -> Bool) -> [a] -> [[a]]\non groupBy(f, xs)\n    -- Typical usage: groupBy(on(eq, f), xs)\n    set mf to mReturn(f)\n    \n    script enGroup\n        on |λ|(a, x)\n            if length of (active of a) > 0 then\n                set h to item 1 of active of a\n            else\n                set h to missing value\n            end if\n            \n            if h is not missing value and mf's |λ|(h, x) then\n                {active:(active of a) & {x}, sofar:sofar of a}\n            else\n                {active:{x}, sofar:(sofar of a) & {active of a}}\n            end if\n        end |λ|\n    end script\n    \n    if length of xs > 0 then\n        set dct to foldl(enGroup, {active:{item 1 of xs}, sofar:{}}, rest of xs)\n        if length of (active of dct) > 0 then\n            sofar of dct & {active of dct}\n        else\n            sofar of dct\n        end if\n    else\n        {}\n    end if\nend groupBy",
     "tags": [
       "AS Prelude"
     ]
   },
   "groupSortOn": {
-    "code": "-- Sort and group a list by comparing the results of a key function\n-- applied to each element. groupSortOn f is equivalent to\n-- groupBy eq $ sortBy (comparing f),\n-- but has the performance advantage of only evaluating f once for each\n-- element in the input list.\n-- This is a decorate-(group.sort)-undecorate pattern, as in the\n-- so-called 'Schwartzian transform'.\n-- Groups are arranged from from lowest to highest.\n-- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]\n-- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]\non groupSortOn(f, xs)\n    script keyBool\n        on |λ|(a, x)\n            if class of x is boolean then\n                {asc:x, fbs:fbs of a}\n            else\n                {asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}\n            end if\n        end |λ|\n    end script\n    set {fs, bs} to {|1|, |2|} of unzip(fbs of foldl(keyBool, ¬\n        {asc:true, fbs:{}}, flatten({f})))\n    \n    set intKeys to length of fs\n    set ca to current application\n    script dec\n        property gs : map(my mReturn, fs)\n        on |λ|(x)\n            set nsDct to (ca's NSMutableDictionary's ¬\n                dictionaryWithDictionary:{val:x})\n            repeat with i from 1 to intKeys\n                (nsDct's setValue:((item i of gs)'s |λ|(x)) ¬\n                    forKey:(character id (96 + i)))\n            end repeat\n            nsDct as record\n        end |λ|\n    end script\n    \n    script descrip\n        on |λ|(bool, i)\n            ca's NSSortDescriptor's ¬\n                sortDescriptorWithKey:(character id (96 + i)) ¬\n                    ascending:bool\n        end |λ|\n    end script\n    \n    script grpUndec\n        on |λ|(grp)\n            script\n                on |λ|(x)\n                    val of x\n                end |λ|\n            end script\n            map(result, grp)\n        end |λ|\n    end script\n    \n    script aEq\n        on |λ|(p, q)\n            (a of p) = (a of q)\n        end |λ|\n    end script\n    \n    -- Sorted, grouped, undecorated\n    map(grpUndec, ¬\n        groupBy(aEq, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬\n            sortedArrayUsingDescriptors:map(descrip, bs)) as list))\nend groupSortOn",
+    "code": "-- groupSortOn :: Ord b => (a -> b) -> [a] -> [[a]]\n-- groupSortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [[a]]\non groupSortOn(f, xs)\n    -- Sort and group a list by comparing the results of a key function\n    -- applied to each element. groupSortOn f is equivalent to\n    -- groupBy eq $ sortBy (comparing f),\n    -- but has the performance advantage of only evaluating f once for each\n    -- element in the input list.\n    -- This is a decorate-(group.sort)-undecorate pattern, as in the\n    -- so-called 'Schwartzian transform'.\n    -- Groups are arranged from from lowest to highest.\n    script keyBool\n        on |λ|(a, x)\n            if class of x is boolean then\n                {asc:x, fbs:fbs of a}\n            else\n                {asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}\n            end if\n        end |λ|\n    end script\n    set {fs, bs} to {|1|, |2|} of unzip(fbs of foldl(keyBool, ¬\n        {asc:true, fbs:{}}, flatten({f})))\n    \n    set intKeys to length of fs\n    set ca to current application\n    script dec\n        property gs : map(my mReturn, fs)\n        on |λ|(x)\n            set nsDct to (ca's NSMutableDictionary's ¬\n                dictionaryWithDictionary:{val:x})\n            repeat with i from 1 to intKeys\n                (nsDct's setValue:((item i of gs)'s |λ|(x)) ¬\n                    forKey:(character id (96 + i)))\n            end repeat\n            nsDct as record\n        end |λ|\n    end script\n    \n    script descrip\n        on |λ|(bool, i)\n            ca's NSSortDescriptor's ¬\n                sortDescriptorWithKey:(character id (96 + i)) ¬\n                    ascending:bool\n        end |λ|\n    end script\n    \n    script grpUndec\n        on |λ|(grp)\n            script\n                on |λ|(x)\n                    val of x\n                end |λ|\n            end script\n            map(result, grp)\n        end |λ|\n    end script\n    \n    script aEq\n        on |λ|(p, q)\n            (a of p) = (a of q)\n        end |λ|\n    end script\n    \n    -- Sorted, grouped, undecorated\n    map(grpUndec, ¬\n        groupBy(aEq, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬\n            sortedArrayUsingDescriptors:map(descrip, bs)) as list))\nend groupSortOn",
     "tags": [
       "AS Prelude"
     ]
@@ -1232,7 +1233,7 @@
     ]
   },
   "isMaybe": {
-    "code": "use framework \"Foundation\"\nuse scripting additions\n-- isMaybe :: a -> Bool\non isMaybe(x)\n    if class of x is record then\n        set ca to current application\n        set v to ((ca's NSDictionary's ¬\n            dictionaryWithDictionary:x)'s ¬\n            objectForKey:\"type\")\n        v is not missing value ¬\n            and (v's isKindOfClass:(ca's NSString)) ¬\n            and (v as string = \"Maybe\")\n    else\n      false\n    end if\nend isMaybe",
+    "code": "-- isMaybe :: a -> Bool\non isMaybe(x)\n    -- use framework \"Foundation\"\n    -- use scripting additions\n    if class of x is record then\n        set ca to current application\n        set v to ((ca's NSDictionary's ¬\n            dictionaryWithDictionary:x)'s ¬\n            objectForKey:\"type\")\n        v is not missing value ¬\n            and (v's isKindOfClass:(ca's NSString)) ¬\n            and (v as string = \"Maybe\")\n    else\n      false\n    end if\nend isMaybe",
     "tags": [
       "AS Prelude"
     ]
@@ -1244,7 +1245,7 @@
     ]
   },
   "isPrefixOf": {
-    "code": "-- isPrefixOf takes two lists or strings and returns \n--  true if and only if the first is a prefix of the second.\n-- isPrefixOf :: [a] -> [a] -> Bool\n-- isPrefixOf :: String -> String -> Bool\non isPrefixOf(xs, ys)\n    script go\n        on |λ|(xs, ys)\n            set intX to length of xs\n            if intX < 1 then\n                true\n            else if intX > length of ys then\n                false\n            else if class of xs is string then\n                (offset of xs in ys) = 1\n            else\n                set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\n                ((|1| of xxt) = (|1| of yyt)) and |λ|(|2| of xxt, |2| of yyt)\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs, ys)\nend isPrefixOf",
+    "code": "-- isPrefixOf :: [a] -> [a] -> Bool\n-- isPrefixOf :: String -> String -> Bool\non isPrefixOf(xs, ys)\n    -- isPrefixOf takes two lists or strings and returns \n    --  true if and only if the first is a prefix of the second.\n    script go\n        on |λ|(xs, ys)\n            set intX to length of xs\n            if intX < 1 then\n                true\n            else if intX > length of ys then\n                false\n            else if class of xs is string then\n                (offset of xs in ys) = 1\n            else\n                set {xxt, yyt} to {Just of uncons(xs), Just of uncons(ys)}\n                ((|1| of xxt) = (|1| of yyt)) and |λ|(|2| of xxt, |2| of yyt)\n            end if\n        end |λ|\n    end script\n    go's |λ|(xs, ys)\nend isPrefixOf",
     "tags": [
       "AS Prelude"
     ]
@@ -1256,7 +1257,7 @@
     ]
   },
   "isSortedBy": {
-    "code": "-- The 'isSortedBy' function returns true iff the predicate returns true\n-- for all adjacent pairs of elements in the list.\n-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool\non isSortedBy(cmp, xs)\n    script LE\n        on |λ|(x)\n            x < 1\n        end |λ|\n    end script\n    (length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))\nend isSortedBy",
+    "code": "-- isSortedBy :: (a -> a -> Bool) -> [a] -> Bool\non isSortedBy(cmp, xs)\n    -- The 'isSortedBy' function returns true iff the predicate returns true\n    -- for all adjacent pairs of elements in the list.\n    script LE\n        on |λ|(x)\n            x < 1\n        end |λ|\n    end script\n    (length of xs < 2) or all(LE, zipWith(cmp, xs, tail(xs)))\nend isSortedBy",
     "tags": [
       "AS Prelude"
     ]
@@ -1352,7 +1353,7 @@
     ]
   },
   "kleisliCompose (>=>)": {
-    "code": "-- Kleisli composition LR\n-- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)\non kleisliCompose(f, g)\n    script\n        on |λ|(x)\n            bind(mReturn(f)'s |λ|(x), g)\n        end |λ|\n    end script\nend kleisliCompose",
+    "code": "-- kleisliCompose (>=>) :: Monad m => (a -> m b) -> (b -> m c) -> (a -> m c)\non kleisliCompose(f, g)\n    script\n        on |λ|(x)\n            bind(mReturn(f)'s |λ|(x), g)\n        end |λ|\n    end script\nend kleisliCompose",
     "tags": [
       "AS Prelude"
     ]
@@ -1400,7 +1401,7 @@
     ]
   },
   "liftA2": {
-    "code": "-- Lift a binary function to actions.\n-- e.g.\n-- liftA2(mult, {1, 2, 3}, {4, 5, 6}) \n--> {4, 5, 6, 8, 10, 12, 12, 15, 18}\n-- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c\non liftA2(f, a, b)\n    set c to class of a\n    if c is list or c is text then\n        liftA2List(f, a, b)\n    else\n        set t to typeName(a)\n        if \"(a -> b)\" = t then\n            liftA2Fn(f, a, b)\n        else if \"Either\" = t then\n            liftA2LR(f, a, b)\n        else if \"Maybe\" = t then\n            liftA2May(f, a, b)\n        else if \"Tuple\" = t then\n            liftA2Tuple(f, a, b)\n        else if \"Node\" = t then\n            liftA2Tree(f, a, b)\n        else\n            missing value\n        end if\n    end if\nend liftA2",
+    "code": "-- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c\non liftA2(f, a, b)\n    -- Lift a binary function to actions.\n    -- e.g.\n    -- liftA2(mult, {1, 2, 3}, {4, 5, 6}) \n    --> {4, 5, 6, 8, 10, 12, 12, 15, 18}\n    set c to class of a\n    if c is list or c is text then\n        liftA2List(f, a, b)\n    else\n        set t to typeName(a)\n        if \"(a -> b)\" = t then\n            liftA2Fn(f, a, b)\n        else if \"Either\" = t then\n            liftA2LR(f, a, b)\n        else if \"Maybe\" = t then\n            liftA2May(f, a, b)\n        else if \"Tuple\" = t then\n            liftA2Tuple(f, a, b)\n        else if \"Node\" = t then\n            liftA2Tree(f, a, b)\n        else\n            missing value\n        end if\n    end if\nend liftA2",
     "tags": [
       "AS Prelude"
     ]
@@ -1461,7 +1462,7 @@
     ]
   },
   "listFromMaybe": {
-    "code": "-- The listFromMaybe function returns an empty list when given\n-- Nothing or a singleton list when not given Nothing.\n-- listFromMaybe :: Maybe a -> [a]\non listFromMaybe(mb)\n    -- A singleton list derived from a Just value, \n    -- or an empty list derived from Nothing.\n    if Nothing of mb then\n        {}\n    else\n        {Just of mb}\n    end if\nend maybeToList",
+    "code": "-- listFromMaybe :: Maybe a -> [a]\non listFromMaybe(mb)\n    -- A singleton list derived from a Just value, \n    -- or an empty list derived from Nothing.\n    if Nothing of mb then\n        {}\n    else\n        {Just of mb}\n    end if\nend maybeToList",
     "tags": [
       "AS Prelude"
     ]
@@ -1480,7 +1481,7 @@
     ]
   },
   "listToMaybe": {
-    "code": "-- The listToMaybe function returns Nothing on \n-- an empty list or Just the head of the list.\n-- listToMaybe :: [a] -> Maybe a\non listToMaybe(xs)\n    if xs ≠ {} then\n        Just(item 1 of xs)\n    else\n        Nothing()\n    end if\nend listToMaybe",
+    "code": "-- listToMaybe :: [a] -> Maybe a\non listToMaybe(xs)\n    -- The listToMaybe function returns Nothing on \n    -- an empty list or Just the head of the list.\n    if xs ≠ {} then\n        Just(item 1 of xs)\n    else\n        Nothing()\n    end if\nend listToMaybe",
     "tags": [
       "AS Prelude"
     ]
@@ -1492,7 +1493,7 @@
     ]
   },
   "lookup": {
-    "code": "-- use framework \"Foundation\"\n-- use scripting additions\n-- lookup :: Eq a => a -> Container -> Maybe b\non lookup(k, m)\n    set c to class of m\n    if c is list then\n        lookupTuples(k, m)\n    else if c = record then\n        lookupDict(k, m)\n    else\n        Nothing()\n    end if\nend lookup",
+    "code": "-- lookup :: Eq a => a -> Container -> Maybe b\non lookup(k, m)\n    set c to class of m\n    if c is list then\n        lookupTuples(k, m)\n    else if c = record then\n        lookupDict(k, m)\n    else\n        Nothing()\n    end if\nend lookup",
     "tags": [
       "AS Prelude"
     ]
@@ -1528,7 +1529,7 @@
     ]
   },
   "mapAccumL": {
-    "code": "-- 'The mapAccumL function behaves like a combination of map and foldl; \n-- it applies a function to each element of a list, passing an \n-- accumulating parameter from |Left| to |Right|, and returning a final \n-- value of this accumulator together with the new list.' (see Hoogle)\n-- mapAccumL :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\non mapAccumL(f, acc, xs)\n    script\n        on |λ|(a, x, i)\n            tell mReturn(f) to set pair to |λ|(|1| of a, x, i)\n            Tuple(|1| of pair, (|2| of a) & {|2| of pair})\n        end |λ|\n    end script\n    \n    foldl(result, Tuple(acc, []), xs)\nend mapAccumL",
+    "code": "-- mapAccumL :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\non mapAccumL(f, acc, xs)\n    -- 'The mapAccumL function behaves like a combination of map and foldl; \n    -- it applies a function to each element of a list, passing an \n    -- accumulating parameter from |Left| to |Right|, and returning a final \n    -- value of this accumulator together with the new list.' (see Hoogle)\n    script\n        on |λ|(a, x, i)\n            tell mReturn(f) to set pair to |λ|(|1| of a, x, i)\n            Tuple(|1| of pair, (|2| of a) & {|2| of pair})\n        end |λ|\n    end script\n    \n    foldl(result, Tuple(acc, []), xs)\nend mapAccumL",
     "tags": [
       "AS Prelude"
     ]
@@ -1541,7 +1542,7 @@
     ]
   },
   "mapAccumR": {
-    "code": "-- 'The mapAccumR function behaves like a combination of map and foldr; \n--  it applies a function to each element of a list, passing an accumulating \n--  parameter from |Right| to |Left|, and returning a final value of this \n--  accumulator together with the new list.' (see Hoogle)\n-- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\non mapAccumR(f, acc, xs)\n    script\n        on |λ|(x, a, i)\n            tell mReturn(f) to set pair to |λ|(|1| of a, x, i)\n            Tuple(|1| of pair, (|2| of pair) & |2| of a)\n        end |λ|\n    end script\n    foldr(result, Tuple(acc, []), xs)\nend mapAccumR",
+    "code": "-- mapAccumR :: (acc -> x -> (acc, y)) -> acc -> [x] -> (acc, [y])\non mapAccumR(f, acc, xs)\n    -- 'The mapAccumR function behaves like a combination of map and foldr; \n    --  it applies a function to each element of a list, passing an accumulating \n    --  parameter from |Right| to |Left|, and returning a final value of this \n    --  accumulator together with the new list.' (see Hoogle)\n    script\n        on |λ|(x, a, i)\n            tell mReturn(f) to set pair to |λ|(|1| of a, x, i)\n            Tuple(|1| of pair, (|2| of pair) & |2| of a)\n        end |λ|\n    end script\n    foldr(result, Tuple(acc, []), xs)\nend mapAccumR",
     "tags": [
       "AS Prelude"
     ]
@@ -1553,7 +1554,7 @@
     ]
   },
   "mapMaybe": {
-    "code": "-- The mapMaybe function is a version of map which can throw out\n-- elements. In particular, the functional argument returns\n-- something of type Maybe b. If this is Nothing, no element is\n-- added on to the result list. If it just Just b, then b is\n-- included in the result list.\n-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\non mapMaybe(mf, xs)\n    script\n        property g : mReturn(mf)\n        on |λ|(a, x)\n            set mb to g's |λ|(x)\n            if Nothing of mb then\n                a\n            else\n                a & (Just of mb)\n            end if\n        end |λ|\n    end script\n    foldl(result, {}, xs)\nend mapMaybe",
+    "code": "-- mapMaybe :: (a -> Maybe b) -> [a] -> [b]\non mapMaybe(mf, xs)\n    -- The mapMaybe function is a version of map which can throw out\n    -- elements. In particular, the functional argument returns\n    -- something of type Maybe b. If this is Nothing, no element is\n    -- added on to the result list. If it just Just b, then b is\n    -- included in the result list.\n    script\n        property g : mReturn(mf)\n        on |λ|(a, x)\n            set mb to g's |λ|(x)\n            if Nothing of mb then\n                a\n            else\n                a & (Just of mb)\n            end if\n        end |λ|\n    end script\n    foldl(result, {}, xs)\nend mapMaybe",
     "tags": [
       "AS Prelude"
     ]
@@ -1595,7 +1596,7 @@
     ]
   },
   "matching": {
-    "code": "-- Returns a sequence-matching function for findIndices etc\n-- matching :: [a] -> (a -> Int -> [a] -> Bool)\n-- matching :: String -> (Char -> Int -> String -> Bool)\non matching(pat)\n    if class of pat is text then\n        set xs to characters of pat\n    else\n        set xs to pat\n    end if\n    set lng to length of xs\n    set bln to 0 < lng\n    if bln then\n        set h to item 1 of xs\n    else\n        set h to missing value\n    end if\n    script\n        on |λ|(x, i, src)\n            (h = x) and xs = ¬\n                (items i thru min(length of src, -1 + lng + i) of src)\n        end |λ|\n    end script\nend matching",
+    "code": "-- matching :: [a] -> (a -> Int -> [a] -> Bool)\n-- matching :: String -> (Char -> Int -> String -> Bool)\non matching(pat)\n    -- Returns a sequence-matching function for findIndices etc\n    if class of pat is text then\n        set xs to characters of pat\n    else\n        set xs to pat\n    end if\n    set lng to length of xs\n    set bln to 0 < lng\n    if bln then\n        set h to item 1 of xs\n    else\n        set h to missing value\n    end if\n    script\n        on |λ|(x, i, src)\n            (h = x) and xs = ¬\n                (items i thru min(length of src, -1 + lng + i) of src)\n        end |λ|\n    end script\nend matching",
     "tags": [
       "AS Prelude"
     ]
@@ -1734,7 +1735,7 @@
     ]
   },
   "newUUID": {
-    "code": "-- use framework \"Foundation\"\n-- use scripting additions\n-- newUUID :: () -> IO UUID String\non newUUID()\n    current application's NSUUID's UUID's UUIDString as string\nend newUUID",
+    "code": "-- newUUID :: () -> IO UUID String\non newUUID()\n    current application's NSUUID's UUID's UUIDString as string\nend newUUID",
     "tags": [
       "AS Prelude"
     ]
@@ -1770,13 +1771,13 @@
     ]
   },
   "on": {
-    "code": "-- e.g. sortBy(|on|(compare, |length|), [\"epsilon\", \"mu\", \"gamma\", \"beta\"])\n-- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c\non |on|(f, g)\n    script\n        on |λ|(a, b)\n            tell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}\n            tell mReturn(f) to |λ|(va, vb)\n        end |λ|\n    end script\nend |on|",
+    "code": "-- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c\non |on|(f, g)\n    -- e.g. sortBy(|on|(compare, |length|), [\"epsilon\", \"mu\", \"gamma\", \"beta\"])\n    script\n        on |λ|(a, b)\n            tell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}\n            tell mReturn(f) to |λ|(va, vb)\n        end |λ|\n    end script\nend |on|",
     "tags": [
       "AS Prelude"
     ]
   },
   "op": {
-    "code": "-- Derive a script with |λ| handler from the name of an infix operator\n-- op :: String -> (a -> a -> b)\non op(strOp)\n    run script \"script\\non |λ|(a, b)\\na \" & strOp & \" b\\nend |λ|\\nend script\"\nend op",
+    "code": "-- op :: String -> (a -> a -> b)\non op(strOp)\n    -- Derive a script with |λ| handler from the name of an infix operator\n    run script \"script\\non |λ|(a, b)\\na \" & strOp & \" b\\nend |λ|\\nend script\"\nend op",
     "tags": [
       "AS Prelude"
     ]
