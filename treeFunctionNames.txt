@@ -1,7 +1,9 @@
 Node :: a -> [Tree a] -> Tree a
+abs :: Num -> Num
 allTree :: (a -> Bool) -> Tree a -> Bool
 anyTree :: (a -> Bool) -> Tree a -> Bool
 apTree (<*>) :: Tree (a -> b) -> Tree a -> Tree b
+draw :: Tree String -> [String]
 drawForest :: [Tree String] -> String
 drawTree :: Tree String -> String
 drawTree2 :: Bool -> Bool -> Tree String -> String

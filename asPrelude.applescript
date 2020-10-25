@@ -4143,7 +4143,7 @@ end permutations
 
 -- permutationsWithRepetition :: Int -> [a] -> [[a]]
 on permutationsWithRepetition(n, xs)
-    if length of xs > 0 then
+    if 0 < length of xs then
         foldl1(curry(my cartesianProduct)'s |λ|(xs), replicate(n, xs))
     else
         {}
@@ -4420,7 +4420,17 @@ on ratioPlus(n1, n2)
         ((n of r2) * (d / (d of r2)))), d)
 end ratioPlus
 
--- rational :: Num a => a -> Rationalon rational(x)    set c to class of x    if integer is c then        ratio(x, 1)    else if real is c then        approxRatio(missing value, x)    else        x    end ifend rational
+-- rational :: Num a => a -> Rational
+on rational(x)
+    set c to class of x
+    if integer is c then
+        ratio(x, 1)
+    else if real is c then
+        approxRatio(missing value, x)
+    else
+        x
+    end if
+end rational
 
 -- read :: Read a => String -> a
 on read (s)
@@ -6506,7 +6516,14 @@ end writeTempFile
 
 -- zip :: [a] -> [b] -> [(a, b)]
 on zip(xs, ys)
-    zipWith(Tuple, xs, ys)
+    -- A list of step-wise pairs drawn from xs and ys
+    -- up to the length of the shorter of those lists.
+    set lng to min(length of xs, length of ys)
+    set zs to {}
+    repeat with i from 1 to lng
+        set end of zs to {item i of xs, item i of ys}
+    end repeat
+    return zs
 end zip
 
 -- zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]
