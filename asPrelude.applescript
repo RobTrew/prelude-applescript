@@ -1934,6 +1934,26 @@ on filterTree(p, tree)
     foldTree(go, tree)
 end filterTree
 
+-- filteredTree (a -> Bool) -> Tree a -> Tree a
+on filteredTree(p, tree)
+    -- A tree including only those children
+    -- which either match the predicate p, or have
+    -- descendants which match the predicate p.
+    script go
+        property q : mReturn(p)'s |λ|
+        on |λ|(x, xs)
+            script test
+                on |λ|(subTree)
+                    {} ≠ (nest of subTree) or q(root of subTree)
+                end |λ|
+            end script
+            Node(x, filter(test, xs))
+        end |λ|
+    end script
+    
+    foldTree(go, tree)
+end filteredTree
+
 -- find :: (a -> Bool) -> [a] -> Maybe a
 on find(p, xs)
     tell mReturn(p)
@@ -2201,9 +2221,9 @@ end foldMapTree
 -- foldTree :: (a -> [b] -> b) -> Tree a -> b
 on foldTree(f, tree)
     script go
-        property g : mReturn(f)'s |λ|
+        property g : mReturn(f)
         on |λ|(oNode)
-            g(root of oNode, map(go, nest of oNode))
+            tell g to |λ|(root of oNode, map(go, nest of oNode))
         end |λ|
     end script
     |λ|(tree) of go

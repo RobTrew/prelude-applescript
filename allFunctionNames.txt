@@ -130,6 +130,7 @@ fileUTI :: FilePath -> Either String String
 filter :: (a -> Bool) -> [a] -> [a]
 filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
 filterTree (a -> Bool) -> Tree a -> [a]
+filteredTree (a -> Bool) -> Tree a -> Tree a
 find :: (a -> Bool) -> [a] -> Maybe a
 findGen :: (a -> Bool) -> Gen [a] -> Maybe a
 findIndex :: (a -> Bool) -> [a] -> Maybe Int

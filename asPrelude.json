@@ -801,6 +801,12 @@
       "AS Prelude"
     ]
   },
+  "filteredTree": {
+    "code": "-- filteredTree (a -> Bool) -> Tree a -> Tree a\non filteredTree(p, tree)\n    -- A tree including only those children\n    -- which either match the predicate p, or have\n    -- descendants which match the predicate p.\n    script go\n        property q : mReturn(p)'s |λ|\n        on |λ|(x, xs)\n            script test\n                on |λ|(subTree)\n                    {} ≠ (nest of subTree) or q(root of subTree)\n                end |λ|\n            end script\n            Node(x, filter(test, xs))\n        end |λ|\n    end script\n    \n    foldTree(go, tree)\nend filteredTree",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
   "find": {
     "code": "-- find :: (a -> Bool) -> [a] -> Maybe a\non find(p, xs)\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then return Just(item i of xs)\n        end repeat\n        Nothing()\n    end tell\nend find",
     "tags": [
@@ -914,7 +920,7 @@
     ]
   },
   "foldTree": {
-    "code": "-- foldTree :: (a -> [b] -> b) -> Tree a -> b\non foldTree(f, tree)\n    script go\n        property g : mReturn(f)'s |λ|\n        on |λ|(oNode)\n            g(root of oNode, map(go, nest of oNode))\n        end |λ|\n    end script\n    |λ|(tree) of go\nend foldTree",
+    "code": "-- foldTree :: (a -> [b] -> b) -> Tree a -> b\non foldTree(f, tree)\n    script go\n        property g : mReturn(f)\n        on |λ|(oNode)\n            tell g to |λ|(root of oNode, map(go, nest of oNode))\n        end |λ|\n    end script\n    |λ|(tree) of go\nend foldTree",
     "tags": [
       "AS Prelude",
       "tree"
