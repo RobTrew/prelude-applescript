@@ -1918,7 +1918,8 @@ end filterGen
 -- filterTree (a -> Bool) -> Tree a -> [a]
 on filterTree(p, tree)
     -- List of all values in the tree
-    --  which match the predicate p.
+    -- which match the predicate p.
+    
     script go
         property q : mReturn(p)'s |λ|
         on |λ|(x, xs)
@@ -1943,6 +1944,23 @@ on find(p, xs)
         Nothing()
     end tell
 end find
+
+-- findGen :: (a -> Bool) -> Gen [a] -> Maybe a
+on findGen(p, gen)
+    -- Just the first match for the predicate p
+    -- in the generator stream gen, or Nothing
+    -- if no match is found.
+    set mp to mReturn(p)
+    set v to gen's |λ|()
+    repeat until missing value is v or (|λ|(v) of mp)
+        set v to (|λ|() of gen)
+    end repeat
+    if missing value is v then
+        Nothing()
+    else
+        Just(v)
+    end if
+end findGen
 
 -- findIndex :: (a -> Bool) -> [a] -> Maybe Int
 on findIndex(p, xs)
@@ -4024,12 +4042,6 @@ on |on|(f, g)
         end |λ|
     end script
 end |on|
-
--- op :: String -> (a -> a -> b)
-on op(strOp)
-    -- Derive a script with |λ| handler from the name of an infix operator
-    run script "script\non |λ|(a, b)\na " & strOp & " b\nend |λ|\nend script"
-end op
 
 -- or :: [Bool] -> Bool
 on |or|(ps)

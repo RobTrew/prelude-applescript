@@ -794,13 +794,19 @@
     ]
   },
   "filterTree": {
-    "code": "-- filterTree (a -> Bool) -> Tree a -> [a]\non filterTree(p, tree)\n    -- List of all values in the tree\n    --  which match the predicate p.\n    script go\n        property q : mReturn(p)'s |λ|\n        on |λ|(x, xs)\n            if q(x) then\n                {x} & concat(xs)\n            else\n                concat(xs)\n            end if\n        end |λ|\n    end script\n    \n    foldTree(go, tree)\nend filterTree",
+    "code": "-- filterTree (a -> Bool) -> Tree a -> [a]\non filterTree(p, tree)\n    -- List of all values in the tree\n    -- which match the predicate p.\n    \n    script go\n        property q : mReturn(p)'s |λ|\n        on |λ|(x, xs)\n            if q(x) then\n                {x} & concat(xs)\n            else\n                concat(xs)\n            end if\n        end |λ|\n    end script\n    \n    foldTree(go, tree)\nend filterTree",
     "tags": [
       "AS Prelude"
     ]
   },
   "find": {
     "code": "-- find :: (a -> Bool) -> [a] -> Maybe a\non find(p, xs)\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then return Just(item i of xs)\n        end repeat\n        Nothing()\n    end tell\nend find",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
+  "findGen": {
+    "code": "-- findGen :: (a -> Bool) -> Gen [a] -> Maybe a\non findGen(p, gen)\n    -- Just the first match for the predicate p\n    -- in the generator stream gen, or Nothing\n    -- if no match is found.\n    set mp to mReturn(p)\n    set v to gen's |λ|()\n    repeat until missing value is v or (|λ|(v) of mp)\n        set v to (|λ|() of gen)\n    end repeat\n    if missing value is v then\n        Nothing()\n    else\n        Just(v)\n    end if\nend findGen",
     "tags": [
       "AS Prelude"
     ]
@@ -1784,12 +1790,6 @@
   },
   "on": {
     "code": "-- on :: (b -> b -> c) -> (a -> b) -> a -> a -> c\non |on|(f, g)\n    -- e.g. sortBy(|on|(compare, |length|), [\"epsilon\", \"mu\", \"gamma\", \"beta\"])\n    script\n        on |λ|(a, b)\n            tell mReturn(g) to set {va, vb} to {|λ|(a), |λ|(b)}\n            tell mReturn(f) to |λ|(va, vb)\n        end |λ|\n    end script\nend |on|",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
-  "op": {
-    "code": "-- op :: String -> (a -> a -> b)\non op(strOp)\n    -- Derive a script with |λ| handler from the name of an infix operator\n    run script \"script\\non |λ|(a, b)\\na \" & strOp & \" b\\nend |λ|\\nend script\"\nend op",
     "tags": [
       "AS Prelude"
     ]

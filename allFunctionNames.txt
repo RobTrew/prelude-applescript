@@ -131,6 +131,7 @@ filter :: (a -> Bool) -> [a] -> [a]
 filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
 filterTree (a -> Bool) -> Tree a -> [a]
 find :: (a -> Bool) -> [a] -> Maybe a
+findGen :: (a -> Bool) -> Gen [a] -> Maybe a
 findIndex :: (a -> Bool) -> [a] -> Maybe Int
 findIndexR :: (a -> Bool) -> [a] -> Maybe Int
 findIndices :: (a -> Bool) -> [a] -> [Int]
@@ -293,7 +294,6 @@ nub :: [a] -> [a]
 nubBy :: (a -> a -> Bool) -> [a] -> [a]
 odd :: Int -> Bool
 on :: (b -> b -> c) -> (a -> b) -> a -> a -> c
-op :: String -> (a -> a -> b)
 or :: [Bool] -> Bool
 ord :: Char -> Int
 ordering :: () -> Ordering
