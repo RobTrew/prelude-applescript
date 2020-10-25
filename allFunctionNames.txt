@@ -15,7 +15,7 @@ and :: [Bool] -> Bool
 any :: (a -> Bool) -> [a] -> Bool
 anyTree :: (a -> Bool) -> Tree a -> Bool
 ap (<*>) :: Monad m => m (a -> b) -> m a -> m b
-apFn :: (a -> b -> c) -> (a -> b) -> a -> c
+apFn :: (a -> b -> c) -> (a -> b) -> (a -> c)
 apLR (<*>) :: Either e (a -> b) -> Either e a -> Either e b
 apList (<*>) :: [(a -> b)] -> [a] -> [b]
 apMay (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
@@ -152,7 +152,7 @@ foldTree :: (a -> [b] -> b) -> Tree a -> b
 foldl :: (a -> b -> a) -> a -> [b] -> a
 foldl1 :: (a -> a -> a) -> [a] -> a
 foldl1May :: (a -> a -> a) -> [a] -> Maybe a
-foldTree :: (a -> [b] -> b) -> Tree a -> b
+foldlTree :: (b -> a -> b) -> b -> Tree a -> b
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr1 :: (a -> a -> a) -> [a] -> a
 foldr1May :: (a -> a -> a) -> [a] -> Maybe a

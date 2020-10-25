@@ -182,7 +182,7 @@ on ap(mf, mx)
     end if
 end ap
 
--- apFn :: (a -> b -> c) -> (a -> b) -> a -> c
+-- apFn :: (a -> b -> c) -> (a -> b) -> (a -> c)
 on apFn(f, g)
     script go
         property mf : |λ| of mReturn(f)
@@ -2258,16 +2258,16 @@ on foldl1May(f, xs)
     end if
 end foldl1May
 
--- foldTree :: (a -> [b] -> b) -> Tree a -> b
-on foldTree(f, tree)
+-- foldlTree :: (b -> a -> b) -> b -> Tree a -> b
+on foldlTree(f, acc, tree)
     script go
-        property g : mReturn(f)
-        on |λ|(oNode)
-            tell g to |λ|(root of oNode, map(go, nest of oNode))
+        property mf : mReturn(f)
+        on |λ|(a, x)
+            foldl(go, |λ|(a, root of x) of mf, nest of x)
         end |λ|
     end script
-    |λ|(tree) of go
-end foldTree
+    |λ|(acc, tree) of go
+end foldlTree
 
 -- foldr :: (a -> b -> b) -> b -> [a] -> b
 on foldr(f, startValue, xs)

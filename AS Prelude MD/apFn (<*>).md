@@ -1,5 +1,5 @@
 ```applescript
--- apFn :: (a -> b -> c) -> (a -> b) -> a -> c
+-- apFn :: (a -> b -> c) -> (a -> b) -> (a -> c)
 on apFn(f, g)
     script go
         property mf : |λ| of mReturn(f)
