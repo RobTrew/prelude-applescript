@@ -339,10 +339,10 @@ readHex :: String -> Int
 readLR :: Read a => String -> Either String a
 recip :: Num -> Num
 recipMay :: Num -> Maybe Num
-regexMatches :: String -> String -> [[String]]
+regexMatches :: Regex String -> String -> [[String]]
 rem :: Int -> Int -> Int
 removeFile :: FilePath -> Either String String
-renameFile :: FilePath -> FilePath -> IO ()
+renamedFile :: FilePath -> FilePath ->
 repeat :: a -> Generator [a]
 replace :: String -> String -> String -> String
 replicate :: Int -> String -> String

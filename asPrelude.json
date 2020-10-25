@@ -2068,7 +2068,7 @@
     ]
   },
   "regexMatches": {
-    "code": "-- regexMatches :: String -> String -> [[String]]\ron regexMatches(strRegex, strHay)\r\tset ca to current application\r\t-- NSNotFound handling and and High Sierra workaround due to @sl1974\r\tset NSNotFound to a reference to 9.22337203685477E+18 + 5807\r\tset oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬\r\t\toptions:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬\r\t\t|error|:(missing value)\r\tset oString to ca's NSString's stringWithString:strHay\r\t\r\tscript matchString\r\t\ton |λ|(m)\r\t\t\tscript rangeMatched\r\t\t\t\ton |λ|(i)\r\t\t\t\t\ttell (m's rangeAtIndex:i)\r\t\t\t\t\t\tset intFrom to its location\r\t\t\t\t\t\tif NSNotFound ≠ intFrom then\r\t\t\t\t\t\t\ttext (intFrom + 1) thru (intFrom + (its |length|)) of strHay\r\t\t\t\t\t\telse\r\t\t\t\t\t\t\tmissing value\r\t\t\t\t\t\tend if\r\t\t\t\t\tend tell\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\tend |λ|\r\tend script\r\t\r\tscript asRange\r\t\ton |λ|(x)\r\t\t\trange() of x\r\t\tend |λ|\r\tend script\r\tmap(asRange, (oRgx's matchesInString:oString ¬\r\t\toptions:0 range:{location:0, |length|:oString's |length|()}) as list)\rend regexMatches",
+    "code": "-- regexMatches :: Regex String -> String -> [[String]]\ron regexMatches(strRegex, strHay)\r\tset ca to current application\r\t-- NSNotFound handling and and High Sierra workaround due to @sl1974\r\tset NSNotFound to a reference to 9.22337203685477E+18 + 5807\r\tset oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬\r\t\toptions:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬\r\t\t|error|:(missing value)\r\tset oString to ca's NSString's stringWithString:strHay\r\t\r\tscript matchString\r\t\ton |λ|(m)\r\t\t\tscript rangeMatched\r\t\t\t\ton |λ|(i)\r\t\t\t\t\ttell (m's rangeAtIndex:i)\r\t\t\t\t\t\tset intFrom to its location\r\t\t\t\t\t\tif NSNotFound ≠ intFrom then\r\t\t\t\t\t\t\ttext (intFrom + 1) thru (intFrom + (its |length|)) of strHay\r\t\t\t\t\t\telse\r\t\t\t\t\t\t\tmissing value\r\t\t\t\t\t\tend if\r\t\t\t\t\tend tell\r\t\t\t\tend |λ|\r\t\t\tend script\r\t\tend |λ|\r\tend script\r\t\r\tscript asRange\r\t\ton |λ|(x)\r\t\t\trange() of x\r\t\tend |λ|\r\tend script\r\tmap(asRange, (oRgx's matchesInString:oString ¬\r\t\toptions:0 range:{location:0, |length|:oString's |length|()}) as list)\rend regexMatches",
     "tags": [
       "AS Prelude"
     ]
@@ -2085,8 +2085,8 @@
       "AS Prelude"
     ]
   },
-  "renameFile": {
-    "code": "-- renameFile :: FilePath -> FilePath -> IO ()\non renameFile(fp, fp2)\n    set e to reference\n    set {bln, obj} to current application's NSFileManager's ¬\n        defaultManager's moveItemAtPath:(fp) toPath:(fp2) |error|:(e)\n    if bln then\n        |Right|(\"Renamed from: \" & fp & \" to \" & fp2)\n    else\n        |Left|(obj's localizedDescription as string)\n    end if\nend renameFile",
+  "renamedFile": {
+    "code": "-- renamedFile :: FilePath -> FilePath ->\n-- Either IO String IO String\non renamedFile(fp, fp2)\n    set e to reference\n    set {bln, obj} to current application's NSFileManager's ¬\n        defaultManager's moveItemAtPath:(fp) toPath:(fp2) |error|:(e)\n    if bln then\n        |Right|(fp2)\n    else\n        |Left|(obj's localizedDescription as string)\n    end if\nend renameFile",
     "tags": [
       "AS Prelude"
     ]

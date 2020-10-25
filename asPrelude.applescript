@@ -4510,7 +4510,7 @@ on recipMay(n)
     end if
 end recipMay
 
--- regexMatches :: String -> String -> [[String]]on regexMatches(strRegex, strHay)	set ca to current application	-- NSNotFound handling and and High Sierra workaround due to @sl1974	set NSNotFound to a reference to 9.22337203685477E+18 + 5807	set oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬		options:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬		|error|:(missing value)	set oString to ca's NSString's stringWithString:strHay		script matchString		on |λ|(m)			script rangeMatched				on |λ|(i)					tell (m's rangeAtIndex:i)						set intFrom to its location						if NSNotFound ≠ intFrom then							text (intFrom + 1) thru (intFrom + (its |length|)) of strHay						else							missing value						end if					end tell				end |λ|			end script		end |λ|	end script		script asRange		on |λ|(x)			range() of x		end |λ|	end script	map(asRange, (oRgx's matchesInString:oString ¬		options:0 range:{location:0, |length|:oString's |length|()}) as list)end regexMatches
+-- regexMatches :: Regex String -> String -> [[String]]on regexMatches(strRegex, strHay)	set ca to current application	-- NSNotFound handling and and High Sierra workaround due to @sl1974	set NSNotFound to a reference to 9.22337203685477E+18 + 5807	set oRgx to ca's NSRegularExpression's regularExpressionWithPattern:strRegex ¬		options:((ca's NSRegularExpressionAnchorsMatchLines as integer)) ¬		|error|:(missing value)	set oString to ca's NSString's stringWithString:strHay		script matchString		on |λ|(m)			script rangeMatched				on |λ|(i)					tell (m's rangeAtIndex:i)						set intFrom to its location						if NSNotFound ≠ intFrom then							text (intFrom + 1) thru (intFrom + (its |length|)) of strHay						else							missing value						end if					end tell				end |λ|			end script		end |λ|	end script		script asRange		on |λ|(x)			range() of x		end |λ|	end script	map(asRange, (oRgx's matchesInString:oString ¬		options:0 range:{location:0, |length|:oString's |length|()}) as list)end regexMatches
 
 -- rem :: Int -> Int -> Int
 on rem(m, n)
@@ -4529,13 +4529,14 @@ on removeFile(fp)
     end if
 end removeFile
 
--- renameFile :: FilePath -> FilePath -> IO ()
-on renameFile(fp, fp2)
+-- renamedFile :: FilePath -> FilePath ->
+-- Either IO String IO String
+on renamedFile(fp, fp2)
     set e to reference
     set {bln, obj} to current application's NSFileManager's ¬
         defaultManager's moveItemAtPath:(fp) toPath:(fp2) |error|:(e)
     if bln then
-        |Right|("Renamed from: " & fp & " to " & fp2)
+        |Right|(fp2)
     else
         |Left|(obj's localizedDescription as string)
     end if
