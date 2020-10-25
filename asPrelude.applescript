@@ -1739,6 +1739,17 @@ on eq(a, b)
     a = b
 end eq
 
+-- eqDate :: Date -> Date -> Bool
+on eqDate(dte, dte1)
+    -- True if the date parts of two date-time objects
+    -- (ignoring the time parts) are the same.
+    tell dte
+        its year = year of dte1 ¬
+            and its month = month of dte1 ¬
+            and its day = day of dte1
+    end tell
+end eqDate
+
 -- evalJSLR :: String -> Either String a
 on evalJSLR(strJS)
     -- gJSC can be declared in the global namespace,
@@ -1903,6 +1914,24 @@ on filterGen(p, gen)
         end |λ|
     end script
 end filterGen
+
+-- filterTree (a -> Bool) -> Tree a -> [a]
+on filterTree(p, tree)
+    -- List of all values in the tree
+    --  which match the predicate p.
+    script go
+        property q : mReturn(p)'s |λ|
+        on |λ|(x, xs)
+            if q(x) then
+                {x} & concat(xs)
+            else
+                concat(xs)
+            end if
+        end |λ|
+    end script
+    
+    foldTree(go, tree)
+end filterTree
 
 -- find :: (a -> Bool) -> [a] -> Maybe a
 on find(p, xs)
@@ -2211,21 +2240,16 @@ on foldl1May(f, xs)
     end if
 end foldl1May
 
--- foldlTree :: (b -> a -> b) -> b -> Tree a -> b
-on foldlTree(f, acc, tree)
+-- foldTree :: (a -> [b] -> b) -> Tree a -> b
+on foldTree(f, tree)
     script go
-        property g : |λ| of mReturn(f)
-        on |λ|(a, x)
-            set xs to nest of x
-            if xs ≠ {} then
-                foldl(go, g(a, root of x), xs)
-            else
-                g(a, root of x)
-            end if
+        property g : mReturn(f)
+        on |λ|(oNode)
+            tell g to |λ|(root of oNode, map(go, nest of oNode))
         end |λ|
     end script
-    |λ|(acc, tree) of go
-end foldlTree
+    |λ|(tree) of go
+end foldTree
 
 -- foldr :: (a -> b -> b) -> b -> [a] -> b
 on foldr(f, startValue, xs)

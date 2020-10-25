@@ -115,6 +115,7 @@ enumFromTo :: Int -> Int -> [Int]
 enumFromToChar :: Char -> Char -> [Char]
 enumFromTo_ :: Enum a => a -> a -> [a]
 eq (==) :: Eq a => a -> a -> Bool
+eqDate :: Date -> Date -> Bool
 evalJSLR :: String -> Either String a
 evalJSMay :: String -> Maybe a
 even :: Int -> Bool
@@ -128,6 +129,7 @@ fileStatus :: FilePath -> Either String Dict
 fileUTI :: FilePath -> Either String String
 filter :: (a -> Bool) -> [a] -> [a]
 filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
+filterTree (a -> Bool) -> Tree a -> [a]
 find :: (a -> Bool) -> [a] -> Maybe a
 findIndex :: (a -> Bool) -> [a] -> Maybe Int
 findIndexR :: (a -> Bool) -> [a] -> Maybe Int
@@ -149,7 +151,7 @@ foldTree :: (a -> [b] -> b) -> Tree a -> b
 foldl :: (a -> b -> a) -> a -> [b] -> a
 foldl1 :: (a -> a -> a) -> [a] -> a
 foldl1May :: (a -> a -> a) -> [a] -> Maybe a
-foldlTree :: (b -> a -> b) -> b -> Tree a -> b
+foldTree :: (a -> [b] -> b) -> Tree a -> b
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr1 :: (a -> a -> a) -> [a] -> a
 foldr1May :: (a -> a -> a) -> [a] -> Maybe a

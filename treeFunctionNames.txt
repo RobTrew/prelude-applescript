@@ -10,7 +10,7 @@ flattenTree :: Tree a -> [a]
 fmapTree :: (a -> b) -> Tree a -> Tree b
 foldMapTree :: Monoid m => (a -> m) -> Tree a -> m
 foldTree :: (a -> [b] -> b) -> Tree a -> b
-foldlTree :: (b -> a -> b) -> b -> Tree a -> b
+foldTree :: (a -> [b] -> b) -> Tree a -> b
 foldrTree :: (a -> b -> b) -> b -> Tree a -> b
 liftA2Tree :: (a -> b -> c) -> Tree a -> Tree b -> Tree c
 listFromTree :: Tree a -> [a]
