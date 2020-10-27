@@ -802,7 +802,7 @@
     ]
   },
   "filteredTree": {
-    "code": "-- filteredTree (a -> Bool) -> Tree a -> Tree a\non filteredTree(p, tree)\n    -- A tree including only those children\n    -- which either match the predicate p, or have\n    -- descendants which match the predicate p.\n    script go\n        property q : mReturn(p)'s |λ|\n        on |λ|(x, xs)\n            script test\n                on |λ|(subTree)\n                    {} ≠ (nest of subTree) or q(root of subTree)\n                end |λ|\n            end script\n            Node(x, filter(test, xs))\n        end |λ|\n    end script\n    \n    foldTree(go, tree)\nend filteredTree",
+    "code": "-- filteredTree (a -> Bool) -> Tree a -> Tree a\non filteredTree(p, tree)\n    -- A tree including only those children\n    -- which either match the predicate p, or have\n    -- descendants which match the predicate p.\n    \n    script go\n        property q : mReturn(p)\n        on |λ|(x, xs)\n            script test\n                on |λ|(subTree)\n                    {} ≠ (nest of subTree) or (|λ|(root of subTree) of q)\n                end |λ|\n            end script\n            Node(x, filter(test, xs))\n        end |λ|\n    end script\n    \n    foldTree(go, tree)\nend filteredTree",
     "tags": [
       "AS Prelude"
     ]
