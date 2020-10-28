@@ -2689,7 +2689,7 @@
     ]
   },
   "toLower": {
-    "code": "-- toLower :: String -> String\non toLower(str)\n    -- String in lower case. \n    set ca to current application\n    ((ca's NSString's stringWithString:(str))'s ¬\n        lowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toLower",
+    "code": "-- toLower :: String -> String\non toLower(str)\n    -- String in lower case. \n    tell current application\n        ((its (NSString's stringWithString:(str)))'s ¬\n            lowercaseStringWithLocale:(its NSLocale's currentLocale())) as text\n    end tell\nend toLower",
     "tags": [
       "AS Prelude"
     ]
@@ -2713,7 +2713,7 @@
     ]
   },
   "toUpper": {
-    "code": "-- toUpper :: String -> String\non toUpper(str)\n    set ca to current application\n    ((ca's NSString's stringWithString:(str))'s ¬\n        uppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text\nend toUpper",
+    "code": "-- toUpper :: String -> String\non toUpper(str)\n    tell current application\n        ((its (NSString's stringWithString:(str)))'s ¬\n            uppercaseStringWithLocale:(its NSLocale's currentLocale())) as text\n    end tell\nend toUpper",
     "tags": [
       "AS Prelude"
     ]

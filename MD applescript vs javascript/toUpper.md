@@ -1,15 +1,16 @@
+```applescript
+-- toUpper :: String -> String
+on toUpper(str)
+    tell current application
+        ((its (NSString's stringWithString:(str)))'s ¬
+            uppercaseStringWithLocale:(its NSLocale's currentLocale())) as text
+    end tell
+end toUpper
+```
+
+
 ```javascript
 // toUpper :: String -> String
 const toUpper = s =>
     s.toLocaleUpperCase();
-```
-
-
-```applescript
--- toUpper :: String -> String
-on toUpper(str)
-    set ca to current application
-    ((ca's NSString's stringWithString:(str))'s ¬
-        uppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
-end toUpper
 ```

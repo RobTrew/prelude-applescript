@@ -5834,9 +5834,10 @@ end toEnum
 -- toLower :: String -> String
 on toLower(str)
     -- String in lower case. 
-    set ca to current application
-    ((ca's NSString's stringWithString:(str))'s ¬
-        lowercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
+    tell current application
+        ((its (NSString's stringWithString:(str)))'s ¬
+            lowercaseStringWithLocale:(its NSLocale's currentLocale())) as text
+    end tell
 end toLower
 
 -- toRatio :: Real -> Ratio
@@ -5871,9 +5872,10 @@ end toTitle
 
 -- toUpper :: String -> String
 on toUpper(str)
-    set ca to current application
-    ((ca's NSString's stringWithString:(str))'s ¬
-        uppercaseStringWithLocale:(ca's NSLocale's currentLocale())) as text
+    tell current application
+        ((its (NSString's stringWithString:(str)))'s ¬
+            uppercaseStringWithLocale:(its NSLocale's currentLocale())) as text
+    end tell
 end toUpper
 
 -- transpose :: [[a]] -> [[a]]
