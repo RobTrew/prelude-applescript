@@ -3431,19 +3431,6 @@ on liftA2Tuple(f, a, b)
     Tuple(mappend(|1| of a, b1), mReturn(f)'s |λ|(|2| of a, b2))
 end liftA2Tuple
 
--- liftMmay :: (a -> b) -> (Maybe a -> Maybe b)
-on liftMmay(f)
-    script
-        on |λ|(mb)
-            if Nothing of mb then
-                mb
-            else
-                tell mReturn(f) to |λ|(Just of mb)
-            end if
-        end |λ|
-    end script
-end liftMmay
-
 -- lines :: String -> [String]
 on |lines|(xs)
     paragraphs of xs

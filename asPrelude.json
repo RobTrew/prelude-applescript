@@ -1469,12 +1469,6 @@
       "AS Prelude"
     ]
   },
-  "liftMmay": {
-    "code": "-- liftMmay :: (a -> b) -> (Maybe a -> Maybe b)\non liftMmay(f)\n    script\n        on |λ|(mb)\n            if Nothing of mb then\n                mb\n            else\n                tell mReturn(f) to |λ|(Just of mb)\n            end if\n        end |λ|\n    end script\nend liftMmay",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
   "lines": {
     "code": "-- lines :: String -> [String]\non |lines|(xs)\n    paragraphs of xs\nend |lines|",
     "tags": [
