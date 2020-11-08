@@ -1325,7 +1325,7 @@
     ]
   },
   "iterate": {
-    "code": "-- iterate :: (a -> a) -> a -> Gen [a]\non iterate(f, x)\n    script\n        property v : missing value\n        property g : mReturn(f)'s |λ|\n        on |λ|()\n            if missing value is v then\n                set v to x\n            else\n                set v to g(v)\n            end if\n            return v\n        end |λ|\n    end script\nend iterate",
+    "code": "-- iterate :: (a -> a) -> a -> Gen [a]\non iterate(f, x)\n    script\n        property v : missing value\n        property g : mReturn(f)\n        on |λ|()\n            if missing value is v then\n                set v to x\n            else\n                set v to g's |λ|(v)\n            end if\n            return v\n        end |λ|\n    end script\nend iterate",
     "tags": [
       "AS Prelude"
     ]
