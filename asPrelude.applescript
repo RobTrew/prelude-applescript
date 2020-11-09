@@ -5758,46 +5758,6 @@ on tempFilePath(template)
         takeExtension(template)
 end tempFilePath
 
--- then (>>) :: Monad m => m a -> m b -> m b
-on |then|(ma, mb)
-    set c to class of ma
-    if c is list then
-        thenList(ma, mb)
-    else if c is record then
-        if keys(ma) contains "Maybe" then
-            thenMay(ma, mb)
-        else
-            thenIO(ma, mb)
-        end if
-    else
-        thenIO(ma, mb)
-    end if
-end |then|
-
--- thenIO (>>) :: IO a -> IO b -> IO b
-on thenIO(ma, mb)
-    mb
-end thenIO
-
--- thenList (>>) :: [a] -> [b] -> [b]
-on thenList(xs, ys)
-    script
-        on |λ|(_)
-            ys
-        end |λ|
-    end script
-    concatMap(result, xs)
-end thenList
-
--- thenMay (>>) :: Maybe a -> Maybe b -> Maybe b
-on thenMay(ma, mb)
-    if Nothing of ma then
-        ma
-    else
-        mb
-    end if
-end thenMay 
-
 -- toEnum :: a -> Int -> a
 on toEnum(e)
     script

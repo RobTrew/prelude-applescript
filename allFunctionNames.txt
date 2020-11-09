@@ -436,10 +436,6 @@ takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
 takeWhileR :: (a -> Bool) -> [a] -> [a]
 taskPaperDateString :: Date -> String
 tempFilePath :: String -> IO FilePath
-then (>>) :: Monad m => m a -> m b -> m b
-thenIO (>>) :: IO a -> IO b -> IO b
-thenList (>>) :: [a] -> [b] -> [b]
-thenMay (>>) :: Maybe a -> Maybe b -> Maybe b
 toEnum :: a -> Int -> a
 toLower :: String -> String
 toRatio :: Real -> Ratio

@@ -2652,30 +2652,6 @@
       "AS Prelude"
     ]
   },
-  "then (>>)": {
-    "code": "-- then (>>) :: Monad m => m a -> m b -> m b\non |then|(ma, mb)\n    set c to class of ma\n    if c is list then\n        thenList(ma, mb)\n    else if c is record then\n        if keys(ma) contains \"Maybe\" then\n            thenMay(ma, mb)\n        else\n            thenIO(ma, mb)\n        end if\n    else\n        thenIO(ma, mb)\n    end if\nend |then|",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
-  "thenIO (>>)": {
-    "code": "-- thenIO (>>) :: IO a -> IO b -> IO b\non thenIO(ma, mb)\n    mb\nend thenIO",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
-  "thenList (>>)": {
-    "code": "-- thenList (>>) :: [a] -> [b] -> [b]\non thenList(xs, ys)\n    script\n        on |λ|(_)\n            ys\n        end |λ|\n    end script\n    concatMap(result, xs)\nend thenList",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
-  "thenMay (>>)": {
-    "code": "-- thenMay (>>) :: Maybe a -> Maybe b -> Maybe b\non thenMay(ma, mb)\n    if Nothing of ma then\n        ma\n    else\n        mb\n    end if\nend thenMay ",
-    "tags": [
-      "AS Prelude"
-    ]
-  },
   "toEnum": {
     "code": "-- toEnum :: a -> Int -> a\non toEnum(e)\n    script\n        property c : class of e\n        on |λ|(x)\n            if integer is c or real is c then\n                x as number\n            else if text is c then\n                character id x\n            else if boolean is c then\n                if 0 ≠ x then\n                    true\n                else\n                    false\n                end if\n            end if\n        end |λ|\n    end script\nend toEnum",
     "tags": [
