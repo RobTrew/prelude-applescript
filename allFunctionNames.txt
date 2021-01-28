@@ -241,6 +241,7 @@ liftA2May :: (a -> b -> c) -> Maybe a -> Maybe b -> Maybe c
 liftA2Tree :: (a -> b -> c) -> Tree a -> Tree b -> Tree c
 liftA2Tuple :: Monoid m => (a -> b -> c) -> (m, a) -> (m, b) -> (m, c)
 lines :: String -> [String]
+list :: Gen [a] -> [a]
 listDirectory :: FilePath -> [FilePath]
 listFromMaybe :: Maybe a -> [a]
 listFromTree :: Tree a -> [a]

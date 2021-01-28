@@ -209,7 +209,7 @@
     ]
   },
   "bimap": {
-    "code": "-- bimap :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)\non bimap(f, g)\n    -- Tuple instance of bimap.\n    -- A tuple of the application of f and g to the\n    -- first and second values of tpl respectively.\n    script\n        on |λ|(x)\n            Tuple(|λ|(fst(x)) of mReturn(f), ¬\n                |λ|(snd(x)) of mReturn(g))\n        end |λ|\n    end script\nend bimap",
+    "code": "-- bimap :: (a -> b) -> (c -> d) -> (a, c) -> (b, d)\non bimap(f, g)\n    -- Tuple instance of bimap.\n    -- A tuple of the application of f and g to the\n    -- first and second values of tpl respectively.\n    script\n        on |λ|(x)\n            {|λ|(fst(x)) of mReturn(f), ¬\n                |λ|(snd(x)) of mReturn(g)}\n        end |λ|\n    end script\nend bimap",
     "tags": [
       "AS Prelude"
     ]
@@ -269,25 +269,25 @@
     ]
   },
   "break": {
-    "code": "-- break :: (a -> Bool) -> [a] -> ([a], [a])\non break(p, xs)\n    set bln to false\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then\n                set bln to true\n                exit repeat\n            end if\n        end repeat\n    end tell\n    if bln then\n        if 1 < i then\n            Tuple(items 1 thru (i - 1) of xs, items i thru -1 of xs)\n        else\n            Tuple({}, xs)\n        end if\n    else\n        Tuple(xs, {})\n    end if\nend break",
+    "code": "-- break :: (a -> Bool) -> [a] -> ([a], [a])\non break(p, xs)\n    set bln to false\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then\n                set bln to true\n                exit repeat\n            end if\n        end repeat\n    end tell\n    if bln then\n        if 1 < i then\n            {items 1 thru (i - 1) of xs, items i thru -1 of xs}\n        else\n            {{}, xs}\n        end if\n    else\n        {xs, {}}\n    end if\nend break",
     "tags": [
       "AS Prelude"
     ]
   },
   "breakOn": {
-    "code": "-- breakOn :: String -> String -> (String, String)\non breakOn(pat, src)\n    -- non null needle -> haystack -> (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        set lngParts to length of lstParts\n        \n        if 1 < lngParts then\n            set tpl to Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text))\n        else\n            set tpl to Tuple(src, \"\")\n        end if\n        \n        set my text item delimiters to dlm\n        return tpl\n    else\n        missing value\n    end if\nend breakOn",
+    "code": "-- breakOn :: String -> String -> (String, String)\non breakOn(pat, src)\n    -- non null needle -> haystack -> (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        set lngParts to length of lstParts\n        \n        if 1 < lngParts then\n            set tpl to {item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text)}\n        else\n            set tpl to Tuple(src, \"\")\n        end if\n        \n        set my text item delimiters to dlm\n        return tpl\n    else\n        missing value\n    end if\nend breakOn",
     "tags": [
       "AS Prelude"
     ]
   },
   "breakOnAll": {
-    "code": "-- breakOnAll :: String -> String -> [(String, String)]\non breakOnAll(pat, src)\n    -- breakOnAll \"/\" \"a/b/c/\"\n    -- ==> [(\"a\", \"/b/c/\"), (\"a/b\", \"/c/\"), (\"a/b/c\", \"/\")]\n    if \"\" ≠ pat then\n        script\n            on |λ|(a, _, i, xs)\n                if 1 < i then\n                    a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬\n                        pat & intercalate(pat, drop(i - 1, xs)))}\n                else\n                    a\n                end if\n            end |λ|\n        end script\n        foldl(result, {}, splitOn(pat, src))\n    else\n        missing value\n    end if\nend breakOnAll",
+    "code": "-- breakOnAll :: String -> String -> [(String, String)]\non breakOnAll(pat, src)\n    -- breakOnAll \"/\" \"a/b/c/\"\n    -- ==> [(\"a\", \"/b/c/\"), (\"a/b\", \"/c/\"), (\"a/b/c\", \"/\")]\n    if \"\" ≠ pat then\n        script\n            on |λ|(a, _, i, xs)\n                if 1 < i then\n                    a & {{intercalate(pat, take(i - 1, xs)), ¬\n                        pat & intercalate(pat, drop(i - 1, xs))}}\n                else\n                    a\n                end if\n            end |λ|\n        end script\n        foldl(result, {}, splitOn(pat, src))\n    else\n        missing value\n    end if\nend breakOnAll",
     "tags": [
       "AS Prelude"
     ]
   },
   "breakOnMay": {
-    "code": "-- breakOnMay :: String -> String -> Maybe (String, String)\non breakOnMay(pat, src)\n    -- needle -> haystack -> maybe (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        if length of lstParts > 1 then\n            set mbTuple to Just(Tuple(item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text)))\n        else\n            set mbTuple to Just(Tuple(src, \"\"))\n        end if\n        \n        set my text item delimiters to dlm\n        return mbTuple\n    else\n        Nothing()\n    end if\nend breakOnMay",
+    "code": "-- breakOnMay :: String -> String -> Maybe (String, String)\non breakOnMay(pat, src)\n    -- needle -> haystack -> maybe (prefix before match, match + rest)\n    if pat ≠ \"\" then\n        set {dlm, my text item delimiters} to {my text item delimiters, pat}\n        \n        set lstParts to text items of src\n        if length of lstParts > 1 then\n            set mbTuple to Just({item 1 of lstParts, pat & ¬\n                ((items 2 thru -1 of lstParts) as text)})\n        else\n            set mbTuple to Just({src, \"\"})\n        end if\n        \n        set my text item delimiters to dlm\n        return mbTuple\n    else\n        Nothing()\n    end if\nend breakOnMay",
     "tags": [
       "AS Prelude"
     ]
@@ -347,7 +347,7 @@
     ]
   },
   "chunksOf": {
-    "code": "-- chunksOf :: Int -> [a] -> [[a]]\ron chunksOf(k, xs)\r\tscript\r\t\ton go(ys)\r\t\t\tset ab to splitAt(k, ys)\r\t\t\tset a to |1| of ab\r\t\t\tif {} ≠ a then\r\t\t\t\t{a} & go(|2| of ab)\r\t\t\telse\r\t\t\t\ta\r\t\t\tend if\r\t\tend go\r\tend script\r\tresult's go(xs)\rend chunksOf",
+    "code": "-- chunksOf :: Int -> [a] -> [[a]]\non chunksOf(k, xs)\n    script\n        on go(ys)\n            set ab to splitAt(k, ys)\n            set a to item 1 of ab\n            if {} ≠ a then\n                {a} & go(item 2 of ab)\n            else\n                a\n            end if\n        end go\n    end script\n    result's go(xs)\nend chunksOf",
     "tags": [
       "AS Prelude"
     ]
@@ -1475,6 +1475,12 @@
       "AS Prelude"
     ]
   },
+  "list": {
+    "code": "-- list :: Gen [a] -> [a]\non |list|(gen)\n    -- A strict list derived from a lazy generator.    \n    set xs to {}\n    set x to |λ|() of gen\n    repeat while missing value ≠ x\n        set end of xs to x\n        set x to |λ|() of gen\n    end repeat\n    return xs\nend |list|",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
   "listDirectory": {
     "code": "-- listDirectory :: FilePath -> [FilePath]\non listDirectory(strPath)\n    set ca to current application\n    unwrap(ca's NSFileManager's defaultManager()'s ¬\n        contentsOfDirectoryAtPath:(unwrap(stringByStandardizingPath of ¬\n            wrap(strPath))) |error|:(missing value))\nend listDirectory",
     "tags": [
@@ -2104,7 +2110,7 @@
     ]
   },
   "replicate": {
-    "code": "-- Egyptian multiplication - progressively doubling a list, appending\n-- stages of doubling to an accumulator where needed for binary \n-- assembly of a target length\n-- replicate :: Int -> String -> String\non replicate(n, s)\n    script p\n        on |λ|({n})\n            n ≤ 1\n        end |λ|\n    end script\n    \n    script f\n        on |λ|({n, dbl, out})\n            if (n mod 2) > 0 then\n                set d to out & dbl\n            else\n                set d to out\n            end if\n            {n div 2, dbl & dbl, d}\n        end |λ|\n    end script\n    \n    set xs to |until|(p, f, {n, s, \"\"})\n    item 2 of xs & item 3 of xs\nend replicate",
+    "code": "-- Egyptian multiplication - progressively doubling a list, appending\n-- stages of doubling to an accumulator where needed for binary \n-- assembly of a target length\n-- replicate :: Int -> String -> String\non replicate(n, s)\n    -- Egyptian multiplication - progressively doubling a list, \n    -- appending stages of doubling to an accumulator where needed \n    -- for binary assembly of a target length\n    script p\n        on |λ|({n})\n            n ≤ 1\n        end |λ|\n    end script\n    \n    script f\n        on |λ|({n, dbl, out})\n            if (n mod 2) > 0 then\n                set d to out & dbl\n            else\n                set d to out\n            end if\n            {n div 2, dbl & dbl, d}\n        end |λ|\n    end script\n    \n    set xs to |until|(p, f, {n, s, \"\"})\n    item 2 of xs & item 3 of xs\nend replicate",
     "tags": [
       "AS Prelude"
     ]
@@ -2419,7 +2425,7 @@
     ]
   },
   "splitAt": {
-    "code": "-- splitAt :: Int -> [a] -> ([a], [a])\non splitAt(n, xs)\n    if n > 0 and n < length of xs then\n        if class of xs is text then\n            Tuple(items 1 thru n of xs as text, ¬\n                items (n + 1) thru -1 of xs as text)\n        else\n            Tuple(items 1 thru n of xs, items (n + 1) thru -1 of xs)\n        end if\n    else\n        if n < 1 then\n            Tuple({}, xs)\n        else\n            Tuple(xs, {})\n        end if\n    end if\nend splitAt",
+    "code": "-- splitAt :: Int -> [a] -> ([a], [a])\non splitAt(n, xs)\n    if n > 0 and n < length of xs then\n        if class of xs is text then\n            {items 1 thru n of xs as text, ¬\n                items (n + 1) thru -1 of xs as text}\n        else\n            {items 1 thru n of xs, items (n + 1) thru -1 of xs}\n        end if\n    else\n        if n < 1 then\n            {{}, xs}\n        else\n            {xs, {}}\n        end if\n    end if\nend splitAt",
     "tags": [
       "AS Prelude"
     ]
@@ -2973,7 +2979,7 @@
     ]
   },
   "zipList": {
-    "code": "-- zipList :: [a] -> [b] -> [(a, b)]\non zipList(xs, ys)\n    set lng to min(length of xs, length of ys)\n    script go\n        on |λ|(x, i)\n            Tuple(x, item i of ys)\n        end |λ|\n    end script\n    map(go, items 1 thru lng of xs)\nend zipList",
+    "code": "-- zipList :: [a] -> [b] -> [(a, b)]\non zipList(xs, ys)\n    set lng to min(length of xs, length of ys)\n    script go\n        on |λ|(x, i)\n            {x, item i of ys}\n        end |λ|\n    end script\n    map(go, items 1 thru lng of xs)\nend zipList",
     "tags": [
       "AS Prelude"
     ]

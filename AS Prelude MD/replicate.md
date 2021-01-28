@@ -4,6 +4,9 @@
 -- assembly of a target length
 -- replicate :: Int -> String -> String
 on replicate(n, s)
+    -- Egyptian multiplication - progressively doubling a list, 
+    -- appending stages of doubling to an accumulator where needed 
+    -- for binary assembly of a target length
     script p
         on |λ|({n})
             n ≤ 1

@@ -1,17 +1,3 @@
-```javascript
-// break :: (a -> Bool) -> [a] -> ([a], [a])
-const break_ = p =>
-    xs => {
-        const i = xs.findIndex(p);
-        return -1 !== i ? (
-            Tuple(xs.slice(0, i))(
-                xs.slice(i)
-            )
-        ) : Tuple(xs)([]);
-    };
-```
-
-
 ```applescript
 -- break :: (a -> Bool) -> [a] -> ([a], [a])
 on break(p, xs)
@@ -27,12 +13,26 @@ on break(p, xs)
     end tell
     if bln then
         if 1 < i then
-            Tuple(items 1 thru (i - 1) of xs, items i thru -1 of xs)
+            {items 1 thru (i - 1) of xs, items i thru -1 of xs}
         else
-            Tuple({}, xs)
+            {{}, xs}
         end if
     else
-        Tuple(xs, {})
+        {xs, {}}
     end if
 end break
+```
+
+
+```javascript
+// break :: (a -> Bool) -> [a] -> ([a], [a])
+const break_ = p =>
+    xs => {
+        const i = xs.findIndex(p);
+        return -1 !== i ? (
+            Tuple(xs.slice(0, i))(
+                xs.slice(i)
+            )
+        ) : Tuple(xs)([]);
+    };
 ```

@@ -444,8 +444,8 @@ on bimap(f, g)
     -- first and second values of tpl respectively.
     script
         on |λ|(x)
-            Tuple(|λ|(fst(x)) of mReturn(f), ¬
-                |λ|(snd(x)) of mReturn(g))
+            {|λ|(fst(x)) of mReturn(f), ¬
+                |λ|(snd(x)) of mReturn(g)}
         end |λ|
     end script
 end bimap
@@ -592,12 +592,12 @@ on break(p, xs)
     end tell
     if bln then
         if 1 < i then
-            Tuple(items 1 thru (i - 1) of xs, items i thru -1 of xs)
+            {items 1 thru (i - 1) of xs, items i thru -1 of xs}
         else
-            Tuple({}, xs)
+            {{}, xs}
         end if
     else
-        Tuple(xs, {})
+        {xs, {}}
     end if
 end break
 
@@ -611,8 +611,8 @@ on breakOn(pat, src)
         set lngParts to length of lstParts
         
         if 1 < lngParts then
-            set tpl to Tuple(item 1 of lstParts, pat & ¬
-                ((items 2 thru -1 of lstParts) as text))
+            set tpl to {item 1 of lstParts, pat & ¬
+                ((items 2 thru -1 of lstParts) as text)}
         else
             set tpl to Tuple(src, "")
         end if
@@ -632,8 +632,8 @@ on breakOnAll(pat, src)
         script
             on |λ|(a, _, i, xs)
                 if 1 < i then
-                    a & {Tuple(intercalate(pat, take(i - 1, xs)), ¬
-                        pat & intercalate(pat, drop(i - 1, xs)))}
+                    a & {{intercalate(pat, take(i - 1, xs)), ¬
+                        pat & intercalate(pat, drop(i - 1, xs))}}
                 else
                     a
                 end if
@@ -653,10 +653,10 @@ on breakOnMay(pat, src)
         
         set lstParts to text items of src
         if length of lstParts > 1 then
-            set mbTuple to Just(Tuple(item 1 of lstParts, pat & ¬
-                ((items 2 thru -1 of lstParts) as text)))
+            set mbTuple to Just({item 1 of lstParts, pat & ¬
+                ((items 2 thru -1 of lstParts) as text)})
         else
-            set mbTuple to Just(Tuple(src, ""))
+            set mbTuple to Just({src, ""})
         end if
         
         set my text item delimiters to dlm
@@ -771,7 +771,21 @@ on chr(n)
     character id n
 end chr
 
--- chunksOf :: Int -> [a] -> [[a]]on chunksOf(k, xs)	script		on go(ys)			set ab to splitAt(k, ys)			set a to |1| of ab			if {} ≠ a then				{a} & go(|2| of ab)			else				a			end if		end go	end script	result's go(xs)end chunksOf
+-- chunksOf :: Int -> [a] -> [[a]]
+on chunksOf(k, xs)
+    script
+        on go(ys)
+            set ab to splitAt(k, ys)
+            set a to item 1 of ab
+            if {} ≠ a then
+                {a} & go(item 2 of ab)
+            else
+                a
+            end if
+        end go
+    end script
+    result's go(xs)
+end chunksOf
 
 -- combine (</>) :: FilePath -> FilePath -> FilePath
 on combine(fp, fp1)
@@ -3436,6 +3450,18 @@ on |lines|(xs)
     paragraphs of xs
 end |lines|
 
+-- list :: Gen [a] -> [a]
+on |list|(gen)
+    -- A strict list derived from a lazy generator.    
+    set xs to {}
+    set x to |λ|() of gen
+    repeat while missing value ≠ x
+        set end of xs to x
+        set x to |λ|() of gen
+    end repeat
+    return xs
+end |list|
+
 -- listDirectory :: FilePath -> [FilePath]
 on listDirectory(strPath)
     set ca to current application
@@ -4574,6 +4600,9 @@ end replace
 -- assembly of a target length
 -- replicate :: Int -> String -> String
 on replicate(n, s)
+    -- Egyptian multiplication - progressively doubling a list, 
+    -- appending stages of doubling to an accumulator where needed 
+    -- for binary assembly of a target length
     script p
         on |λ|({n})
             n ≤ 1
@@ -5149,16 +5178,16 @@ end splitArrow
 on splitAt(n, xs)
     if n > 0 and n < length of xs then
         if class of xs is text then
-            Tuple(items 1 thru n of xs as text, ¬
-                items (n + 1) thru -1 of xs as text)
+            {items 1 thru n of xs as text, ¬
+                items (n + 1) thru -1 of xs as text}
         else
-            Tuple(items 1 thru n of xs, items (n + 1) thru -1 of xs)
+            {items 1 thru n of xs, items (n + 1) thru -1 of xs}
         end if
     else
         if n < 1 then
-            Tuple({}, xs)
+            {{}, xs}
         else
-            Tuple(xs, {})
+            {xs, {}}
         end if
     end if
 end splitAt
@@ -6548,7 +6577,7 @@ on zipList(xs, ys)
     set lng to min(length of xs, length of ys)
     script go
         on |λ|(x, i)
-            Tuple(x, item i of ys)
+            {x, item i of ys}
         end |λ|
     end script
     map(go, items 1 thru lng of xs)
