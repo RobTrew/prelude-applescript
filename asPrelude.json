@@ -2955,7 +2955,7 @@
     ]
   },
   "zip": {
-    "code": "-- zip :: [a] -> [b] -> [(a, b)]\non zip(xs, ys)\n    -- A list of step-wise pairs drawn from xs and ys\n    -- up to the length of the shorter of those lists.\n    set lng to min(length of xs, length of ys)\n    set zs to {}\n    repeat with i from 1 to lng\n        set end of zs to {item i of xs, item i of ys}\n    end repeat\n    return zs\nend zip",
+    "code": "-- zip :: [a] -> [b] -> [(a, b)]\non zip(xs, ys)\n    zipWith(Tuple, xs, ys)\nend zip",
     "tags": [
       "AS Prelude"
     ]
