@@ -5144,23 +5144,28 @@ end sortBy
 -- sortOn :: Ord b => (a -> b) -> [a] -> [a]-- sortOn :: Ord b => [((a -> b), Bool)]  -> [a] -> [a]on sortOn(f, xs)	-- Sort a list by comparing the results of a key function applied to each	-- element. sortOn f is equivalent to sortBy(comparing(f), xs), but has the	-- performance advantage of only evaluating f once for each element in	-- the input list. This is called the decorate-sort-undecorate paradigm,	-- or Schwartzian transform.	-- Elements are arranged from from lowest to highest.		-- In this Applescript implementation, f can optionally be [(a -> b)]	-- or [((a -> b), Bool)]) to specify a compound sort order		--    xs:  List of items to be sorted. 	--          (The items can be records, lists, or simple values).	--	--    f:    A single (a -> b) function (Applescript handler),	--          or a list of such functions.	--          if the argument is a list, any function can 	--          optionally be followed by a bool. 	--          (False -> descending sort)	--	--          (Subgrouping in the list is optional and ignored)	--          Each function (Item -> Value) in the list should 	--          take an item (of the type contained by xs) 	--          as its input and return a simple orderable value 	--          (Number, String, or Date).	--	--          The sequence of key functions and optional 	--          direction bools defines primary to N-ary sort keys.	script keyBool		on |λ|(x, a)			if boolean is class of x then				{asc:x, fbs:fbs of a}			else				{asc:true, fbs:({Tuple(x, asc of a)} & fbs of a)}			end if		end |λ|	end script	set {fs, bs} to {|1|, |2|} of unzip(fbs of foldr(keyBool, ¬		{asc:true, fbs:{}}, flatten({f})))		set intKeys to length of fs	set ca to current application	script dec		property gs : map(my mReturn, fs)		on |λ|(x)			set nsDct to (ca's NSMutableDictionary's ¬				dictionaryWithDictionary:{val:x})			repeat with i from 1 to intKeys				(nsDct's setValue:((item i of gs)'s |λ|(x)) ¬					forKey:(character id (96 + i)))			end repeat			nsDct as record		end |λ|	end script		script descrip		on |λ|(bool, i)			ca's NSSortDescriptor's ¬				sortDescriptorWithKey:(character id (96 + i)) ¬					ascending:bool		end |λ|	end script		script undec		on |λ|(x)			val of x		end |λ|	end script		map(undec, ((ca's NSArray's arrayWithArray:map(dec, xs))'s ¬		sortedArrayUsingDescriptors:map(descrip, bs)) as list)end sortOn
 
 -- span :: (a -> Bool) -> [a] -> ([a], [a])
-on span(f)
+on span(p, xs)
     -- The longest (possibly empty) prefix of xs
     -- that contains only elements satisfying p,
     -- tupled with the remainder of xs.
     -- span(p, xs) eq (takeWhile(p, xs), dropWhile(p, xs)) 
-    script
-        on |λ|(xs)
-            set lng to length of xs
-            set i to 0
-            tell mReturn(f)
-                repeat while lng > i and |λ|(item (1 + i) of xs)
-                    set i to 1 + i
-                end repeat
-            end tell
-            splitAt(i, xs)
+    script go
+        property f : mReturn(p)
+        on |λ|(cs)
+            if {} ≠ cs then
+                set c to item 1 of cs
+                if |λ|(c) of p then
+                    set {ys, zs} to go's |λ|(rest of cs)
+                    {{c} & ys, zs}
+                else
+                    {{}, cs}
+                end if
+            else
+                {}
+            end if
         end |λ|
     end script
+    |λ|(xs) of go
 end span
 
 -- splitArrow (***) :: (a -> b) -> (c -> d) -> ((a, c) -> (b, d))
