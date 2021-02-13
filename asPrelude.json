@@ -527,7 +527,7 @@
     ]
   },
   "doesFileExist": {
-    "code": "-- doesFileExist :: FilePath -> IO Bool\non doesFileExist(strPath)\n    set ca to current application\n    set oPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {bln, int} to (ca's NSFileManager's defaultManager's ¬\n        fileExistsAtPath:oPath isDirectory:(reference))\n    bln and (int ≠ 1)\nend doesFileExist",
+    "code": "-- doesFileExist :: FilePath -> IO Bool\non doesFileExist(strPath)\n    set ca to current application\n    set oPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {bln, int} to (ca's NSFileManager's defaultManager's ¬\n        fileExistsAtPath:oPath isDirectory:(reference))\n    bln and (1 ≠ int)\nend doesFileExist",
     "tags": [
       "AS Prelude"
     ]
@@ -2413,7 +2413,7 @@
     ]
   },
   "span": {
-    "code": "-- span :: (a -> Bool) -> [a] -> ([a], [a])\non span(p, xs)\n    -- The longest (possibly empty) prefix of xs\n    -- that contains only elements satisfying p,\n    -- tupled with the remainder of xs.\n    -- span(p, xs) eq (takeWhile(p, xs), dropWhile(p, xs)) \n    script go\n        property f : mReturn(p)\n        on |λ|(cs)\n            if {} ≠ cs then\n                set c to item 1 of cs\n                if |λ|(c) of p then\n                    set {ys, zs} to go's |λ|(rest of cs)\n                    {{c} & ys, zs}\n                else\n                    {{}, cs}\n                end if\n            else\n                {}\n            end if\n        end |λ|\n    end script\n    |λ|(xs) of go\nend span",
+    "code": "-- span :: (a -> Bool) -> [a] -> ([a], [a])\non span(p, xs)\n    -- The longest (possibly empty) prefix of xs\n    -- that contains only elements satisfying p,\n    -- tupled with the remainder of xs.\n    -- span(p, xs) eq (takeWhile(p, xs), dropWhile(p, xs)) \n    script go\n        property mp : mReturn(p)\n        on |λ|(vs)\n            if {} ≠ vs then\n                set x to item 1 of vs\n                if |λ|(x) of mp then\n                    set {ys, zs} to |λ|(rest of vs)\n                    {{x} & ys, zs}\n                else\n                    {{}, vs}\n                end if\n            else\n                {{}, {}}\n            end if\n        end |λ|\n    end script\n    |λ|(xs) of go\nend span",
     "tags": [
       "AS Prelude"
     ]
