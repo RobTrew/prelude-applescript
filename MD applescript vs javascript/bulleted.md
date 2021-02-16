@@ -18,8 +18,7 @@ end bulleted
 ```javascript
 // bulleted :: String -> String -> String
 const bulleted = strTab =>
-    s => s.split(/[\n\r]+/u)
-    .map(
+    s => s.split(/[\n\r]+/u).map(
         x => '' !== x ? (
             `${strTab}- ${x}`
         ) : x

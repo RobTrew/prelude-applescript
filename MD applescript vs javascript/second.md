@@ -20,6 +20,7 @@ const second = f =>
     // f (a, b) -> (a, f(b))
     xy => {
         const tpl = Tuple(xy[0])(f(xy[1]));
+
         return Array.isArray(xy) ? (
             Array.from(tpl)
         ) : tpl;
