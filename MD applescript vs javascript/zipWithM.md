@@ -1,15 +1,3 @@
-```javascript
-// zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
-const zipWithM = f =>
-    xs => ys =>
-        sequenceA(
-            zipWith(f)(
-                [...xs]
-            )([...ys])
-        );
-```
-
-
 ```applescript
 -- zipWithM :: Applicative m => (a -> b -> m c) -> [a] -> [b] -> m [c]
 on zipWithM(fm, xs, ys)
@@ -18,4 +6,17 @@ on zipWithM(fm, xs, ys)
     -- or Just/Right a list of the results, when all succeeded.
     traverseList(my identity, zipWith(fm, xs, ys))
 end zipWithM
+```
+
+
+```javascript
+// zipWithM :: Applicative m => (a -> b -> m c) ->
+// [a] -> [b] -> m [c]
+const zipWithM = f =>
+    xs => ys =>
+        sequenceA(
+            zipWith(f)(
+                [...xs]
+            )([...ys])
+        );
 ```
