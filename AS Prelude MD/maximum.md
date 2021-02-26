@@ -1,16 +1,8 @@
 ```applescript
 -- maximum :: Ord a => [a] -> a
 on maximum(xs)
-    script
-        on |λ|(a, b)
-            if a is missing value or b > a then
-                b
-            else
-                a
-            end if
-        end |λ|
-    end script
-    
-    foldl(result, missing value, xs)
+    set ca to current application
+    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@max.self")
 end maximum
 ```

@@ -3796,17 +3796,9 @@ end maxBound
 
 -- maximum :: Ord a => [a] -> a
 on maximum(xs)
-    script
-        on |λ|(a, b)
-            if a is missing value or b > a then
-                b
-            else
-                a
-            end if
-        end |λ|
-    end script
-    
-    foldl(result, missing value, xs)
+    set ca to current application
+    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@max.self")
 end maximum
 
 -- maximumBy :: (a -> a -> Ordering) -> [a] -> a
@@ -3860,12 +3852,9 @@ end maybe
 
 -- mean :: [Num] -> Num
 on mean(xs)
-    script
-        on |λ|(a, x)
-            a + x
-        end |λ|
-    end script
-    foldl(result, 0, xs) / (length of xs)
+    set ca to current application
+    ((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@avg.self") as real
 end mean
 
 -- memberDict :: Key -> Dict -> Bool
@@ -3905,14 +3894,9 @@ end minBound
 
 -- minimum :: Ord a => [a] -> a
 on minimum(xs)
-    set lng to length of xs
-    if lng < 1 then return missing value
-    set m to item 1 of xs
-    repeat with x in xs
-        set v to contents of x
-        if v < m then set m to v
-    end repeat
-    return m
+    set ca to current application
+    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@min.self")
 end minimum
 
 -- minimumBy :: (a -> a -> Ordering) -> [a] -> a
@@ -4034,7 +4018,9 @@ end notElem
 
 -- nub :: [a] -> [a]
 on nub(xs)
-    nubBy(eq, xs)
+    set ca to current application
+    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@distinctUnionOfObjects.self") as list
 end nub
 
 -- nubBy :: (a -> a -> Bool) -> [a] -> [a]
@@ -5504,13 +5490,9 @@ end succMay
 
 -- sum :: [Num] -> Num
 on sum(xs)
-    script add
-        on |λ|(a, b)
-            a + b
-        end |λ|
-    end script
-    
-    foldl(add, 0, xs)
+    set ca to current application
+    ((ca's NSArray's arrayWithArray:xs)'s ¬
+        valueForKeyPath:"@sum.self") as real
 end sum
 
 -- swap :: (a, b) -> (b, a)

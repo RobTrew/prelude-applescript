@@ -1640,7 +1640,7 @@
     ]
   },
   "maximum": {
-    "code": "-- maximum :: Ord a => [a] -> a\non maximum(xs)\n    script\n        on |λ|(a, b)\n            if a is missing value or b > a then\n                b\n            else\n                a\n            end if\n        end |λ|\n    end script\n    \n    foldl(result, missing value, xs)\nend maximum",
+    "code": "-- maximum :: Ord a => [a] -> a\non maximum(xs)\n    set ca to current application\n    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@max.self\")\nend maximum",
     "tags": [
       "AS Prelude"
     ]
@@ -1670,7 +1670,7 @@
     ]
   },
   "mean": {
-    "code": "-- mean :: [Num] -> Num\non mean(xs)\n    script\n        on |λ|(a, x)\n            a + x\n        end |λ|\n    end script\n    foldl(result, 0, xs) / (length of xs)\nend mean",
+    "code": "-- mean :: [Num] -> Num\non mean(xs)\n    set ca to current application\n    ((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@avg.self\") as real\nend mean",
     "tags": [
       "AS Prelude"
     ]
@@ -1700,7 +1700,7 @@
     ]
   },
   "minimum": {
-    "code": "-- minimum :: Ord a => [a] -> a\non minimum(xs)\n    set lng to length of xs\n    if lng < 1 then return missing value\n    set m to item 1 of xs\n    repeat with x in xs\n        set v to contents of x\n        if v < m then set m to v\n    end repeat\n    return m\nend minimum",
+    "code": "-- minimum :: Ord a => [a] -> a\non minimum(xs)\n    set ca to current application\n    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@min.self\")\nend minimum",
     "tags": [
       "AS Prelude"
     ]
@@ -1779,7 +1779,7 @@
     ]
   },
   "nub": {
-    "code": "-- nub :: [a] -> [a]\non nub(xs)\n    nubBy(eq, xs)\nend nub",
+    "code": "-- nub :: [a] -> [a]\non nub(xs)\n    set ca to current application\n    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@distinctUnionOfObjects.self\") as list\nend nub",
     "tags": [
       "AS Prelude"
     ]
@@ -2539,7 +2539,7 @@
     ]
   },
   "sum": {
-    "code": "-- sum :: [Num] -> Num\non sum(xs)\n    script add\n        on |λ|(a, b)\n            a + b\n        end |λ|\n    end script\n    \n    foldl(add, 0, xs)\nend sum",
+    "code": "-- sum :: [Num] -> Num\non sum(xs)\n    set ca to current application\n    ((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@sum.self\") as real\nend sum",
     "tags": [
       "AS Prelude"
     ]
