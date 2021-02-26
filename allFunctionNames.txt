@@ -474,7 +474,7 @@ unlines :: [String] -> String
 unsnoc :: [a] -> Maybe ([a], a)
 until :: (a -> Bool) -> (a -> a) -> a -> a
 unwords :: [String] -> String
-unwrap :: NSObject -> a
+unwrap :: NSValue -> a
 unzip :: [(a,b)] -> ([a],[b])
 unzip3 :: [(a,b,c)] -> ([a],[b],[c])
 unzip4 :: [(a,b,c,d)] -> ([a],[b],[c],[d])

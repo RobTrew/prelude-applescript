@@ -2889,7 +2889,7 @@
     ]
   },
   "unwrap": {
-    "code": "-- unwrap :: NSObject -> a\non unwrap(objCValue)\n    if objCValue is missing value then\n        missing value\n    else\n        set ca to current application\n        item 1 of ((ca's NSArray's arrayWithObject:objCValue) as list)\n    end if\nend unwrap",
+    "code": "-- unwrap :: NSValue -> a\non unwrap(nsValue)\n    if nsValue is missing value then\n        missing value\n    else\n        set ca to current application\n        item 1 of ((ca's NSArray's arrayWithObject:nsValue) as list)\n    end if\nend unwrap",
     "tags": [
       "AS Prelude"
     ]
