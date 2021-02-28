@@ -2841,7 +2841,7 @@
     ]
   },
   "unfoldr": {
-    "code": "-- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]\non unfoldr(f, v)\n    -- A list obtained from a simple value.\n    -- Dual to foldr.\n    -- unfoldr (\\b -> if b == 0 then Nothing else Just (b, b-1)) 10\n    -- -> [10,9,8,7,6,5,4,3,2,1] \n    set xr to {v, v} -- (value, remainder)\n    set xs to {}\n    tell mReturn(f)\n        repeat -- Function applied to remainder.\n            set mb to |λ|(snd(xr))\n            if Nothing of mb then\n                exit repeat\n            else -- New (value, remainder) tuple,\n                set xr to Just of mb\n                -- and value appended to output list.\n                set end of xs to fst(xr)\n            end if\n        end repeat\n    end tell\n    return xs\nend unfoldr",
+    "code": "-- unfoldr :: (b -> Maybe (a, b)) -> b -> [a]\non unfoldr(f, v)\n    -- A lazy (generator) list unfolded from a seed value\n    -- by repeated application of f to a value until no\n    -- residue remains. Dual to fold/reduce.\n    -- f returns either nothing (missing value) \n    -- or just (value, residue).\n    script\n        property valueResidue : {v, v}\n        property g : mReturn(f)\n        on |λ|()\n            set valueResidue to g's |λ|(item 2 of (valueResidue))\n            if missing value ≠ valueResidue then\n                item 1 of (valueResidue)\n            else\n                missing value\n            end if\n        end |λ|\n    end script\nend unfoldr",
     "tags": [
       "AS Prelude"
     ]
