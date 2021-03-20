@@ -1724,7 +1724,7 @@
     ]
   },
   "mod": {
-    "code": "-- mod :: Int -> Int -> Int\non |mod|(n, d)\n    if signum(n) = signum(-d) then\n        (n mod d) + d\n    else\n        (n mod d)\n    end if\nend |mod|",
+    "code": "-- mod :: Int -> Int -> Int\non |mod|(n, d)\n    -- The built-in infix `mod` inherits the sign of the \n    -- *dividend* for non zero results. \n    -- (i.e. the 'rem' pattern in some languages).\n    --\n    -- This version inherits the sign of the *divisor*.\n    -- (A more typical 'mod' pattern, and useful,\n    -- for example with biredirectional list rotations).\n    if signum(n) = signum(-d) then\n        (n mod d) + d\n    else\n        (n mod d)\n    end if\nend |mod|",
     "tags": [
       "AS Prelude"
     ]
@@ -2152,6 +2152,12 @@
       "AS Prelude"
     ]
   },
+  "rotated": {
+    "code": "-- rotated :: Int -> [a] -> [a]\non rotated(n, xs)\n    set lng to length of xs\n    set m to |mod|(n, lng)\n    \n    if 0 ≠ n then\n        (items (1 + m) thru -1 of xs) & ¬\n            (items 1 thru m of xs)\n    else\n        xs\n    end if\nend rotated",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
   "round": {
     "code": "-- round :: a -> Int\non |round|(n)\n    round n\nend |round|",
     "tags": [
@@ -2569,7 +2575,7 @@
     ]
   },
   "take": {
-    "code": "-- take :: Int -> [a] -> [a]\n-- take :: Int -> String -> String\non take(n, xs)\n    set c to class of xs\n    if list is c then\n        if 0 < n then\n            items 1 thru min(n, length of xs) of xs\n        else\n            {}\n        end if\n    else if string is c then\n        if 0 < n then\n            text 1 thru min(n, length of xs) of xs\n        else\n            \"\"\n        end if\n    else if script is c then\n        set ys to {}\n        repeat with i from 1 to n\n            set v to |λ|() of xs\n            if missing value is v then\n                return ys\n            else\n                set end of ys to v\n            end if\n        end repeat\n        return ys\n    else\n        missing value\n    end if\nend take",
+    "code": "-- take :: Int -> [a] -> [a]\n-- take :: Int -> String -> String\non take(n, xs)\n    set c to class of xs\n    if list is c then\n        set lng to length of xs\n        if 0 < n and 0 < lng then\n            items 1 thru min(n, lng) of xs\n        else\n            {}\n        end if\n    else if string is c then\n        if 0 < n then\n            text 1 thru min(n, length of xs) of xs\n        else\n            \"\"\n        end if\n    else if script is c then\n        set ys to {}\n        repeat with i from 1 to n\n            set v to |λ|() of xs\n            if missing value is v then\n                return ys\n            else\n                set end of ys to v\n            end if\n        end repeat\n        return ys\n    else\n        missing value\n    end if\nend take",
     "tags": [
       "AS Prelude"
     ]

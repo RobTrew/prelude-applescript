@@ -1,0 +1,121 @@
+Last login: Sat Mar  6 18:41:34 on ttys003
+robintrew@MacBook-Pro ~ % brew install pip
+Updating Homebrew...
+==> Auto-updated Homebrew!
+Updated 3 taps (homebrew/core, homebrew/cask and d12frosted/emacs-plus).
+==> New Formulae
+bas55                      latino                     projectm
+crispy-doom                libmd                      pyside@2
+datalad                    libpipeline                rdkit
+delve                      name-that-hash             rtl_433
+geph4                      open-adventure             saml2aws
+ghc@9                      openmama                   sqlancer
+go@1.15                    openmodelica               waffle
+kotlin-language-server     oras                       yubikey-agent
+kubergrunt                 pcalc
+==> Updated Formulae
+Updated 1543 formulae.
+==> Renamed Formulae
+ht-rust -> xh                            qt5 -> qt@5
+==> Deleted Formulae
+avian                                    geant4
+==> New Casks
+astah-uml                  fawkes                     n1ghtshade
+atomic-wallet              font-smoothing-adjuster    nault
+audiogridder-plugin        forticlient-vpn            neat-reader
+audiogridder-server        google-drive               nuage
+banksiagui                 imdone                     opgg
+bleunlock                  infinity                   pika
+bluesnooze                 jandi-statusbar            redream
+cakebrewjs                 kiwi-for-gmail             rhino
+cinco                      kyokan-bob                 skychart
+clicker-for-netflix        lightform                  textbuddy
+clicker-for-youtube        mailtrackerblocker         the-archive
+cog                        megax                      wannianli
+curseforge                 micro-sniff                webull
+daedalus-testnet           mouse-fix                  xournal-plus-plus
+devutils                   mubu                       zecwallet-lite
+evkey                      mxsrvs                     zulufx
+==> Updated Casks
+Updated 629 casks.
+==> Deleted Casks
+ableton-live               mega                       rhinoceros
+daedalus-catalyst          pins                       yyets
+insomnia-designer          protonmail-unofficial
+kode54-cog                 racket-cs
+
+==> Searching for similarly named formulae...
+These similarly named formulae were found:
+aespipe             pip-completion      pipes-sh            pyenv-pip-migrate
+brew-pip            pipebench           pipeviewer          soundpipe
+lesspipe            pipemeter           pipgrip             spiped
+libpipeline         pipenv ✔            pipx
+To install one of them, run (for example):
+  brew install aespipe
+Error: No available formula or cask with the name "pip".
+pip is part of the python formula:
+  brew install python
+robintrew@MacBook-Pro ~ % brew install python3
+==> Downloading https://homebrew.bintray.com/bottles/mpdecimal-2.5.1.catalina.bo
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/1a8314428019cec85756b
+######################################################################## 100.0%
+==> Downloading https://homebrew.bintray.com/bottles/openssl%401.1-1.1.1j.catali
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/ecfbca86c18eb819222ae
+######################################################################## 100.0%
+==> Downloading https://homebrew.bintray.com/bottles/readline-8.1.catalina.bottl
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/fe4de019cf549376a7743
+######################################################################## 100.0%
+==> Downloading https://homebrew.bintray.com/bottles/sqlite-3.34.0.catalina.bott
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/7e04c1fcd0294ec7625e4
+######################################################################## 100.0%
+==> Downloading https://homebrew.bintray.com/bottles/tcl-tk-8.6.11_1.catalina.bo
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/f4027cdfd4d797d769b02
+######################################################################## 100.0%
+==> Downloading https://homebrew.bintray.com/bottles/python%403.9-3.9.2_1.catali
+==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/65c25cb1486cbda7ce41c
+######################################################################## 100.0%
+Error: python@3.9 3.9.0_1 is already installed
+To upgrade to 3.9.2_1, run:
+  brew upgrade python@3.9
+==> `brew cleanup` has not been run in 30 days, running now...
+Removing: /Users/robintrew/Library/Caches/Homebrew/coreutils--8.32.catalina.bottle.1.tar.gz... (3.8MB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/gd--2.3.0.catalina.bottle.tar.gz... (288.9KB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/icu4c--67.1.catalina.bottle.tar.gz... (26.8MB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/libomp--11.0.0.catalina.bottle.tar.gz... (467.2KB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/little-cms2--2.11.catalina.bottle.tar.gz... (386.8KB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/openjdk--15.0.1.catalina.bottle.tar.gz... (190.9MB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/perl--5.32.0.catalina.bottle.tar.gz... (16.6MB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/purescript--0.13.8_1.catalina.bottle.tar.gz... (9MB)
+Removing: /Users/robintrew/Library/Caches/Homebrew/webp--1.1.0.catalina.bottle.tar.gz... (860.6KB)
+Pruned 1 symbolic links from /usr/local
+robintrew@MacBook-Pro ~ % ls
+  [Restored 9 Mar 2021 at 13:28:23]
+Last login: Tue Mar  9 13:28:23 on ttys002
+robintrew@MacBook-Pro ~ % 
+  [Restored 10 Mar 2021 at 17:26:37]
+Last login: Tue Mar  9 22:34:57 on ttys007
+robintrew@MacBook-Pro ~ % 
+  [Restored 12 Mar 2021 at 09:16:09]
+Last login: Wed Mar 10 17:26:37 on ttys004
+robintrew@MacBook-Pro ~ % 
+  [Restored 13 Mar 2021 at 22:05:28]
+Last login: Fri Mar 12 09:16:10 on ttys005
+robintrew@MacBook-Pro ~ % 
+  [Restored 14 Mar 2021 at 00:08:04]
+Last login: Sun Mar 14 00:08:04 on ttys000
+robintrew@MacBook-Pro ~ % 
+  [Restored 15 Mar 2021 at 18:26:48]
+Last login: Sun Mar 14 07:38:15 on console
+robintrew@MacBook-Pro ~ % 
+  [Restored 15 Mar 2021 at 23:37:38]
+Last login: Mon Mar 15 23:37:38 on ttys001
+robintrew@MacBook-Pro ~ % 
+  [Restored 16 Mar 2021 at 19:01:38]
+Last login: Mon Mar 15 23:37:39 on ttys005
+Restored session: Mon 15 Mar 2021 23:42:38 GMT
+robintrew@MacBook-Pro ~ % ls ~/TaskPaper Templates
+ls: /Users/robintrew/TaskPaper: No such file or directory
+ls: Templates: No such file or directory
+robintrew@MacBook-Pro ~ % ls "~/TaskPaper Templates"
+ls: ~/TaskPaper Templates: No such file or directory
+robintrew@MacBook-Pro ~ % ls "$HOME/TaskPaper Templates"

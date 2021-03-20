@@ -3954,6 +3954,13 @@ end minimumMay
 
 -- mod :: Int -> Int -> Int
 on |mod|(n, d)
+    -- The built-in infix `mod` inherits the sign of the 
+    -- *dividend* for non zero results. 
+    -- (i.e. the 'rem' pattern in some languages).
+    --
+    -- This version inherits the sign of the *divisor*.
+    -- (A more typical 'mod' pattern, and useful,
+    -- for example with biredirectional list rotations).
     if signum(n) = signum(-d) then
         (n mod d) + d
     else
@@ -4696,6 +4703,19 @@ on rotate(n, xs)
         lng
     end if
 end rotate
+
+-- rotated :: Int -> [a] -> [a]
+on rotated(n, xs)
+    set lng to length of xs
+    set m to |mod|(n, lng)
+    
+    if 0 ≠ n then
+        (items (1 + m) thru -1 of xs) & ¬
+            (items 1 thru m of xs)
+    else
+        xs
+    end if
+end rotated
 
 -- round :: a -> Int
 on |round|(n)
@@ -5555,8 +5575,9 @@ end tails
 on take(n, xs)
     set c to class of xs
     if list is c then
-        if 0 < n then
-            items 1 thru min(n, length of xs) of xs
+        set lng to length of xs
+        if 0 < n and 0 < lng then
+            items 1 thru min(n, lng) of xs
         else
             {}
         end if

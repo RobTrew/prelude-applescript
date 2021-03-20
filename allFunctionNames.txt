@@ -353,6 +353,7 @@ reverse :: [a] -> [a]
 rights :: [Either a b] -> [b]
 root :: Tree a -> a
 rotate :: Int -> [a] -> [a]
+rotated :: Int -> [a] -> [a]
 round :: a -> Int
 roundTo :: Int -> Float -> Float
 runAction :: Action a -> a
