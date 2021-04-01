@@ -395,7 +395,7 @@
     ]
   },
   "concat": {
-    "code": "-- concat :: [[a]] -> [a]\n-- concat :: [String] -> String\non concat(xs)\n    set lng to length of xs\n    if 0 < lng and string is class of (item 1 of xs) then\n        set acc to \"\"\n    else\n        set acc to {}\n    end if\n    repeat with i from 1 to lng\n        set acc to acc & item i of xs\n    end repeat\n    acc\nend concat",
+    "code": "-- concat :: [[a]] -> [a]\non concat(xs)\n    ((current application's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@unionOfArrays.self\") as list\nend concat",
     "tags": [
       "AS Prelude"
     ]
@@ -1779,7 +1779,7 @@
     ]
   },
   "nub": {
-    "code": "-- nub :: [a] -> [a]\non nub(xs)\n    set ca to current application\n    unwrap((ca's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@distinctUnionOfObjects.self\") as list\nend nub",
+    "code": "-- nub :: [a] -> [a]\non nub(xs)\n    ((current application's NSArray's arrayWithArray:xs)'s ¬\n        valueForKeyPath:\"@distinctUnionOfObjects.self\") as list\nend nub",
     "tags": [
       "AS Prelude"
     ]
