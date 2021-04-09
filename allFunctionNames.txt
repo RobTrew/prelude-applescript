@@ -334,6 +334,7 @@ ratioMult :: Rational -> Rational -> Rational
 ratioPlus :: Rational -> Rational -> Rational
 rational :: Num a => a -> Rational
 read :: Read a => String -> a
+readBinary :: String -> Int
 readFile :: FilePath -> IO String
 readFileLR :: FilePath -> Either String IO String
 readHex :: String -> Int

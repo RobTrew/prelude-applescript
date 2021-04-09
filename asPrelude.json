@@ -1960,7 +1960,7 @@
     ]
   },
   "quotRem": {
-    "code": "-- quotRem :: Int -> Int -> (Int, Int)\non quotRem(m, n)\n    Tuple(m div n, m mod n)\nend quotRem",
+    "code": "-- quotRem :: Int -> Int -> (Int, Int)\non quotRem(m, n)\n    {m div n, m mod n}\nend quotRem",
     "tags": [
       "AS Prelude"
     ]
@@ -2033,6 +2033,12 @@
   },
   "read": {
     "code": "-- read :: Read a => String -> a\non read (s)\n    run script s\nend read",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
+  "readBinary": {
+    "code": "-- readBinary :: String -> Int\non readBinary(s)\n    -- The integer value of the binary string s\n    script go\n        on |λ|(c, en)\n            set {e, n} to en\n            set v to ((id of c) - 48)\n            \n            {2 * e, v * e + n}\n        end |λ|\n    end script\n    \n    item 2 of foldr(go, {1, 0}, s)\nend readBinary",
     "tags": [
       "AS Prelude"
     ]
@@ -2261,7 +2267,7 @@
     ]
   },
   "showBinary": {
-    "code": "-- showBinary :: Int -> String\non showBinary(n)\n    script binaryChar\n        on |λ|(n)\n            text item (n + 1) of \"01\"\n        end |λ|\n    end script\n    showIntAtBase(2, binaryChar, n, \"\")\nend showBin",
+    "code": "-- showBinary :: Int -> String\non showBinary(n)\n    script binaryChar\n        on |λ|(n)\n            character id (48 + n)\n        end |λ|\n    end script\n    showIntAtBase(2, binaryChar, n, \"\")\nend showBinary",
     "tags": [
       "AS Prelude"
     ]
@@ -2292,7 +2298,7 @@
     ]
   },
   "showIntAtBase": {
-    "code": "-- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String\non showIntAtBase(base, toDigit, n, rs)\n    script showIt\n        property f : mReturn(toDigit)\n        on |λ|(nd_, r)\n            set {n, d} to ({|1|, |2|} of nd_)\n            set r_ to f's |λ|(d) & r\n            if n > 0 then\n                |λ|(quotRem(n, base), r_)\n            else\n                r_\n            end if\n        end |λ|\n    end script\n    showIt's |λ|(quotRem(n, base), rs)\nend showIntAtBase",
+    "code": "-- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String\non showIntAtBase(base, toDigit, n, rs)\n    script go\n        property f : mReturn(toDigit)\n        on |λ|(nd_, r)\n            set {n, d} to nd_\n            set r_ to f's |λ|(d) & r\n            if n > 0 then\n                |λ|(quotRem(n, base), r_)\n            else\n                r_\n            end if\n        end |λ|\n    end script\n    |λ|(quotRem(n, base), rs) of go\nend showIntAtBase",
     "tags": [
       "AS Prelude"
     ]

@@ -4331,7 +4331,7 @@ end quot
 
 -- quotRem :: Int -> Int -> (Int, Int)
 on quotRem(m, n)
-    Tuple(m div n, m mod n)
+    {m div n, m mod n}
 end quotRem
 
 -- quoted :: Char -> String -> String
@@ -4458,6 +4458,21 @@ end rational
 on read (s)
     run script s
 end read
+
+-- readBinary :: String -> Int
+on readBinary(s)
+    -- The integer value of the binary string s
+    script go
+        on |λ|(c, en)
+            set {e, n} to en
+            set v to ((id of c) - 48)
+            
+            {2 * e, v * e + n}
+        end |λ|
+    end script
+    
+    item 2 of foldr(go, {1, 0}, s)
+end readBinary
 
 -- readFile :: FilePath -> IO String
 on readFile(strPath)
@@ -4895,11 +4910,11 @@ end show
 on showBinary(n)
     script binaryChar
         on |λ|(n)
-            text item (n + 1) of "01"
+            character id (48 + n)
         end |λ|
     end script
     showIntAtBase(2, binaryChar, n, "")
-end showBin
+end showBinary
 
 -- ISO 8601 UTC 
 -- showDate :: Date -> String
@@ -4924,10 +4939,10 @@ end showHex
 
 -- showIntAtBase :: Int -> (Int -> Char) -> Int -> String -> String
 on showIntAtBase(base, toDigit, n, rs)
-    script showIt
+    script go
         property f : mReturn(toDigit)
         on |λ|(nd_, r)
-            set {n, d} to ({|1|, |2|} of nd_)
+            set {n, d} to nd_
             set r_ to f's |λ|(d) & r
             if n > 0 then
                 |λ|(quotRem(n, base), r_)
@@ -4936,7 +4951,7 @@ on showIntAtBase(base, toDigit, n, rs)
             end if
         end |λ|
     end script
-    showIt's |λ|(quotRem(n, base), rs)
+    |λ|(quotRem(n, base), rs) of go
 end showIntAtBase
 
 -- showJSON :: a -> String
