@@ -9,5 +9,5 @@ end chars
 ```javascript
 // chars :: String -> [Char]
 const chars = s =>
-    s.split("");
+    [...s];
 ```
