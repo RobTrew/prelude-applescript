@@ -808,7 +808,7 @@
     ]
   },
   "find": {
-    "code": "-- find :: (a -> Bool) -> [a] -> Maybe a\non find(p, xs)\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then return Just(item i of xs)\n        end repeat\n        Nothing()\n    end tell\nend find",
+    "code": "-- find :: (a -> Bool) -> [a] -> (missing value | a)\non find(p, xs)\n    tell mReturn(p)\n        set lng to length of xs\n        repeat with i from 1 to lng\n            if |λ|(item i of xs) then return item i of xs\n        end repeat\n        missing value\n    end tell\nend find",
     "tags": [
       "AS Prelude"
     ]
@@ -2467,7 +2467,7 @@
     ]
   },
   "sqrt": {
-    "code": "-- sqrt :: Num -> Num\non sqrt(n)\n    if 0 <= n then\n        n ^ (1 / 2)\n    else\n        missing value\n    end if\nend sqrt",
+    "code": "-- sqrt :: Num -> (missing value | Num)\non sqrt(n)\n    if 0 <= n then\n        n ^ (1 / 2)\n    else\n        missing value\n    end if\nend sqrt",
     "tags": [
       "AS Prelude"
     ]

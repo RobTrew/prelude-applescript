@@ -131,7 +131,7 @@ filter :: (a -> Bool) -> [a] -> [a]
 filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
 filterTree (a -> Bool) -> Tree a -> [a]
 filteredTree (a -> Bool) -> Tree a -> Tree a
-find :: (a -> Bool) -> [a] -> Maybe a
+find :: (a -> Bool) -> [a] -> (missing value | a)
 findGen :: (a -> Bool) -> Gen [a] -> Maybe a
 findIndex :: (a -> Bool) -> [a] -> Maybe Int
 findIndexR :: (a -> Bool) -> [a] -> Maybe Int
@@ -405,7 +405,7 @@ splitBy :: (a -> a -> Bool) -> [a] -> [[a]]
 splitFileName :: FilePath -> (String, String)
 splitOn :: [a] -> [a] -> [[a]]
 splitRegex :: Regex -> String -> [String]
-sqrt :: Num -> Num
+sqrt :: Num -> (missing value | Num)
 sqrtLR :: Num -> Either String Num
 sqrtMay :: Num -> Maybe Num
 str :: a -> String

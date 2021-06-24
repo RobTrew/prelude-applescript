@@ -1965,14 +1965,14 @@ on filteredTree(p, tree)
     foldTree(go, tree)
 end filteredTree
 
--- find :: (a -> Bool) -> [a] -> Maybe a
+-- find :: (a -> Bool) -> [a] -> (missing value | a)
 on find(p, xs)
     tell mReturn(p)
         set lng to length of xs
         repeat with i from 1 to lng
-            if |λ|(item i of xs) then return Just(item i of xs)
+            if |λ|(item i of xs) then return item i of xs
         end repeat
-        Nothing()
+        missing value
     end tell
 end find
 
@@ -5327,7 +5327,7 @@ on splitRegex(strRegex, str)
     end if
 end splitRegex
 
--- sqrt :: Num -> Num
+-- sqrt :: Num -> (missing value | Num)
 on sqrt(n)
     if 0 <= n then
         n ^ (1 / 2)

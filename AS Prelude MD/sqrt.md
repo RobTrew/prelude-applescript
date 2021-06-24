@@ -1,5 +1,5 @@
 ```applescript
--- sqrt :: Num -> Num
+-- sqrt :: Num -> (missing value | Num)
 on sqrt(n)
     if 0 <= n then
         n ^ (1 / 2)
