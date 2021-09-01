@@ -1,121 +1,541 @@
-Last login: Sat Mar  6 18:41:34 on ttys003
-robintrew@MacBook-Pro ~ % brew install pip
-Updating Homebrew...
-==> Auto-updated Homebrew!
-Updated 3 taps (homebrew/core, homebrew/cask and d12frosted/emacs-plus).
-==> New Formulae
-bas55                      latino                     projectm
-crispy-doom                libmd                      pyside@2
-datalad                    libpipeline                rdkit
-delve                      name-that-hash             rtl_433
-geph4                      open-adventure             saml2aws
-ghc@9                      openmama                   sqlancer
-go@1.15                    openmodelica               waffle
-kotlin-language-server     oras                       yubikey-agent
-kubergrunt                 pcalc
-==> Updated Formulae
-Updated 1543 formulae.
-==> Renamed Formulae
-ht-rust -> xh                            qt5 -> qt@5
-==> Deleted Formulae
-avian                                    geant4
-==> New Casks
-astah-uml                  fawkes                     n1ghtshade
-atomic-wallet              font-smoothing-adjuster    nault
-audiogridder-plugin        forticlient-vpn            neat-reader
-audiogridder-server        google-drive               nuage
-banksiagui                 imdone                     opgg
-bleunlock                  infinity                   pika
-bluesnooze                 jandi-statusbar            redream
-cakebrewjs                 kiwi-for-gmail             rhino
-cinco                      kyokan-bob                 skychart
-clicker-for-netflix        lightform                  textbuddy
-clicker-for-youtube        mailtrackerblocker         the-archive
-cog                        megax                      wannianli
-curseforge                 micro-sniff                webull
-daedalus-testnet           mouse-fix                  xournal-plus-plus
-devutils                   mubu                       zecwallet-lite
-evkey                      mxsrvs                     zulufx
-==> Updated Casks
-Updated 629 casks.
-==> Deleted Casks
-ableton-live               mega                       rhinoceros
-daedalus-catalyst          pins                       yyets
-insomnia-designer          protonmail-unofficial
-kode54-cog                 racket-cs
+Last login: Thu Aug 19 01:49:42 on ttys000
+robintrew@MacBook-Pro ~ % multimarkdown --help
 
-==> Searching for similarly named formulae...
-These similarly named formulae were found:
-aespipe             pip-completion      pipes-sh            pyenv-pip-migrate
-brew-pip            pipebench           pipeviewer          soundpipe
-lesspipe            pipemeter           pipgrip             spiped
-libpipeline         pipenv ✔            pipx
-To install one of them, run (for example):
-  brew install aespipe
-Error: No available formula or cask with the name "pip".
-pip is part of the python formula:
-  brew install python
-robintrew@MacBook-Pro ~ % brew install python3
-==> Downloading https://homebrew.bintray.com/bottles/mpdecimal-2.5.1.catalina.bo
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/1a8314428019cec85756b
-######################################################################## 100.0%
-==> Downloading https://homebrew.bintray.com/bottles/openssl%401.1-1.1.1j.catali
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/ecfbca86c18eb819222ae
-######################################################################## 100.0%
-==> Downloading https://homebrew.bintray.com/bottles/readline-8.1.catalina.bottl
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/fe4de019cf549376a7743
-######################################################################## 100.0%
-==> Downloading https://homebrew.bintray.com/bottles/sqlite-3.34.0.catalina.bott
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/7e04c1fcd0294ec7625e4
-######################################################################## 100.0%
-==> Downloading https://homebrew.bintray.com/bottles/tcl-tk-8.6.11_1.catalina.bo
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/f4027cdfd4d797d769b02
-######################################################################## 100.0%
-==> Downloading https://homebrew.bintray.com/bottles/python%403.9-3.9.2_1.catali
-==> Downloading from https://d29vzk4ow07wi7.cloudfront.net/65c25cb1486cbda7ce41c
-######################################################################## 100.0%
-Error: python@3.9 3.9.0_1 is already installed
-To upgrade to 3.9.2_1, run:
-  brew upgrade python@3.9
-==> `brew cleanup` has not been run in 30 days, running now...
-Removing: /Users/robintrew/Library/Caches/Homebrew/coreutils--8.32.catalina.bottle.1.tar.gz... (3.8MB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/gd--2.3.0.catalina.bottle.tar.gz... (288.9KB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/icu4c--67.1.catalina.bottle.tar.gz... (26.8MB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/libomp--11.0.0.catalina.bottle.tar.gz... (467.2KB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/little-cms2--2.11.catalina.bottle.tar.gz... (386.8KB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/openjdk--15.0.1.catalina.bottle.tar.gz... (190.9MB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/perl--5.32.0.catalina.bottle.tar.gz... (16.6MB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/purescript--0.13.8_1.catalina.bottle.tar.gz... (9MB)
-Removing: /Users/robintrew/Library/Caches/Homebrew/webp--1.1.0.catalina.bottle.tar.gz... (860.6KB)
-Pruned 1 symbolic links from /usr/local
+libMultiMarkdown v6.6.0 -- Copyright © 2016 - 2020 Fletcher T. Penney.
+
+	Usage: multimarkdown [-bfscarm] [--help] [--version] [--random] [--unique] [--nosmart] [--nolabels] [--notransclude] [--opml] [--itmz] [-t FORMAT] [-o FILE] [-l LANG] [-e KEY] [<FILE>]...
+
+Options:
+	--help                    display this help and exit
+	--version                 display version info and exit
+	                          
+	-b, --batch               process each file separately
+	-f, --full                force a complete document
+	-s, --snippet             force a snippet
+	-c, --compatibility       Markdown compatibility mode
+	--random                  use random numbers for footnote anchors
+	--unique                  use random numbers for header labels unless manually specified
+	--nosmart                 Disable smart typography
+	--nolabels                Disable id attributes for headers
+	--notransclude            Disable file transclusion
+	--opml                    Convert OPML source to plain text before processing
+	--itmz                    Convert ITMZ (iThoughts) source to plain text before processing
+	                          
+	-t, --to=FORMAT           convert to FORMAT, FORMAT = html|latex|beamer|memoir|mmd|odt|fodt|epub|opml|itmz|bundle|bundlezip
+	-o, --output=FILE         send output to FILE
+	                          
+	-a, --accept              accept all CriticMarkup changes
+	-r, --reject              reject all CriticMarkup changes
+	                          
+	-l, --lang=LANG           language/smart quote localization, LANG = en|es|de|fr|he|nl|sv
+	                          
+	-m, --metadata-keys       list all metadata keys
+	-e, --extract=KEY         extract specified metadata key
+	                          
+	<FILE>                    read input from file(s) -- use stdin if no files given
+
+robintrew@MacBook-Pro ~ % 
+  [Restored 20 Aug 2021 at 13:51:54]
+Last login: Fri Aug 20 08:18:58 on console
+Restored session: Thu 19 Aug 2021 14:49:30 BST
+robintrew@MacBook-Pro ~ % 
+  [Restored 20 Aug 2021 at 17:32:26]
+Last login: Fri Aug 20 13:51:54 on ttys001
+Restored session: Fri 20 Aug 2021 17:09:12 BST
 robintrew@MacBook-Pro ~ % ls
-  [Restored 9 Mar 2021 at 13:28:23]
-Last login: Tue Mar  9 13:28:23 on ttys002
+'''Perfect squares using every digit in 
+00_hello_world.lhs
+2019-01
+2021-01-19.
+=LAMBDA(f,
+=LAMBDA(op,.applescript
+=LAMBDA(p,
+ADS-Desktops
+AT.postflight.26134
+AppAppleScript.plist
+Applications
+Arabic
+Archive
+AutoSave_Sample.skp
+AutoSave_Stages-001.skp
+B000JQU7A8_EBOKbak.mbp
+B002RI9K54_EBOKbak.mbp
+BaseXData
+Beijing Art Market.dtBase2
+Blank.gtemplate
+Block sketches
+Bloggedy.hs
+Bottom-up breadth-first.txt
+Bottom-up depth-first.txt
+CaptureOne
+Cara
+CaraSite2012Mar5
+CaraSite2012Mar5 copy
+CaraSite2012Mar5 copy 2
+CaraSite2012Mar5 copy 3
+CaraSite2012Mar5 copy.zip
+Cargo.lock
+Cargo.toml
+CarobWigs.jpg alias
+Central point.mm
+CherylsBirthday.py
+ChezStephen.txt
+Clipboard Preview.docx
+Clipboard Preview.pdf
+Clippings on DropBox.oo3
+Code
+CodeBox.cbxml.zip
+D3JSTest
+Dani
+Databases
+Dell Color Laser 3110cn.app
+Desktop
+Documents
+DoneToday.txt
+Downloads
+Dropbox
+DueSoonish.txt
+Easy ways to boost your immune system to fight off coronavirus .pdf
+Everyday_AppleScriptObjC_3.3
+ExampleConfigObjectJS.scpt
+ExampleConfigTextJS.scpt
+ExampleMixedJS.scpt
+Excel LAMBDAs
+Exercism
+Explore.txt
+FTLog
+FTMakeOrUpdateReminder.workflow
+FT_PARSE.scpt
+FT_TYPE.scpt
+Final stages of assembling report [alert](x-apple-reminder:8BE51E33-9897-493B-89D0-EA9C69538BE2) .taskpaper
+Finnegan
+FlaggedTasks.txt
+Follow trail of crumbs.txt
+General Notes
+GitBook
+Go.graffle
+Google Drive
+Google Drive 2
+GoolishMF Medium.html
+GraphTransactionList
+Hebrew
+HebrewNotes.taskpaper
+Hook export 2019-12-25 10761.hook-links
+Hook export 2020-04-02 55890.hook-links
+IdeaProjects
+Inbox
+Inbox.taskpaper
+Inbox2.taskpaper
+Inbox9.taskpaper
+Inter-faith marriages.doc
+IsleOfGulls.png
+JS1E6-002.scpt
+JS1E6.scpt
+Javascript.js
+Jonathan Bate · Saint Terence · LRB 23 May 1991.pdf
+JustDone.txt
+Kaddish.ft
+Kai
+Kai-001.graffle
+Kai-002.graffle
+Kai-002.graffle.zip
+Kai-IndexPages1-6-12.pdf
+KindleNotes-000.pl
+KindleSample.txt
+KindleSample2.txt
+KtivaDotMF Regular.html
+LaPriseDesNotes.pdf
+LargerSclase.skp
+LargerSclase~.skp
+Left66~.scpt
+Library
+Mannsample.html
+Markov.graffle
+Movies
+Music
+Notes
+Notes.txt
+OmniPresence
+PRIF0128
+PRIF278128
+Padovan n-step number sequences
+ParserExperiments.hsproj
+Pictures
+Pipfile
+Pipfile.lock
+Place project items in TaskPaper 3 file
+Public
+Quiver
+Quiver.qvlibrary
+Robin Trew.hazellicense
+Sites
+Snapshot- ‘The Plain’ by Melanie Friend | Financial Times.pdf
+Streaming Preview.html
+TaskPaper Templates
+Text
+Typeface.html
+Untitled-1
+Untitled-1.scpt
+Untitled-1.sh
+Untitled.scpt
+Untitled.xlogic
+V??icon.pngUT
+Wagner Ring Cycle Libretti
+Why the Swiss should vote for ‘Vollgeld’.pdf
+[Content_Types].xml
+_rels
+aS.txt
+altEck.py
+app.txt
+appendTuple.scpt
+aran
+aran-js
+archive.oo3
+arguments
+artb.html
+astropix.html
+banner.scpt
+basex
+basex-test-001.xq
+basex-test-002.xq
+basex-test-003.xq
+bin-lein.txt
+binaryTreeSum.scpt
+birch-outline
+bonkers.txt alias
+bonkers1.txt
+bookendFunctions.taskpaper
+bookendsAPI.taskpaper
+bookendsCopyAsMDLinks-002.scpt
+bookendsCopyAsMDLinks.scpt
+bookmarker
+bower.json
+bracketedTerms.scpt
+brazil.py
+bunches
+c.jpg
+cal-upcoming.sh
+car
+cdf-002.scpt
+cdf-003.scpt
+chaos.html
+cheryl-003.py
+chromeSafariTabMatches-001.scpt
+chromeSafariTabMatches-002.scpt
+chromeSafariTabMatches-003.scpt
+chromeTests.scpt
+chunking.scpt
+cleanSample.scpt
+clear.scpt
+clip.png
+clip.scpt
+clip.txt
+clipLineTo60-002.scpt
+clipLineTo60.scpt
+clipOFType.scpt
+clipToNumSortedKMVarSeries-001.scpt
+clipboardContents.scpt
+clipmaster-9000
+closeAll.sh
+closeExceptCode.sh
+closeRightGap.txt
+cmdline.opml
+code.txt
+com.apple.ic
+combinLibBuild-002.scpt
+combinLibBuild-003.scpt
+composeYourself
+concat-002.scpt
+console.log
+converge.py
+copied.txt
+copy-as-md-link
+copyAllDisplayed.scpt
+core thinking skills
+cousinPrimes-002.py
+cousinPrimes.py
+crt.js
+css
+csvSample.txt
+csvSampleSummed.txt
+current_tasks.itm
+curried-python
+d.jpg
+data.sqlite3
+data.txt
+dirtySample.scpt
+disj2.py
+distribute-0.6.14.tar.gz
+docProps
+docs
+donkey.txt
+draft8.png
+draft8Inf.png
+draftBook
+drang.kmmacros
+drawing.pdf
+due.sh
+dueSprintStart.scpt
+dueStart.scpt
+duetest.sh
+dump.txt
+dwend.scpt
+editFileNumber-001.scpt
+env
+es5Parse.scpt
+eta-init
+evenQuotes-001.scpt
+evenQuotes-002.scpt
+example12.text
+extra
+family
+favicon.ico
+first50.pdf
+flashblast
+fmapInstance.scpt
+folderForTAsk.scpt
+foo
+foo.rtf
+foo.sh
+forallx-yyc
+forcedFeeling.txt
+forest
+fullshadow.jpg
+function() {var x='s'; function (tree) { return tr
+functionsAsMailMerge-001.scpt
+gcd.rs
+getTitle.pl
+github
+heb.txt
+hebcal.txt
+hebhelp.txt
+hello
+hello.hs
+hello2.hs
+help.pdf
+heron.hs
+history.txt
+hmusic
+hooksync
+iCloud
+iCloud Drive (Archive)
+iCloud Drive (Archive) - 1
+iCloud Drive (Archive) - 2
+iCloud Drive (Archive) - 3
+icon.png
+idPicture.jpg
+ill2-20180429T185530Z-001.zip
+import-todo.sh.pl
+in.wisp
+inconsistentChar-002.scpt
+index.html?mode=json
+index.html?mode=json.1
+index.html?mode=json.2
+index.html?mode=json.3
+isbn-002.py
+jif.png
+jsParserCombinators
+json.scpt
+just.scpt
+kaiSquares.pdf
+kayawood_06.jpg
+kaywood.jpg
+languageOptions-001.scpt
+languageOptions-002.scpt
+languageOptions.scpt
+languages
+lee
+lesMiserables.txt
+lev.py
+lib
+libUse.js
+libUse.scpt
+log.txt
+lookupTuples.scpt
+loop.svg
+lostIThoughtsXStyle.png
+ludic.hs
+lzw-001.scpt
+makenote.sh
+manPagePDFs
+mappendFn-001.scpt
+mappendOrd2.scpt
+mastering-vim.pdf
+matchAll.scpt
+mbox
+mdCopyTest.scpt
+measure.scpt
+memoziedAS.scpt
+mitWords.txt
+moerdykTony.pdf
+my.taskpaper
+my.taskpaper2
+nameLineFromNumber-002.scpt
+nameLineFromNumber.scpt
+nextDate.scpt
+node_modules
+noteBook
+numSetSorted-001.scpt
+oeis000037-001.scpt
+oeis000037-002.scpt
+ofFromKMTag-001.scpt
+oldMove-001.scpt
+oldTest.scpt
+oneDAutomata-001.py
+opSample-002.scpt
+opSample.js
+opSample.scpt
+openAccessibleDisplay.scpt
+openDuplicateLink.scpt
+other.py
+out.js
+output.png
+output2-0.png
+output2-1.png
+output2.png
+output3-0.png
+output3-1.png
+output3.png
+output4-0.png
+output4-1.png
+output4-2.png
+output4-3.png
+output4.png
+package-lock.json
+package.json
+pagicoWhois.txt
+parseClip.scpt
+parseWide.scpt
+pattern.scpt
+peopleFromPhone.scpt
+poemTrees
+points
+prelude-applescript
+prelude-jxa
+prelude-jxa BACKUP UNCURRIED
+prelude-racket
+preludeBuilds
+preludeBuilds.zip
+productiveJavaScript
+projects
+purescript-hello
+putClip.sh
+puzzles-001.scpt
+puzzles-002.scpt
+puzzles-003.scpt
+py.py
+quakes.txt
+range-001.scpt
+raw.txt
+readAttrs.scpt
+readOPML.scpt
+reanimate
+recursionDepth.applescript
+recursionDepthJS.scpt
+reecursionDepthJS.scpt
+resource
+robList.txt
+rootNotes
+rootNotes.zip
+rootNotes.zkn3
+rtFigureOfEight.png
+run.scpt
+safariTabMatches-002.scpt
+safariTabMatches-003.scpt
+safariTabMatches-004.scpt
+safariTabMatches.scpt
+sampe.hs
+sampe.scpt
+sample
+sample file.txt
+sample-0001.scpt
+sample-001.scpt
+sample-002.py
+sample-002.scpt
+sample-003.js
+sample-003.py
+sample-003.scpt
+sample-004.scpt
+sample-1
+sample.backup.xlogic
+sample.hs
+sample.js
+sample.json
+sample.opml
+sample.py
+sample.scpt
+sample.txt
+sample.xlogic
+sample2.scpt
+sampleTrees
+scripts
+seder
+settings.sh
+shirim
+shirl
+sierp.hs
+simple.scpt
+simpleTable.html
+some.scpt
+sortTest.taskpaper
+splitDrive.scpt
+src
+stdin.pdf
+stdin.pdf.log
+sundar-002.scpt
+tabStream.scpt
+tagList.scpt
+tagToggle-001.scpt
+tagToggle-002.scpt
+tagToggleCompact-002.scpt
+taskPaperTEst.taskpaper
+test-004
+test.clj
+test.py
+test.scpt
+test.txt
+testArchive3.zip
+testMany.scpt
+testProject
+testSay.sh
+testSortOn.scpt
+testcase-002.scpt
+testcase.js
+testing.scpt
+text.txt
+textBarSprint.scpt
+textonyms.hs
+theme.less
+tmp.html
+tmp.plist
+toggle.scpt
+trashLanding
+traversal.hs
+tree-002.clj
+tree.clj
+treeToList
+trees
+tst.scap
+twoWayTreeNest-001.py
+txtquery-tools
+unfoldr.py
+uniques.py
+uniques.scpt
+unixdict.txt
+unplugged
+up-to-date-real-world-haskell
+vandal.py
+vaneck723.scpt
+verA.txt
+verB.txt
+verBAtxt
+violin
+vizout
+wc-001.scpt
+weekDayNames.txt
+wget-log
+what_was_i_doing.md
+word
+work
+workspace.code-workspace
 robintrew@MacBook-Pro ~ % 
-  [Restored 10 Mar 2021 at 17:26:37]
-Last login: Tue Mar  9 22:34:57 on ttys007
-robintrew@MacBook-Pro ~ % 
-  [Restored 12 Mar 2021 at 09:16:09]
-Last login: Wed Mar 10 17:26:37 on ttys004
-robintrew@MacBook-Pro ~ % 
-  [Restored 13 Mar 2021 at 22:05:28]
-Last login: Fri Mar 12 09:16:10 on ttys005
-robintrew@MacBook-Pro ~ % 
-  [Restored 14 Mar 2021 at 00:08:04]
-Last login: Sun Mar 14 00:08:04 on ttys000
-robintrew@MacBook-Pro ~ % 
-  [Restored 15 Mar 2021 at 18:26:48]
-Last login: Sun Mar 14 07:38:15 on console
-robintrew@MacBook-Pro ~ % 
-  [Restored 15 Mar 2021 at 23:37:38]
-Last login: Mon Mar 15 23:37:38 on ttys001
-robintrew@MacBook-Pro ~ % 
-  [Restored 16 Mar 2021 at 19:01:38]
-Last login: Mon Mar 15 23:37:39 on ttys005
-Restored session: Mon 15 Mar 2021 23:42:38 GMT
-robintrew@MacBook-Pro ~ % ls ~/TaskPaper Templates
-ls: /Users/robintrew/TaskPaper: No such file or directory
-ls: Templates: No such file or directory
-robintrew@MacBook-Pro ~ % ls "~/TaskPaper Templates"
-ls: ~/TaskPaper Templates: No such file or directory
-robintrew@MacBook-Pro ~ % ls "$HOME/TaskPaper Templates"

@@ -421,6 +421,7 @@ succ :: Enum a => a -> a
 succMay :: Enum a => a -> Maybe a
 sum :: [Num] -> Num
 swap :: (a, b) -> (b, a)
+table :: Int -> [String] -> String
 tail :: [a] -> [a]
 tailMay :: [a] -> Maybe [a]
 tails :: [a] -> [[a]]

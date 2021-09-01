@@ -21,7 +21,7 @@ end treeLeaves
 const treeLeaves = tree => {
     const subNest = tree.nest;
 
-    return (0 < subNest.length) ? (
+    return 0 < subNest.length ? (
         subNest.flatMap(treeLeaves)
     ) : [tree];
 };

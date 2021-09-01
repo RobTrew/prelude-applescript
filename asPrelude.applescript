@@ -1702,18 +1702,7 @@ on enumFromThenToChar(x1, x2, y)
     return xs
 end enumFromThenToChar
 
--- enumFromTo :: Int -> Int -> [Int]
-on enumFromTo(m, n)
-    if m ≤ n then
-        set lst to {}
-        repeat with i from m to n
-            set end of lst to i
-        end repeat
-        lst
-    else
-        {}
-    end if
-end enumFromTo
+-- enumFromTo :: Int -> Int -> [Int]on enumFromTo(m, n)    if m ≤ n then        set xs to {}        repeat with i from m to n            set end of xs to i        end repeat        xs    else        {}    end ifend enumFromTo
 
 -- enumFromToChar :: Char -> Char -> [Char]
 on enumFromToChar(m, n)
@@ -5528,6 +5517,8 @@ on swap(ab)
         {item 2 of ab, item 1 of ab}
     end if
 end swap
+
+-- table :: Int -> [String] -> Stringon table(n, xs)    -- A list of strings formatted as    -- right-justified rows of n columns.    set w to length of last item of xs    unlines(map(my unwords, ¬        chunksOf(n, map(justifyRight(w, space), xs))))end table
 
 -- tail :: [a] -> [a]
 on tail(xs)

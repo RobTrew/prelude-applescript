@@ -687,7 +687,7 @@
     ]
   },
   "enumFromTo": {
-    "code": "-- enumFromTo :: Int -> Int -> [Int]\non enumFromTo(m, n)\n    if m ≤ n then\n        set lst to {}\n        repeat with i from m to n\n            set end of lst to i\n        end repeat\n        lst\n    else\n        {}\n    end if\nend enumFromTo",
+    "code": "-- enumFromTo :: Int -> Int -> [Int]\ron enumFromTo(m, n)\r    if m ≤ n then\r        set xs to {}\r        repeat with i from m to n\r            set end of xs to i\r        end repeat\r        xs\r    else\r        {}\r    end if\rend enumFromTo",
     "tags": [
       "AS Prelude"
     ]
@@ -2558,6 +2558,12 @@
   },
   "swap": {
     "code": "-- swap :: (a, b) -> (b, a)\non swap(ab)\n    if class of ab is record then\n        Tuple(|2| of ab, |1| of ab)\n    else\n        {item 2 of ab, item 1 of ab}\n    end if\nend swap",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
+  "table": {
+    "code": "-- table :: Int -> [String] -> String\ron table(n, xs)\r    -- A list of strings formatted as\r    -- right-justified rows of n columns.\r    set w to length of last item of xs\r    unlines(map(my unwords, ¬\r        chunksOf(n, map(justifyRight(w, space), xs))))\rend table",
     "tags": [
       "AS Prelude"
     ]
