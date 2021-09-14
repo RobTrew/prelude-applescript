@@ -18,6 +18,7 @@ const levels = tree => {
             .reduce(go, t)
         ];
     };
+};
 ```
 
 
