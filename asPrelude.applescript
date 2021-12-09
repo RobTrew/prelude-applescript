@@ -1522,7 +1522,11 @@ on dropWhile(p, xs)
             set i to i + 1
         end repeat
     end tell
-    drop(i - 1, xs)
+    if {} ≠ xs then
+        items i thru -1 of xs
+    else
+        xs
+    end if
 end dropWhile
 
 -- dropWhileEnd :: (a -> Bool) -> [a] -> [a]
@@ -3272,32 +3276,7 @@ on levelNodes(tree)
     iterateUntil(p, f, {tree})
 end levelNodes
 
--- levels :: Tree a -> [[a]]
-on levels(tree)
-    script nextLayer
-        on |λ|(xs)
-            script
-                on |λ|(x)
-                    nest of x
-                end |λ|
-            end script
-            concatMap(result, xs)
-        end |λ|
-    end script
-    
-    script roots
-        on |λ|(xs)
-            script
-                on |λ|(x)
-                    root of x
-                end |λ|
-            end script
-            map(result, xs)
-        end |λ|
-    end script
-    
-    map(roots, iterateUntil(my isNull, nextLayer, {tree}))
-end levels
+-- levels :: Tree a -> [[a]]on levels(tree)    -- A list of lists, grouping the root    -- values of each level of the tree.    script go        on |λ|(node, a)            if {} ≠ a then                tell a to set {h, t} to {item 1, rest}            else                set {h, t} to {{}, {}}            end if                        {{root of node} & h} & foldr(go, t, nest of node)        end |λ|    end script        |λ|(tree, {}) of goend levels
 
 -- liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
 on liftA2(f, a, b)

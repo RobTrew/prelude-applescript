@@ -597,7 +597,7 @@
     ]
   },
   "dropWhile": {
-    "code": "-- dropWhile :: (a -> Bool) -> [a] -> [a]\n-- dropWhile :: (Char -> Bool) -> String -> String\non dropWhile(p, xs)\n    set lng to length of xs\n    set i to 1\n    tell mReturn(p)\n        repeat while i ≤ lng and |λ|(item i of xs)\n            set i to i + 1\n        end repeat\n    end tell\n    drop(i - 1, xs)\nend dropWhile",
+    "code": "-- dropWhile :: (a -> Bool) -> [a] -> [a]\n-- dropWhile :: (Char -> Bool) -> String -> String\non dropWhile(p, xs)\n    set lng to length of xs\n    set i to 1\n    tell mReturn(p)\n        repeat while i ≤ lng and |λ|(item i of xs)\n            set i to i + 1\n        end repeat\n    end tell\n    if {} ≠ xs then\n        items i thru -1 of xs\n    else\n        xs\n    end if\nend dropWhile",
     "tags": [
       "AS Prelude"
     ]
@@ -1421,7 +1421,7 @@
     ]
   },
   "levels": {
-    "code": "-- levels :: Tree a -> [[a]]\non levels(tree)\n    script nextLayer\n        on |λ|(xs)\n            script\n                on |λ|(x)\n                    nest of x\n                end |λ|\n            end script\n            concatMap(result, xs)\n        end |λ|\n    end script\n    \n    script roots\n        on |λ|(xs)\n            script\n                on |λ|(x)\n                    root of x\n                end |λ|\n            end script\n            map(result, xs)\n        end |λ|\n    end script\n    \n    map(roots, iterateUntil(my isNull, nextLayer, {tree}))\nend levels",
+    "code": "-- levels :: Tree a -> [[a]]\ron levels(tree)\r    -- A list of lists, grouping the root\r    -- values of each level of the tree.\r    script go\r        on |λ|(node, a)\r            if {} ≠ a then\r                tell a to set {h, t} to {item 1, rest}\r            else\r                set {h, t} to {{}, {}}\r            end if\r            \r            {{root of node} & h} & foldr(go, t, nest of node)\r        end |λ|\r    end script\r    \r    |λ|(tree, {}) of go\rend levels",
     "tags": [
       "AS Prelude"
     ]

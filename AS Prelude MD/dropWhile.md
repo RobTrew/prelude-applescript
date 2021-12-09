@@ -9,6 +9,10 @@ on dropWhile(p, xs)
             set i to i + 1
         end repeat
     end tell
-    drop(i - 1, xs)
+    if {} ≠ xs then
+        items i thru -1 of xs
+    else
+        xs
+    end if
 end dropWhile
 ```
