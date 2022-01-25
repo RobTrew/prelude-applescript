@@ -4,6 +4,7 @@ on fileStatus(fp)
     set e to reference
     set {v, e} to current application's NSFileManager's defaultManager's ¬
         attributesOfItemAtPath:fp |error|:e
+
     if v is not missing value then
         |Right|(v as record)
     else

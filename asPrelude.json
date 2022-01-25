@@ -765,19 +765,19 @@
     ]
   },
   "fileSize": {
-    "code": "-- fileSize :: FilePath -> Either String Int\non fileSize(fp)\n    script fs\n        on |λ|(rec)\n            |Right|(NSFileSize of rec)\n        end |λ|\n    end script\n    bindLR(my fileStatus(fp), fs)\nend fileSize",
+    "code": "-- fileSize :: FilePath -> Either String Int\non fileSize(fp)\n    script fs\n        on |λ|(rec)\n            |Right|(NSFileSize of rec)\n        end |λ|\n    end script\n\n    bindLR(my fileStatus(fp), fs)\nend fileSize",
     "tags": [
       "AS Prelude"
     ]
   },
   "fileStatus": {
-    "code": "-- fileStatus :: FilePath -> Either String Dict\non fileStatus(fp)\n    set e to reference\n    set {v, e} to current application's NSFileManager's defaultManager's ¬\n        attributesOfItemAtPath:fp |error|:e\n    if v is not missing value then\n        |Right|(v as record)\n    else\n        |Left|((localizedDescription of e) as string)\n    end if\nend fileStatus",
+    "code": "-- fileStatus :: FilePath -> Either String Dict\non fileStatus(fp)\n    set e to reference\n    set {v, e} to current application's NSFileManager's defaultManager's ¬\n        attributesOfItemAtPath:fp |error|:e\n\n    if v is not missing value then\n        |Right|(v as record)\n    else\n        |Left|((localizedDescription of e) as string)\n    end if\nend fileStatus",
     "tags": [
       "AS Prelude"
     ]
   },
   "fileUTI": {
-    "code": "-- fileUTI :: FilePath -> Either String String\non fileUTI(fp)\n    set {uti, e} to (current application's ¬\n        NSWorkspace's sharedWorkspace()'s ¬\n        typeOfFile:fp |error|:(reference)) as list\n    if uti is missing value then\n        |Left|(e's localizedDescription() as text)\n    else\n        |Right|(uti as text)\n    end if\nend fileUTI",
+    "code": "-- fileUTI :: FilePath -> Either String String\non fileUTI(fp)\n    set {uti, e} to (current application's ¬\n        NSWorkspace's sharedWorkspace()'s ¬\n        typeOfFile:fp |error|:(reference)) as list\n        \n    if uti is missing value then\n        |Left|(e's localizedDescription() as text)\n    else\n        |Right|(uti as text)\n    end if\nend fileUTI",
     "tags": [
       "AS Prelude",
       "jxa"
@@ -2304,7 +2304,7 @@
     ]
   },
   "showJSON": {
-    "code": "-- showJSON :: a -> String\non showJSON(x)\n    set c to class of x\n    if (c is list) or (c is record) then\n        set ca to current application\n        set {json, e} to ca's NSJSONSerialization's dataWithJSONObject:x options:1 |error|:(reference)\n        if json is missing value then\n            e's localizedDescription() as text\n        else\n            (ca's NSString's alloc()'s initWithData:json encoding:(ca's NSUTF8StringEncoding)) as text\n        end if\n    else if c is date then\n        \"\\\"\" & ((x - (time to GMT)) as «class isot» as string) & \".000Z\" & \"\\\"\"\n    else if c is text then\n        \"\\\"\" & x & \"\\\"\"\n    else if (c is integer or c is real) then\n        x as text\n    else if c is class then\n        \"null\"\n    else\n        try\n            x as text\n        on error\n            (\"«\" & c as text) & \"»\"\n        end try\n    end if\nend showJSON",
+    "code": "-- showJSON :: a -> String\ron showJSON(x)\r    set c to class of x\r    if (c is list) or (c is record) then\r        set ca to current application\r        set json to ca's NSJSONSerialization's dataWithJSONObject:x options:1 |error|:(missing value)\r        if json is missing value then\r            \"Could not serialize as JSON\"\r        else\r            (ca's NSString's alloc()'s initWithData:json encoding:(ca's NSUTF8StringEncoding)) as text\r        end if\r    else if c is date then\r        \"\\\"\" & ((x - (time to GMT)) as «class isot» as string) & \".000Z\" & \"\\\"\"\r    else if c is text then\r        \"\\\"\" & x & \"\\\"\"\r    else if (c is integer or c is real) then\r        x as text\r    else if c is class then\r        \"null\"\r    else\r        try\r            x as text\r        on error\r            (\"«\" & c as text) & \"»\"\r        end try\r    end if\rend showJSON",
     "tags": [
       "AS Prelude"
     ]

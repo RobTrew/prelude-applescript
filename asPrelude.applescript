@@ -1858,6 +1858,7 @@ on fileSize(fp)
             |Right|(NSFileSize of rec)
         end |λ|
     end script
+
     bindLR(my fileStatus(fp), fs)
 end fileSize
 
@@ -1866,6 +1867,7 @@ on fileStatus(fp)
     set e to reference
     set {v, e} to current application's NSFileManager's defaultManager's ¬
         attributesOfItemAtPath:fp |error|:e
+
     if v is not missing value then
         |Right|(v as record)
     else
@@ -1878,6 +1880,7 @@ on fileUTI(fp)
     set {uti, e} to (current application's ¬
         NSWorkspace's sharedWorkspace()'s ¬
         typeOfFile:fp |error|:(reference)) as list
+        
     if uti is missing value then
         |Left|(e's localizedDescription() as text)
     else
@@ -4907,33 +4910,7 @@ on showIntAtBase(base, toDigit, n, rs)
     |λ|(quotRem(n, base), rs) of go
 end showIntAtBase
 
--- showJSON :: a -> String
-on showJSON(x)
-    set c to class of x
-    if (c is list) or (c is record) then
-        set ca to current application
-        set {json, e} to ca's NSJSONSerialization's dataWithJSONObject:x options:1 |error|:(reference)
-        if json is missing value then
-            e's localizedDescription() as text
-        else
-            (ca's NSString's alloc()'s initWithData:json encoding:(ca's NSUTF8StringEncoding)) as text
-        end if
-    else if c is date then
-        "\"" & ((x - (time to GMT)) as «class isot» as string) & ".000Z" & "\""
-    else if c is text then
-        "\"" & x & "\""
-    else if (c is integer or c is real) then
-        x as text
-    else if c is class then
-        "null"
-    else
-        try
-            x as text
-        on error
-            ("«" & c as text) & "»"
-        end try
-    end if
-end showJSON
+-- showJSON :: a -> Stringon showJSON(x)    set c to class of x    if (c is list) or (c is record) then        set ca to current application        set json to ca's NSJSONSerialization's dataWithJSONObject:x options:1 |error|:(missing value)        if json is missing value then            "Could not serialize as JSON"        else            (ca's NSString's alloc()'s initWithData:json encoding:(ca's NSUTF8StringEncoding)) as text        end if    else if c is date then        "\"" & ((x - (time to GMT)) as «class isot» as string) & ".000Z" & "\""    else if c is text then        "\"" & x & "\""    else if (c is integer or c is real) then        x as text    else if c is class then        "null"    else        try            x as text        on error            ("«" & c as text) & "»"        end try    end ifend showJSON
 
 -- showLR :: Either a b -> String
 on showLR(lr)
