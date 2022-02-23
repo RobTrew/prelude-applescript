@@ -1627,6 +1627,12 @@
       "AS Prelude"
     ]
   },
+  "matrix": {
+    "code": "-- matrix :: Int -> Int -> ((Int, Int) -> a) -> [[a]]\ron matrix(nRows, nCols, f)\r    -- A matrix of a given number of columns and rows,\r    -- in which each value is a given function of its\r    -- (zero-based) column and row indices.\r    script go\r        property g : mReturn(f)'s |λ|\r        on |λ|(iRow)\r            set xs to {}\r            repeat with iCol from 1 to nCols\r                set end of xs to g(iRow, iCol)\r            end repeat\r            xs\r        end |λ|\r    end script\r    \r    map(go, enumFromTo(1, nRows))\rend matrix",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
   "max": {
     "code": "-- max :: Ord a => a -> a -> a\non max(x, y)\n    if gt(x, y) then\n        x\n    else\n        y\n    end if\nend max",
     "tags": [
@@ -2323,6 +2329,12 @@
   },
   "showLog": {
     "code": "-- showLog :: a -> IO ()\non showLog(e)\n    log show(e)\nend showLog",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
+  "showMatrix": {
+    "code": "-- showMatrix :: [[Maybe a]] -> String\ron showMatrix(rows)\r    -- String representation of rows\r    -- as a matrix.\r    \r    script showRow\r        on |λ|(a, row)\r            set {maxWidth, prevRows} to a\r            script showCell\r                on |λ|(acc, cell)\r                    set {w, xs} to acc\r                    if missing value is cell then\r                        {w, xs & \"\"}\r                    else\r                        set s to cell as string\r                        {max(w, length of s), xs & s}\r                    end if\r                end |λ|\r            end script\r            \r            set {rowMax, cells} to foldl(showCell, {0, {}}, row)\r            {max(maxWidth, rowMax), prevRows & {cells}}\r        end |λ|\r    end script\r    \r    set {w, stringRows} to foldl(showRow, {0, {}}, rows)\r    script go\r        on |λ|(row)\r            unwords(map(justifyRight(w, space), row))\r        end |λ|\r    end script\r    \r    unlines(map(go, stringRows))\rend showMatrix",
     "tags": [
       "AS Prelude"
     ]

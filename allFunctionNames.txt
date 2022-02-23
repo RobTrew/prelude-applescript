@@ -266,6 +266,7 @@ mappendMaybe (<>) :: Maybe a -> Maybe a -> Maybe a
 mappendOrd (<>) :: Ordering -> Ordering -> Ordering
 mappendTuple (<>) :: (a, b) -> (a, b) -> (a, b)
 matching :: [a] -> (a -> Int -> [a] -> Bool)
+matrix :: Int -> Int -> ((Int, Int) -> a) -> [[a]]
 max :: Ord a => a -> a -> a
 maxBound :: a -> a
 maximum :: Ord a => [a] -> a
@@ -382,6 +383,7 @@ showJSON :: a -> String
 showLR :: Either a b -> String
 showList :: [a] -> String
 showLog :: a -> IO ()
+showMatrix :: [[Maybe a]] -> String
 showMaybe :: Maybe a -> String
 showOrdering :: Ordering -> String
 showOutline :: Tree String -> String

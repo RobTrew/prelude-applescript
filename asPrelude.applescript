@@ -3718,6 +3718,8 @@ on matching(pat)
     end script
 end matching
 
+-- matrix :: Int -> Int -> ((Int, Int) -> a) -> [[a]]on matrix(nRows, nCols, f)    -- A matrix of a given number of columns and rows,    -- in which each value is a given function of its    -- (zero-based) column and row indices.    script go        property g : mReturn(f)'s |λ|        on |λ|(iRow)            set xs to {}            repeat with iCol from 1 to nCols                set end of xs to g(iRow, iCol)            end repeat            xs        end |λ|    end script        map(go, enumFromTo(1, nRows))end matrix
+
 -- max :: Ord a => a -> a -> a
 on max(x, y)
     if gt(x, y) then
@@ -4930,6 +4932,8 @@ end showList
 on showLog(e)
     log show(e)
 end showLog
+
+-- showMatrix :: [[Maybe a]] -> Stringon showMatrix(rows)    -- String representation of rows    -- as a matrix.        script showRow        on |λ|(a, row)            set {maxWidth, prevRows} to a            script showCell                on |λ|(acc, cell)                    set {w, xs} to acc                    if missing value is cell then                        {w, xs & ""}                    else                        set s to cell as string                        {max(w, length of s), xs & s}                    end if                end |λ|            end script                        set {rowMax, cells} to foldl(showCell, {0, {}}, row)            {max(maxWidth, rowMax), prevRows & {cells}}        end |λ|    end script        set {w, stringRows} to foldl(showRow, {0, {}}, rows)    script go        on |λ|(row)            unwords(map(justifyRight(w, space), row))        end |λ|    end script        unlines(map(go, stringRows))end showMatrix
 
 -- showMaybe :: Maybe a -> String
 on showMaybe(mb)
