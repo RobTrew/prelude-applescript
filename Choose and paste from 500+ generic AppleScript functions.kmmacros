@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Activate</key>
+		<string>Normal</string>
+		<key>CreationDate</key>
+		<real>551631812.997293</real>
+		<key>Macros</key>
+		<array>
+			<dict>
+				<key>Actions</key>
+				<array>
+					<dict>
+						<key>ActionUID</key>
+						<integer>1902</integer>
+						<key>MacroActionType</key>
+						<string>Comment</string>
+						<key>StyledText</key>
+						<data>
+						cnRmZAAAAAADAAAAAgAAAAcAAABU
+						WFQucnRmAQAAAC4FAwAAKwAAAAEA
+						AAD9AgAAe1xydGYxXGFuc2lcYW5z
+						aWNwZzEyNTJcY29jb2FydGYyNTgw
+						Clxjb2NvYXRleHRzY2FsaW5nMFxj
+						b2NvYXBsYXRmb3JtMHtcZm9udHRi
+						bFxmMFxmbmlsXGZjaGFyc2V0MCBI
+						ZWx2ZXRpY2FOZXVlO30Ke1xjb2xv
+						cnRibDtccmVkMjU1XGdyZWVuMjU1
+						XGJsdWUyNTU7XHJlZDBcZ3JlZW4w
+						XGJsdWUwO30Ke1wqXGV4cGFuZGVk
+						Y29sb3J0Ymw7O1xjc2dyYXlcYzA7
+						fQpccGFyZFx0eDU2MFx0eDExMjBc
+						dHgxNjgwXHR4MjI0MFx0eDI4MDBc
+						dHgzMzYwXHR4MzkyMFx0eDQ0ODBc
+						dHg1MDQwXHR4NTYwMFx0eDYxNjBc
+						dHg2NzIwXHBhcmRpcm5hdHVyYWxc
+						cGFydGlnaHRlbmZhY3RvcjAKClxm
+						MFxmczI2IFxjZjIgYXNQcmVsdWRl
+						RGljdC5qc29uIGFuZCBvdGhlciBB
+						cHBsZXNjcmlwdCBQcmVsdWRlIGxp
+						YnJhcnkgZmlsZXMgYXJlIGF0OlwK
+						XApccGFyZFx0eDU2MFx0eDExMjBc
+						dHgxNjgwXHR4MjI0MFx0eDI4MDBc
+						dHgzMzYwXHR4MzkyMFx0eDQ0ODBc
+						dHg1MDQwXHR4NTYwMFx0eDYxNjBc
+						dHg2NzIwXHBhcmRpcm5hdHVyYWxc
+						cGFydGlnaHRlbmZhY3RvcjAKe1xm
+						aWVsZHtcKlxmbGRpbnN0e0hZUEVS
+						TElOSyAiaHR0cHM6Ly9naXRodWIu
+						Y29tL1JvYlRyZXcvcHJlbHVkZS1q
+						eGEifX17XGZsZHJzbHQgaHR0cHM6
+						Ly9naXRodWIuY29tL1JvYlRyZXcv
+						cHJlbHVkZS1hcHBsZXNjcmlwdH19
+						XApcCiggNTAwIEFwcGxlU2NyaXB0
+						IFByZWx1ZGUgRnVuY3Rpb25zIG1l
+						bnUuKyBnZW5lcmljIGFuZCBmaWxl
+						LXN5c3RlbSBmdW5jdGlvbnMgZm9y
+						IEFwcGxlU2NyaXB0ICl9AQAAACMA
+						AAABAAAABwAAAFRYVC5ydGYQAAAA
+						Nm8XYrYBAAAAAAAAAAAAAA==
+						</data>
+						<key>Title</key>
+						<string>Adjust the value of preludeApplescript below to a local path on your system</string>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>1903</integer>
+						<key>DisplayKind</key>
+						<string>Clipboard</string>
+						<key>HonourFailureSettings</key>
+						<true/>
+						<key>IncludeStdErr</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>ExecuteJavaScriptForAutomation</string>
+						<key>Path</key>
+						<string></string>
+						<key>Text</key>
+						<string>(() =&gt; {
+    "use strict";
+
+    // ---------------------- MAIN ----------------------
+    const main = () =&gt; {
+        const inner = () =&gt; {
+            const
+                fpFolder = "~/prelude-applescript",
+                menuJSONFile = "asPreludeMenu.json";
+
+            return either(
+                alert("AppleScript functions")
+            )(
+                // Returned to Keyboard Maestro
+                // for pasting.
+                x =&gt; x
+            )(
+                bindLR(
+                    doesDirectoryExist(fpFolder) ? (
+                        Right(fpFolder)
+                    ) : Left(`Directory not found: ${fpFolder}`)
+                )(
+                    fpDir =&gt; bindLR(
+                        readFileLR(
+                            combine(fpDir)(menuJSONFile)
+                        )
+                    )(
+                        json =&gt; bindLR(
+                            jsonParseLR(json)
+                        )(
+                            dict =&gt; bindLR(
+                                showMenuLR(true)(
+                                    "AppleScript Prelude Functions"
+                                )(Object.keys(dict))
+                            )(
+                                ks =&gt; Right(
+                                    ks.map(k =&gt; dict[k])
+                                    .join("\n\n\n")
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        };
+
+        return inner();
+    };
+
+    // ---------------- JS PRELUDE - JXA ----------------
+
+    // alert :: String =&gt; String -&gt; IO String
+    const alert = title =&gt;
+        s =&gt; {
+            const sa = Object.assign(
+                Application("System Events"), {
+                    includeStandardAdditions: true
+                });
+
+            return (
+                sa.activate(),
+                sa.displayDialog(s, {
+                    withTitle: title,
+                    buttons: ["OK"],
+                    defaultButton: "OK"
+                }),
+                s
+            );
+        };
+
+    // doesDirectoryExist :: FilePath -&gt; IO Bool
+    const doesDirectoryExist = fp =&gt; {
+        const ref = Ref();
+
+        return $.NSFileManager.defaultManager
+            .fileExistsAtPathIsDirectory(
+                $(fp)
+                .stringByStandardizingPath, ref
+            ) &amp;&amp; ref[0];
+    };
+
+    // readFileLR :: FilePath -&gt; Either String IO String
+    const readFileLR = fp =&gt; {
+        const
+            e = $(),
+            ns = $.NSString
+            .stringWithContentsOfFileEncodingError(
+                $(fp).stringByStandardizingPath,
+                $.NSUTF8StringEncoding,
+                e
+            );
+
+        return ns.isNil() ? (
+            Left(ObjC.unwrap(e.localizedDescription))
+        ) : Right(ObjC.unwrap(ns));
+    };
+
+    // ------------------- JS PRELUDE -------------------
+
+    // Left :: a -&gt; Either a b
+    const Left = x =&gt; ({
+        type: "Either",
+        Left: x
+    });
+
+    // Right :: b -&gt; Either a b
+    const Right = x =&gt; ({
+        type: "Either",
+        Right: x
+    });
+
+    // bindLR (&gt;&gt;=) :: Either a -&gt;
+    // (a -&gt; Either b) -&gt; Either b
+    const bindLR = m =&gt;
+        mf =&gt; undefined !== m.Left ? (
+            m
+        ) : mf(m.Right);
+
+    // combine (&lt;/&gt;) :: FilePath -&gt; FilePath -&gt; FilePath
+    const combine = fp =&gt;
+        // Two paths combined with a path separator.
+        // Just the second path if that starts
+        // with a path separator.
+        fp1 =&gt; Boolean(fp) &amp;&amp; Boolean(fp1) ? (
+            "/" === fp1.slice(0, 1) ? (
+                fp1
+            ) : "/" === fp.slice(-1) ? (
+                fp + fp1
+            ) : `${fp}/${fp1}`
+        ) : fp + fp1;
+
+    // either :: (a -&gt; c) -&gt; (b -&gt; c) -&gt; Either a b -&gt; c
+    const either = fl =&gt;
+        // Application of the function fl to the
+        // contents of any Left value in e, or
+        // the application of fr to its Right value.
+        fr =&gt; e =&gt; "Either" === e.type ? (
+            undefined !== e.Left ? (
+                fl(e.Left)
+            ) : fr(e.Right)
+        ) : undefined;
+
+    // jsonParseLR :: String -&gt; Either String a
+    const jsonParseLR = s =&gt; {
+        try {
+            return Right(JSON.parse(s));
+        } catch (e) {
+            return Left(
+                `${e.message} (line:${e.line} col:${e.column})`
+            );
+        }
+    };
+
+    // showMenuLR :: Bool -&gt; String -&gt; [String] -&gt;
+    // Either String [String]
+    const showMenuLR = blnMult =&gt;
+        title =&gt; xs =&gt; 0 &lt; xs.length ? (() =&gt; {
+            const sa = Object.assign(
+                Application("System Events"), {
+                    includeStandardAdditions: true
+                });
+
+            sa.activate();
+            const v = sa.chooseFromList(xs, {
+                withTitle: title,
+                withPrompt: `Select${
+                    blnMult ? (
+                        ` one or more of ${
+                        xs.length.toString()}`
+                    ) : ":"}`,
+                defaultItems: xs[0],
+                okButtonName: "OK",
+                cancelButtonName: "Cancel",
+                multipleSelectionsAllowed: blnMult,
+                emptySelectionAllowed: false
+            });
+
+            return Array.isArray(v) ? (
+                Right(v)
+            ) : Left(`User cancelled ${title} menu.`);
+        })() : Left(`${title}: No items to choose from.`);
+
+    return main();
+})();</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+						<key>TrimResults</key>
+						<true/>
+						<key>TrimResultsNew</key>
+						<true/>
+						<key>UseText</key>
+						<true/>
+					</dict>
+					<dict>
+						<key>ActionUID</key>
+						<integer>1904</integer>
+						<key>IsDisclosed</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>BringWindowsForward</string>
+					</dict>
+					<dict>
+						<key>Action</key>
+						<string>Paste</string>
+						<key>ActionUID</key>
+						<integer>1905</integer>
+						<key>IsDisclosed</key>
+						<false/>
+						<key>MacroActionType</key>
+						<string>CutCopyPaste</string>
+						<key>TimeOutAbortsMacro</key>
+						<true/>
+					</dict>
+				</array>
+				<key>CreationDate</key>
+				<real>551631369.62312603</real>
+				<key>CustomIconData</key>
+				<string>KMEC=Rounded=KMCOLOR:239,239,239,255=↓=86=6=0=0=KMCOLOR:255,0,0,255</string>
+				<key>ModificationDate</key>
+				<real>667396002.36522102</real>
+				<key>Name</key>
+				<string>Choose and paste from 500+ generic AppleScript functions</string>
+				<key>Triggers</key>
+				<array>
+					<dict>
+						<key>FireType</key>
+						<string>Pressed</string>
+						<key>KeyCode</key>
+						<integer>0</integer>
+						<key>MacroTriggerType</key>
+						<string>HotKey</string>
+						<key>Modifiers</key>
+						<integer>2304</integer>
+					</dict>
+				</array>
+				<key>UID</key>
+				<string>2BFE9CF8-E619-4EC3-A071-D88F6EC5B19C</string>
+			</dict>
+		</array>
+		<key>Name</key>
+		<string>Prelude</string>
+		<key>Targeting</key>
+		<dict>
+			<key>Targeting</key>
+			<string>Excluded</string>
+			<key>TargetingApps</key>
+			<array>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.hogbaysoftware.TaskPaper3.direct</string>
+					<key>Name</key>
+					<string>TaskPaper</string>
+					<key>NewFile</key>
+					<string>/Applications/TaskPaper.app</string>
+				</dict>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.omnigroup.OmniGraffle7</string>
+					<key>Name</key>
+					<string>OmniGraffle</string>
+					<key>NewFile</key>
+					<string>/Applications/OmniGraffle.app</string>
+				</dict>
+				<dict>
+					<key>BundleIdentifier</key>
+					<string>com.apple.finder</string>
+					<key>Name</key>
+					<string>Finder</string>
+					<key>NewFile</key>
+					<string>/System/Library/CoreServices/Finder.app</string>
+				</dict>
+			</array>
+		</dict>
+		<key>ToggleMacroUID</key>
+		<string>89CF234D-1ABC-4CDE-9BAF-87F943C2FE30</string>
+		<key>UID</key>
+		<string>7B9EF0DB-38C6-46C7-8B06-29AA6AC43D1A</string>
+	</dict>
+</array>
+</plist>
