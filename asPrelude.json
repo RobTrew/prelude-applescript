@@ -401,7 +401,7 @@
     ]
   },
   "concatMap": {
-    "code": "-- concatMap :: (a -> [b]) -> [a] -> [b]\non concatMap(f, xs)\n    set lng to length of xs\n    set acc to {}\n    tell mReturn(f)\n        repeat with i from 1 to lng\n            set acc to acc & (|λ|(item i of xs, i, xs))\n        end repeat\n    end tell\n    if {text, string} contains class of xs then\n        acc as text\n    else\n        acc\n    end if\nend concatMap",
+    "code": "-- concatMap :: (a -> [b]) -> [a] -> [b]\ron concatMap(f, xs)\r    set lng to length of xs\r    set acc to {}\r    \r    tell mReturn(f)\r        repeat with i from 1 to lng\r            set acc to acc & (|λ|(item i of xs, i, xs))\r        end repeat\r    end tell\r    acc\rend concatMap",
     "tags": [
       "AS Prelude"
     ]
@@ -784,7 +784,7 @@
     ]
   },
   "filter": {
-    "code": "-- filter :: (a -> Bool) -> [a] -> [a]\ron filter(p, xs)\r    tell mReturn(p)\r        set ys to {}\r        set n to length of xs\r        \r        repeat with i from 1 to n\r            set v to item i of xs\r            if |λ|(v, i, xs) then set end of ys to v\r        end repeat\r        ys\r    end tell\rend filter",
+    "code": "-- filter :: (a -> Bool) -> [a] -> [a]\ron filter(p, xs)\r    tell mReturn(p)\r        set n to length of xs\r        set ys to {}\r        \r        repeat with i from 1 to n\r            set v to item i of xs\r            if |λ|(v, i, xs) then set end of ys to v\r        end repeat\r        ys\r    end tell\rend filter",
     "tags": [
       "AS Prelude"
     ]

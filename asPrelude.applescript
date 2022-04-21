@@ -892,21 +892,7 @@ on concat(xs)
         valueForKeyPath:"@unionOfArrays.self") as list
 end concat
 
--- concatMap :: (a -> [b]) -> [a] -> [b]
-on concatMap(f, xs)
-    set lng to length of xs
-    set acc to {}
-    tell mReturn(f)
-        repeat with i from 1 to lng
-            set acc to acc & (|λ|(item i of xs, i, xs))
-        end repeat
-    end tell
-    if {text, string} contains class of xs then
-        acc as text
-    else
-        acc
-    end if
-end concatMap
+-- concatMap :: (a -> [b]) -> [a] -> [b]on concatMap(f, xs)    set lng to length of xs    set acc to {}        tell mReturn(f)        repeat with i from 1 to lng            set acc to acc & (|λ|(item i of xs, i, xs))        end repeat    end tell    accend concatMap
 
 -- cons :: a -> [a] -> [a]
 on cons(x, xs)
@@ -1888,7 +1874,7 @@ on fileUTI(fp)
     end if
 end fileUTI
 
--- filter :: (a -> Bool) -> [a] -> [a]on filter(p, xs)    tell mReturn(p)        set ys to {}        set n to length of xs                repeat with i from 1 to n            set v to item i of xs            if |λ|(v, i, xs) then set end of ys to v        end repeat        ys    end tellend filter
+-- filter :: (a -> Bool) -> [a] -> [a]on filter(p, xs)    tell mReturn(p)        set n to length of xs        set ys to {}                repeat with i from 1 to n            set v to item i of xs            if |λ|(v, i, xs) then set end of ys to v        end repeat        ys    end tellend filter
 
 -- filterGen :: (a -> Bool) -> Gen [a] -> Gen [a]
 on filterGen(p, gen)
