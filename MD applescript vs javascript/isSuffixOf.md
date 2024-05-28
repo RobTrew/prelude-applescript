@@ -1,19 +1,3 @@
-```javascript
-// isSuffixOf :: Eq a => [a] -> [a] -> Bool
-// isSuffixOf :: String -> String -> Bool
-const isSuffixOf = needle =>
-    haystack => "string" !== typeof haystack ? (
-        bindMay(
-            dropLengthMaybe(needle)(haystack)
-        )(
-            delta => eq(needle)(
-                dropLength(delta)(haystack)
-            )
-        )
-    ) : haystack.endsWith(needle);
-```
-
-
 ```applescript
 -- isSuffixOf :: Eq a => [a] -> [a] -> Bool
 -- isSuffixOf :: String -> String -> Bool
@@ -25,4 +9,20 @@ on isSuffixOf(ns, hs)
     end script
     bindMay(dropLengthMaybe(ns, hs), go)
 end isSuffixOf
+```
+
+
+```javascript
+// isSuffixOf :: Eq a => [a] -> [a] -> Bool
+// isSuffixOf :: String -> String -> Bool
+const isSuffixOf = needle =>
+    haystack => "string" !== typeof haystack
+        ? bindMay(
+            dropLengthMaybe(needle)(haystack)
+        )(
+            delta => eq(needle)(
+                dropLength(delta)(haystack)
+            )
+        )
+        : haystack.endsWith(needle);
 ```

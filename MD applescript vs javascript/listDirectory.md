@@ -1,17 +1,3 @@
-```javascript
-// listDirectory :: FilePath -> [FilePath]
-const listDirectory = fp =>
-    ObjC.unwrap(
-        $.NSFileManager.defaultManager
-        .contentsOfDirectoryAtPathError(
-            ObjC.wrap(fp)
-            .stringByStandardizingPath,
-            null
-        ))
-    .map(ObjC.unwrap);
-```
-
-
 ```applescript
 -- listDirectory :: FilePath -> [FilePath]
 on listDirectory(strPath)
@@ -20,4 +6,17 @@ on listDirectory(strPath)
         contentsOfDirectoryAtPath:(unwrap(stringByStandardizingPath of ¬
             wrap(strPath))) |error|:(missing value))
 end listDirectory
+```
+
+
+```javascript
+// listDirectory :: FilePath -> [FilePath]
+const listDirectory = fp =>
+    ObjC.deepUnwrap(
+        $.NSFileManager.defaultManager
+        .contentsOfDirectoryAtPathError(
+            $(fp).stringByStandardizingPath,
+            null
+        )
+    );
 ```

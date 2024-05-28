@@ -1,22 +1,3 @@
-```javascript
-// getDirectoryContentsLR :: FilePath ->
-// Either String IO [FilePath]
-const getDirectoryContentsLR = fp => {
-    const
-        error = $(),
-        xs = $.NSFileManager.defaultManager
-        .contentsOfDirectoryAtPathError(
-            $(fp).stringByStandardizingPath,
-            error
-        );
-
-    return xs.isNil() ? (
-        Left(ObjC.unwrap(error.localizedDescription))
-    ) : Right(ObjC.deepUnwrap(xs));
-};
-```
-
-
 ```applescript
 -- getDirectoryContentsLR :: FilePath -> Either String IO [FilePath]
 on getDirectoryContentsLR(strPath)
@@ -31,4 +12,23 @@ on getDirectoryContentsLR(strPath)
         |Right|(xs as list)
     end if
 end getDirectoryContentsLR
+```
+
+
+```javascript
+// getDirectoryContentsLR :: FilePath ->
+// Either String IO [FilePath]
+const getDirectoryContentsLR = fp => {
+    const
+        error = $(),
+        xs = $.NSFileManager.defaultManager
+        .contentsOfDirectoryAtPathError(
+            $(fp).stringByStandardizingPath,
+            error
+        );
+
+    return xs.isNil()
+        ? Left(ObjC.unwrap(error.localizedDescription))
+        : Right(ObjC.deepUnwrap(xs));
+};
 ```

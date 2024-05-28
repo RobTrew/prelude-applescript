@@ -149,7 +149,7 @@
     ]
   },
   "appendFile": {
-    "code": "-- appendFile :: FilePath -> String -> IO Bool\non appendFile(strPath, txt)\n    -- Write a string to the end of a file. \n    -- Returns true if the path exists \n    -- and the write succeeded. \n    -- Otherwise returns false.\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n    if blnExists then\n        if 0 = intFolder then\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            true\n        else\n            -- text appended to folder is undefined\n            false\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(oFullPath as string)) then\n            writeFile(oFullPath, txt)\n            true\n        else\n            false\n        end if\n    end if\nend appendFile",
+    "code": "-- appendFile :: FilePath -> String -> IO Bool\non appendFile(strPath, txt)\n    -- Write a string to the end of a file. \n    -- Returns true if the path exists \n    -- and the write succeeded. \n    -- Otherwise returns false.\n    set ca to current application\n    set oFullPath to (ca's NSString's stringWithString:strPath)'s ¬\n        stringByStandardizingPath\n    set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬\n        fileExistsAtPath:oFullPath isDirectory:(reference))\n        \n    if blnExists then\n        if 0 = intFolder then\n            set oData to (ca's NSString's stringWithString:txt)'s ¬\n                dataUsingEncoding:(ca's NSUTF8StringEncoding)\n            set h to ca's NSFileHandle's fileHandleForWritingAtPath:oFullPath\n            h's seekToEndOfFile\n            h's writeData:oData\n            h's closeFile()\n            true\n        else\n            -- text appended to folder is undefined\n            false\n        end if\n    else\n        if doesDirectoryExist(takeDirectory(oFullPath as string)) then\n            writeFile(oFullPath, txt)\n            true\n        else\n            false\n        end if\n    end if\nend appendFile",
     "tags": [
       "AS Prelude"
     ]
@@ -197,7 +197,7 @@
     ]
   },
   "base64decode": {
-    "code": "-- base64decode :: String -> String\non base64decode(s)\n    tell current application\n        set encoding to its NSUTF8StringEncoding\n        set ignore to its NSDataBase64DecodingIgnoreUnknownCharacters\n        \n        (((alloc() of its NSString)'s initWithData:((its (NSData's alloc()'s ¬\n            initWithBase64EncodedString:s ¬\n                options:(ignore)))) encoding:ignore)) as text\n    end tell\nend base64decode",
+    "code": "-- base64decode :: String -> String\non base64decode(s)\n    tell current application\n        set encoding to its NSUTF8StringEncoding\n        set ignore to its NSDataBase64DecodingIgnoreUnknownCharacters\n        \n        (((alloc() of its NSString)'s initWithData:((its (NSData's alloc()'s ¬\n            initWithBase64EncodedString:s ¬\n                options:(ignore)))) encoding:encoding)) as text\n    end tell\nend base64decode",
     "tags": [
       "AS Prelude"
     ]
@@ -1367,7 +1367,7 @@
     ]
   },
   "justifyRight": {
-    "code": "-- justifyRight :: Int -> Char -> String -> String\non justifyRight(n, cFiller, strText)\n    if n > length of strText then\n        text -n thru -1 of ((replicate(n, cFiller) as text) & strText)\n    else\n        strText\n    end if\nend justifyRight",
+    "code": "-- justifyRight :: Int -> Char -> String -> String\non justifyRight(n, cFiller)\n    script\n        on |λ|(txt)\n            if n > length of txt then\n                text -n thru -1 of ((replicate(n, cFiller) as text) & txt)\n            else\n                txt\n            end if\n        end |λ|\n    end script\nend justifyRight",
     "tags": [
       "AS Prelude"
     ]
@@ -1816,6 +1816,12 @@
   },
   "ord": {
     "code": "-- ord :: Char -> Int\non ord(c)\n    id of c\nend ord",
+    "tags": [
+      "AS Prelude"
+    ]
+  },
+  "orderedUnion": {
+    "code": "-- orderedUnion :: [a] -> [a] -> [a]\ron orderedUnion(xs, ys)\r    (union(setFromList(xs), setFromList(ys))'s ¬\r        allObjects()'s sortedArrayUsingSelector:\"compare:\") as list\rend orderedUnion",
     "tags": [
       "AS Prelude"
     ]
@@ -2273,7 +2279,7 @@
     ]
   },
   "showBinary": {
-    "code": "-- showBinary :: Int -> String\non showBinary(n)\n    script binaryChar\n        on |λ|(n)\n            character id (48 + n)\n        end |λ|\n    end script\n    showIntAtBase(2, binaryChar, n, \"\")\nend showBinary",
+    "code": "-- showBinary :: Int -> String\non showBinary(n)\n    script binaryChar\n        on |λ|(n)\n            character id (48 + n)\n        end |λ|\n    end script\n    \n    showIntAtBase(2, binaryChar, n, \"\")\nend showBinary",
     "tags": [
       "AS Prelude"
     ]
@@ -2985,7 +2991,7 @@
     ]
   },
   "zip": {
-    "code": "-- zip :: [a] -> [b] -> [(a, b)]\non zip(xs, ys)\n    zipWith(Tuple, xs, ys)\nend zip",
+    "code": "-- zip :: [a] -> [b] -> [(a, b)]\ron zip(xs, ys)\r    set n to min(length of xs, length of ys)\r    \r    set lst to {}\r    repeat with i from 1 to n\r        set end of lst to {item i of xs, item i of ys}\r    end repeat\r    return lst\rend zip",
     "tags": [
       "AS Prelude"
     ]

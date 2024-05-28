@@ -277,6 +277,7 @@ on appendFile(strPath, txt)
         stringByStandardizingPath
     set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬
         fileExistsAtPath:oFullPath isDirectory:(reference))
+        
     if blnExists then
         if 0 = intFolder then
             set oData to (ca's NSString's stringWithString:txt)'s ¬
@@ -428,7 +429,7 @@ on base64decode(s)
         
         (((alloc() of its NSString)'s initWithData:((its (NSData's alloc()'s ¬
             initWithBase64EncodedString:s ¬
-                options:(ignore)))) encoding:ignore)) as text
+                options:(ignore)))) encoding:encoding)) as text
     end tell
 end base64decode
 
@@ -3154,12 +3155,16 @@ on justifyLeft(n, cFiller, strText)
 end justifyLeft
 
 -- justifyRight :: Int -> Char -> String -> String
-on justifyRight(n, cFiller, strText)
-    if n > length of strText then
-        text -n thru -1 of ((replicate(n, cFiller) as text) & strText)
-    else
-        strText
-    end if
+on justifyRight(n, cFiller)
+    script
+        on |λ|(txt)
+            if n > length of txt then
+                text -n thru -1 of ((replicate(n, cFiller) as text) & txt)
+            else
+                txt
+            end if
+        end |λ|
+    end script
 end justifyRight
 
 -- keys :: Dict -> [String]
@@ -4022,6 +4027,8 @@ on ord(c)
     id of c
 end ord
 
+-- orderedUnion :: [a] -> [a] -> [a]on orderedUnion(xs, ys)    (union(setFromList(xs), setFromList(ys))'s ¬        allObjects()'s sortedArrayUsingSelector:"compare:") as listend orderedUnion
+
 -- ordering :: () -> Ordering
 on ordering()
     enumFromPairs("Ordering", {{"LT", -1}, {"EQ", 0}, {"GT", 1}})
@@ -4857,6 +4864,7 @@ on showBinary(n)
             character id (48 + n)
         end |λ|
     end script
+    
     showIntAtBase(2, binaryChar, n, "")
 end showBinary
 
@@ -6452,10 +6460,7 @@ on writeTempFile(template, txt)
     strPath
 end writeTempFile
 
--- zip :: [a] -> [b] -> [(a, b)]
-on zip(xs, ys)
-    zipWith(Tuple, xs, ys)
-end zip
+-- zip :: [a] -> [b] -> [(a, b)]on zip(xs, ys)    set n to min(length of xs, length of ys)        set lst to {}    repeat with i from 1 to n        set end of lst to {item i of xs, item i of ys}    end repeat    return lstend zip
 
 -- zip3 :: [a] -> [b] -> [c] -> [(a, b, c)]
 on zip3(xs, ys, zs)

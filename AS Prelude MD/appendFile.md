@@ -10,6 +10,7 @@ on appendFile(strPath, txt)
         stringByStandardizingPath
     set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬
         fileExistsAtPath:oFullPath isDirectory:(reference))
+        
     if blnExists then
         if 0 = intFolder then
             set oData to (ca's NSString's stringWithString:txt)'s ¬

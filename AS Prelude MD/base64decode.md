@@ -7,7 +7,7 @@ on base64decode(s)
         
         (((alloc() of its NSString)'s initWithData:((its (NSData's alloc()'s ¬
             initWithBase64EncodedString:s ¬
-                options:(ignore)))) encoding:ignore)) as text
+                options:(ignore)))) encoding:encoding)) as text
     end tell
 end base64decode
 ```

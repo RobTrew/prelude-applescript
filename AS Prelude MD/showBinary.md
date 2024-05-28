@@ -6,6 +6,7 @@ on showBinary(n)
             character id (48 + n)
         end |λ|
     end script
+    
     showIntAtBase(2, binaryChar, n, "")
 end showBinary
 ```

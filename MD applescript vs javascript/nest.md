@@ -1,3 +1,11 @@
+```applescript
+-- nest :: Tree a -> [a]
+on nest(oTree)
+    nest of oTree
+end nest
+```
+
+
 ```javascript
 // nest :: Tree a -> [a]
 const nest = tree => {
@@ -7,16 +15,8 @@ const nest = tree => {
     // here to the root, and returns a list.
     const xs = tree.nest;
 
-    return "function" !== typeof xs ? (
-        xs
-    ) : xs(root(tree));
+    return "function" !== typeof xs
+        ? xs
+        : xs(root(tree));
 };
-```
-
-
-```applescript
--- nest :: Tree a -> [a]
-on nest(oTree)
-    nest of oTree
-end nest
 ```

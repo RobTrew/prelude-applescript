@@ -1,22 +1,3 @@
-```javascript
-// takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
-const takeWhileGen = p => xs => {
-    const ys = [];
-    let
-        nxt = xs.next(),
-        v = nxt.value;
-
-    while (!nxt.done && p(v)) {
-        ys.push(v);
-        nxt = xs.next();
-        v = nxt.value;
-    }
-
-    return ys;
-};
-```
-
-
 ```applescript
 -- takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
 on takeWhileGen(p, xs)
@@ -30,4 +11,24 @@ on takeWhileGen(p, xs)
     end tell
     return ys
 end takeWhileGen
+```
+
+
+```javascript
+// takeWhileGen :: (a -> Bool) -> Gen [a] -> [a]
+const takeWhileGen = p =>
+    xs => {
+        const ys = [];
+        let
+            nxt = xs.next(),
+            v = nxt.value;
+
+        while (!nxt.done && p(v)) {
+            ys.push(v);
+            nxt = xs.next();
+            v = nxt.value;
+        }
+
+        return ys;
+    };
 ```

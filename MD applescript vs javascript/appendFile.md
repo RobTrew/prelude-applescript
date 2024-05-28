@@ -1,42 +1,3 @@
-```javascript
-// appendFile :: FilePath -> String -> IO Bool
-const appendFile = fp =>
-    // The file at fp updated with a new string
-    // appended to its existing contents.
-    txt => {
-        const
-            oFullPath = ObjC.wrap(fp)
-            .stringByStandardizingPath,
-            ref = Ref();
-
-        return $.NSFileManager.defaultManager
-        .fileExistsAtPathIsDirectory(
-            oFullPath
-            .stringByStandardizingPath, ref
-        ) ? (
-                0 === ref[0] ? (() => {
-                    const
-                        oData = ObjC.wrap(txt)
-                        .dataUsingEncoding($.NSUTF8StringEncoding),
-                        h = $.NSFileHandle.fileHandleForWritingAtPath(
-                            oFullPath
-                        );
-
-                    return (
-                        h.seekToEndOfFile,
-                        h.writeData(oData),
-                        h.closeFile,
-                        true
-                    );
-                })() : false
-            ) : doesDirectoryExist(takeDirectory(ObjC.unwrap(fp))) ? (
-                writeFile(oFullPath)(txt),
-                true
-            ) : false;
-    };
-```
-
-
 ```applescript
 -- appendFile :: FilePath -> String -> IO Bool
 on appendFile(strPath, txt)
@@ -49,6 +10,7 @@ on appendFile(strPath, txt)
         stringByStandardizingPath
     set {blnExists, intFolder} to (ca's NSFileManager's defaultManager()'s ¬
         fileExistsAtPath:oFullPath isDirectory:(reference))
+        
     if blnExists then
         if 0 = intFolder then
             set oData to (ca's NSString's stringWithString:txt)'s ¬
@@ -71,4 +33,39 @@ on appendFile(strPath, txt)
         end if
     end if
 end appendFile
+```
+
+
+```javascript
+// appendFile :: FilePath -> String -> IO Bool
+const appendFile = fp =>
+    // The file at fp updated with a new string
+    // appended to its existing contents.
+    txt => {
+        const fpFull = filePath(fp);
+
+        return doesFileExist(fpFull)
+            ? (() => {
+                const
+                    h = $.NSFileHandle
+                    .fileHandleForWritingAtPath(
+                        $(fpFull)
+                    );
+
+                return (
+                    h.seekToEndOfFile,
+                    h.writeData(
+                        $(txt)
+                        .dataUsingEncoding(
+                            $.NSUTF8StringEncoding
+                        )
+                    ),
+                    h.closeFile,
+                    true
+                );
+            })()
+            : doesDirectoryExist(takeDirectory(fpFull))
+                ? (writeFile(fpFull)(txt), true)
+                : false;
+    };
 ```
