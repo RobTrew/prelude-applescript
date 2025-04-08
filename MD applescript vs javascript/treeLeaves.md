@@ -1,11 +1,15 @@
 ```javascript
-// treeLeaves :: Tree -> [Tree]
+// treeLeaves :: Tree a -> [Tree a]
 const treeLeaves = tree => {
-    const subNest = tree.nest;
+    const go = t => {
+        const xs = nest(t);
 
-    return Boolean(subNest.length) ? (
-        subNest.flatMap(treeLeaves)
-    ) : [tree];
+        return 0 < xs.length
+            ? xs.flatMap(go)
+            : [t];
+    };
+
+    return go(tree);
 };
 ```
 

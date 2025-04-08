@@ -1,13 +1,15 @@
 ```javascript
 // uncurry :: (a -> b -> c) -> ((a, b) -> c)
 const uncurry = f =>
-    // A function over a pair, derived
-    // from a curried function.
+    // A function over a Tuple or argument pair, 
+    // derived from a curried function.
     (...args) => {
-        const
-            [x, y] = Boolean(args.length % 2)
-                ? args[0]
-                : args;
+        const h = args[0];
+        const [x, y] = Array.isArray(h) || (
+            "Tuple" === h?.type
+        )
+            ? h
+            : args;
 
         return f(x)(y);
     };

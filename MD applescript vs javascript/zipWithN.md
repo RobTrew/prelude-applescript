@@ -1,26 +1,17 @@
 ```javascript
-// zipWithN :: (a -> b -> ... -> c) -> ([a], [b] ...) -> [c]
-const zipWithN = (...args) => {
-    // Uncurried function of which the first argument is
-    // a function, and all remaining arguments are lists.
-    const rows = args.slice(1);
+// zipWithN :: (a -> b -> ... -> d) -> [a], [b] ... -> [d]
+const zipWithN = (f, ...xss) => {
+    // Generalisation of ZipWith, ZipWith3 etc.
+    // f is a curried function absorbing at least 
+    // N arguments, where N is the length of xss.
+    const m = 0 < xss.length
+        ? Math.min(...xss.map(x => x.length))
+        : 0;
 
-    return 0 < rows.length
-        ? (() => {
-            const
-                n = Math.min(...rows.map(x => x.length)),
-                // Uncurried reduction of zipWith(identity)
-                apZL_ = (fs, ys) => fs.map(
-                    (f, i) => (f)(ys[i])
-                )
-                .slice(0, n);
-
-            return rows.slice(1).reduce(
-                apZL_,
-                rows[0].map(args[0])
-            );
-        })()
-        : [];
+    return xss.reduce(
+        (gs, vs) => gs.map((g, i) => g(vs[i])),
+        Array.from({ length: m }, () => f)
+    );
 };
 ```
 
