@@ -3,14 +3,20 @@
 const partition = p =>
     // A tuple of two lists - those elements in
     // xs which match p, and those which do not.
-    xs => [...xs].reduce(
-        (a, x) => (
-            p(x)
-                ? first
-                : second
-        )(ys => [...ys, x])(a),
-        Tuple([])([])
-    );
+    xs => {
+        const [matches, nons] = [[], []];
+
+        return (
+            xs.forEach(x => {
+                if (p(x)) {
+                    matches.push(x)
+                } else {
+                    nons.push(x)
+                }
+            }),
+            Tuple(matches)(nons)
+        );
+    };
 ```
 
 
